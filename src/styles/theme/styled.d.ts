@@ -1,4 +1,3 @@
-import 'styled-components';
 import { Theme } from './themes';
 
 /* This is the suggested way of declaring theme types */
