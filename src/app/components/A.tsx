@@ -1,38 +1,18 @@
-import * as React from 'react';
-// import styled from 'styled-components/macro';
-
-// export const A = styled.a`
-//   color: ${p => p.theme.primary};
-//   text-decoration: none;
-
-//   &:hover {
-//     text-decoration: underline;
-//     opacity: 0.8;
-//   }
-
-//   &:active {
-//     opacity: 0.4;
-//   }
-// `;
+import * as React from 'react'
+import 'index.css'
 
 export const A = (...allProps: any) => {
-  const { props } = allProps.props;
+  const { props } = allProps.props
   const style: any = `
-    color: ${props.theme.primary};
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      opacity: 0.8;
-    }
-
-    &:active {
-      opacity: 0.4;
-    }
-  `;
+    text-[${props.theme.primary}]
+    no-underline
+    &:hover:underline
+    &:hover:opacity-80
+    &:active:opacity-40
+  `
   return (
     <a href="/#" style={style}>
       {...allProps}
     </a>
-  );
-};
+  )
+}

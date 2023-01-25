@@ -6,9 +6,10 @@ export default function Search() {
     <div tabIndex={0} className={styles.container}>
       <input
         className={styles.input}
-        type="text"
+        type="search"
         name="search"
         placeholder="Search..."
+        autoComplete="off"
       ></input>
     </div>
   )
@@ -17,7 +18,7 @@ export default function Search() {
 const styles = {
   container: `
     flex
-    bg-[#222222]
+    bg-[#202327]
     w-[450px]
     px-4
     py-3
@@ -26,12 +27,12 @@ const styles = {
   `,
   input: `
     self-center
-    bg-[#222222]
+    bg-[#202327]
     text-white
     rounded-none
     outline-none
     w-[420px]
     text-lg
-    placeholder-[#898989]
+    placeholder-[#71767b]
   `,
 }

@@ -17,13 +17,13 @@ const trendlist: Trend[] = [
 
 export default function Trends() {
   return (
-    <div className="flex flex-col bg-[#222222] w-[450px] rounded-[15px]">
-      <div
+    <div className="flex flex-col bg-[#16181c] w-[450px] rounded-[15px]">
+      <span
         className="flex text-white px-4 py-3 items-center
         font-bold text-2xl"
       >
         Trends for you
-      </div>
+      </span>
       <TrendsList trends={trendlist} />
     </div>
   )
@@ -40,11 +40,11 @@ export const TrendsList = ({ trends }: TrendsListProps) => {
         const { name, twitsAmount } = trend
 
         return (
-          <div className="flex flex-col items-left px-4 py-3">
+          <div className="flex flex-col items-left px-4 py-3 hover:bg-[rgb(255,255,255,0.03)] transition-colors duration-200">
             <div className="flex text-white font-bold text-lg">{name}</div>
-            <div className="flex text-[#898989] text-base">
+            <span className="flex text-[#71767b] text-base">
               Twits: {twitsAmount}
-            </div>
+            </span>
           </div>
         )
       })}

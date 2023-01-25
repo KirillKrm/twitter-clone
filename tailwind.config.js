@@ -7,5 +7,8 @@ module.exports = {
       sans: ['"Roboto"'],
     },
   },
+  variants: {
+    fill: ['hover', 'focus'],
+  },
   plugins: [],
 }
