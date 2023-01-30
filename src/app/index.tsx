@@ -19,7 +19,7 @@ export function App() {
   const { i18n } = useTranslation()
 
   return (
-    <div className="m-3">
+    <>
       <BrowserRouter>
         <Helmet
           titleTemplate="Twitter Clone"
@@ -34,6 +34,6 @@ export function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   )
 }

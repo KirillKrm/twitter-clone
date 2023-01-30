@@ -33,7 +33,7 @@ export default function TwitCreate() {
   }
 
   return (
-    <div className="flex w-[510px] p-3 shadow-[0px_0px_0px_1px_#2f3336]">
+    <div className="flex w-full p-3 shadow-[0px_0px_0px_1px_#2f3336]">
       <img
         className="flex w-10 h-10 rounded-full mr-3"
         alt="avatar"

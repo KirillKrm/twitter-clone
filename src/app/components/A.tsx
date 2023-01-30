@@ -10,6 +10,7 @@ export const A = (...allProps: any) => {
     &:hover:opacity-80
     &:active:opacity-40
   `
+
   return (
     <a href="/#" style={style}>
       {...allProps}

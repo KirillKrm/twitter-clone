@@ -19,10 +19,10 @@ const styles = {
   container: `
     flex
     bg-[#202327]
-    w-[450px]
+    w-full
     px-4
-    py-3
-    rounded-[15px]
+    py-2
+    rounded-full
     focus-within:shadow-[0px_0px_0px_1px_deepskyblue_inset]
   `,
   input: `

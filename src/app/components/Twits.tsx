@@ -24,6 +24,72 @@ const twitslist: Twit[] = [
     comments: 1300,
     retwits: 2400,
   },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
 ]
 
 export default function Twits() {
@@ -42,7 +108,7 @@ export const TwitsList = ({ twits }: TwitsListProps) => {
           twit
 
         return (
-          <div className="flex w-[510px] p-3 hover:bg-[rgb(255,255,255,0.03)] shadow-[0px_0px_0px_1px_#2f3336]">
+          <div className="flex w-full p-3 hover:bg-[rgba(255,255,255,0.03)] border-b border-[#2f3336]">
             <img
               className="flex w-10 h-10 rounded-full mr-3"
               alt="avatar"

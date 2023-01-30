@@ -42,7 +42,7 @@ const recommendationlist: Recommendation[] = [
 
 export default function Recommendations() {
   return (
-    <div className="flex flex-col bg-[#16181c] w-[450px] rounded-[15px]">
+    <div className="flex flex-col bg-[#16181c] w-full rounded-[15px]">
       <span
         className="flex text-white px-4 py-3 items-center
         font-bold text-2xl"

@@ -10,17 +10,19 @@ export default function Account() {
   }
 
   return (
-    <div className="flex items-center w-[200px] p-3 rounded-full hover:bg-[rgb(231,233,234,0.1)] transition-colors duration-200">
+    <div className="flex items-center w-max p-3 rounded-full hover:bg-[rgb(231,233,234,0.1)] transition-colors duration-200">
       <img
         className="flex w-10 h-10 rounded-full mr-3"
         alt="avatar"
         src={mockData.avatar}
       />
       <div className="flex flex-col mr-3 text-white">
-        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+        <span className="whitespace-nowrap overflow-hidden text-ellipsis text-[15px] font-bold">
           {mockData.name}
         </span>
-        <span className="text-[#71767b]">{'@' + mockData.username}</span>
+        <span className="text-[#71767b] text-[15px]">
+          {'@' + mockData.username}
+        </span>
       </div>
       <svg viewBox="0 0 24 24" className="w-6 h-6" aria-hidden="true">
         <g color="white">

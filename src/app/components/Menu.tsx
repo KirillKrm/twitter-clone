@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import 'index.css'
 
 export type menu = {
@@ -63,7 +64,7 @@ export default function Menu() {
     <nav className="flex flex-col">
       <a
         href="/#"
-        className="flex items-center w-max p-3 my-1 rounded-full hover:bg-[rgb(29,155,240,0.1)] transition-colors duration-200"
+        className="flex items-center w-max p-3 my-1 rounded-full $ hover:bg-[rgb(29,155,240,0.1)] transition-colors duration-200"
       >
         <svg viewBox="0 0 24 24" className="w-7 h-7">
           <g color="white">
@@ -81,6 +82,17 @@ export type MenuListProps = {
 }
 
 export const MenuList = ({ menuButtons }: MenuListProps) => {
+  const [active, setActive] = useState('')
+
+  // const handleClick = event => {
+  //   setActive(event.target.id)
+  // }
+
+  // useEffect(() => {
+  //   const element = document.getElementById(active)
+  //   setActive(element)
+  // }, [active])
+
   return (
     <>
       {menuList.map(menuButton => {
@@ -88,15 +100,18 @@ export const MenuList = ({ menuButtons }: MenuListProps) => {
 
         return (
           <a
+            key={name}
             href={link}
-            className="flex items-center w-max p-3 my-1 rounded-full hover:bg-[rgb(231,233,234,0.1)] transition-colors duration-200"
+            className={`flex items-center w-max p-3 my-1 rounded-full hover:bg-[rgb(231,233,234,0.1)] transition-colors duration-200
+            ${active === name ? 'font-bold' : undefined}`}
+            onClick={() => setActive(name)}
           >
             <svg viewBox="0 0 24 24" className="w-6 h-6 mr-3">
               <g color="white">
                 <path d={image}></path>
               </g>
             </svg>
-            <span className="text-white text-base">{name}</span>
+            <span className="text-white text-base text-[20px]">{name}</span>
           </a>
         )
       })}
