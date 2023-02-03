@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* input[type='search']::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+*::-webkit-scrollbar {
+  width: 12px;
+}
 
-  height: 15px;
-  width: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath d='M6.09 7.5L.04 1.46 1.46.04 7.5 6.09 13.54.04l1.42 1.42L8.91 7.5l6.05 6.04-1.42 1.42L7.5 8.91l-6.04 6.05-1.42-1.42L6.09 7.5z'");
-} */
+*::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: rgb(32, 34, 38);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 100vh;
+  background: rgb(162, 164, 168);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(122, 124, 128);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: rgb(82, 84, 88);
+}

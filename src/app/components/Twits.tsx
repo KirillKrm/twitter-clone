@@ -90,6 +90,50 @@ const twitslist: Twit[] = [
     comments: 1300,
     retwits: 2400,
   },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
 ]
 
 export default function Twits() {
