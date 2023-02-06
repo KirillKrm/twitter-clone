@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
+import RecommendationsUnit from 'app/components/RecommendationsUnit'
 import 'index.css'
 
 export type Recommendation = {
@@ -45,13 +46,8 @@ export default function Recommendations() {
   const { t } = useTranslation()
 
   return (
-    <div className="flex flex-col bg-[#16181c] w-full rounded-[15px]">
-      <span
-        className="flex text-white px-4 py-3 items-center
-        font-bold text-2xl"
-      >
-        {t('Recommendations')}
-      </span>
+    <div className={styles.container}>
+      <span className={styles.container__title}>{t('Recommendations')}</span>
       <RecommendationsList recommendations={recommendationlist} />
     </div>
   )
@@ -70,24 +66,32 @@ export const RecommendationsList = ({
         const { name, nickname, avatar } = recommendation
 
         return (
-          <div
-            key={nickname}
-            className="flex flex-row items-left px-4 py-3 hover:bg-[rgb(255,255,255,0.03)] transition-colors duration-200"
-          >
-            <img
-              className="flex w-12 h-12 rounded-full mr-3"
-              alt="avatar"
-              src={avatar}
-            />
-            <div>
-              <span className="flex text-white font-bold text-base">
-                {name}
-              </span>
-              <span className="flex text-[#71767b] text-base">{nickname}</span>
-            </div>
-          </div>
+          <RecommendationsUnit
+            name={name}
+            nickname={nickname}
+            avatar={avatar}
+          />
         )
       })}
     </>
   )
+}
+
+const styles = {
+  container: `
+    flex 
+    flex-col 
+    bg-[#16181c] 
+    w-full 
+    rounded-[15px]
+  `,
+  container__title: `
+    flex 
+    text-white 
+    px-4 
+    py-3 
+    items-center
+    font-bold 
+    text-2xl
+  `,
 }

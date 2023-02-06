@@ -2,21 +2,21 @@ import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-import en from './en/translation.json'
-import ua from './ua/translation.json'
+import feedTranslationEN from './en/feed.json'
+import feedTranslationUA from './ua/feed.json'
 import { convertLanguageJsonToObject } from './translations'
 
 export const translationsJson = {
   en: {
-    translation: en,
+    feed: feedTranslationEN,
   },
   ua: {
-    translation: ua,
+    feed: feedTranslationUA,
   },
 }
 
 // Create the 'translations' object to provide full intellisense support for the static json files.
-convertLanguageJsonToObject(en)
+convertLanguageJsonToObject(feedTranslationEN)
 
 export const i18n = i18next
   // pass the i18n instance to react-i18next.
@@ -27,6 +27,7 @@ export const i18n = i18next
   .init({
     resources: translationsJson,
     fallbackLng: 'en',
+    ns: ['feed'],
     debug:
       process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test',
 

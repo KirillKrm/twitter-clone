@@ -36,15 +36,15 @@ export default function TwitCreate() {
   }
 
   return (
-    <div className="flex w-full p-3 shadow-[0px_0px_0px_1px_#2f3336]">
+    <div className={styles.container}>
       <img
-        className="flex w-10 h-10 rounded-full mr-3"
+        className={styles.container__image}
         alt="avatar"
         src={mockData.avatar}
       />
-      <div className="flex flex-col w-full">
+      <div className={styles.container__inputBox}>
         <textarea
-          className="flex py-2 bg-black text-white outline-none text-lg placeholder-[#71767b] resize-none"
+          className={styles.inputBox__textArea}
           name="twitCreate"
           placeholder={t('TweetHolder')}
           maxLength={280}
@@ -53,12 +53,57 @@ export default function TwitCreate() {
           ref={textAreaRef}
           value={value}
         ></textarea>
-        <div className="flex self-end">
-          <span className="flex items-center px-4 text-base min-h-[36px] text-white rounded-full bg-[#1d9bf0] hover:bg-[rgb(26,140,216)] transition-colors duration-200">
-            {t('Tweet')}
-          </span>
+        <div className={styles.inputBox__button}>
+          <span className={styles.button__text}>{t('Tweet')}</span>
         </div>
       </div>
     </div>
   )
+}
+
+const styles = {
+  container: `
+    flex 
+    w-full 
+    p-3 
+    shadow-[0px_0px_0px_1px_#2f3336]
+  `,
+  container__image: `
+    flex 
+    w-10 
+    h-10 
+    rounded-full mr-3
+  `,
+  container__inputBox: `
+    flex 
+    flex-col 
+    w-full
+  `,
+  inputBox__textArea: `
+    flex 
+    py-2 
+    bg-black 
+    text-white 
+    outline-none 
+    text-lg 
+    placeholder-[#71767b] 
+    resize-none
+  `,
+  inputBox__button: `
+    flex 
+    self-end
+  `,
+  button__text: `
+    flex 
+    items-center 
+    px-4 
+    text-base 
+    min-h-[36px] 
+    text-white 
+    rounded-full 
+    bg-[#1d9bf0] 
+    hover:bg-[rgb(26,140,216)] 
+    transition-colors 
+    duration-200
+  `,
 }
