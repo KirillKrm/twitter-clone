@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import 'index.css'
 
 export type Recommendation = {
@@ -41,13 +42,15 @@ const recommendationlist: Recommendation[] = [
 ]
 
 export default function Recommendations() {
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col bg-[#16181c] w-full rounded-[15px]">
       <span
         className="flex text-white px-4 py-3 items-center
         font-bold text-2xl"
       >
-        Who to follow
+        {t('Recommendations')}
       </span>
       <RecommendationsList recommendations={recommendationlist} />
     </div>
@@ -67,7 +70,10 @@ export const RecommendationsList = ({
         const { name, nickname, avatar } = recommendation
 
         return (
-          <div className="flex flex-row items-left px-4 py-3 hover:bg-[rgb(255,255,255,0.03)] transition-colors duration-200">
+          <div
+            key={nickname}
+            className="flex flex-row items-left px-4 py-3 hover:bg-[rgb(255,255,255,0.03)] transition-colors duration-200"
+          >
             <img
               className="flex w-12 h-12 rounded-full mr-3"
               alt="avatar"

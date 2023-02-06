@@ -1,14 +1,17 @@
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import 'index.css'
 
 export default function Search() {
+  const { t } = useTranslation()
+
   return (
     <div tabIndex={0} className={styles.container}>
       <input
         className={styles.input}
         type="search"
         name="search"
-        placeholder="Search..."
+        placeholder={t('Search')}
         autoComplete="off"
       ></input>
     </div>

@@ -2,6 +2,7 @@ import * as React from 'react'
 import 'index.css'
 
 export type Twit = {
+  id: string
   avatar: string
   name: string
   nickname: string
@@ -14,6 +15,7 @@ export type Twit = {
 
 const twitslist: Twit[] = [
   {
+    id: '1',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -25,6 +27,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '2',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -36,6 +39,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '3',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -47,6 +51,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '4',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -58,6 +63,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '5',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -69,6 +75,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '6',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -80,6 +87,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '7',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -91,6 +99,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '8',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -102,6 +111,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '9',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -113,6 +123,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '10',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -124,6 +135,7 @@ const twitslist: Twit[] = [
     retwits: 2400,
   },
   {
+    id: '11',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
     name: 'Kyrylo Karmazin',
@@ -148,11 +160,23 @@ export const TwitsList = ({ twits }: TwitsListProps) => {
   return (
     <>
       {twitslist.map(twit => {
-        const { avatar, name, nickname, date, text, likes, comments, retwits } =
-          twit
+        const {
+          id,
+          avatar,
+          name,
+          nickname,
+          date,
+          text,
+          likes,
+          comments,
+          retwits,
+        } = twit
 
         return (
-          <div className="flex w-full p-3 hover:bg-[rgba(255,255,255,0.03)] border-b border-[#2f3336]">
+          <div
+            key={id}
+            className="flex w-full p-3 hover:bg-[rgba(255,255,255,0.03)] border-b border-[#2f3336]"
+          >
             <img
               className="flex w-10 h-10 rounded-full mr-3"
               alt="avatar"

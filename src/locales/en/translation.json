@@ -1,15 +1,15 @@
 {
-  "home": "Home",
-  "explore": "Explore",
-  "notifications": "Notifications",
-  "messages": "Messages",
-  "bookmarks": "Bookmarks",
-  "lists": "Lists",
-  "profile": "Profile",
-  "more": "More",
-  "search": "Search...",
-  "trends": "Trends for you",
-  "recommendations": "Who to follow",
-  "tweet": "Tweet",
-  "tweetHolder": "What's happening?"
+  "Home": "Home",
+  "Explore": "Explore",
+  "Notifications": "Notifications",
+  "Messages": "Messages",
+  "Bookmarks": "Bookmarks",
+  "Lists": "Lists",
+  "Profile": "Profile",
+  "More": "More",
+  "Search": "Search...",
+  "Trends": "Trends for you",
+  "Recommendations": "Who to follow",
+  "Tweet": "Tweet",
+  "TweetHolder": "What's happening?"
 }

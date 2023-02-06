@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import 'index.css'
 
 export type menu = {
@@ -83,6 +84,7 @@ export type MenuListProps = {
 
 export const MenuList = ({ menuButtons }: MenuListProps) => {
   const [active, setActive] = useState('')
+  const { t } = useTranslation()
 
   // const handleClick = event => {
   //   setActive(event.target.id)
@@ -111,7 +113,7 @@ export const MenuList = ({ menuButtons }: MenuListProps) => {
                 <path d={image}></path>
               </g>
             </svg>
-            <span className="text-white text-base text-[20px]">{name}</span>
+            <span className="text-white text-base text-[20px]">{t(name)}</span>
           </a>
         )
       })}

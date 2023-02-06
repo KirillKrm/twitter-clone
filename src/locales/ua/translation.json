@@ -1,15 +1,15 @@
 {
-  "home": "Головна",
-  "explore": "Ознайомлення",
-  "notifications": "Сповіщення",
-  "messages": "Повідомлення",
-  "bookmarks": "Закладки",
-  "lists": "Списки",
-  "profile": "Профіль",
-  "more": "Інші дії",
-  "search": "Пошук...",
-  "trends": "Тренди для вас",
-  "recommendations": "За ким слідувати",
-  "tweet": "Твітнути",
-  "tweetHolder": "Що відбувається?"
+  "Home": "Головна",
+  "Explore": "Ознайомлення",
+  "Notifications": "Сповіщення",
+  "Messages": "Повідомлення",
+  "Bookmarks": "Закладки",
+  "Lists": "Списки",
+  "Profile": "Профіль",
+  "More": "Інші дії",
+  "Search": "Пошук...",
+  "Trends": "Тренди для вас",
+  "Recommendations": "За ким слідувати",
+  "Tweet": "Твітнути",
+  "TweetHolder": "Що відбувається?"
 }

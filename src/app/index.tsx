@@ -10,7 +10,7 @@ import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'index.css'
-import 'i18n'
+import 'locales/i18n.ts'
 
 import { HomePage } from './pages/HomePage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'

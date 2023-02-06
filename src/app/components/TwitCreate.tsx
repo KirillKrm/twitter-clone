@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import 'index.css'
 
 const useAutosizeTextArea = (
@@ -16,6 +17,8 @@ const useAutosizeTextArea = (
 }
 
 export default function TwitCreate() {
+  const { t } = useTranslation()
+
   const [value, setValue] = useState('')
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -43,7 +46,7 @@ export default function TwitCreate() {
         <textarea
           className="flex py-2 bg-black text-white outline-none text-lg placeholder-[#71767b] resize-none"
           name="twitCreate"
-          placeholder="What’s happening?"
+          placeholder={t('TweetHolder')}
           maxLength={280}
           rows={1}
           onChange={handleChange}
@@ -52,7 +55,7 @@ export default function TwitCreate() {
         ></textarea>
         <div className="flex self-end">
           <span className="flex items-center px-4 text-base min-h-[36px] text-white rounded-full bg-[#1d9bf0] hover:bg-[rgb(26,140,216)] transition-colors duration-200">
-            Tweet
+            {t('Tweet')}
           </span>
         </div>
       </div>
