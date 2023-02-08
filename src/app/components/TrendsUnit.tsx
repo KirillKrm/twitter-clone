@@ -1,12 +1,12 @@
 import * as React from 'react'
 import 'index.css'
 
-type Trend = {
+type TrendProps = {
   name: string
   twitsAmount: number
 }
 
-export default function TrendsUnit(props: Trend) {
+export default function TrendsUnit(props: TrendProps) {
   return (
     <div key={props.name} className={styles.container}>
       <div className={styles.container__name}>{props.name}</div>

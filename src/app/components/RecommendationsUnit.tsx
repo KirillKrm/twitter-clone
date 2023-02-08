@@ -1,13 +1,13 @@
 import * as React from 'react'
 import 'index.css'
 
-type Recommendation = {
+type RecommendationProps = {
   name: string
   nickname: string
   avatar: string
 }
 
-export default function RecommendationsUnit(props: Recommendation) {
+export default function RecommendationsUnit(props: RecommendationProps) {
   return (
     <div key={props.nickname} className={styles.container}>
       <img

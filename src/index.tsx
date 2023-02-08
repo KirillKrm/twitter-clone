@@ -22,7 +22,6 @@ import { HelmetProvider } from 'react-helmet-async'
 
 import { configureAppStore } from 'store/configureStore'
 
-// TODO
 // import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
 import reportWebVitals from 'reportWebVitals'

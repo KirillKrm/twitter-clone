@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 
-type Twit = {
+type TwitProps = {
   id: string
   avatar: string
   name: string
@@ -13,7 +13,7 @@ type Twit = {
   retwits: number
 }
 
-export default function TwitsUnit(props: Twit) {
+export default function TwitsUnit(props: TwitProps) {
   return (
     <div key={props.id} className={styles.container}>
       <img

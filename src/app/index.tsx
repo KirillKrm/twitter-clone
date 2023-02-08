@@ -12,9 +12,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'index.css'
 import 'locales/i18n.ts'
 
+import { useTranslation } from 'react-i18next'
 import { HomePage } from './pages/HomePage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
-import { useTranslation } from 'react-i18next'
 
 export function App() {
   const { i18n } = useTranslation()
@@ -31,7 +31,9 @@ export function App() {
         </Helmet>
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          {['/', '/home'].map((path, index) => (
+            <Route path={path} element={<HomePage />} key={index} />
+          ))}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
