@@ -23,24 +23,12 @@ export default function Trends() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Trends')}</span>
-      <TrendsList trends={trendlist} />
-    </div>
-  )
-}
-
-export type TrendsListProps = {
-  trends: Trend[]
-}
-
-export const TrendsList = ({ trends }: TrendsListProps) => {
-  return (
-    <>
       {trendlist.map(trend => {
         const { name, twitsAmount } = trend
 
         return <TrendsUnit name={name} twitsAmount={twitsAmount} />
       })}
-    </>
+    </div>
   )
 }
 

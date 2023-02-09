@@ -105,9 +105,7 @@ export function HomePage() {
 
 const styles = {
   container: `
-    flex
-    flex-1 
-    h-full  
+    flex  
     bg-black
   `,
   container__buttons: `
@@ -128,6 +126,7 @@ const styles = {
   container__header: `
     flex 
     flex-grow 
+    h-full 
     justify-end 
     w-[594px]
   `,
@@ -142,6 +141,7 @@ const styles = {
   container__main: `
     flex 
     flex-grow 
+    h-full 
     w-[1309px] 
     items-start
   `,
@@ -178,7 +178,6 @@ const styles = {
   columns__sidebar: `
     flex 
     flex-col 
-    h-full 
     w-[350px]
   `,
   sidebar__search: `
