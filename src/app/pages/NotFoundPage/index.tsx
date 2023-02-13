@@ -1,7 +1,14 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 export function NotFoundPage() {
+  const { t, i18n } = useTranslation('notfound')
+
+  const changeLanguage = language => {
+    i18n.changeLanguage(language)
+  }
+
   return (
     <div className={styles.container}>
       <Helmet>
@@ -9,6 +16,22 @@ export function NotFoundPage() {
         <meta name="description" content="Page not found" />
       </Helmet>
       <div className={styles.container__body}>
+        <div className={styles.container__buttons}>
+          <button
+            className={styles.buttons__locales}
+            type="button"
+            onClick={() => changeLanguage('en')}
+          >
+            EN
+          </button>
+          <button
+            className={styles.buttons__locales}
+            type="button"
+            onClick={() => changeLanguage('ua')}
+          >
+            UA
+          </button>
+        </div>
         <div className={styles.body__top}>
           <svg
             className={styles.top__svg}
@@ -29,13 +52,10 @@ export function NotFoundPage() {
                 </g>
               </svg>
             </a>
-            <h1 className={styles.article__header}>Здесь ничего нет</h1>
-            <p className={styles.article__description}>
-              Похоже, такой страницы не существует. Не расстраивайтесь — вот вам
-              фотография пуделя в кресле.
-            </p>
+            <h1 className={styles.article__header}>{t('title')}</h1>
+            <p className={styles.article__description}>{t('arcticle')}</p>
             <a href="/home" className={styles.article__button}>
-              Ищите это?
+              {t('button')}
             </a>
           </div>
           <img
@@ -47,37 +67,37 @@ export function NotFoundPage() {
             <ul className={styles.footer__ul}>
               <li className={styles.ul__li}>
                 <a href="/#" className={styles.li__a}>
-                  Главная
+                  {t('home')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  Статус
+                  {t('status')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  Условия предоставления услуг
+                  {t('terms')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  Политика конфиденциальности
+                  {t('privacy')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  Политика в отношении файлов cookie
+                  {t('cookie')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  Контактные и регистрационные данные
+                  {t('contacts')}
                 </a>
               </li>
               <li className={styles.ul__li}>
                 <a href="/*" className={styles.li__a}>
-                  О рекламе
+                  {t('advertising')}
                 </a>
               </li>
             </ul>
@@ -131,6 +151,23 @@ const styles = {
     mx-[auto]
     relative
     h-full
+  `,
+  container__buttons: `
+    flex 
+    flex-row
+    fixed 
+    mt-1 
+    ml-1 
+    gap-1
+    z-10
+  `,
+  buttons__locales: `
+    w-max
+    py-1 
+    px-2 
+    bg-gray-700 
+    text-white 
+    rounded-lg
   `,
   content__article: `
     pt-[5vh]

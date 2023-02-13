@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'index.css'
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import Search from 'app/components/Search'
@@ -10,6 +10,7 @@ import Menu from 'app/components/Menu'
 import Account from 'app/components/Account'
 import Twits from 'app/components/Twits'
 import TwitCreate from 'app/components/TwitCreate'
+import ThemeSwitcher from 'app/components/ThemeSwitcher'
 
 export function HomePage() {
   const [scroll, setScroll] = useState(true)
@@ -37,13 +38,26 @@ export function HomePage() {
   //   }
   // })
 
+  const [theme, setTheme] = useState('light')
+  useEffect(() => {
+    const currentTheme = localStorage.getItem('theme')
+    if (currentTheme) {
+      setTheme(currentTheme)
+    }
+  }, [])
+
   const { t, i18n } = useTranslation('feed')
+
   const changeLanguage = language => {
     i18n.changeLanguage(language)
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={
+        theme === 'dark' ? styles.container_dark : styles.container_light
+      }
+    >
       <div className={styles.container__buttons}>
         <button
           className={styles.buttons__locales}
@@ -59,6 +73,9 @@ export function HomePage() {
         >
           UA
         </button>
+      </div>
+      <div className={styles.container__themes}>
+        <ThemeSwitcher />
       </div>
       <Helmet>
         <title>Home Page</title>
@@ -104,19 +121,30 @@ export function HomePage() {
 }
 
 const styles = {
-  container: `
-    flex  
-    bg-black
+  container_light: `
+    flex
+    bg-white 
+  `,
+  container_dark: `
+    flex
+    bg-black 
+  `,
+  container__themes: `
+    fixed
+    right-0
+    mt-1 
+    mr-1 
   `,
   container__buttons: `
     flex 
-    flex-row 
+    flex-row
     fixed 
     mt-1 
     ml-1 
     gap-1
   `,
   buttons__locales: `
+    w-max
     py-1 
     px-2 
     bg-gray-700 

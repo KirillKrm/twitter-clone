@@ -4,14 +4,18 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import feedTranslationEN from './en/feed.json'
 import feedTranslationUA from './ua/feed.json'
+import notfoundTranslationEN from './en/notfound.json'
+import notfoundTranslationUA from './ua/notfound.json'
 import { convertLanguageJsonToObject } from './translations'
 
 export const translationsJson = {
   en: {
     feed: feedTranslationEN,
+    notfound: notfoundTranslationEN,
   },
   ua: {
     feed: feedTranslationUA,
+    notfound: notfoundTranslationUA,
   },
 }
 
