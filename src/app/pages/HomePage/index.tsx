@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'index.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import Search from 'app/components/Search'
@@ -38,14 +38,6 @@ export function HomePage() {
   //   }
   // })
 
-  const [theme, setTheme] = useState('light')
-  useEffect(() => {
-    const currentTheme = localStorage.getItem('theme')
-    if (currentTheme) {
-      setTheme(currentTheme)
-    }
-  }, [])
-
   const { t, i18n } = useTranslation('feed')
 
   const changeLanguage = language => {
@@ -53,11 +45,7 @@ export function HomePage() {
   }
 
   return (
-    <div
-      className={
-        theme === 'dark' ? styles.container_dark : styles.container_light
-      }
-    >
+    <div className={styles.container}>
       <div className={styles.container__buttons}>
         <button
           className={styles.buttons__locales}
@@ -121,13 +109,9 @@ export function HomePage() {
 }
 
 const styles = {
-  container_light: `
+  container: `
     flex
-    bg-white 
-  `,
-  container_dark: `
-    flex
-    bg-black 
+    bg-white dark:bg-black
   `,
   container__themes: `
     fixed
@@ -196,8 +180,8 @@ const styles = {
     py-4 
     pl-4 
     backdrop-blur-md 
-    bg-[rgba(0,0,0,0.65)] 
-    text-white 
+    bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 
+    text-black dark:text-white 
     text-[20px] 
     font-bold 
     border-b 
@@ -214,7 +198,7 @@ const styles = {
     z-10 
     top-0 
     py-1 
-    bg-black
+    bg-white dark:bg-black
   `,
   sidebar__box: `
     flex 

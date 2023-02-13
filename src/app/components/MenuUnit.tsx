@@ -24,7 +24,7 @@ export default function MenuUnit(props: MenuProps) {
       onClick={() => props.setActive(props.name)}
     >
       <svg viewBox="0 0 24 24" className={styles.button__svg}>
-        <g color="white">
+        <g className={styles.svg__g}>
           <path d={props.image}></path>
         </g>
       </svg>
@@ -41,7 +41,7 @@ const styles = {
     p-3 
     my-1 
     rounded-full 
-    hover:bg-[rgb(231,233,234,0.1)] 
+    hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
     transition-colors 
     duration-200
   `,
@@ -50,8 +50,11 @@ const styles = {
     h-6 
     mr-3
   `,
+  svg__g: `
+    text-black dark:text-white
+  `,
   button__name: `
-    text-white 
+    text-black dark:text-white 
     text-base 
     text-[20px]
   `,

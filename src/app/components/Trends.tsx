@@ -26,7 +26,7 @@ export default function Trends() {
       {trendlist.map(trend => {
         const { name, twitsAmount } = trend
 
-        return <TrendsUnit name={name} twitsAmount={twitsAmount} />
+        return <TrendsUnit key={name} name={name} twitsAmount={twitsAmount} />
       })}
     </div>
   )
@@ -36,13 +36,13 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[#16181c] 
+    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
     w-full 
     rounded-[15px]
   `,
   container__title: `
     flex 
-    text-white 
+    text-black dark:text-white 
     px-4 
     py-3 
     items-center

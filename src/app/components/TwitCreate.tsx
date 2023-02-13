@@ -82,11 +82,11 @@ const styles = {
   inputBox__textArea: `
     flex 
     py-2 
-    bg-black 
-    text-white 
+    bg-white dark:bg-black 
+    text-black dark:text-white 
     outline-none 
     text-lg 
-    placeholder-[#71767b] 
+    placeholder-[rgb(83,100,113)] dark:placeholder-[#71767b]
     resize-none
   `,
   inputBox__button: `

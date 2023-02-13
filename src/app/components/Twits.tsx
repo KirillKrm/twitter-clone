@@ -175,6 +175,7 @@ export const TwitsList = ({ twits }: TwitsListProps) => {
 
         return (
           <TwitsUnit
+            key={id}
             id={id}
             avatar={avatar}
             name={name}

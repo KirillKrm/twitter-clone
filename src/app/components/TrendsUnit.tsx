@@ -24,18 +24,18 @@ const styles = {
     items-left 
     px-4 
     py-3 
-    hover:bg-[rgb(255,255,255,0.03)] 
+    hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
     transition-colors duration-200
   `,
   container__name: `
     flex 
-    text-white 
+    text-black dark:text-white 
     font-bold 
     text-lg
   `,
   container__twits: `
     flex 
-    text-[#71767b] 
+    text-[rgb(83,100,113)] dark:text-[#71767b] 
     text-base
   `,
 }

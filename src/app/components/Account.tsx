@@ -25,7 +25,7 @@ export default function Account() {
         className={styles.container__svg}
         aria-hidden="true"
       >
-        <g color="white">
+        <g className={styles.svg__g}>
           <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
         </g>
       </svg>
@@ -41,8 +41,9 @@ const styles = {
     p-3 
     mb-3
     rounded-full 
-    hover:bg-[rgb(231,233,234,0.1)] 
-    transition-colors duration-200
+    hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
+    transition-colors 
+    duration-200
   `,
   container__image: `
     flex 
@@ -55,7 +56,7 @@ const styles = {
     flex 
     flex-col 
     mr-3 
-    text-white
+    text-black dark:text-white
   `,
   text__name: `
     whitespace-nowrap 
@@ -65,12 +66,14 @@ const styles = {
     font-bold
   `,
   text__nickname: `
-    text-[#71767b] 
+    text-[rgb(83,100,113)] dark:text-[#71767b] 
     text-[15px]
   `,
-  container__nickname: ``,
   container__svg: `
     w-6 
     h-6
+  `,
+  svg__g: `
+    text-black dark:text-white
   `,
 }

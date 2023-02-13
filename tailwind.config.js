@@ -11,4 +11,5 @@ module.exports = {
     fill: ['hover', 'focus'],
   },
   plugins: [],
+  darkMode: 'class',
 }

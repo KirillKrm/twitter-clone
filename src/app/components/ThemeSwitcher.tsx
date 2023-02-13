@@ -2,27 +2,49 @@ import * as React from 'react'
 import 'index.css'
 
 export default function ThemeSwitcher() {
-  const handleClickTheme = theme => {
-    let currentTheme = localStorage.getItem('theme')
-    localStorage.setItem('theme', theme)
-    if (currentTheme !== theme) window.location.reload()
+  const handleClickLight = () => {
+    // if set via local storage previously
+    if (localStorage.getItem('color-theme')) {
+      if (localStorage.getItem('color-theme') === 'dark') {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('color-theme', 'light')
+      }
+      // if NOT set via local storage previously
+    } else {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('color-theme', 'light')
+      }
+    }
+  }
+
+  const handleClickDark = () => {
+    // if set via local storage previously
+    if (localStorage.getItem('color-theme')) {
+      if (localStorage.getItem('color-theme') === 'light') {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('color-theme', 'dark')
+      }
+      // if NOT set via local storage previously
+    } else {
+      if (!document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('color-theme', 'dark')
+      }
+    }
   }
 
   return (
     <div className={styles.container}>
       <button
         className={styles.container__light}
-        onClick={() => {
-          handleClickTheme('light')
-        }}
+        onClick={() => handleClickLight()}
       >
         light
       </button>
       <button
         className={styles.container__dark}
-        onClick={() => {
-          handleClickTheme('dark')
-        }}
+        onClick={() => handleClickDark()}
       >
         dark
       </button>
@@ -42,7 +64,8 @@ const styles = {
     bg-white
     text-black
     rounded-lg
-    shadow-[0px_0px_0px_2px_black_inset]
+    border-2
+    border-black
   `,
   container__dark: `
     py-1
@@ -50,6 +73,7 @@ const styles = {
     bg-black
     text-white
     rounded-lg
-    shadow-[0px_0px_0px_2px_white_inset]
+    border-2
+    border-white
   `,
 }

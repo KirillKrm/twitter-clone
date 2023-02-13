@@ -67,6 +67,7 @@ export const RecommendationsList = ({
 
         return (
           <RecommendationsUnit
+            key={nickname}
             name={name}
             nickname={nickname}
             avatar={avatar}
@@ -81,13 +82,13 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[#16181c] 
+    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
     w-full 
     rounded-[15px]
   `,
   container__title: `
     flex 
-    text-white 
+    text-black dark:text-white 
     px-4 
     py-3 
     items-center

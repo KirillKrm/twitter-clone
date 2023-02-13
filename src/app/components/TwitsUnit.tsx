@@ -66,7 +66,8 @@ const styles = {
     flex 
     w-full 
     p-3 
-    hover:bg-[rgba(255,255,255,0.03)] 
+    hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
+    duration-200
     border-b 
     border-[#2f3336]
   `,
@@ -87,18 +88,18 @@ const styles = {
   `,
   title__name: `
     font-bold 
-    text-white
+    text-black dark:text-white
   `,
   title__nickname: `
     ml-1 
-    text-[#71767b]
+    text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
   title__date: `
     ml-1 
-    text-[#71767b]
+    text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
   twitBox__article: `
-    text-white
+    text-black dark:text-white
   `,
   twitBox__buttons: `
     flex 
@@ -109,7 +110,7 @@ const styles = {
     flex-row 
     items-center 
     mr-12 
-    text-[#71767b] 
+    text-[rgb(83,100,113)] dark:text-[#71767b]
     hover:text-[rgb(249,24,128)]
   `,
   like__svg: `
@@ -129,7 +130,7 @@ const styles = {
     flex-row 
     items-center 
     mr-12 
-    text-[#71767b] 
+    text-[rgb(83,100,113)] dark:text-[#71767b]
     hover:text-[rgb(29,155,240)]
   `,
   comment__svg: `
@@ -148,7 +149,7 @@ const styles = {
     flex 
     flex-row 
     items-center 
-    text-[#71767b] 
+    text-[rgb(83,100,113)] dark:text-[#71767b]
     hover:text-[rgb(0,186,124)]
   `,
   retwit__svg: `

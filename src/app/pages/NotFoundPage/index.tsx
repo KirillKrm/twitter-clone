@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import ThemeSwitcher from 'app/components/ThemeSwitcher'
 
 export function NotFoundPage() {
   const { t, i18n } = useTranslation('notfound')
@@ -31,6 +32,9 @@ export function NotFoundPage() {
           >
             UA
           </button>
+        </div>
+        <div className={styles.container__themes}>
+          <ThemeSwitcher />
         </div>
         <div className={styles.body__top}>
           <svg
@@ -120,6 +124,13 @@ const styles = {
     bg-blend-lighten
     bg-cover
   `,
+  container__themes: `
+    fixed
+    right-0
+    mt-1 
+    mr-1 
+    z-10
+  `,
   container__body: `
     h-full
     overflow-hidden
@@ -127,11 +138,11 @@ const styles = {
     p-0
     bg-transparent
     overflow-hidden
-    text-[#fff]
+    text-[#000] dark:text-[#fff]
     max-h-[100vh]
   `,
   body__top: `
-    bg-[#030303]
+    bg-white dark:bg-[#030303]
     absolute
     h-[45vh]
     w-[100vw]
@@ -139,7 +150,7 @@ const styles = {
     block
   `,
   top__svg: `
-    fill-[#030303]
+    fill-white dark:fill-[#030303]
     absolute
     w-full
     h-[auto]
@@ -175,6 +186,7 @@ const styles = {
     pb-[0]
     ml-[4%]
     max-w-[520px]
+    text-black dark:text-white
   `,
   content__image: `
     h-[80vh]
@@ -253,10 +265,9 @@ const styles = {
     inline-block
     px-[2em]
     py-[1em]
-    bg-black
     rounded-full
-    shadow-[0px_0px_0px_2px_white_inset]
-    hover:bg-white 
-    hover:text-black 
+    shadow-[0px_0px_0px_2px_black_inset] dark:shadow-[0px_0px_0px_2px_white_inset]
+    hover:bg-black dark:hover:bg-white 
+    hover:text-white dark:hover:text-black 
   `,
 }
