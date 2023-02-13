@@ -6,33 +6,37 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import * as React from 'react'
+import { Helmet } from 'react-helmet-async'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'index.css'
+import 'locales/i18n.ts'
 
-import { GlobalStyle } from 'styles/global-styles';
-
-import { HomePage } from './pages/HomePage/Loadable';
-import { NotFoundPage } from './pages/NotFoundPage/Loadable';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import { HomePage } from './pages/HomePage/index'
+import { NotFoundPage } from './pages/NotFoundPage/index'
 
 export function App() {
-  const { i18n } = useTranslation();
-  return (
-    <BrowserRouter>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-        htmlAttributes={{ lang: i18n.language }}
-      >
-        <meta name="description" content="A React Boilerplate application" />
-      </Helmet>
+  const { i18n } = useTranslation()
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      <GlobalStyle />
-    </BrowserRouter>
-  );
+  return (
+    <>
+      <BrowserRouter>
+        <Helmet
+          titleTemplate="Twitter Clone"
+          defaultTitle="Twitter Clone"
+          htmlAttributes={{ lang: i18n.language }}
+        >
+          <meta name="description" content="Twitter Clone" />
+        </Helmet>
+
+        <Routes>
+          {['/', '/home'].map((path, index) => (
+            <Route path={path} element={<HomePage />} key={index} />
+          ))}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
