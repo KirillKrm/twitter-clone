@@ -170,7 +170,7 @@ const styles = {
     h-full 
     border-r 
     border-l 
-    border-[rgb(47,51,54)]
+    border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
   `,
   middleColumn__title: `
     flex 
@@ -185,7 +185,7 @@ const styles = {
     text-[20px] 
     font-bold 
     border-b 
-    border-[rgb(47,51,54)]
+    bodred-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
   `,
   columns__sidebar: `
     flex 

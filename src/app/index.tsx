@@ -14,6 +14,8 @@ import 'locales/i18n.ts'
 
 import { useTranslation } from 'react-i18next'
 import { HomePage } from './pages/HomePage/index'
+import { LoginPage } from './pages/LoginPage/index'
+import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
 
 export function App() {
@@ -34,6 +36,8 @@ export function App() {
           {['/', '/home'].map((path, index) => (
             <Route path={path} element={<HomePage />} key={index} />
           ))}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

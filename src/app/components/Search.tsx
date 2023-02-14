@@ -13,7 +13,7 @@ export default function Search() {
         name="search"
         placeholder={t('Search')}
         autoComplete="off"
-      ></input>
+      />
     </div>
   )
 }

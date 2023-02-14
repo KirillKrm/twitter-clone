@@ -139,6 +139,6 @@ const styles = {
     h-7
   `,
   svg__g: `
-    text-black dark:text-white
+    text-[rgb(29,155,240)] dark:text-white
   `,
 }

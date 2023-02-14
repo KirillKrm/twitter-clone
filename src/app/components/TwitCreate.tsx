@@ -66,7 +66,7 @@ const styles = {
     flex 
     w-full 
     p-3 
-    shadow-[0px_0px_0px_1px_#2f3336]
+    shadow-[0px_0px_0px_1px_rgb(239,243,244)] dark:shadow-[0px_0px_0px_1px_#2f3336]
   `,
   container__image: `
     flex 

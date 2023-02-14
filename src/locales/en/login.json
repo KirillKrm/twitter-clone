@@ -1,0 +1,10 @@
+{
+  "login": "Login in to Twitter",
+  "google": "Continue with Google",
+  "separator": "or",
+  "input": "Phone, email or username",
+  "next": "Next",
+  "forgot": "Forgot password? ",
+  "hint": "Don't have an account? ",
+  "signup": "Sign up for Twitter"
+}

@@ -69,7 +69,7 @@ const styles = {
     hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
     duration-200
     border-b 
-    border-[#2f3336]
+    border-[rgb(239,243,244)] dark:border-[#2f3336]
   `,
   container__image: `
     flex 
