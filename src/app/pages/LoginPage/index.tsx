@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
+import InputField from './InputField'
 
 export function LoginPage() {
   const { t, i18n } = useTranslation('login')
@@ -102,14 +103,7 @@ export function LoginPage() {
             <div className={styles.separator__text}>{t('separator')}</div>
             <div className={styles.separator__line}></div>
           </div>
-          <div className={styles.main__input}>
-            <input
-              className={styles.input__textarea}
-              type="text"
-              name="text"
-              placeholder={t('input')}
-            />
-          </div>
+          <InputField />
           <div className={styles.main__next} role="button">
             <span className={styles.next__text}>{t('next')}</span>
           </div>
@@ -261,25 +255,7 @@ const styles = {
     text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
     leading-[20px]
   `,
-  main__input: `
-    flex
-    my-[12px]
-    rounded
-    border
-    border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
-  `,
-  input__textarea: `
-    w-full
-    my-[18px]
-    mx-[8px]
-    bg-white dark:bg-black
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
-    placeholder-[rgb(113,118,123)]
-    leading-[24px]
-    text-[17px]
-    overflow-ellipsis
-    outline-none
-  `,
+
   main__next: `
     flex
     flex-row
@@ -307,6 +283,7 @@ const styles = {
     rounded-full
     border
     border-[rgb(83,100,113)]
+    dark:hover:bg-[rgba(239,243,244,0.1)]
   `,
   forgot__text: `
     text-dark dark:text-white
@@ -322,5 +299,6 @@ const styles = {
   `,
   hint__right: `
     text-[rgb(29,155,240)]
+    hover:underline
   `,
 }
