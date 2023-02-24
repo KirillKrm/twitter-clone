@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { useTranslation } from 'react-i18next'
 
-export default function InputField() {
-  const { t } = useTranslation('login')
-
+export default function InputField({ value = '', setValue, placeholder }) {
+  // TODO
   return (
     <>
       <div className={styles.container}>
@@ -14,9 +12,13 @@ export default function InputField() {
           id="login"
           autoComplete="off"
           required
+          onChange={e => {
+            console.log(e)
+            setValue(e.target.value)
+          }}
         />
         <label className={styles.container__label} htmlFor="login">
-          {t('input')}
+          {placeholder}
         </label>
       </div>
     </>

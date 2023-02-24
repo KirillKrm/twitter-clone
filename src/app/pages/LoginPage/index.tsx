@@ -2,10 +2,13 @@ import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
-import InputField from './InputField'
+import InputField from 'app/components/InputField'
 
 export function LoginPage() {
   const { t, i18n } = useTranslation('login')
+
+  const [login, setLogin] = React.useState('')
+  console.log('login: ', login)
 
   const changeLanguage = language => {
     i18n.changeLanguage(language)
@@ -103,7 +106,11 @@ export function LoginPage() {
             <div className={styles.separator__text}>{t('separator')}</div>
             <div className={styles.separator__line}></div>
           </div>
-          <InputField />
+          <InputField
+            value={login}
+            setValue={setLogin}
+            placeholder={t('input')}
+          />
           <div className={styles.main__next} role="button">
             <span className={styles.next__text}>{t('next')}</span>
           </div>
@@ -112,9 +119,11 @@ export function LoginPage() {
           </div>
           <div className={styles.main__hint}>
             <span className={styles.hint__left}>{t('hint')}</span>
-            <span className={styles.hint__right} role="button">
-              {t('signup')}
-            </span>
+            <a href="/signup">
+              <span className={styles.hint__right} role="button">
+                {t('signup')}
+              </span>
+            </a>
           </div>
         </div>
       </div>
