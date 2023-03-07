@@ -1,14 +1,11 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
 
 export function NotFoundPage() {
-  const { t, i18n } = useTranslation('notfound')
-
-  const changeLanguage = language => {
-    i18n.changeLanguage(language)
-  }
+  const { t } = useTranslation('notfound')
 
   return (
     <div className={styles.container}>
@@ -18,20 +15,7 @@ export function NotFoundPage() {
       </Helmet>
       <div className={styles.container__body}>
         <div className={styles.container__buttons}>
-          <button
-            className={styles.buttons__locales}
-            type="button"
-            onClick={() => changeLanguage('en')}
-          >
-            EN
-          </button>
-          <button
-            className={styles.buttons__locales}
-            type="button"
-            onClick={() => changeLanguage('ua')}
-          >
-            UA
-          </button>
+          <LanguageSwitcher page={'notfound'} />
         </div>
         <div className={styles.container__themes}>
           <ThemeSwitcher />
@@ -171,14 +155,6 @@ const styles = {
     ml-1 
     gap-1
     z-10
-  `,
-  buttons__locales: `
-    w-max
-    py-1 
-    px-2 
-    bg-gray-700 
-    text-white 
-    rounded-lg
   `,
   content__article: `
     pt-[5vh]

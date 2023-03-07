@@ -10,6 +10,7 @@ import Menu from 'app/components/Menu'
 import Account from 'app/components/Account'
 import Twits from 'app/components/Twits'
 import TwitCreate from 'app/components/TwitCreate'
+import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
 
 export function HomePage() {
@@ -38,29 +39,12 @@ export function HomePage() {
   //   }
   // })
 
-  const { t, i18n } = useTranslation('feed')
-
-  const changeLanguage = language => {
-    i18n.changeLanguage(language)
-  }
+  const { t } = useTranslation('feed')
 
   return (
     <div className={styles.container}>
       <div className={styles.container__buttons}>
-        <button
-          className={styles.buttons__locales}
-          type="button"
-          onClick={() => changeLanguage('en')}
-        >
-          EN
-        </button>
-        <button
-          className={styles.buttons__locales}
-          type="button"
-          onClick={() => changeLanguage('ua')}
-        >
-          UA
-        </button>
+        <LanguageSwitcher page={'feed'} />
       </div>
       <div className={styles.container__themes}>
         <ThemeSwitcher />
@@ -126,14 +110,6 @@ const styles = {
     mt-1 
     ml-1 
     gap-1
-  `,
-  buttons__locales: `
-    w-max
-    py-1 
-    px-2 
-    bg-gray-700 
-    text-white 
-    rounded-lg
   `,
   container__header: `
     flex 

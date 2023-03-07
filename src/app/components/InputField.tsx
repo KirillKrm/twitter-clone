@@ -1,16 +1,16 @@
 import * as React from 'react'
 
 export default function InputField({ value = '', setValue, placeholder }) {
-  // TODO
   return (
     <>
       <div className={styles.container}>
         <input
           className={styles.container__input}
-          type="text"
           name="text"
           id="login"
           autoComplete="off"
+          title=""
+          maxLength={50}
           required
           onChange={e => {
             console.log(e)

@@ -14,9 +14,11 @@ export default function SelectField(props: ListProps) {
           name="text"
           id="login"
           autoComplete="off"
+          title=""
           required
+          style={{ content: '↓', color: 'white' }}
         >
-          <option disabled></option>
+          <option selected disabled></option>
           {props.list.map(list => {
             const { name } = list
 
@@ -35,7 +37,7 @@ const styles = {
   container: `
       relative
       h-[56px]
-      my-3
+      w-full
     `,
   container__input: `
       absolute
@@ -53,9 +55,12 @@ const styles = {
       border
       border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
       outline-none
+      cursor-pointer
       focus:border-[rgb(29,155,240)] dark:focus:border-[rgb(29,155,240)]
   
       peer
+
+      select-arrow
     `,
   container__label: `
       absolute
