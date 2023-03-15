@@ -220,7 +220,7 @@ const styles = {
     flex-col
     mx-auto
     px-[32px]
-    pb-[48px]
+    pt-[112px]
   `,
   main__title: `
     w-[300px]

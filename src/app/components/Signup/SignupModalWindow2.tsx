@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
-import InputField from 'app/components/InputField'
+import { EmailInput, NameInput } from 'app/components/InputField'
 import SelectField from 'app/components/SelectField'
 
 export type Month = {
@@ -50,19 +50,16 @@ export default function SignupModalWindow2({ setModalStep }) {
   const { t } = useTranslation('signup')
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
-  const [error, setError] = React.useState(false)
-  const refInputName = React.useRef<HTMLInputElement>(null)
-  const refInputEmail = React.useRef<HTMLInputElement>(null)
-  const emailExp = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+  // const [error, setError] = React.useState(false)
+  // const refInputName = React.useRef<HTMLInputElement>(null)
+  // const refInputEmail = React.useRef<HTMLInputElement>(null)
 
   console.log('Name: ', name)
   console.log('Email: ', email)
 
-  const validation = () => {
-    if (!emailExp.test(email)) {
-      console.log('Wrong email!')
-    }
-  }
+  // if (!emailExp.test(email)) {
+  //   console.log('Wrong email!')
+  // }
 
   return (
     <form className={styles.container__module}>
@@ -89,11 +86,12 @@ export default function SignupModalWindow2({ setModalStep }) {
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <InputField value={name} setValue={setName} placeholder={t('name')} />
-        <InputField
+        <NameInput value={name} setValue={setName} placeholder={t('name')} />
+        <EmailInput
           value={email}
           setValue={setEmail}
           placeholder={t('email')}
+          // validator={str => emailExp.test(str)}
         />
         <div className={styles.main__birthday}>
           <span>{t('birthday')}</span>
