@@ -86,12 +86,16 @@ export default function SignupModalWindow2({ setModalStep }) {
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <NameInput value={name} setValue={setName} placeholder={t('name')} />
+        <NameInput
+          value={name}
+          setValue={setName}
+          placeholder={t('name')}
+          maxLength={50}
+        />
         <EmailInput
           value={email}
           setValue={setEmail}
           placeholder={t('email')}
-          // validator={str => emailExp.test(str)}
         />
         <div className={styles.main__birthday}>
           <span>{t('birthday')}</span>
