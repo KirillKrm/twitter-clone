@@ -9,11 +9,13 @@ type InputFieldProps = {
   maxLength?: number
   counterMax?: number
   pattern?: string
+  setValid?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function InputField({
   value = '',
   setValue,
+  setValid,
   placeholder,
   maxLength,
   pattern,
@@ -24,11 +26,23 @@ export default function InputField({
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
   })
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  React.useEffect(() => {
+    if (inputRef.current != null) {
+      if (!!setValid) {
+        inputRef.current.checkValidity() && !isInputEmpty
+          ? setValid(true)
+          : setValid(false)
+      }
+    }
+  })
 
   return (
     <>
       <div className={styles.container}>
         <input
+          ref={inputRef}
           className={styles.container__input}
           name="text"
           type="text"
@@ -40,6 +54,7 @@ export default function InputField({
             console.log(e)
             setValue(e.target.value)
           }}
+          // onInvalid={setValid ? () => setValid(false) : undefined}
           onFocus={() => setEverFocusedInput(true)}
           onInput={e =>
             maxLength
@@ -66,6 +81,7 @@ type EmailInputProps = {
   value: string
   setValue: React.Dispatch<React.SetStateAction<string>>
   placeholder: string
+  setValid?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function EmailInput(props: EmailInputProps) {
@@ -79,6 +95,7 @@ type NameInputProps = {
   setValue: React.Dispatch<React.SetStateAction<string>>
   placeholder: string
   maxLength: number
+  setValid?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function NameInput(props: NameInputProps) {

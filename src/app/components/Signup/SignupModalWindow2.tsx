@@ -50,16 +50,13 @@ export default function SignupModalWindow2({ setModalStep }) {
   const { t } = useTranslation('signup')
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
-  // const [error, setError] = React.useState(false)
-  // const refInputName = React.useRef<HTMLInputElement>(null)
-  // const refInputEmail = React.useRef<HTMLInputElement>(null)
-
-  console.log('Name: ', name)
-  console.log('Email: ', email)
-
-  // if (!emailExp.test(email)) {
-  //   console.log('Wrong email!')
-  // }
+  const [nameValid, setNameValid] = React.useState(false)
+  const [emailValid, setEmailValid] = React.useState(false)
+  const [monthValid, setMonthValid] = React.useState(false)
+  const [dayValid, setDayValid] = React.useState(false)
+  const [yearValid, setYearValid] = React.useState(false)
+  const formValid =
+    nameValid && emailValid && monthValid && dayValid && yearValid
 
   return (
     <form className={styles.container__module}>
@@ -89,12 +86,14 @@ export default function SignupModalWindow2({ setModalStep }) {
         <NameInput
           value={name}
           setValue={setName}
+          setValid={setNameValid}
           placeholder={t('name')}
           maxLength={50}
         />
         <EmailInput
           value={email}
           setValue={setEmail}
+          setValid={setEmailValid}
           placeholder={t('email')}
         />
         <div className={styles.main__birthday}>
@@ -105,22 +104,34 @@ export default function SignupModalWindow2({ setModalStep }) {
         </div>
         <div className={styles.main__select}>
           <div className={styles.select__month}>
-            <SelectField list={monthlist} placeholder={t('month')} />
+            <SelectField
+              list={monthlist}
+              placeholder={t('month')}
+              setValid={setMonthValid}
+            />
           </div>
           <div className={styles.select__day}>
-            <SelectField list={daylist} placeholder={t('day')} />
+            <SelectField
+              list={daylist}
+              placeholder={t('day')}
+              setValid={setDayValid}
+            />
           </div>
           <div className={styles.select__year}>
-            <SelectField list={yearlist} placeholder={t('year')} />
+            <SelectField
+              list={yearlist}
+              placeholder={t('year')}
+              setValid={setYearValid}
+            />
           </div>
         </div>
-        <div
+        <button
           className={styles.main__next + 'w-[440px] h-[52px]'}
-          role="button"
           onClick={() => setModalStep('third')}
+          disabled={!formValid}
         >
           <span className={styles.next__text}>{t('next')}</span>
-        </div>
+        </button>
       </div>
     </form>
   )
@@ -170,12 +181,12 @@ const styles = {
     leading-[24px]
   `,
   module__main: `
-  flex
-  flex-col
-  mx-auto
-  px-[32px]
-  pb-[48px]
-`,
+    flex
+    flex-col
+    mx-auto
+    px-[32px]
+    pb-[48px]
+  `,
   main__title: `
     w-[300px]
     my-[20px]
@@ -229,6 +240,7 @@ const styles = {
     my-[12px]
     bg-black dark:bg-white
     rounded-full
+    disabled:opacity-50
   `,
   next__text: `
     text-white dark:text-black
