@@ -7,9 +7,6 @@ type InputFieldProps = {
   placeholder: string
   validator?: (str: string) => boolean
   maxLength?: number
-  inputRef?: React.RefObject<HTMLInputElement>
-  counter?: string //TODO
-  counterCB?: () => any //TODO
   counterMax?: number
   pattern?: string
 }
@@ -18,15 +15,11 @@ export default function InputField({
   value = '',
   setValue,
   placeholder,
-  validator,
   maxLength,
-  inputRef,
-  counter,
   pattern,
 }: InputFieldProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
-  console.log('everFocusedInput: ', everFocusedInput)
-
+  const [counter, setCounter] = React.useState('')
   const isInputEmpty = value.length === 0
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
@@ -36,7 +29,6 @@ export default function InputField({
     <>
       <div className={styles.container}>
         <input
-          ref={inputRef}
           className={styles.container__input}
           name="text"
           type="text"
@@ -49,6 +41,13 @@ export default function InputField({
             setValue(e.target.value)
           }}
           onFocus={() => setEverFocusedInput(true)}
+          onInput={e =>
+            maxLength
+              ? setCounter(
+                  (e.target as HTMLInputElement).value.length + '/' + maxLength,
+                )
+              : undefined
+          }
           pattern={everFocusedInput ? pattern : undefined}
           required={!!pattern && everFocusedInput}
         />
@@ -83,35 +82,9 @@ type NameInputProps = {
 }
 
 export function NameInput(props: NameInputProps) {
-  const inputRef = React.useRef<HTMLInputElement>(null)
-  const [counter, setCounter] = React.useState('')
   const pattern = '^[\\w\\d]+$'
 
-  // TODO try to rewrite without using ref, but NOT obligated
-  React.useEffect(() => {
-    if (inputRef.current) {
-      const input = inputRef.current
-
-      const countCharacters = () => {
-        setCounter(input.value.length + '/' + props.maxLength)
-      }
-
-      input.addEventListener('input', countCharacters)
-
-      return () => {
-        input.removeEventListener('input', countCharacters)
-      }
-    }
-  })
-
-  return (
-    <InputField
-      inputRef={inputRef}
-      counter={counter}
-      pattern={pattern}
-      {...props}
-    />
-  )
+  return <InputField pattern={pattern} {...props} />
 }
 
 const styles = {
