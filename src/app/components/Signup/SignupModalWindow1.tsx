@@ -2,7 +2,9 @@ import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
 import SignupBaseModal from './SignupBaseModal'
-import GoogleAuth from 'app/components/GoogleAuth'
+import GoogleAuth from '../GoogleAuth'
+import SvgTwitter from '../SVG/SvgTwitter'
+import SvgButtonClose from '../SVG/SvgButtonClose'
 
 export default function SignupModalWindow1({ setModalStep }) {
   const { t } = useTranslation('signup')
@@ -16,24 +18,11 @@ export default function SignupModalWindow1({ setModalStep }) {
             aria-label="Close"
             role="button"
           >
-            <svg className={styles.button__svg} viewBox="0 0 24 24">
-              <g className={styles.button__g}>
-                <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
-              </g>
-            </svg>
+            <SvgButtonClose />
           </div>
         </div>
         <div className={styles.top__logo}>
-          <svg
-            className={styles.logo__svg}
-            viewBox="0 0 24 24"
-            aria-label="Twitter"
-            role="img"
-          >
-            <g className={styles.logo__g}>
-              <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
-            </g>
-          </svg>
+          <SvgTwitter />
         </div>
         <div className={styles.top__space} />
       </div>
@@ -82,24 +71,11 @@ export function SignupStep1({ setModalStep }) {
             aria-label="Close"
             role="button"
           >
-            <svg className={styles.button__svg} viewBox="0 0 24 24">
-              <g className={styles.button__g}>
-                <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
-              </g>
-            </svg>
+            <SvgButtonClose />
           </div>
         </div>
         <div className={styles.top__logo}>
-          <svg
-            className={styles.logo__svg}
-            viewBox="0 0 24 24"
-            aria-label="Twitter"
-            role="img"
-          >
-            <g className={styles.logo__g}>
-              <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
-            </g>
-          </svg>
+          <SvgTwitter />
         </div>
         <div className={styles.top__space} />
       </div>
@@ -108,32 +84,7 @@ export function SignupStep1({ setModalStep }) {
           <h1 className={styles.title__h1}>{t('join')}</h1>
         </div>
         <div className={styles.main__google} role="button">
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
-            className={styles.google__logo}
-          >
-            <g>
-              <path
-                fill="#EA4335"
-                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-              ></path>
-              <path
-                fill="#4285F4"
-                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
-              ></path>
-              <path
-                fill="#FBBC05"
-                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
-              ></path>
-              <path
-                fill="#34A853"
-                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-              ></path>
-              <path fill="none" d="M0 0h48v48H0z"></path>
-            </g>
-          </svg>
+          <GoogleAuth />
           <span className={styles.google__text}>{t('google')}</span>
         </div>
         <div className={styles.main__separator}>
@@ -163,7 +114,6 @@ export function SignupStep1({ setModalStep }) {
     </SignupBaseModal>
   )
 }
-// SignupModalStep1
 
 const styles = {
   container__module: `
@@ -193,23 +143,9 @@ const styles = {
     rounded-full
     hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(239,243,244,0.1)]
   `,
-  button__svg: `
-    w-5 
-    h-5
-  `,
-  button__g: `
-    text-[rgb(15,20,25)] dark:text-white
-  `,
   top__logo: `
     flex
     items-center
-  `,
-  logo__svg: `
-    w-8 
-    h-8
-  `,
-  logo__g: `
-    text-[rgb(29,155,240)] dark:text-white
   `,
   top__space: `
     flex
@@ -244,11 +180,6 @@ const styles = {
     rounded-full
     border
     border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
-  `,
-  google__logo: `
-    w-[18px]
-    h-[18px]
-    mr-[8px]
   `,
   google__text: `
     text-black

@@ -20,12 +20,8 @@ export default function SelectField({
   const selectRef = React.useRef<HTMLSelectElement>(null)
 
   React.useEffect(() => {
-    if (selectRef.current != null) {
-      if (!!setValid) {
-        selectRef.current.checkValidity() && isChoosen
-          ? setValid(true)
-          : setValid(false)
-      }
+    if (setValid && selectRef.current != null) {
+      setValid(selectRef.current.checkValidity() && isChoosen)
     }
   })
 

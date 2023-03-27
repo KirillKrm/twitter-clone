@@ -1,8 +1,10 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
-import { EmailInput, NameInput } from 'app/components/InputField'
-import SelectField from 'app/components/SelectField'
+import InputEmail from '../Input/InputEmail'
+import InputName from '../Input/InputName'
+import SelectField from '../SelectField'
+import SvgButtonBack from '../SVG/SvgButtonBack'
 
 export type Month = {
   name: string
@@ -46,6 +48,13 @@ for (let i = new Date().getFullYear(); i >= 1900; i--) {
   yearlist.push(obj)
 }
 
+const setData = (stepName: string, res: { [key: string]: any }): void => {
+  // axios.post({
+  //   path: `${apiUrl}/register`,
+  //   body: res
+  // })
+}
+
 export default function SignupModalWindow2({ setModalStep }) {
   const { t } = useTranslation('signup')
   const [name, setName] = React.useState('')
@@ -57,6 +66,16 @@ export default function SignupModalWindow2({ setModalStep }) {
   const [yearValid, setYearValid] = React.useState(false)
   const formValid =
     nameValid && emailValid && monthValid && dayValid && yearValid
+  // TODO
+  const res = {
+    name: 'string',
+    email: 'email',
+    birth: {
+      day: 6,
+      month: 'april',
+      year: '2001',
+    },
+  }
 
   return (
     <form className={styles.container__module}>
@@ -68,11 +87,7 @@ export default function SignupModalWindow2({ setModalStep }) {
             role="button"
             onClick={() => setModalStep('first')}
           >
-            <svg className={styles.button__svg} viewBox="0 0 24 24">
-              <g className={styles.button__g}>
-                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
-              </g>
-            </svg>
+            <SvgButtonBack />
           </div>
         </div>
         <div className={styles.top__text}>
@@ -83,14 +98,14 @@ export default function SignupModalWindow2({ setModalStep }) {
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <NameInput
+        <InputName
           value={name}
           setValue={setName}
           setValid={setNameValid}
           placeholder={t('name')}
           maxLength={50}
         />
-        <EmailInput
+        <InputEmail
           value={email}
           setValue={setEmail}
           setValid={setEmailValid}
@@ -127,7 +142,10 @@ export default function SignupModalWindow2({ setModalStep }) {
         </div>
         <button
           className={styles.main__next + 'w-[440px] h-[52px]'}
-          onClick={() => setModalStep('third')}
+          onClick={() => {
+            setData('second', res)
+            setModalStep('third')
+          }}
           disabled={!formValid}
         >
           <span className={styles.next__text}>{t('next')}</span>
@@ -164,13 +182,6 @@ const styles = {
     ml-[-8px]
     rounded-full
     hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(239,243,244,0.1)]
-  `,
-  button__svg: `
-    w-5 
-    h-5
-  `,
-  button__g: `
-    text-[rgb(15,20,25)] dark:text-white
   `,
   top__text: `
     flex

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import 'index.css'
+import SvgAccount from './SVG/SvgAccount'
 
 export default function Account() {
   const mockData = {
@@ -20,15 +21,7 @@ export default function Account() {
         <span className={styles.text__name}>{mockData.name}</span>
         <span className={styles.text__nickname}>{'@' + mockData.username}</span>
       </div>
-      <svg
-        viewBox="0 0 24 24"
-        className={styles.container__svg}
-        aria-hidden="true"
-      >
-        <g className={styles.svg__g}>
-          <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
-        </g>
-      </svg>
+      <SvgAccount />
     </div>
   )
 }
@@ -68,12 +61,5 @@ const styles = {
   text__nickname: `
     text-[rgb(83,100,113)] dark:text-[#71767b] 
     text-[15px]
-  `,
-  container__svg: `
-    w-6 
-    h-6
-  `,
-  svg__g: `
-    text-black dark:text-white
   `,
 }

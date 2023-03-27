@@ -18,7 +18,7 @@ export default function InputField({
   setValid,
   placeholder,
   maxLength,
-  pattern,
+  pattern = '*',
 }: InputFieldProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [counter, setCounter] = React.useState('')
@@ -29,12 +29,8 @@ export default function InputField({
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
-    if (inputRef.current != null) {
-      if (!!setValid) {
-        inputRef.current.checkValidity() && !isInputEmpty
-          ? setValid(true)
-          : setValid(false)
-      }
+    if (setValid && inputRef.current != null) {
+      setValid(inputRef.current.checkValidity() && !isInputEmpty)
     }
   })
 
@@ -75,33 +71,6 @@ export default function InputField({
       </div>
     </>
   )
-}
-
-type EmailInputProps = {
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-  placeholder: string
-  setValid?: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export function EmailInput(props: EmailInputProps) {
-  const pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-
-  return <InputField pattern={pattern} {...props} />
-}
-
-type NameInputProps = {
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-  placeholder: string
-  maxLength: number
-  setValid?: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export function NameInput(props: NameInputProps) {
-  const pattern = '^[\\w\\d]+$'
-
-  return <InputField pattern={pattern} {...props} />
 }
 
 const styles = {

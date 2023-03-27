@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
-import InputField from 'app/components/InputField'
+import InputField from 'app/components/Input/InputField'
 import GoogleAuth from 'app/components/GoogleAuth'
 
 export function LoginPage() {
