@@ -1,18 +1,18 @@
 import * as React from 'react'
 import 'index.css'
+import { RootState } from 'types'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import InputField from '../Input/InputField'
 import SvgButtonBack from '../SVG/SvgButtonBack'
 
 export default function SignupModalWindow3({ setModalStep }) {
-  const [name, setName] = React.useState('')
-  const [birthday, setBirthday] = React.useState('')
-  const [email, setEmail] = React.useState('')
+  const signUpPage = useSelector((state: RootState) => state.signuppage)
+  const [name, setName] = React.useState(signUpPage?.name || '')
+  const [email, setEmail] = React.useState(signUpPage?.email || '')
+  const bithdayString = `${signUpPage?.birthday.day} ${signUpPage?.birthday.month} ${signUpPage?.birthday.year}`
+  const [birthday, setBirthday] = React.useState(bithdayString || '')
   const { t } = useTranslation('signup')
-
-  console.log('Name: ', name)
-  console.log('Date of Birth: ', birthday)
-  console.log('Email: ', email)
 
   return (
     <div className={styles.container__module}>
@@ -37,16 +37,24 @@ export default function SignupModalWindow3({ setModalStep }) {
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <InputField value={name} setValue={setName} placeholder={t('name')} />
+        <InputField
+          value={name}
+          setValue={setName}
+          placeholder={t('name')}
+          isConfirmed={true}
+          onClick={setModalStep}
+        />
         <InputField
           value={email}
           setValue={setEmail}
           placeholder={t('email')}
+          isConfirmed={true}
         />
         <InputField
           value={birthday}
           setValue={setBirthday}
           placeholder={t('birthday')}
+          isConfirmed={true}
         />
         <div className={styles.main__registrationhint}>
           <span>{t('registrationHint2')}</span>

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import classnames from 'classnames'
+import SvgConfirmed from '../SVG/SvgConfirmed'
 
 type InputFieldProps = {
   value: string
@@ -10,6 +11,8 @@ type InputFieldProps = {
   counterMax?: number
   pattern?: string
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
+  isConfirmed?: boolean
+  onClick?: any
 }
 
 export default function InputField({
@@ -18,7 +21,9 @@ export default function InputField({
   setValid,
   placeholder,
   maxLength,
-  pattern = '*',
+  pattern = '.*',
+  isConfirmed,
+  onClick,
 }: InputFieldProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [counter, setCounter] = React.useState('')
@@ -36,13 +41,16 @@ export default function InputField({
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onClick={onClick ? () => onClick('second') : undefined}
+      >
         <input
           ref={inputRef}
           className={styles.container__input}
           name="text"
           type="text"
-          id="login"
+          value={value}
           autoComplete="off"
           title=""
           maxLength={maxLength}
@@ -68,6 +76,11 @@ export default function InputField({
         <label className={styles.container__counter} htmlFor="login">
           {counter}
         </label>
+        {isConfirmed ? (
+          <div className={styles.container__svg}>
+            <SvgConfirmed />
+          </div>
+        ) : null}
       </div>
     </>
   )
@@ -141,5 +154,12 @@ const styles = {
     pointer-events-none
 
     peer-focus-within:block
+  `,
+  container__svg: `
+    absolute
+    bottom-0
+    right-0
+    px-2
+    py-2
   `,
 }

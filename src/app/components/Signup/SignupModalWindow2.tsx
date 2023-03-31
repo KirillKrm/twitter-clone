@@ -1,10 +1,13 @@
 import * as React from 'react'
 import 'index.css'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { RootState } from 'types'
 import InputEmail from '../Input/InputEmail'
 import InputName from '../Input/InputName'
 import SelectField from '../SelectField'
 import SvgButtonBack from '../SVG/SvgButtonBack'
+import { signUpPageActions } from '../../pages/SignupPage/slice/index'
 
 export type Month = {
   name: string
@@ -57,8 +60,12 @@ const setData = (stepName: string, res: { [key: string]: any }): void => {
 
 export default function SignupModalWindow2({ setModalStep }) {
   const { t } = useTranslation('signup')
-  const [name, setName] = React.useState('')
-  const [email, setEmail] = React.useState('')
+  const signUpPage = useSelector((state: RootState) => state.signuppage)
+  const [name, setName] = React.useState(signUpPage?.name || '')
+  const [email, setEmail] = React.useState(signUpPage?.email || '')
+  const [month, setMonth] = React.useState(signUpPage?.birthday.month)
+  const [day, setDay] = React.useState(signUpPage?.birthday.day)
+  const [year, setYear] = React.useState(signUpPage?.birthday.year)
   const [nameValid, setNameValid] = React.useState(false)
   const [emailValid, setEmailValid] = React.useState(false)
   const [monthValid, setMonthValid] = React.useState(false)
@@ -76,6 +83,14 @@ export default function SignupModalWindow2({ setModalStep }) {
       year: '2001',
     },
   }
+
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(signUpPageActions.changeName(name))
+    dispatch(signUpPageActions.changeEmail(email))
+    dispatch(signUpPageActions.changeBirthday({ month, day, year }))
+  }, [name, email, month, day, year, dispatch])
 
   return (
     <form className={styles.container__module}>
@@ -123,6 +138,8 @@ export default function SignupModalWindow2({ setModalStep }) {
               list={monthlist}
               placeholder={t('month')}
               setValid={setMonthValid}
+              value={month}
+              setValue={setMonth}
             />
           </div>
           <div className={styles.select__day}>
@@ -130,6 +147,8 @@ export default function SignupModalWindow2({ setModalStep }) {
               list={daylist}
               placeholder={t('day')}
               setValid={setDayValid}
+              value={day}
+              setValue={setDay}
             />
           </div>
           <div className={styles.select__year}>
@@ -137,6 +156,8 @@ export default function SignupModalWindow2({ setModalStep }) {
               list={yearlist}
               placeholder={t('year')}
               setValid={setYearValid}
+              value={year}
+              setValue={setYear}
             />
           </div>
         </div>

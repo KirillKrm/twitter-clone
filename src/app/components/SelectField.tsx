@@ -5,23 +5,30 @@ type ListProps = {
   list: any
   placeholder: string
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
+  value: any
+  setValue?: any
 }
 
 export default function SelectField({
   list,
   placeholder,
   setValid,
+  value,
+  setValue,
 }: ListProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [isChoosen, setІsChoosen] = React.useState(false)
+  const isSelectEmpty = value.length === 0
   const labelStyle = classnames(styles.container__label, {
-    [styles.container__label_shrinked]: isChoosen,
+    [styles.container__label_shrinked]: isChoosen || !isSelectEmpty,
   })
   const selectRef = React.useRef<HTMLSelectElement>(null)
 
   React.useEffect(() => {
     if (setValid && selectRef.current != null) {
-      setValid(selectRef.current.checkValidity() && isChoosen)
+      setValid(
+        (selectRef.current.checkValidity() && isChoosen) || !isSelectEmpty,
+      )
     }
   })
 
@@ -33,20 +40,27 @@ export default function SelectField({
           className={styles.container__input}
           name="text"
           id="login"
+          value={value}
           autoComplete="off"
           title=""
           required={everFocusedInput}
           onFocus={() => setEverFocusedInput(true)}
           onChange={e => {
             if (e.target.selectedIndex !== -1) setІsChoosen(true)
+            console.log(e)
+            if (setValue) setValue(e.target.value)
           }}
           style={{ content: '↓', color: 'white' }}
         >
-          <option selected disabled></option>
+          <option value="" disabled></option>
           {list.map((list: { name: string }) => {
             const { name } = list
 
-            return <option>{name}</option>
+            return (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            )
           })}
         </select>
         <label className={labelStyle} htmlFor="login">
