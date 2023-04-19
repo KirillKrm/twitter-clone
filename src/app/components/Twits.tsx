@@ -1,192 +1,53 @@
 import * as React from 'react'
-import TwitsUnit from 'app/components/TwitsUnit'
 import 'index.css'
+import { Twit } from 'types/Twit'
+import TwitsUnit from 'app/components/TwitsUnit'
 
-export type Twit = {
-  id: string
-  avatar: string
-  name: string
-  nickname: string
-  date: string
-  text: string
-  likes: number
-  comments: number
-  retwits: number
+const apiUrl = 'https://pokeapi.co/api/v2'
+
+const getData = async (url: string) => {
+  return fetch(url).then(res => res.json())
 }
 
-const twitslist: Twit[] = [
-  {
-    id: '1',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '2',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '3',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '4',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '5',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '6',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '7',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '8',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '9',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '10',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-  {
-    id: '11',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-    name: 'Kyrylo Karmazin',
-    nickname: '@KirillKr231',
-    date: '23.01.23',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
-    likes: 2000,
-    comments: 1300,
-    retwits: 2400,
-  },
-]
+async function getLocation(locationId: number): Promise<string> {
+  const url = `${apiUrl}/location-area/${locationId}`
+  const location = await getData(url)
+  const locationName = location.names[0].name
 
-export default function Twits() {
-  return <TwitsList twits={twitslist} />
+  return locationName as string
 }
 
-export type TwitsListProps = {
-  twits: Twit[]
+async function getPokemon(
+  locationId: number,
+  pokemonId: number,
+): Promise<string> {
+  const url = `${apiUrl}/location-area/${locationId}`
+  const location = await getData(url)
+  const pokemonName = location.pokemon_encounters[pokemonId].pokemon.name
+
+  return pokemonName as string
 }
 
-export const TwitsList = ({ twits }: TwitsListProps) => {
+type TwitsProps = {
+  twitsList: { data: Twit }[]
+}
+
+export default function Twits(props: TwitsProps) {
+  const { twitsList } = props
+  const [location, setLocation] = React.useState('')
+  const [pokemon, setPokemon] = React.useState('')
+
+  React.useEffect(() => {
+    getLocation(1).then(location => setLocation(location))
+    getPokemon(1, 1).then(pokemon => setPokemon(pokemon))
+  }, [])
+
+  twitsList[0].data.text = `OMG! When I was walking in the ${location}, I met the ${pokemon}.`
+
   return (
     <>
-      {twitslist.map(twit => {
-        const {
-          id,
-          avatar,
-          name,
-          nickname,
-          date,
-          text,
-          likes,
-          comments,
-          retwits,
-        } = twit
-
-        return (
-          <TwitsUnit
-            key={id}
-            id={id}
-            avatar={avatar}
-            name={name}
-            nickname={nickname}
-            date={date}
-            text={text}
-            likes={likes}
-            comments={comments}
-            retwits={retwits}
-          />
-        )
+      {twitsList.map(twit => {
+        return <TwitsUnit key={twit.data.id} data={twit.data} />
       })}
     </>
   )

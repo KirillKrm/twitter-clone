@@ -3,48 +3,40 @@ import 'index.css'
 import SvgLike from './SVG/SvgLike'
 import SvgComment from './SVG/SvgComment'
 import SvgRetwit from './SVG/SvgRetwit'
+import { Twit } from 'types/Twit'
 
-type TwitProps = {
-  id: string
-  avatar: string
-  name: string
-  nickname: string
-  date: string
-  text: string
-  likes: number
-  comments: number
-  retwits: number
+export type TwitUnitProps = {
+  data: Twit
 }
 
-export default function TwitsUnit(props: TwitProps) {
+export default function TwitsUnit(props: TwitUnitProps) {
+  const { id, avatar, name, nickname, date, text, likes, comments, retwits } =
+    props.data
+
   return (
-    <div key={props.id} className={styles.container}>
-      <img
-        className={styles.container__image}
-        alt="avatar"
-        src={props.avatar}
-      />
+    <div key={id} className={styles.container}>
+      <img className={styles.container__image} alt="avatar" src={avatar} />
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>
           <a href="/#">
-            <span className={styles.title__name}>{props.name}</span>
+            <span className={styles.title__name}>{name}</span>
           </a>
-          <div className={styles.title__nickname}>{props.nickname}</div>
-          <div className={styles.title__date}>{props.date}</div>
+          <div className={styles.title__nickname}>{nickname}</div>
+          <div className={styles.title__date}>{date}</div>
         </div>
-        <div className={styles.twitBox__article}>{props.text}</div>
+        <div className={styles.twitBox__article}>{text}</div>
         <div className={styles.twitBox__buttons}>
           <div className={styles.buttons__like}>
             <SvgLike />
-            <span className={styles.like__text}>{props.likes}</span>
+            <span className={styles.like__text}>{likes}</span>
           </div>
           <div className={styles.buttons__comment}>
             <SvgComment />
-            <span className={styles.comment__text}>{props.comments}</span>
+            <span className={styles.comment__text}>{comments}</span>
           </div>
           <div className={styles.buttons__retwit}>
             <SvgRetwit />
-            <span className={styles.retwit__text}>{props.retwits}</span>
+            <span className={styles.retwit__text}>{retwits}</span>
           </div>
         </div>
       </div>

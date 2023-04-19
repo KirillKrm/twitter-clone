@@ -12,6 +12,7 @@ import Twits from 'app/components/Twits'
 import TwitCreate from 'app/components/TwitCreate'
 import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
+import { Twit } from 'types/Twit'
 
 export function HomePage() {
   const [scroll, setScroll] = useState(true)
@@ -64,7 +65,7 @@ export function HomePage() {
           <div className={styles.columns__middleColumn}>
             <h2 className={styles.middleColumn__title}>{t('Home')}</h2>
             <TwitCreate />
-            <Twits />
+            <Twits twitsList={twitsList.map(v => ({ data: v }))} />
           </div>
           <div className={styles.columns__sidebar}>
             <div className={styles.sidebar__search}>
@@ -91,6 +92,141 @@ export function HomePage() {
     </div>
   )
 }
+
+const twitsList: Twit[] = [
+  {
+    id: '1',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '2',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '3',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '4',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '5',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '6',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '7',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '8',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '9',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '10',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+  {
+    id: '11',
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+    name: 'Kyrylo Karmazin',
+    nickname: '@KirillKr231',
+    date: '23.01.23',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem enim, auctor eget ultricies in, luctus eget ex. Sed ac turpis imperdiet, congue tellus sit amet, vehicula est. Nulla sed lorem ut est tempor rutrum sit amet sit amet leo.',
+    likes: 2000,
+    comments: 1300,
+    retwits: 2400,
+  },
+]
 
 const styles = {
   container: `
