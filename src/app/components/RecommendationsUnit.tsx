@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 
-type RecommendationProps = {
+export type RecommendationProps = {
   name: string
   nickname: string
   avatar: string

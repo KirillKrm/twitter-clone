@@ -15,19 +15,20 @@ import ThemeSwitcher from 'app/components/ThemeSwitcher'
 import { Twit } from 'types/Twit'
 
 export function HomePage() {
-  const [scroll, setScroll] = useState(true)
+  // const [scroll, setScroll] = useState(true)
   const refTrendsRecommends = useRef(null)
 
-  window.addEventListener('scroll', e => {
-    // setScroll(scroll + e.deltaY)
-    if ((e as any).deltaY >= 0) {
-      // Scrolling Down with mouse
-      setScroll(true)
-    } else {
-      // Scrolling Up with mouse
-      setScroll(false)
-    }
-  })
+  // TODO fix scroll
+  // window.addEventListener('scroll', e => {
+  //   // setScroll(scroll + e.deltaY)
+  //   if ((e as any).deltaY >= 0) {
+  //     // Scrolling Down with mouse
+  //     setScroll(true)
+  //   } else {
+  //     // Scrolling Up with mouse
+  //     setScroll(false)
+  //   }
+  // })
 
   // window.scroll(e => {
   //   var $el = $('.fixedElement')
@@ -77,7 +78,8 @@ export function HomePage() {
               // // className={`flex flex-col m-[${scroll}px]`}
               // style={{ top: scroll }}
               // ${ scroll ? '' : 'top-0' }
-              className={styles.sidebar__box + `${scroll ? 'top-0' : 'top-0'}`}
+              // className={styles.sidebar__box + `${scroll ? 'top-0' : 'top-0'}`}
+              className={styles.sidebar__box}
             >
               <div className={styles.box__trends}>
                 <Trends />

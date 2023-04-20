@@ -2,24 +2,22 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import 'index.css'
 
-type MenuProps = {
+export type MenuUnitProps = {
   name: string
   image: string
   link: string
-  active: string
+  active: boolean
   setActive: Function
 }
 
-export default function MenuUnit(props: MenuProps) {
+export default function MenuUnit(props: MenuUnitProps) {
   const { t } = useTranslation()
 
   return (
     <a
-      key={props.name}
       href={props.link}
       className={
-        styles.container__button +
-        `${props.active === props.name ? 'font-bold' : ''}`
+        styles.container__button + `${props.active ? 'font-bold' : ''}`
       }
       onClick={() => props.setActive(props.name)}
     >

@@ -1,15 +1,12 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import RecommendationsUnit from 'app/components/RecommendationsUnit'
 import 'index.css'
 
-export type Recommendation = {
-  name: string
-  nickname: string
-  avatar: string
-}
+import RecommendationsUnit, {
+  RecommendationProps,
+} from 'app/components/RecommendationsUnit'
 
-const recommendationlist: Recommendation[] = [
+const recommendationlist: RecommendationProps[] = [
   {
     name: 'Kyrylo Karmazin',
     nickname: '@KirillKr231',
@@ -48,20 +45,6 @@ export default function Recommendations() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Recommendations')}</span>
-      <RecommendationsList recommendations={recommendationlist} />
-    </div>
-  )
-}
-
-export type RecommendationsListProps = {
-  recommendations: Recommendation[]
-}
-
-export const RecommendationsList = ({
-  recommendations,
-}: RecommendationsListProps) => {
-  return (
-    <>
       {recommendationlist.map(recommendation => {
         const { name, nickname, avatar } = recommendation
 
@@ -74,7 +57,7 @@ export const RecommendationsList = ({
           />
         )
       })}
-    </>
+    </div>
   )
 }
 

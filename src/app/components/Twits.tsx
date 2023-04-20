@@ -1,7 +1,6 @@
 import * as React from 'react'
 import 'index.css'
-import { Twit } from 'types/Twit'
-import TwitsUnit from 'app/components/TwitsUnit'
+import TwitsUnit, { TwitUnitProps } from 'app/components/TwitsUnit'
 
 const apiUrl = 'https://pokeapi.co/api/v2'
 
@@ -29,7 +28,7 @@ async function getPokemon(
 }
 
 type TwitsProps = {
-  twitsList: { data: Twit }[]
+  twitsList: TwitUnitProps[]
 }
 
 export default function Twits(props: TwitsProps) {

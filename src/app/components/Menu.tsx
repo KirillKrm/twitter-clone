@@ -1,16 +1,13 @@
 import * as React from 'react'
 import 'index.css'
-import { useState, useCallback } from 'react'
-import MenuUnit from './MenuUnit'
+import { useState } from 'react'
+
+import MenuUnit, { MenuUnitProps } from './MenuUnit'
 import SvgTwitter from './SVG/SvgTwitter'
 
-export type menu = {
-  name: string
-  image: string
-  link: string
-}
+export type MenuButton = Omit<MenuUnitProps, 'active' | 'setActive'>
 
-const menuList: menu[] = [
+const menuList: MenuButton[] = [
   {
     name: 'Home',
     image:
@@ -62,41 +59,13 @@ const menuList: menu[] = [
 ]
 
 export default function Menu() {
+  const [activeButton, setActiveButton] = useState('')
+
   return (
     <nav className={styles.container}>
       <a href="/#" className={styles.container__logo}>
         <SvgTwitter />
       </a>
-      <MenuList menuButtons={menuList} />
-    </nav>
-  )
-}
-
-export type MenuListProps = {
-  menuButtons: menu[]
-}
-
-export const MenuList = ({ menuButtons }: MenuListProps) => {
-  const [active, setActive] = useState('')
-
-  const setActiveCallBack = useCallback(
-    (state: React.SetStateAction<string>) => {
-      setActive(state)
-    },
-    [setActive],
-  )
-
-  // const handleClick = event => {
-  //   setActive(event.target.id)
-  // }
-
-  // useEffect(() => {
-  //   const element = document.getElementById(active)
-  //   setActive(element)
-  // }, [active])
-
-  return (
-    <>
       {menuList.map(menuButton => {
         const { name, image, link } = menuButton
 
@@ -106,12 +75,12 @@ export const MenuList = ({ menuButtons }: MenuListProps) => {
             name={name}
             image={image}
             link={link}
-            active={active}
-            setActive={setActiveCallBack}
+            active={activeButton === name}
+            setActive={setActiveButton}
           />
         )
       })}
-    </>
+    </nav>
   )
 }
 

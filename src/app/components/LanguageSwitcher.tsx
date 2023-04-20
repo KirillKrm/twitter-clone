@@ -2,11 +2,11 @@ import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
 
-type Props = {
+type LanguageSwitcherProps = {
   page: string
 }
 
-export default function LanguageSwitcher(props: Props) {
+export default function LanguageSwitcher(props: LanguageSwitcherProps) {
   const { i18n } = useTranslation(props.page)
 
   const changeLanguage = language => {
