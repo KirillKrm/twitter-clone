@@ -2,7 +2,7 @@ import * as React from 'react'
 import classnames from 'classnames'
 
 type ListProps = {
-  list: any
+  list: any[]
   placeholder: string
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
   value: any

@@ -72,7 +72,8 @@ const styles = {
     flex 
     w-10 
     h-10 
-    rounded-full mr-3
+    rounded-full
+    mr-3
   `,
   container__inputBox: `
     flex 
