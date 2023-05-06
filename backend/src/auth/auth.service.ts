@@ -7,8 +7,8 @@ import { CreateUserDto } from '../users/dto/create-user.dto'
 import { UsersService } from '../users/users.service'
 import { User } from '../users/entities/user.entity'
 
-import { RegisterDto } from './dto/register.dto'
-import { JwtRefreshDto } from './dto'
+import { RegisterDto, JwtRefreshDto, JwtTokensDto } from './dto'
+import { JwtPayload } from './types'
 
 @Injectable()
 export class AuthService {
@@ -24,10 +24,11 @@ export class AuthService {
     return this.usersService.create(userPayload)
   }
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  async validateUser(
+    username: string,
+    pass: string,
+  ): Promise<JwtPayload | null> {
     const user = await this.usersService.findOneByUsername(username)
-    console.log(user)
-    console.log(user && Hash.compare(pass, user.password))
     if (user && Hash.compare(pass, user.password)) {
       return { id: user.id, username: user.username }
     }
@@ -35,10 +36,10 @@ export class AuthService {
     return null
   }
 
-  async getJwtTokens(username: string, pass: string): Promise<any> {
+  async getJwtTokens(username: string, pass: string): Promise<JwtTokensDto> {
     const user = await this.usersService.findOneByUsername(username)
 
-    const payload = { username: user.username, userId: user.id } //TODO give payload a type JwtPayload
+    const payload: JwtPayload = { username: user.username, id: user.id }
 
     const jwtAccessToken = this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET'),
@@ -56,8 +57,8 @@ export class AuthService {
     }
   }
 
-  async refreshJwt(jwtRefreshDto: JwtRefreshDto) {
-    let jwtVerifyRes
+  async refreshJwt(jwtRefreshDto: JwtRefreshDto): Promise<JwtTokensDto> {
+    let jwtVerifyRes: JwtPayload
     try {
       jwtVerifyRes = this.jwtService.verify(jwtRefreshDto.refreshToken, {
         secret: this.configService.get('JWT_REFRESH_SECRET'),
@@ -67,7 +68,7 @@ export class AuthService {
     }
     console.log(jwtVerifyRes) //TODO give payload a type JwtPayload
 
-    const user: User = await this.usersService.findOne(jwtVerifyRes.userId)
+    const user: User = await this.usersService.findOne(jwtVerifyRes.id)
 
     return this.getJwtTokens(user.username, user.password)
   }
