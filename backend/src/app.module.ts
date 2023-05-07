@@ -1,4 +1,5 @@
-import { Logger, Module } from '@nestjs/common'
+import { ClassSerializerInterceptor, Logger, Module } from '@nestjs/common'
+import { APP_INTERCEPTOR } from '@nestjs/core'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm'
 import { validateSync } from 'class-validator'
@@ -48,6 +49,13 @@ import { join } from 'path'
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, Logger],
+  providers: [
+    AppService,
+    Logger,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
+  ],
 })
 export class AppModule {}

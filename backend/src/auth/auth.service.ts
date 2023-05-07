@@ -20,8 +20,9 @@ export class AuthService {
 
   async register(payload: RegisterDto): Promise<User> {
     const userPayload: CreateUserDto = payload
+    const user = await this.usersService.create(userPayload)
 
-    return this.usersService.create(userPayload)
+    return this.usersService.findOneByUsername(payload.username)
   }
 
   async validateUser(
@@ -66,10 +67,17 @@ export class AuthService {
     } catch (e) {
       throw new UnauthorizedException('Invalid jwt')
     }
-    console.log(jwtVerifyRes) //TODO give payload a type JwtPayload
 
     const user: User = await this.usersService.findOne(jwtVerifyRes.id)
+    const payload: JwtPayload = { username: user.username, id: user.id }
+    const jwtAccessToken = this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: `${this.configService.get('JWT_ACCESS_EXPIRE')}s`,
+    })
 
-    return this.getJwtTokens(user.username, user.password)
+    return {
+      jwtAccessToken,
+      jwtRefreshToken: jwtRefreshDto.refreshToken,
+    }
   }
 }
