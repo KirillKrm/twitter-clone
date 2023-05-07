@@ -10,11 +10,10 @@ async function bootstrap() {
     logger: ['log', 'error', 'warn', 'debug'],
   })
 
-  app.setGlobalPrefix('api')
+  app.useGlobalPipes(new ValidationPipe())
   app.enableVersioning({
     type: VersioningType.URI,
   })
-  app.useGlobalPipes(new ValidationPipe())
 
   const documentation = SwaggerModule.createDocument(
     app,
