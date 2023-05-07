@@ -10,6 +10,16 @@ export default function Account() {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
   }
 
+  const [matches, setMatches] = React.useState(
+    window.matchMedia('(min-width: 1280px)').matches,
+  )
+
+  React.useEffect(() => {
+    window
+      .matchMedia('(min-width: 1280px)')
+      .addEventListener('change', e => setMatches(e.matches))
+  }, [])
+
   return (
     <div className={styles.container}>
       <img
@@ -17,11 +27,15 @@ export default function Account() {
         alt="avatar"
         src={mockData.avatar}
       />
-      <div className={styles.container__text}>
-        <span className={styles.text__name}>{mockData.name}</span>
-        <span className={styles.text__nickname}>{'@' + mockData.username}</span>
+      <div className={styles.container__rightblock}>
+        <div className={styles.rightblock__text}>
+          <span className={styles.text__name}>{mockData.name}</span>
+          <span className={styles.text__nickname}>
+            {'@' + mockData.username}
+          </span>
+        </div>
+        <SvgAccount />
       </div>
-      <SvgAccount />
     </div>
   )
 }
@@ -45,7 +59,11 @@ const styles = {
     rounded-full 
     mr-3
   `,
-  container__text: `
+  container__rightblock: `
+    flex
+    min-[0px]:max-xl:hidden
+  `,
+  rightblock__text: `
     flex 
     flex-col 
     mr-3 

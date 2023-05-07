@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import 'index.css'
 
@@ -46,7 +45,6 @@ const styles = {
   button__svg: `
     w-6 
     h-6 
-    mr-3
   `,
   svg__g: `
     text-black dark:text-white
@@ -55,5 +53,7 @@ const styles = {
     text-black dark:text-white 
     text-base 
     text-[20px]
+    mx-4
+    min-[0px]:max-xl:hidden
   `,
 }

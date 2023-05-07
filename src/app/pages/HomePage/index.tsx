@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'index.css'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import Search from 'app/components/Search'
@@ -15,8 +15,9 @@ import ThemeSwitcher from 'app/components/ThemeSwitcher'
 import { Twit } from 'types/Twit'
 
 export function HomePage() {
-  // const [scroll, setScroll] = useState(true)
+  const { t } = useTranslation('feed')
   const refTrendsRecommends = useRef(null)
+  // const [scroll, setScroll] = useState(true)
 
   // TODO fix scroll
   // window.addEventListener('scroll', e => {
@@ -29,7 +30,6 @@ export function HomePage() {
   //     setScroll(false)
   //   }
   // })
-
   // window.scroll(e => {
   //   var $el = $('.fixedElement')
   //   var isPositionFixed = $el.css('position') == 'fixed'
@@ -41,57 +41,57 @@ export function HomePage() {
   //   }
   // })
 
-  const { t } = useTranslation('feed')
-
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.container__buttons}>
         <LanguageSwitcher page={'feed'} />
       </div>
       <div className={styles.container__themes}>
         <ThemeSwitcher />
       </div>
-      <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="Twitter Clone homepage" />
-      </Helmet>
-      <header className={styles.container__header}>
-        <div className={styles.header__menu}>
-          <Menu />
-          <Account />
-        </div>
-      </header>
-      <main className={styles.container__main}>
-        <div className={styles.main__columns}>
-          <div className={styles.columns__middleColumn}>
-            <h2 className={styles.middleColumn__title}>{t('Home')}</h2>
-            <TwitCreate />
-            <Twits twitsList={twitsList.map(v => ({ data: v }))} />
-          </div>
-          <div className={styles.columns__sidebar}>
-            <div className={styles.sidebar__search}>
-              <Search />
+      <div className={styles.container}>
+        <Helmet>
+          <title>Home Page</title>
+          <meta name="description" content="Twitter Clone homepage" />
+        </Helmet>
+        <main className={styles.container__main}>
+          <header className={styles.main__header}>
+            <div className={styles.header__menu}>
+              <Menu />
+              <Account />
             </div>
-            <div
-              ref={refTrendsRecommends}
-              // className={`flex flex-col`}
-              // // className={`flex flex-col m-[${scroll}px]`}
-              // style={{ top: scroll }}
-              // ${ scroll ? '' : 'top-0' }
-              // className={styles.sidebar__box + `${scroll ? 'top-0' : 'top-0'}`}
-              className={styles.sidebar__box}
-            >
-              <div className={styles.box__trends}>
-                <Trends />
+          </header>
+          <div className={styles.main__columns}>
+            <div className={styles.columns__middleColumn}>
+              <h2 className={styles.middleColumn__title}>{t('Home')}</h2>
+              <TwitCreate />
+              <Twits twitsList={twitsList.map(v => ({ data: v }))} />
+            </div>
+            <div className={styles.columns__sidebar}>
+              <div className={styles.sidebar__search}>
+                <Search />
               </div>
-              <div className={styles.box__recommendations}>
-                <Recommendations />
+              <div
+                ref={refTrendsRecommends}
+                // className={`flex flex-col`}
+                // // className={`flex flex-col m-[${scroll}px]`}
+                // style={{ top: scroll }}
+                // ${ scroll ? '' : 'top-0' }
+                // className={styles.sidebar__box + `${scroll ? 'top-0' : 'top-0'}`}
+                className={styles.sidebar__box}
+              >
+                <div className={styles.box__trends}>
+                  <Trends />
+                </div>
+                <div className={styles.box__recommendations}>
+                  <Recommendations />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   )
 }
 
@@ -232,100 +232,103 @@ const twitsList: Twit[] = [
 
 const styles = {
   container: `
-    flex
-    bg-white dark:bg-black
-  `,
+  flex
+  flex-row
+  justify-center
+  bg-white dark:bg-black
+`,
   container__themes: `
-    fixed
-    right-0
-    mt-1 
-    mr-1 
-  `,
+  fixed
+  right-0
+  mt-1 
+  mr-1 
+  z-[11]
+`,
   container__buttons: `
-    flex 
-    flex-row
-    fixed 
-    mt-1 
-    ml-1 
-    gap-1
-  `,
-  container__header: `
-    flex 
-    flex-grow 
-    h-full 
-    justify-end 
-    w-[594px]
-  `,
-  header__menu: `
-    flex 
-    fixed 
-    flex-col 
-    w-[275px] 
-    h-full 
-    justify-between
-  `,
+  flex 
+  flex-row
+  fixed 
+  mt-1 
+  ml-1 
+  gap-1
+  z-[11]
+`,
   container__main: `
-    flex 
-    flex-grow 
-    h-full 
-    w-[1309px] 
-    items-start
-  `,
+  flex
+  flex-row
+  justify-center
+  w-9/12
+`,
+  main__header: `
+  flex
+  flex-grow 
+  sticky
+  top-0
+  h-screen
+  justify-end
+`,
+  header__menu: `
+  flex 
+  flex-col 
+  justify-between
+`,
   main__columns: `
-    flex 
-    w-[990px] 
-    h-full 
-    justify-between
-  `,
+  flex 
+  flex-grow
+  gap-6
+`,
   columns__middleColumn: `
-    flex 
-    flex-col 
-    w-[598px] 
-    h-full 
-    border-r 
-    border-l 
-    border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
-  `,
+  flex 
+  flex-col 
+  max-w-[598px] 
+  border-r 
+  border-l 
+  border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+`,
   middleColumn__title: `
-    flex 
-    sticky 
-    top-0 
-    w-[596px] 
-    py-4 
-    pl-4 
-    backdrop-blur-md 
-    bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 
-    text-black dark:text-white 
-    text-[20px] 
-    font-bold 
-    border-b 
-    bodred-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
-  `,
+  flex 
+  sticky 
+  top-0 
+  w-[596px] 
+  py-4 
+  pl-4 
+  backdrop-blur-md 
+  bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 
+  text-black dark:text-white 
+  text-[20px] 
+  font-bold 
+  border-b 
+  bodred-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+`,
   columns__sidebar: `
-    flex 
-    flex-col 
-    w-[350px]
-  `,
+  flex 
+  flex-col 
+  min-[0px]:max-[1000px]:hidden
+  min-[1000px]:block
+  min-[1000px]:max-[1025px]:w-[290px]
+  min-[1025px]:max-[1075px]:w-[320px]
+  min-[1075px]:w-[350px]
+`,
   sidebar__search: `
-    flex 
-    sticky 
-    z-10 
-    top-0 
-    py-1 
-    bg-white dark:bg-black
-  `,
+  flex 
+  sticky 
+  z-10
+  top-0 
+  py-1 
+  bg-white dark:bg-black
+`,
   sidebar__box: `
-    flex 
-    flex-col 
-    sticky 
-    mt-3 
-    top-0
-  `,
+  flex 
+  flex-col 
+  sticky 
+  mt-3 
+  top-0
+`,
   box__trends: `
-    flex 
-    mb-4
-  `,
+  flex 
+  mb-4
+`,
   box__recommendations: `
-   flex
-  `,
+  flex
+`,
 }
