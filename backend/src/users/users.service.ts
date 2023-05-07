@@ -38,7 +38,7 @@ export class UsersService {
   // TODO filter + pagination
   async findAll(): Promise<User[]> {
     const users = await this.userRepository.find()
-    if (!users) {
+    if (!users || !users.length) {
       throw new NotFoundException('Users not found')
     }
 
