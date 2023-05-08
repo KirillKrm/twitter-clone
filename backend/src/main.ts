@@ -2,6 +2,9 @@ import { NestFactory } from '@nestjs/core'
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import cookieParser from 'cookie-parser'
+import helmet from 'helmet'
+import csurf from 'tiny-csrf'
 
 import { AppModule } from './app.module'
 
@@ -9,6 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['log', 'error', 'warn', 'debug'],
   })
+  const configService = app.get(ConfigService)
 
   app.useGlobalPipes(new ValidationPipe())
   app.enableVersioning({
@@ -25,7 +29,13 @@ async function bootstrap() {
   )
   SwaggerModule.setup('docs', app, documentation)
 
-  const configService = app.get(ConfigService)
+  app.use(helmet())
+  app.use(cookieParser())
+  // TODO add domain for frontend on deploy
+  // app.enableCors()
+  // TODO
+  // app.use(csurf(configService.get('GENERAL_SECRET')))
+
   const port = configService.get('PORT')
   await app.listen(port)
 
