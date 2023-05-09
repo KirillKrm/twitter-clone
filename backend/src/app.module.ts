@@ -10,11 +10,13 @@ import { EnvConfigSchema } from './config/env.config'
 import { TwitsModule } from './twits/twits.module'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
+import { GlobalJwtModule } from './auth/jwt.module'
 import { join } from 'path'
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       validate: (config: Record<string, unknown>) => {
         const envConfig = Object.assign(new EnvConfigSchema(), config)
         const errors = validateSync(envConfig)
@@ -44,6 +46,7 @@ import { join } from 'path'
           },
         } as TypeOrmModuleAsyncOptions),
     }),
+    GlobalJwtModule,
     TwitsModule,
     UsersModule,
     AuthModule,

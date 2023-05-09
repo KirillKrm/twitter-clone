@@ -22,7 +22,7 @@ export class AuthService {
     const userPayload: CreateUserDto = payload
     const user = await this.usersService.create(userPayload)
 
-    return this.usersService.findOneByUsername(payload.username)
+    return this.usersService.findOne(user.id)
   }
 
   async validateUser(
