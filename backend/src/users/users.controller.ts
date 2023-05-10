@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Body,
   Patch,
   Param,
   Delete,
@@ -67,6 +66,6 @@ export class UsersController {
   })
   @ApiResponse({ status: 204, description: 'Successfully deleted user.' })
   async remove(@Param('id') id: number): Promise<void> {
-    return this.usersService.remove(id)
+    await this.usersService.remove(id)
   }
 }
