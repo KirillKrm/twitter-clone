@@ -6,6 +6,8 @@ import {
   Column,
   OneToMany,
   BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm'
 import { PasswordTransformer } from '../../common/transformers/password.transformer'
 
@@ -37,4 +39,10 @@ export class User extends BaseEntity {
   // TODO
   // @OneToMany(() => Like, like => like.user)
   // likes: Like[]
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 }
