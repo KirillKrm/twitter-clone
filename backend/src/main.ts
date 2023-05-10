@@ -6,11 +6,12 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import csurf from 'tiny-csrf'
 
+import { logger } from './logger'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['log', 'error', 'warn', 'debug'],
+    logger,
   })
   const configService = app.get(ConfigService)
 
@@ -41,6 +42,6 @@ async function bootstrap() {
 
   const loggerService = app.get(Logger)
   loggerService.log(`Port: ${port}`)
-  loggerService.log(`NOVE_ENV: ${configService.get('NODE_ENV')}`)
+  loggerService.log(`NODE_ENV: ${configService.get('NODE_ENV')}`)
 }
 bootstrap()

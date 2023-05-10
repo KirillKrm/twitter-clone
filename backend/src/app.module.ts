@@ -4,14 +4,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm'
 import { validateSync } from 'class-validator'
 
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { EnvConfigSchema } from './config/env.config'
 import { TwitsModule } from './twits/twits.module'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { GlobalJwtModule } from './auth/jwt.module'
 import { join } from 'path'
+
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
 
 @Module({
   imports: [

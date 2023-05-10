@@ -1,6 +1,7 @@
 import {
   ForbiddenException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -14,6 +15,8 @@ import { Twit } from './twit.entity'
 
 @Injectable()
 export class TwitsService {
+  private readonly logger = new Logger(TwitsService.name)
+
   constructor(
     @InjectRepository(Twit)
     private readonly twitRepository: Repository<Twit>,
@@ -28,7 +31,10 @@ export class TwitsService {
       author: user,
     })
 
-    return this.twitRepository.save(newTwit)
+    const res = await this.twitRepository.save(newTwit)
+    this.logger.log(`Twit ${res.id} created successfully`)
+
+    return res
   }
 
   async findAll(): Promise<Twit[]> {
@@ -38,6 +44,7 @@ export class TwitsService {
     if (!twits || !twits.length) {
       throw new NotFoundException('Twits not found')
     }
+    this.logger.log(`${twits.length} twits fetched successfully`)
 
     return twits
   }
@@ -50,6 +57,7 @@ export class TwitsService {
     if (!twit) {
       throw new NotFoundException('Twit not found')
     }
+    this.logger.log(`Twit ${twit.id} fetched successfully`)
 
     return twit
   }
@@ -74,12 +82,12 @@ export class TwitsService {
     }
 
     const res = await this.twitRepository.update({ id: twitId }, updateTwitDto)
-    console.log(res)
+    this.logger.log(`Twit ${twitId} updated successfully`)
 
     return this.findOne(twitId)
   }
 
-  async remove(userId: number, twitId: number) {
+  async remove(userId: number, twitId: number): Promise<Twit> {
     const twit = await this.twitRepository.findOne({
       where: { id: twitId },
       relations: { author: true },
@@ -95,6 +103,7 @@ export class TwitsService {
     }
 
     const res = await this.twitRepository.delete({ id: twitId })
+    this.logger.log(`Twit ${twitId} deleted successfully`)
 
     return twit
   }

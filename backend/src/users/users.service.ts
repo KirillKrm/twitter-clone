@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -12,6 +13,8 @@ import { UpdateUserDto } from './dto/update-user.dto'
 
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger(UsersService.name)
+
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -32,7 +35,10 @@ export class UsersService {
       throw new ConflictException('Username already taken')
     }
 
-    return this.userRepository.save(createUserDto)
+    const res = await this.userRepository.save(createUserDto)
+    this.logger.log(`User ${res.id} created successfully`)
+
+    return res
   }
 
   // TODO filter + pagination
@@ -41,6 +47,7 @@ export class UsersService {
     if (!users || !users.length) {
       throw new NotFoundException('Users not found')
     }
+    this.logger.log(`${users.length} users fetched successfully`)
 
     return users
   }
@@ -50,6 +57,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User not found')
     }
+    this.logger.log(`User ${user.id} fetched successfully`)
 
     return user
   }
@@ -59,6 +67,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User not found')
     }
+    this.logger.log(`User ${user.id} fetched successfully`)
 
     return user
   }
@@ -68,12 +77,15 @@ export class UsersService {
   //   return this.userRepository.findOneBy({ id })
   // }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<User> {
     const user = await this.userRepository.findOneBy({ id })
     if (!user) {
       throw new NotFoundException('User not found')
     }
 
-    await this.userRepository.delete(id)
+    const res = await this.userRepository.delete(id)
+    this.logger.log(`User ${user.id} deleted successfully`)
+
+    return user
   }
 }

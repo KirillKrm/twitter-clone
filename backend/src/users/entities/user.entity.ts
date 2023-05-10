@@ -41,8 +41,10 @@ export class User extends BaseEntity {
   // likes: Like[]
 
   @CreateDateColumn()
+  @ApiProperty()
   createdAt: Date
 
   @UpdateDateColumn()
+  @ApiProperty()
   updatedAt: Date
 }
