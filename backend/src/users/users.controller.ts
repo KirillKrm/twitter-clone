@@ -27,7 +27,7 @@ export class UsersController {
     description: 'Retrieve a list of all users.',
   })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: 'Successfully retrieved all users.',
     type: [User],
   })
@@ -42,7 +42,7 @@ export class UsersController {
     description: 'Retrieve a user by their ID.',
   })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: 'Successfully retrieved user.',
     type: User,
   })
@@ -64,7 +64,10 @@ export class UsersController {
     summary: 'Delete user by ID',
     description: 'Delete a user by their ID.',
   })
-  @ApiResponse({ status: 204, description: 'Successfully deleted user.' })
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Successfully deleted user.',
+  })
   async remove(@Param('id') id: number): Promise<void> {
     await this.usersService.remove(id)
   }

@@ -10,6 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common'
+import { ApiOperation, ApiResponse } from '@nestjs/swagger'
 
 import { JwtPayload } from '../auth/types'
 import { AuthGuard } from '../auth/auth.guard'
@@ -27,17 +28,18 @@ import { Twit } from './twit.entity'
 export class TwitsController {
   constructor(private readonly twitsService: TwitsService) {}
 
-  // @Get('test')
-  // @UseGuards(AuthGuard)
-  // @HttpCode(HttpStatus.OK)
-  // async test(@CurrentUser() user: JwtPayload) {
-  //   return user
-  // }
-
   @Post()
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.CREATED)
-  // TODO @ApiOperation()
+  @ApiOperation({
+    summary: 'Create a new twit',
+    description: 'Creates a new twit with the provided data',
+  })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The twit has been successfully created',
+    type: Twit,
+  })
   async create(
     @CurrentUser() userJwtPayload: JwtPayload,
     @Body() createTwitDto: CreateTwitDto,
@@ -47,14 +49,30 @@ export class TwitsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  // TODO @ApiOperation()
+  @ApiOperation({
+    summary: 'Get all twits',
+    description: 'Retrieves all the existing twits',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Successfully retrieved all twits',
+    type: [Twit],
+  })
   async findAll(): Promise<Twit[]> {
     return this.twitsService.findAll()
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  // TODO @ApiOperation()
+  @ApiOperation({
+    summary: 'Get a twit by ID',
+    description: 'Retrieves a twit based on the provided ID',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Successfully retrieved the twit',
+    type: Twit,
+  })
   async findOne(@Param('id') id: number): Promise<Twit> {
     return this.twitsService.findOne(id)
   }
@@ -62,7 +80,14 @@ export class TwitsController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  // TODO @ApiOperation()
+  @ApiOperation({
+    summary: 'Update a twit by ID',
+    description: 'Updates a twit based on the provided ID',
+  })
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'The twit has been successfully updated',
+  })
   async update(
     @CurrentUser() userJwtPayload: JwtPayload,
     @Param('id') twitId: number,
@@ -74,7 +99,14 @@ export class TwitsController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  // TODO @ApiOperation()
+  @ApiOperation({
+    summary: 'Delete a twit by ID',
+    description: 'Deletes a twit based on the provided ID',
+  })
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'The twit has been successfully deleted',
+  })
   async remove(
     @CurrentUser() userJwtPayload: JwtPayload,
     @Param('id') twitId: number,
