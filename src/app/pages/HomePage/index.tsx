@@ -234,20 +234,22 @@ const styles = {
   container: `
   flex
   flex-row
-  justify-center
   bg-white dark:bg-black
+
+  min-[680px]:justify-center
 `,
   container__themes: `
   fixed
-  right-0
+  top-[75%]
   mt-1 
   mr-1 
   z-[11]
 `,
   container__buttons: `
   flex 
-  flex-row
+  flex-col
   fixed 
+  top-[65%]
   mt-1 
   ml-1 
   gap-1
@@ -257,39 +259,55 @@ const styles = {
   flex
   flex-row
   justify-center
-  w-9/12
+
+  min-[680px]:w-9/12
 `,
   main__header: `
   flex
   flex-grow 
   sticky
-  top-0
   h-screen
-  justify-end
+
+  min-[500px]:top-0
+  min-[500px]:justify-end
+
+  max-[500px]:fixed
+  max-[500px]:bottom-0
+  max-[500px]:w-full
+  max-[500px]:h-[56px]
+  max-[500px]:justify-center
+  max-[500px]:bg-black
 `,
   header__menu: `
   flex 
   flex-col 
   justify-between
+
+  max-[500px]:flex-row
+  max-[500px]:w-full
+  max-[500px]:border-t
+  max-[500px]:border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
 `,
   main__columns: `
   flex 
   flex-grow
   gap-6
+
+  min-[500px]:max-[680px]:w-full
 `,
   columns__middleColumn: `
   flex 
   flex-col 
-  max-w-[598px] 
-  border-r 
-  border-l 
-  border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+  min-[500px]:border-r 
+  min-[500px]:border-l 
+  min-[500px]:border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+
+  min-[500px]:max-[680px]:w-full
 `,
   middleColumn__title: `
   flex 
   sticky 
   top-0 
-  w-[596px] 
   py-4 
   pl-4 
   backdrop-blur-md 
@@ -299,10 +317,14 @@ const styles = {
   font-bold 
   border-b 
   bodred-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+
+  min-[500px]:max-[680px]:w-full
+  min-[680px]:w-[598px]
 `,
   columns__sidebar: `
   flex 
   flex-col 
+
   min-[0px]:max-[1000px]:hidden
   min-[1000px]:block
   min-[1000px]:max-[1025px]:w-[290px]

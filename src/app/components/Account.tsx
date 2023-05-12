@@ -51,6 +51,7 @@ const styles = {
     hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
     transition-colors 
     duration-200
+    min-[0px]:max-[500px]:hidden
   `,
   container__image: `
     flex 
@@ -58,6 +59,7 @@ const styles = {
     h-10 
     rounded-full 
     mr-3
+    min-[0px]:max-xl:mr-0
   `,
   container__rightblock: `
     flex

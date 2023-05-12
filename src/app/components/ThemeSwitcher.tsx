@@ -61,7 +61,7 @@ export default function ThemeSwitcher() {
 const styles = {
   container: `
     flex
-    flex-row
+    flex-col
     gap-1
   `,
   container__light: `
