@@ -7,6 +7,10 @@ export class EnvConfigSchema {
 
   @IsDefined()
   @IsString()
+  GENERAL_SECRET: string
+
+  @IsDefined()
+  @IsString()
   JWT_SECRET: string
 
   @IsDefined()

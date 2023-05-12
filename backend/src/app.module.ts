@@ -22,6 +22,7 @@ import { AppService } from './app.service'
         const envConfig = Object.assign(new EnvConfigSchema(), config)
         const errors = validateSync(envConfig)
         if (errors.length > 0) {
+          console.error(errors)
           throw new Error(
             `Config validation error:\n ${JSON.stringify(errors)}`,
           )
@@ -41,7 +42,11 @@ import { AppService } from './app.service'
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [join(process.cwd(), '**/**.entity.{js,ts}')],
+          entities: [
+            configService.get('NODE_ENV') === 'development'
+              ? join(process.cwd(), '**/**.entity.{js,ts}')
+              : 'dist/**/*.entity.js',
+          ],
           ssl: {
             rejectUnauthorized: false,
           },
