@@ -10,16 +10,6 @@ export default function Account() {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
   }
 
-  const [matches, setMatches] = React.useState(
-    window.matchMedia('(min-width: 1280px)').matches,
-  )
-
-  React.useEffect(() => {
-    window
-      .matchMedia('(min-width: 1280px)')
-      .addEventListener('change', e => setMatches(e.matches))
-  }, [])
-
   return (
     <div className={styles.container}>
       <img
@@ -63,6 +53,8 @@ const styles = {
   `,
   container__rightblock: `
     flex
+    flex-row
+    items-center
     min-[0px]:max-xl:hidden
   `,
   rightblock__text: `

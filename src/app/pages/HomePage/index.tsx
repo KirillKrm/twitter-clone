@@ -303,6 +303,7 @@ const styles = {
   min-[500px]:border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
 
   min-[500px]:max-[680px]:w-full
+  min-[680px]:w-[600px]
 `,
   middleColumn__title: `
   flex 
