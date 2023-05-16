@@ -27,6 +27,8 @@ const styles = {
     rounded-full
     border
     border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
+
+    pointer-events-none
   `,
   google__logo: `
     w-[18px]

@@ -3,9 +3,9 @@ import 'index.css'
 import { Helmet } from 'react-helmet-async'
 import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
-import SignupModalWindow1 from 'app/components/Signup/SignupModalWindow1'
-import SignupModalWindow2 from 'app/components/Signup/SignupModalWindow2'
-import SignupModalWindow3 from 'app/components/Signup/SignupModalWindow3'
+import SignupModalWindow1 from 'app/pages/SignupPage/components/SignupModalWindow1'
+import SignupModalWindow2 from 'app/pages/SignupPage/components/SignupModalWindow2'
+import SignupModalWindow3 from 'app/pages/SignupPage/components/SignupModalWindow3'
 
 export function SignupPage() {
   const [step, setStep] = React.useState('first')

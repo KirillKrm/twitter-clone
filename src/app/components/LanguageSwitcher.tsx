@@ -2,7 +2,7 @@ import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
 
-type LanguageSwitcherProps = {
+export type LanguageSwitcherProps = {
   page: string
 }
 

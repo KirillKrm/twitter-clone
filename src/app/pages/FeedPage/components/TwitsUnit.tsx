@@ -1,8 +1,8 @@
 import * as React from 'react'
 import 'index.css'
-import SvgLike from './SVG/SvgLike'
-import SvgComment from './SVG/SvgComment'
-import SvgRetwit from './SVG/SvgRetwit'
+import SvgLike from 'app/components/SVG/SvgLike'
+import SvgComment from 'app/components/SVG/SvgComment'
+import SvgRetwit from 'app/components/SVG/SvgRetwit'
 import { Twit } from 'types/Twit'
 
 export type TwitUnitProps = {

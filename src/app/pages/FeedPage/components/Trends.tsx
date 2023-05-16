@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import Trend, { TrendProps } from 'app/components/TrendsUnit'
+import Trend, { TrendProps } from 'app/pages/FeedPage/components/TrendsUnit'
 import 'index.css'
 
 const trendlist: TrendProps[] = [

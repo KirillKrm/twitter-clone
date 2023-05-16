@@ -3,8 +3,11 @@ import 'index.css'
 import { RootState } from 'types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import InputField from '../Input/InputField'
-import SvgButtonBack from '../SVG/SvgButtonBack'
+import { Navigate } from 'react-router-dom'
+
+import BaseModal from 'app/components/BaseModal'
+import InputField from 'app/components/Input/InputField'
+import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 
 export default function SignupModalWindow3({ setModalStep }) {
   const signUpPage = useSelector((state: RootState) => state.signuppage)
@@ -12,10 +15,12 @@ export default function SignupModalWindow3({ setModalStep }) {
   const [email, setEmail] = React.useState(signUpPage?.email || '')
   const bithdayString = `${signUpPage?.birthday.day} ${signUpPage?.birthday.month} ${signUpPage?.birthday.year}`
   const [birthday, setBirthday] = React.useState(bithdayString || '')
+  // eslint-disable-next-line
+  const [authenticated, setAuthenticated] = React.useState(null)
   const { t } = useTranslation('signup')
 
   return (
-    <div className={styles.container__module}>
+    <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__back}>
           <div
@@ -65,6 +70,11 @@ export default function SignupModalWindow3({ setModalStep }) {
             'w-[440px] h-[52px] my-[24px] bg-[rgb(29,155,240)] dark:bg-[rgb(29,155,240)]'
           }
           role="button"
+          onClick={() => {
+            if (!authenticated) {
+              return <Navigate replace to="/home" />
+            }
+          }}
         >
           <span
             className={styles.next__text + 'text-[white] dark:text-[white]'}
@@ -73,7 +83,7 @@ export default function SignupModalWindow3({ setModalStep }) {
           </span>
         </div>
       </div>
-    </div>
+    </BaseModal>
   )
 }
 

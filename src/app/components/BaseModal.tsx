@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 
-export default function SignupBaseModal({ children }) {
+export default function BaseModal({ children }) {
   return (
     <div role="dialog" className={styles.container__module}>
       {children}

@@ -1,6 +1,8 @@
 import * as React from 'react'
 import 'index.css'
-import TwitsUnit, { TwitUnitProps } from 'app/components/TwitsUnit'
+import TwitsUnit, {
+  TwitUnitProps,
+} from 'app/pages/FeedPage/components/TwitsUnit'
 import { getLocation, getPokemon, randLocation } from 'app/api/services'
 
 type TwitsProps = {
@@ -9,7 +11,9 @@ type TwitsProps = {
 
 export default function Twits(props: TwitsProps) {
   const { twitsList } = props
+  // eslint-disable-next-line
   const [location, setLocation] = React.useState('')
+  // eslint-disable-next-line
   const [pokemon, setPokemon] = React.useState('')
 
   React.useEffect(() => {

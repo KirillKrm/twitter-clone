@@ -1,16 +1,24 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
-import SignupBaseModal from './SignupBaseModal'
-import GoogleAuth from '../GoogleAuth'
-import SvgTwitter from '../SVG/SvgTwitter'
-import SvgButtonClose from '../SVG/SvgButtonClose'
+
+import BaseModal from 'app/components/BaseModal'
+import GoogleAuth from 'app/components/GoogleAuth'
+import SvgTwitter from 'app/components/SVG/SvgTwitter'
+import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 export default function SignupModalWindow1({ setModalStep }) {
   const { t } = useTranslation('signup')
 
+  const handleKeyPress = (e: any) => {
+    if (e.keyCode === 'Enter') {
+      setModalStep('second')
+      console.log('Enter pressed')
+    }
+  }
+
   return (
-    <div className={styles.container__module}>
+    <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__close}>
           <div
@@ -39,7 +47,9 @@ export default function SignupModalWindow1({ setModalStep }) {
         <div
           className={styles.main__next}
           role="button"
+          tabIndex={0}
           onClick={() => setModalStep('second')}
+          onKeyDown={handleKeyPress}
         >
           <span className={styles.next__text}>{t('signup')}</span>
         </div>
@@ -55,63 +65,7 @@ export default function SignupModalWindow1({ setModalStep }) {
           </a>
         </div>
       </div>
-    </div>
-  )
-}
-
-export function SignupStep1({ setModalStep }) {
-  const { t } = useTranslation('signup')
-
-  return (
-    <SignupBaseModal>
-      <div className={styles.module__top}>
-        <div className={styles.top__close}>
-          <div
-            className={styles.close__button}
-            aria-label="Close"
-            role="button"
-          >
-            <SvgButtonClose />
-          </div>
-        </div>
-        <div className={styles.top__logo}>
-          <SvgTwitter />
-        </div>
-        <div className={styles.top__space} />
-      </div>
-      <div className={styles.module__main}>
-        <div className={styles.main__title} aria-level={1} role="heading">
-          <h1 className={styles.title__h1}>{t('join')}</h1>
-        </div>
-        <div className={styles.main__google} role="button">
-          <GoogleAuth />
-          <span className={styles.google__text}>{t('google')}</span>
-        </div>
-        <div className={styles.main__separator}>
-          <div className={styles.separator__line}></div>
-          <div className={styles.separator__text}>{t('separator')}</div>
-          <div className={styles.separator__line}></div>
-        </div>
-        <div
-          className={styles.main__next}
-          role="button"
-          onClick={() => setModalStep('second')}
-        >
-          <span className={styles.next__text}>{t('signup')}</span>
-        </div>
-        <div className={styles.main__registrationHint1}>
-          {t('registrationHint1')}
-        </div>
-        <div className={styles.main__hint}>
-          <span className={styles.hint__left}>{t('hint')}</span>
-          <a href="/login">
-            <span className={styles.hint__right} role="button">
-              {t('signin')}
-            </span>
-          </a>
-        </div>
-      </div>
-    </SignupBaseModal>
+    </BaseModal>
   )
 }
 

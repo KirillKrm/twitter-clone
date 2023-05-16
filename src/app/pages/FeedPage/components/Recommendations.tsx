@@ -4,7 +4,7 @@ import 'index.css'
 
 import RecommendationsUnit, {
   RecommendationProps,
-} from 'app/components/RecommendationsUnit'
+} from 'app/pages/FeedPage/components/RecommendationsUnit'
 
 const recommendationlist: RecommendationProps[] = [
   {

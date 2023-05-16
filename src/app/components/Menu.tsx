@@ -7,6 +7,23 @@ import SvgTwitter from './SVG/SvgTwitter'
 
 export type MenuButton = Omit<MenuUnitProps, 'active' | 'setActive'>
 
+const searchBtn = {
+  name: 'Search',
+  image:
+    'M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z',
+  link: '/home',
+}
+
+class MenuButtons {
+  getMobileBtns(): MenuButton[] {
+    return [] //TODO
+  }
+
+  getDesktopBtns(): MenuButton[] {
+    return [] //TODO
+  }
+}
+
 const menuList: MenuButton[] = [
   {
     name: 'Home',
@@ -58,7 +75,18 @@ const menuList: MenuButton[] = [
   },
 ]
 
-const menuListMobile: MenuButton[] = [
+const menuListMobile: MenuButton[] = menuList.filter(menuBtn =>
+  ['Home', 'Notifications', 'Messages'].includes(menuBtn.name),
+)
+menuListMobile.push(searchBtn)
+
+const menuListMobile2: MenuButton[] = menuList.filter(
+  ({ name }) => name !== 'Search',
+)
+
+// const menuListMobile3 = [homeBtn, exploreBtn, notificationBtn] //and else
+
+const a = [
   {
     name: 'Home',
     image:
@@ -88,6 +116,7 @@ const menuListMobile: MenuButton[] = [
 export default function Menu() {
   const [activeButton, setActiveButton] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
+  // const [user, isLogined] = useAuth()
 
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth)

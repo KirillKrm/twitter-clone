@@ -3,11 +3,13 @@ import 'index.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from 'types'
-import InputEmail from '../Input/InputEmail'
-import InputName from '../Input/InputName'
-import SelectField from '../SelectField'
-import SvgButtonBack from '../SVG/SvgButtonBack'
-import { signUpPageActions } from '../../pages/SignupPage/slice/index'
+
+import BaseModal from 'app/components/BaseModal'
+import InputEmail from 'app/components/Input/InputEmail'
+import InputName from 'app/components/Input/InputName'
+import SelectField from 'app/components/SelectField'
+import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
+import { signUpPageActions } from 'app/pages/SignupPage/slice/index'
 
 export type Month = {
   name: string
@@ -93,7 +95,7 @@ export default function SignupModalWindow2({ setModalStep }) {
   }, [name, email, month, day, year, dispatch])
 
   return (
-    <form className={styles.container__module}>
+    <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__back}>
           <div
@@ -109,7 +111,7 @@ export default function SignupModalWindow2({ setModalStep }) {
           <h2>{t('step1')}</h2>
         </div>
       </div>
-      <div className={styles.module__main + 'w-[440px] mx-[80px] px-0'}>
+      <form className={styles.module__main + 'w-[440px] mx-[80px] px-0'}>
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
@@ -171,8 +173,8 @@ export default function SignupModalWindow2({ setModalStep }) {
         >
           <span className={styles.next__text}>{t('next')}</span>
         </button>
-      </div>
-    </form>
+      </form>
+    </BaseModal>
   )
 }
 

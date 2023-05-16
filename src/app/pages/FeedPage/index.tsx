@@ -3,18 +3,19 @@ import 'index.css'
 import { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+
 import Search from 'app/components/Search'
-import Trends from 'app/components/Trends'
-import Recommendations from 'app/components/Recommendations'
+import Trends from 'app/pages/FeedPage/components/Trends'
+import Recommendations from 'app/pages/FeedPage/components/Recommendations'
 import Menu from 'app/components/Menu'
 import Account from 'app/components/Account'
-import Twits from 'app/components/Twits'
+import Twits from 'app/pages/FeedPage/components/Twits'
 import TwitCreate from 'app/components/TwitCreate'
 import LanguageSwitcher from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
 import { Twit } from 'types/Twit'
 
-export function HomePage() {
+export function FeedPage() {
   const { t } = useTranslation('feed')
   const refTrendsRecommends = useRef(null)
   // const [scroll, setScroll] = useState(true)
@@ -51,8 +52,8 @@ export function HomePage() {
       </div>
       <div className={styles.container}>
         <Helmet>
-          <title>Home Page</title>
-          <meta name="description" content="Twitter Clone homepage" />
+          <title>Feed Page</title>
+          <meta name="description" content="Twitter Clone Feed Page" />
         </Helmet>
         <main className={styles.container__main}>
           <header className={styles.main__header}>
