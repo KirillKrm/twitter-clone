@@ -210,11 +210,6 @@ const styles = {
     hover:underline
     focus:underline
   `,
-  li__span: `
-    inline-block
-    min-w-[2em]
-    text-[#657786]
-  `,
   article__link: `
     block
     w-[46px]

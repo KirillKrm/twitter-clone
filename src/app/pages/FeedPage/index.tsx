@@ -50,11 +50,11 @@ export function FeedPage() {
       <div className={styles.container__themes}>
         <ThemeSwitcher />
       </div>
+      <Helmet>
+        <title>Feed Page</title>
+        <meta name="description" content="Twitter Clone Feed Page" />
+      </Helmet>
       <div className={styles.container}>
-        <Helmet>
-          <title>Feed Page</title>
-          <meta name="description" content="Twitter Clone Feed Page" />
-        </Helmet>
         <main className={styles.container__main}>
           <header className={styles.main__header}>
             <div className={styles.header__menu}>

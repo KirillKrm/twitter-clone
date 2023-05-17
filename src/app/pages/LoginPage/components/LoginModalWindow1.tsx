@@ -81,37 +81,6 @@ export default function LoginModalWindow1({ setModalStep }) {
 }
 
 const styles = {
-  container: `
-    grid
-    h-full
-    bg-[rgba(255,255,255,0.6)] dark:bg-[rgba(91,112,131,0.4)]
-  `,
-  container__buttons: `
-    flex 
-    flex-row
-    fixed 
-    mt-1 
-    ml-1 
-    gap-1
-    z-10
-  `,
-  container__themes: `
-    fixed
-    right-0
-    mt-1 
-    mr-1 
-    z-10
-  `,
-  container__module: `
-    flex
-    flex-col
-    self-center
-    justify-self-center
-    w-[600px]
-    h-[650px]
-    bg-white dark:bg-black
-    rounded-2xl
-  `,
   module__top: `
     flex
     flex-row

@@ -179,16 +179,6 @@ export default function SignupModalWindow2({ setModalStep }) {
 }
 
 const styles = {
-  container__module: `
-    flex
-    flex-col
-    self-center
-    justify-self-center
-    w-[600px]
-    h-[650px]
-    bg-white dark:bg-black
-    rounded-2xl
-  `,
   module__top: `
     flex
     flex-row

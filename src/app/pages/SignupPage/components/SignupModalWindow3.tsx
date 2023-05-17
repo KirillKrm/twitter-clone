@@ -88,16 +88,6 @@ export default function SignupModalWindow3({ setModalStep }) {
 }
 
 const styles = {
-  container__module: `
-    flex
-    flex-col
-    self-center
-    justify-self-center
-    w-[600px]
-    h-[650px]
-    bg-white dark:bg-black
-    rounded-2xl
-  `,
   module__top: `
     flex
     flex-row
@@ -114,13 +104,6 @@ const styles = {
     ml-[-8px]
     rounded-full
     hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(239,243,244,0.1)]
-  `,
-  button__svg: `
-    w-5 
-    h-5
-  `,
-  button__g: `
-    text-[rgb(15,20,25)] dark:text-white
   `,
   top__text: `
     flex

@@ -13,21 +13,16 @@ export type BasePageProps = {
     description: string
   }
   langSwitch: LanguageSwitcherProps
-  children: ReactI18NextChild
-  isGay: boolean
+  children: ReactI18NextChild | Iterable<ReactI18NextChild>
 }
 
-export function BasePage({
+export default function BasePage({
   helmet: { title, description },
   langSwitch,
   children,
-  isGay,
 }: BasePageProps) {
   return (
-    <div
-      className={styles.container}
-      style={{ backgroundColor: isGay ? 'grey' : 'pink' }}
-    >
+    <div className={styles.container}>
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -38,7 +33,7 @@ export function BasePage({
       <div className={styles.container__themes}>
         <ThemeSwitcher />
       </div>
-      <div>{children}</div>
+      {children}
     </div>
   )
 }

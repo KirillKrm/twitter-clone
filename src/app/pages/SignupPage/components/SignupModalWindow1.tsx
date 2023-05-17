@@ -10,11 +10,15 @@ import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 export default function SignupModalWindow1({ setModalStep }) {
   const { t } = useTranslation('signup')
 
-  const handleKeyPress = (e: any) => {
-    if (e.keyCode === 'Enter') {
-      setModalStep('second')
-      console.log('Enter pressed')
+  const handleKeyDown = (e: any) => {
+    switch (e.key) {
+      case 'Enter':
+        setModalStep('second')
+        break
+      default:
+        break
     }
+    e.preventDefault()
   }
 
   return (
@@ -49,7 +53,7 @@ export default function SignupModalWindow1({ setModalStep }) {
           role="button"
           tabIndex={0}
           onClick={() => setModalStep('second')}
-          onKeyDown={handleKeyPress}
+          onKeyDown={handleKeyDown}
         >
           <span className={styles.next__text}>{t('signup')}</span>
         </div>
@@ -70,16 +74,6 @@ export default function SignupModalWindow1({ setModalStep }) {
 }
 
 const styles = {
-  container__module: `
-    flex
-    flex-col
-    self-center
-    justify-self-center
-    w-[600px]
-    h-[650px]
-    bg-white dark:bg-black
-    rounded-2xl
-  `,
   module__top: `
     flex
     flex-row
@@ -121,22 +115,6 @@ const styles = {
     text-[31px]
     font-bold
     text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
-  `,
-  main__google: `
-    flex
-    flex-row
-    items-center
-    justify-center
-    w-[300px]
-    h-[40px]
-    my-[12px]
-    bg-white
-    rounded-full
-    border
-    border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
-  `,
-  google__text: `
-    text-black
   `,
   main__separator: `
     flex
