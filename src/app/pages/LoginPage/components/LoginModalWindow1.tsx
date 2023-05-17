@@ -10,7 +10,6 @@ export default function LoginModalWindow1({ setModalStep }) {
   const { t } = useTranslation('login')
 
   const [login, setLogin] = React.useState('')
-  console.log('login: ', login)
 
   return (
     <BaseModal>
@@ -44,7 +43,7 @@ export default function LoginModalWindow1({ setModalStep }) {
       </div>
       <div className={styles.module__main}>
         <div className={styles.main__title} aria-level={1} role="heading">
-          <h1 className={styles.title__h1}>{t('login')}</h1>
+          <h1 className={styles.title__h1}>{t('loginTitle1')}</h1>
         </div>
         <GoogleAuth />
         <div className={styles.main__separator}>

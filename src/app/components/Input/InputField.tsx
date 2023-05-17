@@ -13,6 +13,7 @@ type InputFieldProps = {
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
   isConfirmed?: boolean
   onClick?: any
+  inactive?: boolean
 }
 
 export default function InputField({
@@ -24,10 +25,14 @@ export default function InputField({
   pattern = '.*',
   isConfirmed,
   onClick,
+  inactive,
 }: InputFieldProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [counter, setCounter] = React.useState('')
   const isInputEmpty = value.length === 0
+  const inputStyle = classnames(styles.container__input, {
+    [styles.container__input_inactive]: inactive,
+  })
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
   })
@@ -47,7 +52,7 @@ export default function InputField({
       >
         <input
           ref={inputRef}
-          className={styles.container__input}
+          className={inputStyle}
           name="text"
           type="text"
           value={value}
@@ -114,6 +119,9 @@ const styles = {
     valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[rgb(51,54,57)]
 
     peer
+  `,
+  container__input_inactive: `
+    bg-[rgb(32, 35, 39)] dark:bg-[rgb(32, 35, 39)]
   `,
   container__label: `
     absolute
