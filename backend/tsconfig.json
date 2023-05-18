@@ -13,7 +13,7 @@
     "noImplicitAny": false,
     "outDir": "./dist",
     "removeComments": true,
-    "rootDir": "src",
+    "rootDirs": ["./src", "../shared"],
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": false,

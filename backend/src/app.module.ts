@@ -43,9 +43,9 @@ import { AppService } from './app.service'
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
           entities: [
-            configService.get('NODE_ENV') === 'development'
-              ? join(process.cwd(), '**/**.entity.{js,ts}')
-              : 'dist/**/*.entity.js',
+            configService.get('NODE_ENV') === 'production'
+              ? 'dist/**/*.entity.js'
+              : join(process.cwd(), '**/**.entity.{js,ts}'),
           ],
           ssl: {
             rejectUnauthorized: false,

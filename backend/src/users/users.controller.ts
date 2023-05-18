@@ -7,12 +7,13 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common'
-import { ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { UsersService } from './users.service'
 import { User } from './entities/user.entity'
 import { UpdateUserDto } from './dto/update-user.dto'
 
+@ApiTags('users')
 @Controller({
   path: 'users',
   version: '1',

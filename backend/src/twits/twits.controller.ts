@@ -10,7 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common'
-import { ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { JwtPayload } from '../auth/types'
 import { AuthGuard } from '../auth/auth.guard'
@@ -21,6 +21,7 @@ import { CreateTwitDto } from './dto/create-twit.dto'
 import { UpdateTwitDto } from './dto/update-twit.dto'
 import { Twit } from './twit.entity'
 
+@ApiTags('twits')
 @Controller({
   path: 'twits',
   version: '1',

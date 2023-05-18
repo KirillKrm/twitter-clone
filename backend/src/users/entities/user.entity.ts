@@ -11,8 +11,10 @@ import {
 } from 'typeorm'
 import { PasswordTransformer } from '../../common/transformers/password.transformer'
 
+import { UserI } from '../../../../shared/interfaces'
+
 @Entity()
-export class User extends BaseEntity {
+export class User extends BaseEntity implements UserI {
   @PrimaryGeneratedColumn('increment')
   @ApiProperty()
   id: number
@@ -20,6 +22,10 @@ export class User extends BaseEntity {
   @Column()
   @ApiProperty()
   username: string
+
+  @Column()
+  @ApiProperty()
+  nickname: string
 
   @Column({ unique: true })
   @ApiProperty()

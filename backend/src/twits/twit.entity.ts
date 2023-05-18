@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,9 +10,10 @@ import {
 } from 'typeorm'
 
 import { User } from '../users/entities/user.entity'
+import { TwitI } from '../../../shared/interfaces'
 
 @Entity()
-export class Twit {
+export class Twit extends BaseEntity implements TwitI {
   @PrimaryGeneratedColumn('increment')
   @ApiProperty()
   id: number
