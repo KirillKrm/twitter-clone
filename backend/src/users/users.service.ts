@@ -35,6 +35,13 @@ export class UsersService {
       throw new ConflictException('Username already taken')
     }
 
+    const checkByNickname = await this.userRepository.findOneBy({
+      nickname: createUserDto.nickname,
+    })
+    if (checkByNickname) {
+      throw new ConflictException('Nickname already taken')
+    }
+
     const res = await this.userRepository.save(createUserDto)
     this.logger.log(`User ${res.id} created successfully`)
 
