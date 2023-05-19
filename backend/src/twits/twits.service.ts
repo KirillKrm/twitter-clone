@@ -39,7 +39,7 @@ export class TwitsService {
     return res
   }
 
-  async findAll({ limit = 20, token }: GetTwitsQuery = {}): Promise<
+  async findAll({ limit = 20, token, userId }: GetTwitsQuery = {}): Promise<
     PaginatedGetAll<Twit>
   > {
     const query = this.twitRepository
@@ -52,6 +52,10 @@ export class TwitsService {
       query.andWhere('twit.createdAt < :token', { token: new Date(token) })
     }
 
+    if (userId) {
+      query.andWhere('user.id = :userId', { userId })
+    }
+
     const twits = await query.getMany()
     if (!twits || !twits.length) {
       throw new NotFoundException('Twits not found')
@@ -60,9 +64,7 @@ export class TwitsService {
 
     const res: PaginatedGetAll<Twit> = {
       data: twits,
-    }
-    if (twits.length === limit) {
-      res.nextToken = twits.at(-1).createdAt.getTime()
+      nextToken: twits.at(-1).createdAt.getTime(),
     }
 
     return res

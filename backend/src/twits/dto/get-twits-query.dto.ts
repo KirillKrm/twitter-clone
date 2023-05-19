@@ -14,4 +14,10 @@ export class GetTwitsQuery {
   @IsOptional()
   @ApiPropertyOptional()
   token?: number
+
+  @IsInt()
+  @Type(() => Number)
+  @IsOptional()
+  @ApiPropertyOptional()
+  userId?: number
 }
