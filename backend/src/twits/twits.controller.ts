@@ -9,16 +9,19 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { JwtPayload } from '../auth/types'
 import { AuthGuard } from '../auth/auth.guard'
 import { CurrentUser } from '../common/decorators'
 
+import { PaginatedGetAll } from './dto/paginated-get-all.dto'
 import { TwitsService } from './twits.service'
 import { CreateTwitDto } from './dto/create-twit.dto'
 import { UpdateTwitDto } from './dto/update-twit.dto'
+import { GetTwitsQuery } from './dto/get-twits-query.dto'
 import { Twit } from './twit.entity'
 
 @ApiTags('twits')
@@ -59,8 +62,11 @@ export class TwitsController {
     description: 'Successfully retrieved all twits',
     type: [Twit],
   })
-  async findAll(): Promise<Twit[]> {
-    return this.twitsService.findAll()
+  @ApiQuery({ type: GetTwitsQuery })
+  async findAll(
+    @Query() queries: GetTwitsQuery,
+  ): Promise<PaginatedGetAll<Twit>> {
+    return this.twitsService.findAll(queries)
   }
 
   @Get(':id')

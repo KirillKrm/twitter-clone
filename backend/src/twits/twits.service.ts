@@ -11,6 +11,8 @@ import { UsersService } from '../users/users.service'
 
 import { CreateTwitDto } from './dto/create-twit.dto'
 import { UpdateTwitDto } from './dto/update-twit.dto'
+import { GetTwitsQuery } from './dto/get-twits-query.dto'
+import { PaginatedGetAll } from './dto/paginated-get-all.dto'
 import { Twit } from './twit.entity'
 
 @Injectable()
@@ -37,16 +39,33 @@ export class TwitsService {
     return res
   }
 
-  async findAll(): Promise<Twit[]> {
-    const twits = await this.twitRepository.find({
-      relations: { author: true },
-    })
+  async findAll({ limit = 20, token }: GetTwitsQuery = {}): Promise<
+    PaginatedGetAll<Twit>
+  > {
+    const query = this.twitRepository
+      .createQueryBuilder('twit')
+      .leftJoinAndSelect('twit.author', 'user')
+      .orderBy('twit.createdAt', 'DESC')
+      .limit(limit)
+
+    if (token) {
+      query.andWhere('twit.createdAt < :token', { token: new Date(token) })
+    }
+
+    const twits = await query.getMany()
     if (!twits || !twits.length) {
       throw new NotFoundException('Twits not found')
     }
     this.logger.log(`${twits.length} twits fetched successfully`)
 
-    return twits
+    const res: PaginatedGetAll<Twit> = {
+      data: twits,
+    }
+    if (twits.length === limit) {
+      res.nextToken = twits.at(-1).createdAt.getTime()
+    }
+
+    return res
   }
 
   async findOne(id: number): Promise<Twit> {
