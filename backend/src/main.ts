@@ -12,6 +12,7 @@ import { AppModule } from './app.module'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger,
+    cors: true,
   })
   const configService = app.get(ConfigService)
 
@@ -33,8 +34,6 @@ async function bootstrap() {
 
   app.use(helmet())
   app.use(cookieParser())
-  // TODO add domain for frontend on deploy
-  // app.enableCors()
   // TODO
   // app.use(csurf(configService.get('GENERAL_SECRET')))
 
