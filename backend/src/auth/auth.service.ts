@@ -37,7 +37,7 @@ export class AuthService {
     return null
   }
 
-  async getJwtTokens(username: string, pass: string): Promise<JwtTokensDto> {
+  async getJwtTokens(username: string): Promise<JwtTokensDto> {
     const user = await this.usersService.findOneByUsername(username)
 
     const payload: JwtPayload = { username: user.username, id: user.id }

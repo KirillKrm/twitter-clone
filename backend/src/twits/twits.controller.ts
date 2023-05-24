@@ -11,11 +11,18 @@ import {
   HttpStatus,
   Query,
 } from '@nestjs/common'
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { JwtPayload } from '../auth/types'
 import { AuthGuard } from '../auth/auth.guard'
 import { CurrentUser } from '../common/decorators'
+import { ExceptionResponseDto } from '../common/dto'
 
 import { PaginatedGetAll } from './dto/paginated-get-all.dto'
 import { TwitsService } from './twits.service'
@@ -35,6 +42,7 @@ export class TwitsController {
   @Post()
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.CREATED)
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Create a new twit',
     description: 'Creates a new twit with the provided data',
@@ -62,6 +70,11 @@ export class TwitsController {
     description: 'Successfully retrieved all twits',
     type: [Twit],
   })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Twits not found.',
+    type: ExceptionResponseDto,
+  })
   @ApiQuery({ type: GetTwitsQuery })
   async findAll(
     @Query() queries: GetTwitsQuery,
@@ -87,6 +100,7 @@ export class TwitsController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Update a twit by ID',
     description: 'Updates a twit based on the provided ID',
@@ -94,6 +108,11 @@ export class TwitsController {
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'The twit has been successfully updated',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Twits not found.',
+    type: ExceptionResponseDto,
   })
   async update(
     @CurrentUser() userJwtPayload: JwtPayload,
@@ -106,6 +125,7 @@ export class TwitsController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Delete a twit by ID',
     description: 'Deletes a twit based on the provided ID',

@@ -26,6 +26,7 @@ async function bootstrap() {
       .setTitle('Twitter-clone')
       .setDescription('The twitter-clone API documentation')
       .setVersion('0.1')
+      .addBearerAuth()
       .build(),
   )
   SwaggerModule.setup('docs', app, documentation)
