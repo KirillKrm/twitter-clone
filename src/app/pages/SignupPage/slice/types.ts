@@ -1,5 +1,3 @@
-export interface SignupPageState {
-  name: string
-  email: string
-  birthday: { month: string; day: string; year: string }
-}
+import { SignUpPayload } from '../types'
+
+export interface SignupPageState extends SignUpPayload {}

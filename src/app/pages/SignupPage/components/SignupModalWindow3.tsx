@@ -3,21 +3,53 @@ import 'index.css'
 import { RootState } from 'types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import BaseModal from 'app/components/BaseModal'
 import InputField from 'app/components/Input/InputField'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
+import { useRegistration } from 'app/hooks/useAuth'
+// import { SignupPageState } from '../slice/types'
 
 export default function SignupModalWindow3({ setModalStep }) {
+  const { t } = useTranslation('signup')
+  const { register, user, loading, error } = useRegistration()
+  const navigate = useNavigate()
+
   const signUpPage = useSelector((state: RootState) => state.signuppage)
-  const [name, setName] = React.useState(signUpPage?.name || '')
+  const password = signUpPage?.password || ''
+  const birthdayList = signUpPage?.birthday || { month: '', day: '', year: '' }
+  const [name, setName] = React.useState(signUpPage?.username || '')
+  const [nickname, setNickname] = React.useState(signUpPage?.nickname || '')
   const [email, setEmail] = React.useState(signUpPage?.email || '')
   const bithdayString = `${signUpPage?.birthday.day} ${signUpPage?.birthday.month} ${signUpPage?.birthday.year}`
   const [birthday, setBirthday] = React.useState(bithdayString || '')
-  // eslint-disable-next-line
-  const [authenticated, setAuthenticated] = React.useState(null)
-  const { t } = useTranslation('signup')
+
+  // const [singUpPageState, setSignUpPageState] = React.useState(signUpPage)
+  // const updateSignUpPageState = <K, V>(key: keyof SignupPageState, value: unknown) => {
+  //   setSignUpPageState({
+  //     ...setSignUpPageState,
+  //     [key]: value,
+  //   })
+  // }
+
+  // updateSignUpPageState('')
+
+  const registerHandler = () => {
+    console.log('Try to register')
+    register({
+      username: name,
+      nickname,
+      email,
+      password,
+      birthday: birthdayList,
+    })
+  }
+
+  if (user) {
+    localStorage.setItem('user', user)
+    navigate('/login')
+  }
 
   return (
     <BaseModal>
@@ -42,18 +74,34 @@ export default function SignupModalWindow3({ setModalStep }) {
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <InputField
-          value={name}
-          setValue={setName}
-          placeholder={t('name')}
-          isConfirmed={true}
-          onClick={setModalStep}
-        />
+        <div className="flex flex-row">
+          <div className="flex w-full mr-4">
+            <InputField
+              value={name}
+              setValue={setName}
+              placeholder={t('name')}
+              isConfirmed={true}
+              isError={!!error}
+              onClick={setModalStep}
+            />
+          </div>
+          <div className="flex w-full">
+            <InputField
+              value={nickname}
+              setValue={setNickname}
+              placeholder={'Nickname'}
+              isConfirmed={true}
+              isError={!!error}
+              onClick={setModalStep}
+            />
+          </div>
+        </div>
         <InputField
           value={email}
           setValue={setEmail}
           placeholder={t('email')}
           isConfirmed={true}
+          isError={!!error}
         />
         <InputField
           value={birthday}
@@ -61,20 +109,20 @@ export default function SignupModalWindow3({ setModalStep }) {
           placeholder={t('birthday')}
           isConfirmed={true}
         />
+        {!!error ? (
+          <h3 className="mt-2 ml-2 font-bold text-rose-500">{error}</h3>
+        ) : null}
         <div className={styles.main__registrationhint}>
           <span>{t('registrationHint2')}</span>
         </div>
         <div
           className={
             styles.main__next +
-            'w-[440px] h-[52px] my-[24px] bg-[rgb(29,155,240)] dark:bg-[rgb(29,155,240)]'
+            'w-[440px] h-[52px] my-[24px] bg-[#1D9BF0] dark:bg-[#1D9BF0]' +
+            (loading ? 'bg-[#8a8a8a]' : '')
           }
           role="button"
-          onClick={() => {
-            if (!authenticated) {
-              return <Navigate replace to="/home" />
-            }
-          }}
+          onClick={e => (!loading ? registerHandler() : e.preventDefault())}
         >
           <span
             className={styles.next__text + 'text-[white] dark:text-[white]'}

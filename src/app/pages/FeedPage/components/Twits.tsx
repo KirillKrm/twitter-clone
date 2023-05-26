@@ -4,7 +4,8 @@ import 'index.css'
 import TwitsUnit, {
   TwitUnitProps,
 } from 'app/pages/FeedPage/components/TwitsUnit'
-import { getLocation, getPokemon, randLocation } from 'app/api/services'
+import { randLocation } from 'app/api/services'
+import { getLocation, getPokemon } from 'app/api/deprecated' //TODO move to separate lib
 
 type TwitsProps = {
   twitsList: TwitUnitProps[]

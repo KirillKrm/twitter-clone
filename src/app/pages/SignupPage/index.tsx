@@ -10,8 +10,6 @@ import SignupModalWindow3 from 'app/pages/SignupPage/components/SignupModalWindo
 export function SignupPage() {
   const [step, setStep] = React.useState('first')
 
-  console.log('Step: ', step)
-
   return (
     <div className={styles.container}>
       <Helmet>

@@ -6,6 +6,7 @@ import LanguageSwitcher, {
   LanguageSwitcherProps,
 } from 'app/components/LanguageSwitcher'
 import ThemeSwitcher from 'app/components/ThemeSwitcher'
+import ErrorBoundary from 'app/components/ErrorBoundary'
 
 export type BasePageProps = {
   helmet: {
@@ -23,6 +24,7 @@ export default function BasePage({
 }: BasePageProps) {
   return (
     <div className={styles.container}>
+      {/* <ErrorBoundary> //TODO */}
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -34,6 +36,7 @@ export default function BasePage({
         <ThemeSwitcher />
       </div>
       {children}
+      {/* </ErrorBoundary> //TODO */}
     </div>
   )
 }

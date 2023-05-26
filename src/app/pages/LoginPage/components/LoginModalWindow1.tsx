@@ -1,15 +1,23 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'types'
 
 import BaseModal from 'app/components/BaseModal'
 import GoogleAuth from 'app/components/GoogleAuth'
 import InputField from 'app/components/Input/InputField'
+import { loginPageActions } from 'app/pages/LoginPage/slice/index'
 
 export default function LoginModalWindow1({ setModalStep }) {
   const { t } = useTranslation('login')
+  const loginPage = useSelector((state: RootState) => state.loginpage)
+  const [login, setLogin] = React.useState(loginPage?.login || '')
+  const dispatch = useDispatch()
 
-  const [login, setLogin] = React.useState('')
+  React.useEffect(() => {
+    dispatch(loginPageActions.changeLogin(login))
+  }, [login, dispatch])
 
   return (
     <BaseModal>

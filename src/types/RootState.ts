@@ -1,6 +1,7 @@
 //import { GithubRepoFormState } from 'app/pages/HomePage/Features/GithubRepoForm/slice/types';
 import { ThemeState } from 'styles/theme/slice/types'
 import { SignupPageState } from 'app/pages/SignupPage/slice/types'
+import { LoginPageState } from 'app/pages/LoginPage/slice/types'
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -12,5 +13,6 @@ import { SignupPageState } from 'app/pages/SignupPage/slice/types'
 export interface RootState {
   theme?: ThemeState
   signuppage?: SignupPageState
+  loginpage?: LoginPageState
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

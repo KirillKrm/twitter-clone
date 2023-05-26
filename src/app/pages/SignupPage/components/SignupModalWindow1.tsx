@@ -7,17 +7,22 @@ import GoogleAuth from 'app/components/GoogleAuth'
 import SvgTwitter from 'app/components/SVG/SvgTwitter'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
-export default function SignupModalWindow1({ setModalStep }) {
+export type SignupModalWindow1Props = {
+  setModalStep: any //function
+  setPrevStep?: any //function
+  setNextStep?: any //function
+}
+
+export default function SignupModalWindow1({
+  setModalStep,
+  setPrevStep,
+  setNextStep,
+}: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
   const handleKeyDown = (e: any) => {
-    switch (e.key) {
-      case 'Enter':
-        setModalStep('second')
-        break
-      default:
-        break
-    }
+    if (e.key === 'Enter') setModalStep('second')
+    // if (e.key === 'Enter') setNextStep()
     e.preventDefault()
   }
 

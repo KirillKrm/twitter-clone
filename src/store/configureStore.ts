@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { createReducer } from './reducers'
 import { signUpPageReducer } from 'app/pages/SignupPage/slice'
+import { loginPageReducer } from 'app/pages/LoginPage/slice'
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {}
@@ -23,6 +24,7 @@ export function configureAppStore() {
   const store = configureStore({
     reducer: createReducer({
       signuppage: signUpPageReducer,
+      loginpage: loginPageReducer,
     }),
     middleware: defaultMiddleware => [...defaultMiddleware(), ...middlewares],
     devTools:

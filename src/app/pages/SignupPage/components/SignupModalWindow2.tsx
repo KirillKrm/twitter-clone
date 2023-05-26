@@ -7,6 +7,7 @@ import { RootState } from 'types'
 import BaseModal from 'app/components/BaseModal'
 import InputEmail from 'app/components/Input/InputEmail'
 import InputName from 'app/components/Input/InputName'
+import InputField from 'app/components/Input/InputField'
 import SelectField from 'app/components/SelectField'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import { signUpPageActions } from 'app/pages/SignupPage/slice/index'
@@ -63,18 +64,35 @@ const setData = (stepName: string, res: { [key: string]: any }): void => {
 export default function SignupModalWindow2({ setModalStep }) {
   const { t } = useTranslation('signup')
   const signUpPage = useSelector((state: RootState) => state.signuppage)
-  const [name, setName] = React.useState(signUpPage?.name || '')
-  const [email, setEmail] = React.useState(signUpPage?.email || '')
+  const [name, setName] = React.useState(signUpPage?.username || 'Uber')
+  const [nickname, setNickname] = React.useState(
+    signUpPage?.nickname || 'Uber228',
+  )
+  const [password, setPassword] = React.useState(
+    signUpPage?.password || '123456789',
+  )
+  const [email, setEmail] = React.useState(
+    signUpPage?.email || 'qwerty@qqq.com',
+  )
   const [month, setMonth] = React.useState(signUpPage?.birthday.month)
   const [day, setDay] = React.useState(signUpPage?.birthday.day)
   const [year, setYear] = React.useState(signUpPage?.birthday.year)
+
   const [nameValid, setNameValid] = React.useState(false)
+  const [nicknameValid, setNicknameValid] = React.useState(false)
+  const [passwordValid, setPasswordValid] = React.useState(false)
   const [emailValid, setEmailValid] = React.useState(false)
   const [monthValid, setMonthValid] = React.useState(false)
   const [dayValid, setDayValid] = React.useState(false)
   const [yearValid, setYearValid] = React.useState(false)
   const formValid =
-    nameValid && emailValid && monthValid && dayValid && yearValid
+    nameValid &&
+    emailValid &&
+    monthValid &&
+    dayValid &&
+    yearValid &&
+    nicknameValid &&
+    passwordValid
   // TODO
   const res = {
     name: 'string',
@@ -90,9 +108,11 @@ export default function SignupModalWindow2({ setModalStep }) {
 
   React.useEffect(() => {
     dispatch(signUpPageActions.changeName(name))
+    dispatch(signUpPageActions.changeNickname(nickname))
     dispatch(signUpPageActions.changeEmail(email))
+    dispatch(signUpPageActions.changePassword(password))
     dispatch(signUpPageActions.changeBirthday({ month, day, year }))
-  }, [name, email, month, day, year, dispatch])
+  }, [name, nickname, email, password, month, day, year, dispatch])
 
   return (
     <BaseModal>
@@ -111,22 +131,42 @@ export default function SignupModalWindow2({ setModalStep }) {
           <h2>{t('step1')}</h2>
         </div>
       </div>
-      <form className={styles.module__main + 'w-[440px] mx-[80px] px-0'}>
+      <div className={styles.module__main + 'w-[440px] mx-[80px] px-0'}>
         <div className={styles.main__title} aria-level={1} role="heading">
           <h1 className={styles.title__h1}>{t('create')}</h1>
         </div>
-        <InputName
-          value={name}
-          setValue={setName}
-          setValid={setNameValid}
-          placeholder={t('name')}
-          maxLength={50}
-        />
+        <div className="flex flex-row">
+          <div className="flex w-full mr-4">
+            <InputName
+              value={name}
+              setValue={setName}
+              setValid={setNameValid}
+              placeholder={t('name')}
+              maxLength={50}
+            />
+          </div>
+          <div className="flex w-full">
+            <InputName
+              value={nickname}
+              setValue={setNickname}
+              setValid={setNicknameValid}
+              placeholder={'Nickname'}
+              maxLength={50}
+            />
+          </div>
+        </div>
         <InputEmail
           value={email}
           setValue={setEmail}
           setValid={setEmailValid}
           placeholder={t('email')}
+        />
+        <InputField
+          value={password}
+          setValue={setPassword}
+          setValid={setPasswordValid}
+          placeholder={'Password'}
+          password={true}
         />
         <div className={styles.main__birthday}>
           <span>{t('birthday')}</span>
@@ -173,7 +213,7 @@ export default function SignupModalWindow2({ setModalStep }) {
         >
           <span className={styles.next__text}>{t('next')}</span>
         </button>
-      </form>
+      </div>
     </BaseModal>
   )
 }

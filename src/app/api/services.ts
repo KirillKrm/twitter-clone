@@ -1,57 +1,60 @@
-import fetchApi from './fetch'
+import { SignUpPayload } from 'app/pages/SignupPage/types'
 
-const apiUrl = 'https://pokeapi.co/api/v2'
-//TODO helth check of chatGPT
-const API_KEY_GPT = process.env.REACT_APP_API_KEY_GPT
+const backendUrl = 'https://twitter-clone2023-0.herokuapp.com'
 
 export function randLocation() {
   const totalLocations = 76
   return Math.floor(Math.random() * (totalLocations - 1) + 1)
 }
 
-export function randPokemon(totalPokemons: number) {
-  return Math.floor(Math.random() * totalPokemons)
+// TODO more types
+async function backendCall(path: string, requestOptions: RequestInit) {
+  const url = `${backendUrl}/${path}`
+
+  const res = await fetch(url, requestOptions)
+  return {
+    status: res.status,
+    data: await res.json(),
+  }
 }
 
-export async function getLocation(locationId: number): Promise<string> {
-  const url = `${apiUrl}/location-area/${locationId}`
-  const location = await fetchApi(url)
-  const locationName = location.names[0].name
+// TODO types
+export async function register(registerData: SignUpPayload): Promise<any> {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Access-Control-Allow-Origin', '*')
 
-  return locationName as string
-}
-
-export async function getPokemon(locationId: number): Promise<string> {
-  const url = `${apiUrl}/location-area/${locationId}`
-  const location = await fetchApi(url)
-  const pokemonsAmount = location.pokemon_encounters.length
-  const pokemonName =
-    location.pokemon_encounters[randPokemon(pokemonsAmount)].pokemon.name
-
-  return pokemonName as string
-}
-
-export async function getMessageFromGPT(
-  pokemon: string,
-  location: string,
-): Promise<string> {
-  const apiRequestBody = {
-    model: 'text-babbage-001',
-    prompt: `You are a Pokemon trainer. Write a twitter post about how you met the ${pokemon} in the ${location}`,
-    max_tokens: 256,
-    temperature: 1,
+  const res = await backendCall('v1/auth/register', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(registerData),
+  })
+  if (res.status !== 201) {
+    throw new Error(`${res.status}: ${res.data.message}`)
   }
 
-  let messageText = await fetch('https://api.openai.com/v1/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${API_KEY_GPT}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(apiRequestBody),
-  })
-    .then(data => data.json())
-    .then(data => data.choices[0].text)
+  console.log('Fetched user ' + res.data.id)
 
-  return messageText
+  return res.data
+}
+
+// TODO types
+export async function login(loginData: {
+  [any: string]: string
+}): Promise<any> {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  const res = await backendCall('v1/auth/login', {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(loginData),
+  })
+  if (res.status !== 200) {
+    throw new Error(`${res.status}: ${res.data.message}`)
+  }
+
+  console.log('Login user ' + loginData.id)
+
+  return res.data
 }

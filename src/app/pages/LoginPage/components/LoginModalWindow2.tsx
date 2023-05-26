@@ -1,6 +1,8 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { RootState } from 'types'
 
 import BaseModal from 'app/components/BaseModal'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
@@ -8,8 +10,12 @@ import InputField from 'app/components/Input/InputField'
 
 export default function SignupBaseModal({ setModalStep }) {
   const { t } = useTranslation('login')
-  const [login, setLogin] = React.useState('')
+  const loginPage = useSelector((state: RootState) => state.loginpage)
+  const [login, setLogin] = React.useState(loginPage?.login || '')
   const [password, setPassword] = React.useState('')
+  const [loginValid, setLoginValid] = React.useState(false)
+  const [passwordValid, setPasswordValid] = React.useState(false)
+  const formValid = loginValid && passwordValid
 
   return (
     <BaseModal>
@@ -44,14 +50,17 @@ export default function SignupBaseModal({ setModalStep }) {
             <h1 className={styles.title__h1}>{t('loginTitle2')}</h1>
           </div>
           <InputField
-            inactive={true}
+            disabled={true}
             value={login}
             setValue={setLogin}
+            setValid={setLoginValid}
             placeholder={t('input')}
           />
           <InputField
             value={password}
             setValue={setPassword}
+            password
+            setValid={setPasswordValid}
             placeholder={t('password')}
           />
           <a href="/signup" className={styles.hint__password}>
@@ -59,9 +68,13 @@ export default function SignupBaseModal({ setModalStep }) {
           </a>
         </div>
         <div className={styles.main__bottom}>
-          <div className={styles.main__next} role="button" onClick={() => {}}>
+          <button
+            className={styles.main__next}
+            onClick={() => {}}
+            disabled={!formValid}
+          >
             <span className={styles.next__text}>{t('login')}</span>
-          </div>
+          </button>
           <div className={styles.main__hint}>
             <span className={styles.hint__left}>{t('hint')}</span>
             <a href="/signup">
@@ -160,6 +173,7 @@ const styles = {
     bg-black dark:bg-white
     rounded-full
     mb-6
+    disabled:opacity-50
   `,
   next__text: `
     text-white dark:text-black

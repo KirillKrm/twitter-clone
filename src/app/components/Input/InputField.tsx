@@ -12,8 +12,10 @@ type InputFieldProps = {
   pattern?: string
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
   isConfirmed?: boolean
+  isError?: boolean
   onClick?: any
-  inactive?: boolean
+  disabled?: boolean
+  password?: boolean
 }
 
 export default function InputField({
@@ -24,17 +26,21 @@ export default function InputField({
   maxLength,
   pattern = '.*',
   isConfirmed,
+  isError,
   onClick,
-  inactive,
+  disabled,
+  password,
 }: InputFieldProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [counter, setCounter] = React.useState('')
   const isInputEmpty = value.length === 0
   const inputStyle = classnames(styles.container__input, {
-    [styles.container__input_inactive]: inactive,
+    [styles.container__input_disabled]: disabled,
+    'border-1 dark:valid:border-rose-500': isError,
   })
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
+    [styles.container__label_disabled]: disabled,
   })
   const inputRef = React.useRef<HTMLInputElement>(null)
 
@@ -54,13 +60,12 @@ export default function InputField({
           ref={inputRef}
           className={inputStyle}
           name="text"
-          type="text"
+          type={password ? 'password' : 'text'}
           value={value}
           autoComplete="off"
           title=""
           maxLength={maxLength}
           onChange={e => {
-            console.log(e)
             setValue(e.target.value)
           }}
           // onInvalid={setValid ? () => setValid(false) : undefined}
@@ -74,13 +79,10 @@ export default function InputField({
           }
           pattern={everFocusedInput ? pattern : undefined}
           required={!!pattern && everFocusedInput}
+          disabled={disabled}
         />
-        <label className={labelStyle} htmlFor="login">
-          {placeholder}
-        </label>
-        <label className={styles.container__counter} htmlFor="login">
-          {counter}
-        </label>
+        <label className={labelStyle}>{placeholder}</label>
+        <label className={styles.container__counter}>{counter}</label>
         {isConfirmed ? (
           <div className={styles.container__svg}>
             <SvgConfirmed />
@@ -95,7 +97,8 @@ const styles = {
   container: `
     relative
     h-[56px]
-    my-3
+    w-full
+    my-2
   `,
   container__input: `
     absolute
@@ -120,8 +123,11 @@ const styles = {
 
     peer
   `,
-  container__input_inactive: `
-    bg-[rgb(32, 35, 39)] dark:bg-[rgb(32, 35, 39)]
+  container__input_disabled: `
+    bg-[rgba(32,35,39,0.5)] dark:bg-[rgba(32,35,39,0.5)]
+    text-[rgba(83,100,113,0.5)] dark:text-[rgba(113,118,123,0.5)]
+    text-[]
+    border-none
   `,
   container__label: `
     absolute
@@ -142,6 +148,9 @@ const styles = {
     peer-focus-within:top-[5px]
     peer-focus-within:text-[12px]
     peer-focus-within:text-[rgb(29,155,240)]
+  `,
+  container__label_disabled: `
+    text-[rgba(83,100,113,0.5)] dark:text-[rgba(113,118,123,0.5)]
   `,
   container__label_shrinked: `
     text-[12px]

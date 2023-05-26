@@ -39,7 +39,6 @@ export default function SelectField({
           ref={selectRef}
           className={styles.container__input}
           name="text"
-          id="login"
           value={value}
           autoComplete="off"
           title=""
@@ -47,7 +46,6 @@ export default function SelectField({
           onFocus={() => setEverFocusedInput(true)}
           onChange={e => {
             if (e.target.selectedIndex !== -1) setІsChoosen(true)
-            console.log(e)
             if (setValue) setValue(e.target.value)
           }}
           style={{ content: '↓', color: 'white' }}
@@ -63,9 +61,7 @@ export default function SelectField({
             )
           })}
         </select>
-        <label className={labelStyle} htmlFor="login">
-          {placeholder}
-        </label>
+        <label className={labelStyle}>{placeholder}</label>
       </div>
     </>
   )
