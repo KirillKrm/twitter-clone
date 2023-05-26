@@ -1,7 +1,5 @@
-import * as React from 'react'
 import 'index.css'
 import { useRef } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 
 import Search from 'app/components/Search'
@@ -11,8 +9,7 @@ import Menu from 'app/components/Menu'
 import Account from 'app/components/Account'
 import Twits from 'app/pages/FeedPage/components/Twits'
 import TwitCreate from 'app/components/TwitCreate'
-import LanguageSwitcher from 'app/components/LanguageSwitcher'
-import ThemeSwitcher from 'app/components/ThemeSwitcher'
+import BasePage from 'app/pages/BasePage'
 import { Twit } from 'types/Twit'
 
 export function FeedPage() {
@@ -43,17 +40,10 @@ export function FeedPage() {
   // })
 
   return (
-    <>
-      <div className={styles.container__buttons}>
-        <LanguageSwitcher page={'feed'} />
-      </div>
-      <div className={styles.container__themes}>
-        <ThemeSwitcher />
-      </div>
-      <Helmet>
-        <title>Feed Page</title>
-        <meta name="description" content="Twitter Clone Feed Page" />
-      </Helmet>
+    <BasePage
+      helmet={{ title: 'Feed page', description: 'Twitter Clone Feed Page' }}
+      langSwitch={{ page: 'feed' }}
+    >
       <div className={styles.container}>
         <main className={styles.container__main}>
           <header className={styles.main__header}>
@@ -92,7 +82,7 @@ export function FeedPage() {
           </div>
         </main>
       </div>
-    </>
+    </BasePage>
   )
 }
 
@@ -234,27 +224,12 @@ const twitsList: Twit[] = [
 const styles = {
   container: `
   flex
-  flex-row
+  justify-center
+  h-fit
+  w-full
   bg-white dark:bg-black
 
   min-[680px]:justify-center
-`,
-  container__themes: `
-  fixed
-  top-[75%]
-  mt-1 
-  mr-1 
-  z-[11]
-`,
-  container__buttons: `
-  flex 
-  flex-col
-  fixed 
-  top-[65%]
-  mt-1 
-  ml-1 
-  gap-1
-  z-[11]
 `,
   container__main: `
   flex

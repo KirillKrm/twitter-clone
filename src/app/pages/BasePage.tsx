@@ -24,33 +24,34 @@ export default function BasePage({
 }: BasePageProps) {
   return (
     <div className={styles.container}>
-      {/* <ErrorBoundary> //TODO */}
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Helmet>
-      <div className={styles.container__language}>
-        <LanguageSwitcher {...langSwitch} />
-      </div>
-      <div className={styles.container__themes}>
-        <ThemeSwitcher />
-      </div>
-      {children}
-      {/* </ErrorBoundary> //TODO */}
+      <ErrorBoundary>
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+        </Helmet>
+        <div className={styles.container__language}>
+          <LanguageSwitcher {...langSwitch} />
+        </div>
+        <div className={styles.container__themes}>
+          <ThemeSwitcher />
+        </div>
+        {children}
+      </ErrorBoundary>
     </div>
   )
 }
 
 const styles = {
   container: `
-    grid
+    flex
     h-full
-    bg-[rgba(255,255,255,0.6)] dark:bg-[rgba(91,112,131,0.4)]
+    w-full
   `,
   container__language: `
     flex 
-    flex-row
+    flex-col
     fixed 
+    left-0
     mt-1 
     ml-1 
     gap-1
