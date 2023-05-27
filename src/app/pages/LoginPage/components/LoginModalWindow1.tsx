@@ -9,10 +9,16 @@ import GoogleAuth from 'app/components/GoogleAuth'
 import InputField from 'app/components/Input/InputField'
 import { loginPageActions } from 'app/pages/LoginPage/slice/index'
 
-export default function LoginModalWindow1({ setModalStep }) {
+export type LoginModalWindow1Props = {
+  goToNextStep: any
+}
+
+export default function LoginModalWindow1({
+  goToNextStep,
+}: LoginModalWindow1Props) {
   const { t } = useTranslation('login')
   const loginPage = useSelector((state: RootState) => state.loginpage)
-  const [login, setLogin] = React.useState(loginPage?.login || '')
+  const [login, setLogin] = React.useState(loginPage?.login || '') //use cur_user_username from localstorage
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -67,7 +73,7 @@ export default function LoginModalWindow1({ setModalStep }) {
         <div
           className={styles.main__next}
           role="button"
-          onClick={() => setModalStep('second')}
+          onClick={() => goToNextStep()}
         >
           <span className={styles.next__text}>{t('next')}</span>
         </div>

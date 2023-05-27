@@ -19,11 +19,14 @@ export function SignupPage() {
     >
       <div className={styles.container}>
         {step === 'first' ? (
-          <SignupModalWindow1 setModalStep={setStep} />
+          <SignupModalWindow1 goToNextStep={() => setStep('second')} />
         ) : step === 'second' ? (
-          <SignupModalWindow2 setModalStep={setStep} />
+          <SignupModalWindow2
+            goToPrevStep={() => setStep('first')}
+            goToNextStep={() => setStep('third')}
+          />
         ) : step === 'third' ? (
-          <SignupModalWindow3 setModalStep={setStep} />
+          <SignupModalWindow3 goToPrevStep={() => setStep('second')} />
         ) : null}
       </div>
     </BasePage>

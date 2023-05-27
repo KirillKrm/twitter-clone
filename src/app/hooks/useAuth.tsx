@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { register as registerRequest } from 'app/api/services'
 import { SignUpPayload } from 'app/pages/SignupPage/types'
 
+// TODO add more types to all returning functions/objects
 export const useRegistration = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)

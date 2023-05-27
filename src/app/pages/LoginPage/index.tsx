@@ -17,9 +17,9 @@ export function LoginPage() {
     >
       <div className={styles.container}>
         {step === 'first' ? (
-          <LoginModalWindow1 setModalStep={setStep} />
+          <LoginModalWindow1 goToNextStep={() => setStep('second')} />
         ) : step === 'second' ? (
-          <LoginModalWindow2 setModalStep={setStep} />
+          <LoginModalWindow2 goToPrevStep={() => setStep('first')} />
         ) : null}
       </div>
     </BasePage>

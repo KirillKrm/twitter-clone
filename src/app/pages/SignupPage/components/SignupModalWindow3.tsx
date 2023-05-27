@@ -11,7 +11,14 @@ import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import { useRegistration } from 'app/hooks/useAuth'
 // import { SignupPageState } from '../slice/types'
 
-export default function SignupModalWindow3({ setModalStep }) {
+// REFACTOR types
+export type SignupModalWindow3Props = {
+  goToPrevStep: any
+}
+
+export default function SignupModalWindow3({
+  goToPrevStep,
+}: SignupModalWindow3Props) {
   const { t } = useTranslation('signup')
   const { register, user, loading, error } = useRegistration()
   const navigate = useNavigate()
@@ -47,7 +54,8 @@ export default function SignupModalWindow3({ setModalStep }) {
   }
 
   if (user) {
-    localStorage.setItem('user', user)
+    // TODO after modifying backend to accept login with also phone number & email
+    // localStorage.setItem('cur_user_username', user.username) //TODO now!
     navigate('/login')
   }
 
@@ -59,7 +67,7 @@ export default function SignupModalWindow3({ setModalStep }) {
             className={styles.back__button}
             aria-label="Back"
             role="button"
-            onClick={() => setModalStep('second')}
+            onClick={() => goToPrevStep()}
           >
             <SvgButtonBack />
           </div>
@@ -82,7 +90,7 @@ export default function SignupModalWindow3({ setModalStep }) {
               placeholder={t('name')}
               isConfirmed={true}
               isError={!!error}
-              onClick={setModalStep}
+              onClick={goToPrevStep}
             />
           </div>
           <div className="flex w-full">
@@ -92,7 +100,7 @@ export default function SignupModalWindow3({ setModalStep }) {
               placeholder={'Nickname'}
               isConfirmed={true}
               isError={!!error}
-              onClick={setModalStep}
+              onClick={goToPrevStep}
             />
           </div>
         </div>

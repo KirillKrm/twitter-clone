@@ -7,22 +7,19 @@ import GoogleAuth from 'app/components/GoogleAuth'
 import SvgTwitter from 'app/components/SVG/SvgTwitter'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
+// REFACTOR types
 export type SignupModalWindow1Props = {
-  setModalStep: any //function
-  setPrevStep?: any //function
-  setNextStep?: any //function
+  goToNextStep: any
 }
 
 export default function SignupModalWindow1({
-  setModalStep,
-  setPrevStep,
-  setNextStep,
+  goToNextStep,
 }: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter') setModalStep('second')
-    // if (e.key === 'Enter') setNextStep()
+    if (e.key === 'Enter') goToNextStep()
+    // if (e.key === 'Enter') goToNextStep()
     e.preventDefault()
   }
 
@@ -57,7 +54,7 @@ export default function SignupModalWindow1({
           className={styles.main__next}
           role="button"
           tabIndex={0}
-          onClick={() => setModalStep('second')}
+          onClick={() => goToNextStep()}
           onKeyDown={handleKeyDown}
         >
           <span className={styles.next__text}>{t('signup')}</span>

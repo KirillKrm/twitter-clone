@@ -8,7 +8,13 @@ import BaseModal from 'app/components/BaseModal'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import InputField from 'app/components/Input/InputField'
 
-export default function SignupBaseModal({ setModalStep }) {
+export type LoginModalWindow2Props = {
+  goToPrevStep: any
+}
+
+export default function SignupBaseModal({
+  goToPrevStep,
+}: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const loginPage = useSelector((state: RootState) => state.loginpage)
   const [login, setLogin] = React.useState(loginPage?.login || '')
@@ -16,6 +22,11 @@ export default function SignupBaseModal({ setModalStep }) {
   const [loginValid, setLoginValid] = React.useState(false)
   const [passwordValid, setPasswordValid] = React.useState(false)
   const formValid = loginValid && passwordValid
+
+  //TODO inject useAuth hook in this code, that gives auth function,
+  // handles jwtTokens without us knowing it, gives boolean
+  // 'isLogin' (? think more about name) and loading & error same as
+  // in useRegistration
 
   return (
     <BaseModal>
@@ -25,7 +36,7 @@ export default function SignupBaseModal({ setModalStep }) {
             className={styles.back__button}
             aria-label="Back"
             role="button"
-            onClick={() => setModalStep('first')}
+            onClick={() => goToPrevStep()}
           >
             <SvgButtonBack />
           </div>
@@ -211,7 +222,6 @@ const styles = {
   `,
   hint__password: `
     w-max
-    mt-[-10px]
     ml-2
     leading-[16px]
     text-[13px]

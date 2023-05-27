@@ -61,7 +61,16 @@ const setData = (stepName: string, res: { [key: string]: any }): void => {
   // })
 }
 
-export default function SignupModalWindow2({ setModalStep }) {
+// REFACTOR types
+export type SignupModalWindow2Props = {
+  goToNextStep: any
+  goToPrevStep: any
+}
+
+export default function SignupModalWindow2({
+  goToNextStep,
+  goToPrevStep,
+}: SignupModalWindow2Props) {
   const { t } = useTranslation('signup')
   const signUpPage = useSelector((state: RootState) => state.signuppage)
   const [name, setName] = React.useState(signUpPage?.username || 'Uber')
@@ -122,7 +131,7 @@ export default function SignupModalWindow2({ setModalStep }) {
             className={styles.back__button}
             aria-label="Back"
             role="button"
-            onClick={() => setModalStep('first')}
+            onClick={() => goToPrevStep()}
           >
             <SvgButtonBack />
           </div>
@@ -207,7 +216,7 @@ export default function SignupModalWindow2({ setModalStep }) {
           className={styles.main__next + 'w-[440px] h-[52px]'}
           onClick={() => {
             setData('second', res)
-            setModalStep('third')
+            goToNextStep()
           }}
           disabled={!formValid}
         >
