@@ -6,6 +6,7 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -14,10 +15,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger'
 
+import { ExceptionResponseDto } from '../common/dto'
+import { AuthGuard } from '../auth/auth.guard'
+
 import { UsersService } from './users.service'
 import { User } from './entities/user.entity'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { ExceptionResponseDto } from '../common/dto'
 
 @ApiTags('users')
 @Controller({
@@ -68,6 +71,7 @@ export class UsersController {
   }
 
   // @Patch(':id')
+  // TODO add admin guard
   // async update(
   //   @Param('id') id: number,
   //   @Body() updateUserDto: UpdateUserDto,
@@ -75,24 +79,24 @@ export class UsersController {
   //   await this.usersService.update(id, updateUserDto)
   // }
 
-  // TODO add admin guard
-  @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiBearerAuth()
-  @ApiOperation({
-    summary: 'Delete user by ID',
-    description: 'Delete a user by their ID.',
-  })
-  @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
-    description: 'Successfully deleted user.',
-  })
-  @ApiResponse({
-    status: HttpStatus.NOT_FOUND,
-    description: 'User not found.',
-    type: ExceptionResponseDto,
-  })
-  async remove(@Param('id') id: number): Promise<void> {
-    await this.usersService.remove(id)
-  }
+  // @Delete(':id')
+  // @UseGuards(AuthGuard) // TODO add admin guard
+  // @HttpCode(HttpStatus.NO_CONTENT)
+  // @ApiBearerAuth()
+  // @ApiOperation({
+  //   summary: 'Delete user by ID',
+  //   description: 'Delete a user by their ID.',
+  // })
+  // @ApiResponse({
+  //   status: HttpStatus.NO_CONTENT,
+  //   description: 'Successfully deleted user.',
+  // })
+  // @ApiResponse({
+  //   status: HttpStatus.NOT_FOUND,
+  //   description: 'User not found.',
+  //   type: ExceptionResponseDto,
+  // })
+  // async remove(@Param('id') id: number): Promise<void> {
+  //   await this.usersService.remove(id)
+  // }
 }
