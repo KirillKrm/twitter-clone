@@ -1,6 +1,5 @@
 import { SignUpPayload } from 'app/pages/SignupPage/types'
-
-const backendUrl = 'https://twitter-clone2023-0.herokuapp.com'
+import { apiClient } from './api-client'
 
 export function randLocation() {
   const totalLocations = 76
@@ -33,62 +32,43 @@ export function randLocation() {
 //   throw new Error('Not expected backend response status')
 // }
 
-// TODO more types
-type backendCallResponse<T> = {
-  status: number
-  data: T
-}
-
-async function backendCall<T = any>(
-  path: string,
-  requestOptions: RequestInit,
-): Promise<backendCallResponse<T>> {
-  const url = `${backendUrl}/${path}`
-
-  const res = await fetch(url, requestOptions)
-  return {
-    status: res.status,
-    data: await res.json(),
-  }
-}
-
 // TODO types
 export async function register(registerData: SignUpPayload): Promise<any> {
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('Access-Control-Allow-Origin', '*') //TODO check if works without this line
+  const res = await apiClient.post(
+    'v1/auth/register',
+    registerData,
+    async (res, body) => {
+      if (res.status !== 201) {
+        throw new Error(`${res.status}: ${body.message}`)
+      }
+    },
+  )
 
-  const res = await backendCall('v1/auth/register', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(registerData),
-  })
-  if (res.status !== 201) {
-    throw new Error(`${res.status}: ${res.data.message}`)
-  }
+  console.log('Fetched user ' + res.id)
 
-  console.log('Fetched user ' + res.data.id)
-
-  return res.data
+  return res
 }
 
 // TODO types
 export async function login(loginData: {
-  [any: string]: string
+  username: string
+  password: string
 }): Promise<any> {
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
+  const res = await apiClient.post(
+    'v1/auth/login',
+    loginData,
+    async (res, body) => {
+      if (res.status !== 200) {
+        throw new Error(`${res.status}: ${body.message}`)
+      }
+    },
+  )
 
-  const res = await backendCall('v1/auth/login', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(loginData),
-  })
-  if (res.status !== 200) {
-    throw new Error(`${res.status}: ${res.data.message}`)
-  }
+  //REFACTOR think if it's appropriate place to use localStorage
+  localStorage.setItem('jwtAccessToken', res.jwtAccessToken)
+  localStorage.setItem('jwtRefreshToken', res.jwtRefreshToken)
 
-  console.log('Login user ' + loginData.id)
+  console.log('Login user ' + loginData.username)
 
-  return res.data
+  return res
 }

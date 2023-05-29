@@ -1,13 +1,20 @@
 import * as React from 'react'
 import 'index.css'
+
+import { useAuth } from 'app/hooks/useAuth'
+
 import SvgAccount from './SVG/SvgAccount'
 
 export default function Account() {
+  const { user } = useAuth()
+
   const mockData = {
-    name: 'Kyrylo Karmazin',
-    username: 'KirillKr231',
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+  }
+
+  if (!user) {
+    return <></>
   }
 
   return (
@@ -19,10 +26,8 @@ export default function Account() {
       />
       <div className={styles.container__rightblock}>
         <div className={styles.rightblock__text}>
-          <span className={styles.text__name}>{mockData.name}</span>
-          <span className={styles.text__nickname}>
-            {'@' + mockData.username}
-          </span>
+          <span className={styles.text__name}>{user.username}</span>
+          <span className={styles.text__nickname}>{'@' + user.nickname}</span>
         </div>
         <SvgAccount />
       </div>

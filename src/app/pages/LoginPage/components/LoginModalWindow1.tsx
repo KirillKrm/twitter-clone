@@ -1,8 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { useDispatch } from 'react-redux'
 
 import BaseModal from 'app/components/BaseModal'
 import GoogleAuth from 'app/components/GoogleAuth'
@@ -17,13 +16,18 @@ export default function LoginModalWindow1({
   goToNextStep,
 }: LoginModalWindow1Props) {
   const { t } = useTranslation('login')
-  const loginPage = useSelector((state: RootState) => state.loginpage)
-  const [login, setLogin] = React.useState(loginPage?.login || '') //use cur_user_username from localstorage
+  //const loginPage = useSelector((state: RootState) => state.loginpage)
+  const [login, setLogin] = React.useState(
+    localStorage.getItem('current_user_username') || '',
+  ) //use cur_user_username from localstorage
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(loginPageActions.changeLogin(login))
-  }, [login, dispatch])
+    if (localStorage.getItem('current_user_username')) {
+      goToNextStep()
+    }
+  }, [login, dispatch, goToNextStep])
 
   return (
     <BaseModal>

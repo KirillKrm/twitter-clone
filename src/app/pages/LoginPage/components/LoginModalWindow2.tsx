@@ -3,10 +3,12 @@ import 'index.css'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { RootState } from 'types'
+import { useNavigate } from 'react-router-dom'
 
 import BaseModal from 'app/components/BaseModal'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import InputField from 'app/components/Input/InputField'
+import { useAuth } from 'app/hooks/useAuth'
 
 export type LoginModalWindow2Props = {
   goToPrevStep: any
@@ -16,17 +18,37 @@ export default function SignupBaseModal({
   goToPrevStep,
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
+  const navigate = useNavigate()
+
   const loginPage = useSelector((state: RootState) => state.loginpage)
-  const [login, setLogin] = React.useState(loginPage?.login || '')
+  const [loginString, setLoginString] = React.useState(
+    loginPage?.login || localStorage.getItem('current_user_username') || '',
+  )
   const [password, setPassword] = React.useState('')
   const [loginValid, setLoginValid] = React.useState(false)
   const [passwordValid, setPasswordValid] = React.useState(false)
   const formValid = loginValid && passwordValid
 
+  const { login, user, loading, error } = useAuth()
+
   //TODO inject useAuth hook in this code, that gives auth function,
   // handles jwtTokens without us knowing it, gives boolean
   // 'isLogin' (? think more about name) and loading & error same as
   // in useRegistration
+
+  const loginHandler = () => {
+    console.log('Try to login')
+    login({
+      username: loginString,
+      password,
+    })
+  }
+
+  React.useEffect(() => {
+    if (user) {
+      navigate('/home')
+    }
+  }, [navigate, user])
 
   return (
     <BaseModal>
@@ -36,7 +58,10 @@ export default function SignupBaseModal({
             className={styles.back__button}
             aria-label="Back"
             role="button"
-            onClick={() => goToPrevStep()}
+            onClick={() => {
+              goToPrevStep()
+              localStorage.removeItem('current_user_username')
+            }}
           >
             <SvgButtonBack />
           </div>
@@ -62,8 +87,8 @@ export default function SignupBaseModal({
           </div>
           <InputField
             disabled={true}
-            value={login}
-            setValue={setLogin}
+            value={loginString}
+            setValue={setLoginString}
             setValid={setLoginValid}
             placeholder={t('input')}
           />
@@ -73,6 +98,7 @@ export default function SignupBaseModal({
             password
             setValid={setPasswordValid}
             placeholder={t('password')}
+            isError={!!error}
           />
           <a href="/signup" className={styles.hint__password}>
             <span role="button">{t('forgot')}</span>
@@ -80,9 +106,9 @@ export default function SignupBaseModal({
         </div>
         <div className={styles.main__bottom}>
           <button
-            className={styles.main__next}
-            onClick={() => {}}
+            className={styles.main__next + (loading ? 'dark:bg-[#8a8a8a]' : '')}
             disabled={!formValid}
+            onClick={e => (!loading ? loginHandler() : e.preventDefault())}
           >
             <span className={styles.next__text}>{t('login')}</span>
           </button>

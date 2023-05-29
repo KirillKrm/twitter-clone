@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 import { RootState } from 'types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ import BaseModal from 'app/components/BaseModal'
 import InputField from 'app/components/Input/InputField'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import { useRegistration } from 'app/hooks/useAuth'
-// import { SignupPageState } from '../slice/types'
+import { feedPageActions } from 'app/pages/FeedPage/slice/index'
 
 // REFACTOR types
 export type SignupModalWindow3Props = {
@@ -22,6 +22,7 @@ export default function SignupModalWindow3({
   const { t } = useTranslation('signup')
   const { register, user, loading, error } = useRegistration()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const signUpPage = useSelector((state: RootState) => state.signuppage)
   const password = signUpPage?.password || ''
@@ -53,11 +54,15 @@ export default function SignupModalWindow3({
     })
   }
 
-  if (user) {
-    // TODO after modifying backend to accept login with also phone number & email
-    // localStorage.setItem('cur_user_username', user.username) //TODO now!
-    navigate('/login')
-  }
+  React.useEffect(() => {
+    if (user) {
+      // TODO after modifying backend to accept login with also phone number & email
+      localStorage.setItem('current_user_username', user.username)
+      dispatch(feedPageActions.changeUsername(user.username))
+      dispatch(feedPageActions.changeNickname(user.nickname))
+      navigate('/login')
+    }
+  }, [dispatch, navigate, user])
 
   return (
     <BaseModal>
