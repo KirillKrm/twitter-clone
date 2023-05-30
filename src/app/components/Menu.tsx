@@ -3,6 +3,7 @@ import 'index.css'
 import { useState, useEffect } from 'react'
 
 import MenuUnit, { MenuUnitProps } from './MenuUnit'
+import { useAuth } from 'app/hooks/useAuth'
 import SvgTwitter from './SVG/SvgTwitter'
 import {
   HomeIcon,
@@ -73,16 +74,20 @@ const menuListDesktop: MenuButton[] = menuList.filter(
 const menuListMobile: MenuButton[] = menuList.filter(menuBtn =>
   ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
 )
-// eslint-disable-next-line
 const menuListNotAuthorized: MenuButton[] = menuList.filter(menuBtn =>
   ['Explore', 'More'].includes(menuBtn.name),
 )
 
 export default function Menu() {
+  const { user } = useAuth()
   const [activeButton, setActiveButton] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
-  const menu = width > 500 ? menuListDesktop : menuListMobile
-  // const [user, isLogined] = useAuth()
+  const menu =
+    width > 500
+      ? user
+        ? menuListDesktop
+        : menuListNotAuthorized
+      : menuListMobile
 
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth)

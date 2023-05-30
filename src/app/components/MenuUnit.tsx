@@ -34,7 +34,7 @@ const styles = {
   container__button: `
     flex 
     items-center 
-    w-max 
+    min-[1280px]:min-w-[200px]
     p-3 
     my-1 
     rounded-full 
