@@ -1,3 +1,5 @@
+import jwt_decode from 'jwt-decode'
+
 type HandleResponse<T = any> = (res: Response, body: T) => Promise<void>
 
 type ApiRequestOptions<T = any> = {
@@ -24,21 +26,6 @@ export class ApiClient {
   }
 
   // TODO types
-  private parseJwt(token: string) {
-    const base64Url = token.split('.')[1]
-    const base64 = base64Url?.replace(/-/g, '+')?.replace(/_/g, '/')
-    const jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join(''),
-    )
-
-    return JSON.parse(jsonPayload)
-  }
-
-  // TODO types
   private async handleResponse(response, handleResponse?: HandleResponse) {
     const body = await response.json()
 
@@ -51,8 +38,9 @@ export class ApiClient {
     return body
   }
 
+  // TODO types
   private isJwtExpired(jwt: string): boolean {
-    const { exp } = this.parseJwt(jwt)
+    const { exp } = jwt_decode<any>(jwt)
 
     return exp * 1000 < Date.now()
   }
@@ -72,7 +60,7 @@ export class ApiClient {
         const refreshToken = localStorage.getItem('jwtRefreshToken')
         if (refreshToken && !this.isJwtExpired(refreshToken)) {
           const res = await this.post(
-            '/v1/auth/refresh',
+            'v1/auth/refresh',
             { refreshToken },
             async res => {
               if (res.status !== 200) {
@@ -82,7 +70,7 @@ export class ApiClient {
           )
 
           localStorage.setItem('jwtAccessToken', res.jwtAccessToken)
-          headers['Authorization'] = `Bearer ${accessToken}`
+          headers['Authorization'] = `Bearer ${res.jwtAccessToken}`
         } else {
           localStorage.removeItem('jwtRefreshToken')
           this.redirectToLogin()
@@ -94,7 +82,7 @@ export class ApiClient {
   private async getHeaders(): Promise<Headers> {
     const headers = Object.assign({}, this.defaultHeaders)
 
-    this.handleAutorizationHeader(headers)
+    await this.handleAutorizationHeader(headers)
 
     return headers
   }
