@@ -20,40 +20,44 @@ type twit = {
 }
 
 export default function Twits() {
-  const [token, setToken] = React.useState<string>() // storing current page number
+  const [token, setToken] = React.useState<number>()
   const [twits, setTwits] = React.useState<twit[]>([])
   const [isFetchMore, setIsFetchMore] = React.useState(true)
-  const [wasLastList, setWasLastList] = React.useState(false) // setting a flag to know the last list
+  const [wasLastList, setWasLastList] = React.useState(false)
 
-  // TODO attach to window
-  const onScroll = () => {
-    console.log('AAAAAAAAAAAAAAAAA')
-    if (
-      document.documentElement.scrollTop +
-        document.documentElement.clientHeight ===
-      document.documentElement.scrollHeight
-    ) {
-      console.log('NEED TO FETCH MORE!')
-      setIsFetchMore(true)
+  React.useEffect(() => {
+    const onScroll = () => {
+      if (
+        document.documentElement.scrollTop +
+          document.documentElement.clientHeight ===
+        document.documentElement.scrollHeight
+      ) {
+        setIsFetchMore(true)
+      }
     }
-  }
+
+    window.addEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  })
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await getTwits({ limit: 10 }) //token
-      if (!response.data.length) {
+      const response = await getTwits({ limit: 10, token })
+      if (response.data.length < 10) {
         setWasLastList(true)
         return
       }
       setTwits(twits.concat(response.data))
-      setToken(response.token)
+      setToken(response.nextToken)
       setIsFetchMore(false)
     }
 
     if (!wasLastList && isFetchMore) {
       fetchData()
     }
-  }, [token, wasLastList, twits])
+  }, [token, wasLastList, twits, isFetchMore])
 
   // const [location, setLocation] = React.useState('')
   // const [pokemon, setPokemon] = React.useState('')
@@ -67,10 +71,11 @@ export default function Twits() {
   // }, [])
 
   return (
-    <div onScroll={onScroll}>
+    <div>
       {twits.map(twit => {
         return <TwitsUnit key={twit.id} data={twit} />
       })}
+      {/* {wasLastList ? <Loader /> : null} */}
     </div>
   )
 }
