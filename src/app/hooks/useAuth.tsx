@@ -29,7 +29,6 @@ export const useRegistration = () => {
 
     try {
       const response = await registerRequest(formData)
-      console.log(response)
       setUser(response)
       // if (response) {
       //   setError(null)

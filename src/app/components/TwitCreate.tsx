@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import 'index.css'
 
+import { useAuth } from 'app/hooks/useAuth'
+import { postTwit } from 'app/api/create-twit'
+
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
   value: string,
@@ -18,7 +21,7 @@ const useAutosizeTextArea = (
 
 export default function TwitCreate() {
   const { t } = useTranslation()
-
+  const { user } = useAuth()
   const [value, setValue] = useState('')
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -30,9 +33,20 @@ export default function TwitCreate() {
     setValue(val)
   }
 
+  const handleOnClick = async () => {
+    const res = await postTwit({ content: value })
+    if (res) {
+      if (textAreaRef.current) textAreaRef.current.value = ''
+    }
+  }
+
   const mockData = {
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+  }
+
+  if (!user) {
+    return <></>
   }
 
   return (
@@ -53,8 +67,20 @@ export default function TwitCreate() {
           ref={textAreaRef}
           value={value}
         ></textarea>
-        <div className={styles.inputBox__button}>
-          <span className={styles.button__text}>{t('Tweet')}</span>
+        <div
+          className={
+            styles.inputBox__button +
+            (value.length === 0 ? 'pointer-events-none' : '')
+          }
+          onClick={handleOnClick}
+        >
+          <span
+            className={
+              styles.button__text + (value.length === 0 ? 'opacity-50 ' : '')
+            }
+          >
+            {t('Tweet')}
+          </span>
         </div>
       </div>
     </div>
