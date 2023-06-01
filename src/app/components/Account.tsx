@@ -46,6 +46,7 @@ const styles = {
     hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
     transition-colors 
     duration-200
+    select-none
     min-[0px]:max-[500px]:hidden
   `,
   container__image: `

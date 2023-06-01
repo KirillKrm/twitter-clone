@@ -26,6 +26,7 @@ const styles = {
     px-4
     py-2
     rounded-full
+    select-none
     focus-within:shadow-[0px_0px_0px_1px_deepskyblue_inset]
   `,
   input: `

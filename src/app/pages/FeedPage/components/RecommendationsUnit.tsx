@@ -40,6 +40,7 @@ const styles = {
     h-12 
     rounded-full 
     mr-3
+    select-none
   `,
   container__text: `
     flex 

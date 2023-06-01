@@ -100,6 +100,7 @@ const styles = {
     h-10 
     rounded-full
     mr-3
+    select-none
   `,
   container__inputBox: `
     flex 
@@ -115,10 +116,12 @@ const styles = {
     text-lg 
     placeholder-[rgb(83,100,113)] dark:placeholder-[#71767b]
     resize-none
+    select-none
   `,
   inputBox__button: `
     flex 
     self-end
+    select-none
   `,
   button__text: `
     flex 

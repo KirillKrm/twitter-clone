@@ -16,9 +16,10 @@ export default function MenuUnit(props: MenuUnitProps) {
     <a
       href={props.link}
       className={
-        styles.container__button + `${props.active ? 'font-bold' : ''}`
+        styles.container__button +
+        `${props.active ? 'font-bold' : 'cursor-default'}`
       }
-      onClick={() => props.setActive(props.name)}
+      //onClick={() => props.setActive(props.name)}
     >
       <svg viewBox="0 0 24 24" className={styles.button__svg}>
         <g className={styles.svg__g}>
@@ -41,6 +42,7 @@ const styles = {
     hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
     transition-colors 
     duration-200
+    select-none
   `,
   button__svg: `
     w-6 

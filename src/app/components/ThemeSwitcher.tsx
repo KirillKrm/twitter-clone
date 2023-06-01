@@ -63,6 +63,7 @@ const styles = {
     flex
     flex-col
     gap-1
+    select-none
   `,
   container__light: `
     py-1

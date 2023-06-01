@@ -41,5 +41,6 @@ const styles = {
     bg-gray-700 
     text-white 
     rounded-lg
+    select-none
   `,
 }
