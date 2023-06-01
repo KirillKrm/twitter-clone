@@ -27,6 +27,31 @@ export default function TwitsUnit({
 }: TwitUnitProps) {
   const avatar = author.avatar ?? defaultAvatarUrl
 
+  function elapsedDate(time: any) {
+    const date = new Date((time || '').replace(/-/g, '/').replace(/[TZ]/g, ' '))
+    const sec_diff = (new Date().getTime() - date.getTime()) / 1000
+    const day_diff = Math.floor(sec_diff / 86400)
+
+    if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31) return
+
+    return (
+      (day_diff === 0 &&
+        ((sec_diff < 60 && 'just now') ||
+          (sec_diff < 120 && '1 minute ago') ||
+          (sec_diff < 3600 && Math.floor(sec_diff / 60) + ' minutes ago') ||
+          (sec_diff < 7200 && '1 hour ago') ||
+          (sec_diff < 86400 && Math.floor(sec_diff / 3600) + ' hours ago'))) ||
+      (day_diff === 1 && 'Yesterday') ||
+      (day_diff < 7 && day_diff + ' days ago') ||
+      (day_diff === 7 && 'week ago') ||
+      (day_diff < 31 && Math.ceil(day_diff / 7) + ' weeks ago') ||
+      (day_diff === 31 && 'mounth ago') ||
+      (day_diff < 365 && Math.ceil(day_diff / 31) + ' months ago') ||
+      (day_diff === 365 && 'year ago') ||
+      (day_diff > 730 && Math.ceil(day_diff / 365) + ' years ago')
+    )
+  }
+
   return (
     <div key={id} className={styles.container}>
       <img className={styles.container__image} alt="avatar" src={avatar} />
@@ -35,8 +60,9 @@ export default function TwitsUnit({
           <a href="/#">
             <span className={styles.title__name}>{author.username}</span>
           </a>
-          <div className={styles.title__nickname}>{author.nickname}</div>
-          <div className={styles.title__date}>{createdAt.toString()}</div>
+          <div className={styles.title__nickname}>{'@' + author.nickname}</div>
+          <div className={styles.title__separator}>·</div>
+          <div className={styles.title__date}>{elapsedDate(createdAt)}</div>
         </div>
         <div className={styles.twitBox__article}>{content}</div>
         <div className={styles.twitBox__buttons}>
@@ -74,6 +100,7 @@ const styles = {
     h-10 
     rounded-full 
     mr-3
+    select-none
   `,
   container__twitBox: `
     flex 
@@ -91,8 +118,11 @@ const styles = {
     ml-1 
     text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
+  title__separator: `
+    px-1
+    text-[rgb(83,100,113)] dark:text-[#71767b] 
+  `,
   title__date: `
-    ml-1 
     text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
   twitBox__article: `
@@ -101,6 +131,7 @@ const styles = {
   twitBox__buttons: `
     flex 
     flex-row
+    select-none
   `,
   buttons__like: `
     flex 
