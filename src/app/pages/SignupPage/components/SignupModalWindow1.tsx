@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import BaseModal from 'app/components/BaseModal'
 import GoogleAuth from 'app/components/GoogleAuth'
-import SvgTwitter from 'app/components/SVG/SvgTwitter'
+import SvgLogo from 'app/components/SVG/SvgLogo'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 // REFACTOR types
@@ -17,9 +17,8 @@ export default function SignupModalWindow1({
 }: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
     if (e.key === 'Enter') goToNextStep()
-    // if (e.key === 'Enter') goToNextStep()
     e.preventDefault()
   }
 
@@ -36,7 +35,7 @@ export default function SignupModalWindow1({
           </div>
         </div>
         <div className={styles.top__logo}>
-          <SvgTwitter />
+          <SvgLogo />
         </div>
         <div className={styles.top__space} />
       </div>
@@ -116,7 +115,7 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__separator: `
     flex
@@ -126,12 +125,12 @@ const styles = {
     w-full
     h-[1px]
     mx-[4px]
-    bg-[rgba(15,20,25,0.1)] dark:bg-[rgb(51,54,57)]
+    bg-[rgba(15,20,25,0.1)] dark:bg-[#333639]
   `,
   separator__text: `
     mx-[4px]
     text-[17px]
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
     leading-[20px]
   `,
   main__next: `
@@ -151,7 +150,7 @@ const styles = {
   `,
   main__registrationHint1: `
     w-[300px]
-    text-[rgb(113,118,123)]
+    text-[#71767b]
     leading-[16px]
     text-[13px]
   `,
@@ -162,10 +161,10 @@ const styles = {
     leading-[20px]
   `,
   hint__left: `
-    text-[rgb(113,118,123)]
+    text-[#71767b]
   `,
   hint__right: `
-    text-[rgb(29,155,240)]
+    text-[#1d9bf0]
     hover:underline
   `,
 }

@@ -2,11 +2,11 @@ import * as React from 'react'
 import classnames from 'classnames'
 
 type ListProps = {
-  list: any[]
+  list: { name: string | number }[]
   placeholder: string
   setValid?: React.Dispatch<React.SetStateAction<boolean>>
-  value: any
-  setValue?: any
+  value: string | undefined
+  setValue?: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
 export default function SelectField({
@@ -18,7 +18,7 @@ export default function SelectField({
 }: ListProps) {
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [isChoosen, setІsChoosen] = React.useState(false)
-  const isSelectEmpty = value.length === 0
+  const isSelectEmpty = value?.length === 0
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: isChoosen || !isSelectEmpty,
   })
@@ -32,38 +32,42 @@ export default function SelectField({
     }
   })
 
-  return (
-    <>
-      <div className={styles.container}>
-        <select
-          ref={selectRef}
-          className={styles.container__input}
-          name="text"
-          value={value}
-          autoComplete="off"
-          title=""
-          required={everFocusedInput}
-          onFocus={() => setEverFocusedInput(true)}
-          onChange={e => {
-            if (e.target.selectedIndex !== -1) setІsChoosen(true)
-            if (setValue) setValue(e.target.value)
-          }}
-          style={{ content: '↓', color: 'white' }}
-        >
-          <option value="" disabled></option>
-          {list.map((list: { name: string }) => {
-            const { name } = list
+  const handleOnFocus = () => setEverFocusedInput(true)
 
-            return (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            )
-          })}
-        </select>
-        <label className={labelStyle}>{placeholder}</label>
-      </div>
-    </>
+  const handleOnChange = (e: {
+    target: {
+      selectedIndex: number
+      value: React.SetStateAction<string | undefined>
+    }
+  }) => {
+    if (e.target.selectedIndex !== -1) setІsChoosen(true)
+    if (setValue) setValue(e.target.value)
+  }
+
+  return (
+    <div className={styles.container}>
+      <select
+        ref={selectRef}
+        className={styles.container__input}
+        name="text"
+        value={value}
+        autoComplete="off"
+        title=""
+        required={everFocusedInput}
+        onFocus={handleOnFocus}
+        onChange={handleOnChange}
+      >
+        <option value="" disabled></option>
+        {list.map(({ name }) => {
+          return (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          )
+        })}
+      </select>
+      <label className={labelStyle}>{placeholder}</label>
+    </div>
   )
 }
 
@@ -87,13 +91,13 @@ const styles = {
     bg-white dark:bg-black
     rounded-[4px]
     border
-    border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
+    border-[rgba(15,20,25,0.1)] dark:border-[#333639]
     outline-none
     cursor-pointer
 
-    focus:border-[rgb(29,155,240)] dark:focus:border-[rgb(29,155,240)]
-    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[rgb(255,54,57)]
-    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[rgb(51,54,57)]
+    focus:border-[#1d9bf0] dark:focus:border-[#1d9bf0]
+    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[#ff3639]
+    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[#333639]
   
     peer
 
@@ -103,7 +107,7 @@ const styles = {
     absolute
     w-[284px]
     text-[17px]
-    text-[rgb(83,100,113)] dark:text-[rgb(113,118,123)]
+    text-[#536471] dark:text-[#71767b]
     top-[16px]
     left-[8px]
     pointer-events-none
@@ -117,7 +121,7 @@ const styles = {
   
     peer-focus-within:top-[5px]
     peer-focus-within:text-[12px]
-    peer-focus-within:text-[rgb(29,155,240)]
+    peer-focus-within:text-[#1d9bf0]
   `,
   container__label_shrinked: `
     text-[12px]
@@ -125,6 +129,6 @@ const styles = {
 
     peer-valid:top-[5px]
     peer-valid:text-[12px]
-    peer-valid:text-[rgb(113,118,123)]
+    peer-valid:text-[#71767b]
   `,
 }

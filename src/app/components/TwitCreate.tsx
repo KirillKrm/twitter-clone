@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import classnames from 'classnames'
 import 'index.css'
 
 import { useAuth } from 'app/hooks/useAuth'
-import { postTwit } from 'app/api/create-twit'
+import { postTwit } from 'app/api/twits'
+import Image from 'app/components/Image'
 
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
@@ -27,6 +29,11 @@ export default function TwitCreate() {
 
   useAutosizeTextArea(textAreaRef.current, value)
 
+  const isInputEmpty = value.length === 0
+  const buttonStyle = classnames(styles.inputBox__button, {
+    'pointer-events-none opacity-50': isInputEmpty,
+  })
+
   const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = evt.target?.value
 
@@ -40,10 +47,8 @@ export default function TwitCreate() {
     }
   }
 
-  const mockData = {
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
-  }
+  const avatar =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png'
 
   if (!user) {
     return <></>
@@ -51,11 +56,7 @@ export default function TwitCreate() {
 
   return (
     <div className={styles.container}>
-      <img
-        className={styles.container__image}
-        alt="avatar"
-        src={mockData.avatar}
-      />
+      <Image img={avatar} />
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}
@@ -67,20 +68,8 @@ export default function TwitCreate() {
           ref={textAreaRef}
           value={value}
         ></textarea>
-        <div
-          className={
-            styles.inputBox__button +
-            (value.length === 0 ? 'pointer-events-none' : '')
-          }
-          onClick={handleOnClick}
-        >
-          <span
-            className={
-              styles.button__text + (value.length === 0 ? 'opacity-50 ' : '')
-            }
-          >
-            {t('Tweet')}
-          </span>
+        <div className={buttonStyle} onClick={handleOnClick}>
+          <span className={styles.button__text}>{t('Tweet')}</span>
         </div>
       </div>
     </div>
@@ -92,15 +81,7 @@ const styles = {
     flex 
     w-full 
     p-3 
-    shadow-[0px_0px_0px_1px_rgb(239,243,244)] dark:shadow-[0px_0px_0px_1px_#2f3336]
-  `,
-  container__image: `
-    flex 
-    w-10 
-    h-10 
-    rounded-full
-    mr-3
-    select-none
+    shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#2f3336]
   `,
   container__inputBox: `
     flex 
@@ -114,7 +95,7 @@ const styles = {
     text-black dark:text-white 
     outline-none 
     text-lg 
-    placeholder-[rgb(83,100,113)] dark:placeholder-[#71767b]
+    placeholder-[#536471] dark:placeholder-[#71767b]
     resize-none
     select-none
   `,
@@ -122,18 +103,18 @@ const styles = {
     flex 
     self-end
     select-none
+    h-[36px] 
+    bg-[#1d9bf0] 
+    hover:bg-[#1a8cd8] 
+    rounded-full 
+    transition-colors 
+    duration-200
   `,
   button__text: `
     flex 
     items-center 
     px-4 
     text-base 
-    min-h-[36px] 
     text-white 
-    rounded-full 
-    bg-[#1d9bf0] 
-    hover:bg-[rgb(26,140,216)] 
-    transition-colors 
-    duration-200
   `,
 }

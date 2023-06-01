@@ -14,8 +14,8 @@ type InputFieldProps = {
   isConfirmed?: boolean
   isError?: boolean
   onClick?: any
-  disabled?: boolean
-  password?: boolean
+  isDisabled?: boolean
+  isPassword?: boolean
 }
 
 export default function InputField({
@@ -28,27 +28,43 @@ export default function InputField({
   isConfirmed,
   isError,
   onClick,
-  disabled,
-  password,
+  isDisabled,
+  isPassword,
 }: InputFieldProps) {
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const [everFocusedInput, setEverFocusedInput] = React.useState(false)
   const [counter, setCounter] = React.useState('')
+
   const isInputEmpty = value.length === 0
   const inputStyle = classnames(styles.container__input, {
-    [styles.container__input_disabled]: disabled,
+    [styles.container__input_disabled]: isDisabled,
     'border-1 dark:valid:border-rose-500': isError,
   })
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
-    [styles.container__label_disabled]: disabled,
+    [styles.container__label_disabled]: isDisabled,
   })
-  const inputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
     if (setValid && inputRef.current != null) {
       setValid(inputRef.current.checkValidity() && !isInputEmpty)
     }
   })
+
+  const handleOnChange = (e: {
+    target: { value: React.SetStateAction<string> }
+  }) => {
+    setValue(e.target.value)
+  }
+
+  const handleOnFocus = () => setEverFocusedInput(true)
+
+  const handleOnInput = (e: any) =>
+    maxLength
+      ? setCounter(
+          (e.target as HTMLInputElement).value.length + '/' + maxLength,
+        )
+      : undefined
 
   return (
     <>
@@ -60,26 +76,17 @@ export default function InputField({
           ref={inputRef}
           className={inputStyle}
           name="text"
-          type={password ? 'password' : 'text'}
+          type={isPassword ? 'password' : 'text'}
           value={value}
           autoComplete="off"
           title=""
           maxLength={maxLength}
-          onChange={e => {
-            setValue(e.target.value)
-          }}
-          // onInvalid={setValid ? () => setValid(false) : undefined}
-          onFocus={() => setEverFocusedInput(true)}
-          onInput={e =>
-            maxLength
-              ? setCounter(
-                  (e.target as HTMLInputElement).value.length + '/' + maxLength,
-                )
-              : undefined
-          }
+          onChange={handleOnChange}
+          onFocus={handleOnFocus}
+          onInput={handleOnInput}
           pattern={everFocusedInput ? pattern : undefined}
           required={!!pattern && everFocusedInput}
-          disabled={disabled}
+          disabled={isDisabled}
         />
         <label className={labelStyle}>{placeholder}</label>
         <label className={styles.container__counter}>{counter}</label>
@@ -114,12 +121,12 @@ const styles = {
     bg-white dark:bg-black
     rounded-[4px]
     border
-    border-[rgba(15,20,25,0.1)] dark:border-[rgb(51,54,57)]
+    border-[rgba(15,20,25,0.1)] dark:border-[#333639]
     outline-none
 
-    focus:border-[rgb(29,155,240)] dark:focus:border-[rgb(29,155,240)]
-    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[rgb(255,54,57)]
-    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[rgb(51,54,57)]
+    focus:border-[#1d9bf0] dark:focus:border-[#1d9bf0]
+    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[#ff3639]
+    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[#333639]
 
     peer
   `,
@@ -133,7 +140,7 @@ const styles = {
     absolute
     w-[284px]
     text-[17px]
-    text-[rgb(83,100,113)] dark:text-[rgb(113,118,123)]
+    text-[#536471] dark:text-[#71767b]
     top-[16px]
     left-[8px]
     pointer-events-none
@@ -147,7 +154,7 @@ const styles = {
 
     peer-focus-within:top-[5px]
     peer-focus-within:text-[12px]
-    peer-focus-within:text-[rgb(29,155,240)]
+    peer-focus-within:text-[#1d9bf0]
   `,
   container__label_disabled: `
     text-[rgba(83,100,113,0.5)] dark:text-[rgba(113,118,123,0.5)]
@@ -158,7 +165,7 @@ const styles = {
 
     peer-valid:top-[5px]
     peer-valid:text-[12px]
-    peer-valid:text-[rgb(113,118,123)]
+    peer-valid:text-[#71767b]
   `,
   container__counter: `
     hidden
@@ -167,7 +174,7 @@ const styles = {
     top-[8px]
     leading-[16px]
     text-[14px]
-    text-[rgb(83,100,113)] dark:text-[rgb(113,118,123)]
+    text-[#536471] dark:text-[#71767b]
     pointer-events-none
 
     peer-focus-within:block

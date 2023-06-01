@@ -5,28 +5,32 @@ export type MenuUnitProps = {
   name: string
   image: string
   link: string
-  active: boolean
+  isActive: boolean
   setActive: Function
 }
 
-export default function MenuUnit(props: MenuUnitProps) {
+export default function MenuUnit({
+  link,
+  isActive,
+  image,
+  name,
+}: MenuUnitProps) {
   const { t } = useTranslation()
 
   return (
     <a
-      href={props.link}
+      href={link}
       className={
         styles.container__button +
-        `${props.active ? 'font-bold' : 'cursor-default'}`
+        `${isActive ? 'font-bold' : 'cursor-default'}`
       }
-      //onClick={() => props.setActive(props.name)}
     >
       <svg viewBox="0 0 24 24" className={styles.button__svg}>
         <g className={styles.svg__g}>
-          <path d={props.image}></path>
+          <path d={image}></path>
         </g>
       </svg>
-      <span className={styles.button__name}>{t(props.name)}</span>
+      <span className={styles.button__name}>{t(name)}</span>
     </a>
   )
 }
@@ -39,7 +43,7 @@ const styles = {
     p-3 
     my-1 
     rounded-full 
-    hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
+    hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(231,233,234,0.1)] 
     transition-colors 
     duration-200
     select-none
@@ -56,6 +60,6 @@ const styles = {
     text-base 
     text-[20px]
     mx-4
-    min-[0px]:max-xl:hidden
+    max-xl:hidden
   `,
 }

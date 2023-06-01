@@ -51,32 +51,36 @@ export class ApiClient {
 
   private async handleAutorizationHeader(headers: Headers): Promise<void> {
     const accessToken = localStorage.getItem('jwtAccessToken')
-    if (accessToken) {
-      if (!this.isJwtExpired(accessToken)) {
-        headers['Authorization'] = `Bearer ${accessToken}`
-      } else {
-        localStorage.removeItem('jwtAccessToken')
+    if (!accessToken) {
+      return
+    }
 
-        const refreshToken = localStorage.getItem('jwtRefreshToken')
-        if (refreshToken && !this.isJwtExpired(refreshToken)) {
-          const res = await this.post(
-            'v1/auth/refresh',
-            { refreshToken },
-            async res => {
-              if (res.status !== 200) {
-                this.redirectToLogin()
-              }
-            },
-          )
+    if (!this.isJwtExpired(accessToken)) {
+      headers['Authorization'] = `Bearer ${accessToken}`
+      return
+    }
 
-          localStorage.setItem('jwtAccessToken', res.jwtAccessToken)
-          headers['Authorization'] = `Bearer ${res.jwtAccessToken}`
-        } else {
-          localStorage.removeItem('jwtRefreshToken')
+    localStorage.removeItem('jwtAccessToken')
+
+    const refreshToken = localStorage.getItem('jwtRefreshToken')
+    if (!refreshToken || this.isJwtExpired(refreshToken)) {
+      localStorage.removeItem('jwtRefreshToken')
+      this.redirectToLogin()
+      return
+    }
+
+    const tokens = await this.post(
+      'v1/auth/refresh',
+      { refreshToken },
+      async res => {
+        if (res.status !== 200) {
           this.redirectToLogin()
         }
-      }
-    }
+      },
+    )
+
+    localStorage.setItem('jwtAccessToken', tokens.jwtAccessToken)
+    headers['Authorization'] = `Bearer ${tokens.jwtAccessToken}`
   }
 
   private async getHeaders(): Promise<Headers> {

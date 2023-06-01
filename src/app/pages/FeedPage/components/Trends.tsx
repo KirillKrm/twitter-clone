@@ -29,7 +29,7 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
+    bg-[#f7f9f9] dark:bg-[#16181c] 
     w-full 
     rounded-[15px]
   `,

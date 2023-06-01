@@ -1,10 +1,10 @@
-import * as React from 'react'
 import 'index.css'
 
 import SvgLike from 'app/components/SVG/SvgLike'
 import SvgComment from 'app/components/SVG/SvgComment'
 import SvgRetwit from 'app/components/SVG/SvgRetwit'
 import { Twit } from 'types/Twit'
+import Image from 'app/components/Image'
 
 export type TwitUnitProps = {
   data: Twit
@@ -54,29 +54,31 @@ export default function TwitsUnit({
 
   return (
     <div key={id} className={styles.container}>
-      <img className={styles.container__image} alt="avatar" src={avatar} />
+      <Image img={avatar} />
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>
           <a href="/#">
             <span className={styles.title__name}>{author.username}</span>
           </a>
-          <div className={styles.title__nickname}>{'@' + author.nickname}</div>
-          <div className={styles.title__separator}>·</div>
-          <div className={styles.title__date}>{elapsedDate(createdAt)}</div>
+          <div className={styles.title__nickname + 'ml-1'}>
+            {'@' + author.nickname}
+          </div>
+          <div className={styles.title__separator + 'px-1'}>·</div>
+          <div>{elapsedDate(createdAt)}</div>
         </div>
         <div className={styles.twitBox__article}>{content}</div>
         <div className={styles.twitBox__buttons}>
-          <div className={styles.buttons__like}>
+          <div className={styles.buttons__box + 'hover:text-[#f91880]'}>
             <SvgLike />
-            <span className={styles.like__text}>{likes}</span>
+            <span className={styles.box__text}>{likes}</span>
           </div>
-          <div className={styles.buttons__comment}>
+          <div className={styles.buttons__box + 'hover:text-[#1d9bf0]'}>
             <SvgComment />
-            <span className={styles.comment__text}>{comments}</span>
+            <span className={styles.box__text}>{comments}</span>
           </div>
-          <div className={styles.buttons__retwit}>
+          <div className={styles.buttons__box + 'hover:text-[#00ba7c]'}>
             <SvgRetwit />
-            <span className={styles.retwit__text}>{retwits}</span>
+            <span className={styles.box__text}>{retwits}</span>
           </div>
         </div>
       </div>
@@ -92,23 +94,17 @@ const styles = {
     hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
     duration-200
     border-b 
-    border-[rgb(239,243,244)] dark:border-[#2f3336]
-  `,
-  container__image: `
-    flex 
-    w-10 
-    h-10 
-    rounded-full 
-    mr-3
-    select-none
+    border-[#eff3f4] dark:border-[#2f3336]
   `,
   container__twitBox: `
     flex 
     flex-col
+    w-full
   `,
   twitBox__title: `
-   flex 
-   flex-row
+    flex 
+    flex-row
+    text-[#536471] dark:text-[#71767b] 
   `,
   title__name: `
     font-bold 
@@ -116,14 +112,9 @@ const styles = {
   `,
   title__nickname: `
     ml-1 
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
   title__separator: `
     px-1
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
-  `,
-  title__date: `
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
   `,
   twitBox__article: `
     text-black dark:text-white
@@ -131,40 +122,18 @@ const styles = {
   twitBox__buttons: `
     flex 
     flex-row
+    max-w-[425px]
+    justify-between
     select-none
   `,
-  buttons__like: `
+  buttons__box: `
     flex 
     flex-row 
     items-center 
-    mr-12 
-    text-[rgb(83,100,113)] dark:text-[#71767b]
-    hover:text-[rgb(249,24,128)]
+    text-[#536471] dark:text-[#71767b]
+    hover:text-[#f91880]
   `,
-  like__text: `
-    pl-1 
-    text-sm
-  `,
-  buttons__comment: `
-    flex 
-    flex-row 
-    items-center 
-    mr-12 
-    text-[rgb(83,100,113)] dark:text-[#71767b]
-    hover:text-[rgb(29,155,240)]
-  `,
-  comment__text: `
-    pl-1 
-    text-sm
-  `,
-  buttons__retwit: `
-    flex 
-    flex-row 
-    items-center 
-    text-[rgb(83,100,113)] dark:text-[#71767b]
-    hover:text-[rgb(0,186,124)]
-  `,
-  retwit__text: `
+  box__text: `
     pl-1 
     text-sm
   `,

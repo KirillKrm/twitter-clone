@@ -64,10 +64,6 @@ export async function login(loginData: {
     },
   )
 
-  //REFACTOR think if it's appropriate place to use localStorage
-  localStorage.setItem('jwtAccessToken', res.jwtAccessToken)
-  localStorage.setItem('jwtRefreshToken', res.jwtRefreshToken)
-
   console.log('Login user ' + loginData.username)
 
   return res

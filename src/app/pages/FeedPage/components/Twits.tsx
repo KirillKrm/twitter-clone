@@ -59,17 +59,6 @@ export default function Twits() {
     }
   }, [token, wasLastList, twits, isFetchMore])
 
-  // const [location, setLocation] = React.useState('')
-  // const [pokemon, setPokemon] = React.useState('')
-  // React.useEffect(() => {
-  //   const locationID = randLocation()
-  //   getLocation(locationID).then(location => setLocation(location))
-  //   getPokemon(locationID).then(pokemon => setPokemon(pokemon))
-  //   getMessageFromGPT(pokemon, location).then(
-  //     message => (twitsList[0].data.text = message),
-  //   )
-  // }, [])
-
   return (
     <div>
       {twits.map(twit => {

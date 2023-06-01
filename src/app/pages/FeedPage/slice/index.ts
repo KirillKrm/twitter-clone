@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { createSlice } from 'utils/@reduxjs/toolkit' // Importing from `utils` makes them more type-safe ✅
+import { createSlice } from 'utils/@reduxjs/toolkit'
 import { FeedPageState } from './types'
 
 export const initialState: FeedPageState = {
@@ -19,9 +19,5 @@ const slice = createSlice({
     },
   },
 })
-
-/**
- * `actions` will be used to trigger change in the state from where ever you want
- */
 
 export const { actions: feedPageActions, reducer: feedPageReducer } = slice

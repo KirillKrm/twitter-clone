@@ -8,7 +8,6 @@ const ErrorBoundary = ({ children }) => {
     const handleError = error => {
       setHasError(true)
       setError(error.message)
-      // You can also log the error to an error tracking service here
       console.log(error.message)
     }
 
@@ -23,7 +22,6 @@ const ErrorBoundary = ({ children }) => {
     <>
       {hasError && (
         <div className="flex fixed t-0 mx-[calc(50%-200px)] justify-center w-[400px] z-50 bg-[rgba(255,192,203,0.4)] text-white p-4">
-          {/* <h2 className="font-bold">Error occurred:</h2> */}
           <p>{error}</p>
         </div>
       )}

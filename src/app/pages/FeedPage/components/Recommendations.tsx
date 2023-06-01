@@ -45,9 +45,7 @@ export default function Recommendations() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Recommendations')}</span>
-      {recommendationlist.map(recommendation => {
-        const { name, nickname, avatar } = recommendation
-
+      {recommendationlist.map(({ name, nickname, avatar }) => {
         return (
           <RecommendationsUnit
             key={nickname}
@@ -65,7 +63,7 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
+    bg-[#f7f9f9] dark:bg-[#16181c] 
     w-full 
     rounded-[15px]
   `,

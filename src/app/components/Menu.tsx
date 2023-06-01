@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 import MenuUnit, { MenuUnitProps } from './MenuUnit'
 import { useAuth } from 'app/hooks/useAuth'
-import SvgTwitter from './SVG/SvgTwitter'
+import SvgLogo from './SVG/SvgLogo'
 import {
   HomeIcon,
   ExploreIcon,
@@ -17,7 +17,7 @@ import {
   SearchIcon,
 } from 'app/components/SVG/SvgIcons'
 
-export type MenuButton = Omit<MenuUnitProps, 'active' | 'setActive'>
+export type MenuButton = Omit<MenuUnitProps, 'isActive' | 'setActive'>
 
 const menuList: MenuButton[] = [
   {
@@ -98,19 +98,17 @@ export default function Menu() {
     <nav className={styles.container}>
       {width > 500 ? (
         <a href="/#" className={styles.container__logo}>
-          <SvgTwitter />
+          <SvgLogo />
         </a>
       ) : null}
-      {menu.map(menuButton => {
-        const { name, image, link } = menuButton
-
+      {menu.map(({ name, image, link }) => {
         return (
           <MenuUnit
             key={name}
             name={name}
             image={image}
             link={link}
-            active={activeButton === name}
+            isActive={activeButton === name}
             setActive={setActiveButton}
           />
         )
@@ -146,6 +144,6 @@ const styles = {
     h-8
   `,
   svg__g: `
-    text-[rgb(29,155,240)] dark:text-white
+    text-[#1D9BF0] dark:text-white
   `,
 }

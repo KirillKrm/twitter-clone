@@ -23,43 +23,16 @@ export type Year = {
   name: number
 }
 
-const monthlist: Month[] = [
-  { name: 'January' },
-  { name: 'February' },
-  { name: 'March' },
-  { name: 'April' },
-  { name: 'May' },
-  { name: 'June' },
-  { name: 'July' },
-  { name: 'August' },
-  { name: 'September' },
-  { name: 'October' },
-  { name: 'November' },
-  { name: 'December' },
-]
+const monthList: Month[] = Array.from({ length: 12 }, (_, i) => ({
+  name: new Date(2000, i, 1).toLocaleString('en-US', { month: 'long' }),
+}))
 
-const daylist: Day[] = []
-for (let i = 1; i <= 31; i++) {
-  let obj = {
-    name: i,
-  }
-  daylist.push(obj)
-}
+const dayList: Day[] = Array.from({ length: 31 }, (_, i) => ({ name: i + 1 }))
 
-const yearlist: Year[] = []
-for (let i = new Date().getFullYear(); i >= 1900; i--) {
-  let obj = {
-    name: i,
-  }
-  yearlist.push(obj)
-}
-
-const setData = (stepName: string, res: { [key: string]: any }): void => {
-  // axios.post({
-  //   path: `${apiUrl}/register`,
-  //   body: res
-  // })
-}
+const currentYear = new Date().getFullYear()
+const yearList: Year[] = Array.from({ length: currentYear - 1899 }, (_, i) => ({
+  name: currentYear - i,
+}))
 
 // REFACTOR types
 export type SignupModalWindow2Props = {
@@ -102,16 +75,6 @@ export default function SignupModalWindow2({
     yearValid &&
     nicknameValid &&
     passwordValid
-  // TODO
-  const res = {
-    name: 'string',
-    email: 'email',
-    birth: {
-      day: 6,
-      month: 'april',
-      year: '2001',
-    },
-  }
 
   const dispatch = useDispatch()
 
@@ -175,7 +138,7 @@ export default function SignupModalWindow2({
           setValue={setPassword}
           setValid={setPasswordValid}
           placeholder={'Password'}
-          password={true}
+          isPassword={true}
         />
         <div className={styles.main__birthday}>
           <span>{t('birthday')}</span>
@@ -186,25 +149,25 @@ export default function SignupModalWindow2({
         <div className={styles.main__select}>
           <div className={styles.select__month}>
             <SelectField
-              list={monthlist}
+              list={monthList}
               placeholder={t('month')}
               setValid={setMonthValid}
               value={month}
               setValue={setMonth}
             />
           </div>
-          <div className={styles.select__day}>
+          <div className={styles.select__date}>
             <SelectField
-              list={daylist}
+              list={dayList}
               placeholder={t('day')}
               setValid={setDayValid}
               value={day}
               setValue={setDay}
             />
           </div>
-          <div className={styles.select__year}>
+          <div className={styles.select__date}>
             <SelectField
-              list={yearlist}
+              list={yearList}
               placeholder={t('year')}
               setValid={setYearValid}
               value={year}
@@ -215,7 +178,6 @@ export default function SignupModalWindow2({
         <button
           className={styles.main__next + 'w-[440px] h-[52px]'}
           onClick={() => {
-            setData('second', res)
             goToNextStep()
           }}
           disabled={!formValid}
@@ -249,7 +211,7 @@ const styles = {
     flex
     items-center
     text-[20px]
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
     font-bold
     leading-[24px]
   `,
@@ -268,19 +230,19 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__birthday: `
     mt-[20px]
     mb-[8px]
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
     text-[15px]
     font-bold
     leading-[20px]
   `,
   main__birthdayhint: `
     mb-[4px]
-    text-[rgb(113,118,123)]
+    text-[#71767b]
     text-[14px]
     leading-[16px]
   `,
@@ -288,18 +250,13 @@ const styles = {
     flex
     flex-row
     my-[16px]
+    gap-3
   `,
   select__month: `
     flex
     grow-[2]
-    mr-[12px]
   `,
-  select__day: `
-    flex
-    flex-grow
-    mr-[12px]
-  `,
-  select__year: `
+  select__date: `
     flex
     flex-grow
   `,

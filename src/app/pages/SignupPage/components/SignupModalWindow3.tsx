@@ -4,6 +4,7 @@ import { RootState } from 'types'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import classnames from 'classnames'
 
 import BaseModal from 'app/components/BaseModal'
 import InputField from 'app/components/Input/InputField'
@@ -33,15 +34,13 @@ export default function SignupModalWindow3({
   const bithdayString = `${signUpPage?.birthday.day} ${signUpPage?.birthday.month} ${signUpPage?.birthday.year}`
   const [birthday, setBirthday] = React.useState(bithdayString || '')
 
-  // const [singUpPageState, setSignUpPageState] = React.useState(signUpPage)
-  // const updateSignUpPageState = <K, V>(key: keyof SignupPageState, value: unknown) => {
-  //   setSignUpPageState({
-  //     ...setSignUpPageState,
-  //     [key]: value,
-  //   })
-  // }
+  const nextButton = classnames(styles.main__next, {
+    'bg-[#8a8a8a]': loading,
+  })
 
-  // updateSignUpPageState('')
+  const handleOnClick = (e: { preventDefault: () => any }) => {
+    !loading ? registerHandler() : e.preventDefault()
+  }
 
   const registerHandler = () => {
     console.log('Try to register')
@@ -56,7 +55,6 @@ export default function SignupModalWindow3({
 
   React.useEffect(() => {
     if (user) {
-      // TODO after modifying backend to accept login with also phone number & email
       localStorage.setItem('current_user_username', user.username)
       dispatch(feedPageActions.changeUsername(user.username))
       dispatch(feedPageActions.changeNickname(user.nickname))
@@ -128,20 +126,8 @@ export default function SignupModalWindow3({
         <div className={styles.main__registrationhint}>
           <span>{t('registrationHint2')}</span>
         </div>
-        <div
-          className={
-            styles.main__next +
-            'w-[440px] h-[52px] my-[24px] bg-[#1D9BF0] dark:bg-[#1D9BF0]' +
-            (loading ? 'bg-[#8a8a8a]' : '')
-          }
-          role="button"
-          onClick={e => (!loading ? registerHandler() : e.preventDefault())}
-        >
-          <span
-            className={styles.next__text + 'text-[white] dark:text-[white]'}
-          >
-            {t('next')}
-          </span>
+        <div className={nextButton} role="button" onClick={handleOnClick}>
+          <span className={styles.next__text}>{t('next')}</span>
         </div>
       </div>
     </BaseModal>
@@ -170,7 +156,7 @@ const styles = {
     flex
     items-center
     text-[20px]
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
     font-bold
     leading-[24px]
   `,
@@ -189,11 +175,11 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[rgb(15,20,25)] dark:text-[rgb(231,233,234)]
+    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__registrationhint: `
     mt-[16px]
-    text-[rgb(113,118,123)]
+    text-[#71767b]
     text-[14px]
     leading-[16px]
   `,
@@ -202,14 +188,14 @@ const styles = {
     flex-row
     items-center
     justify-center
-    w-[300px]
-    h-[40px]
-    my-[12px]
-    bg-black dark:bg-white
+    w-[440px]
+    h-[52px]
+    my-[24px]
+    bg-[#1D9BF0] dark:bg-[#1D9BF0]
     rounded-full
   `,
   next__text: `
-    text-white dark:text-black
+    text-white dark:text-white
     font-bold
   `,
 }

@@ -35,7 +35,7 @@ const styles = {
   `,
   container__twits: `
     flex 
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
+    text-[#536471] dark:text-[#71767b] 
     text-base
   `,
 }

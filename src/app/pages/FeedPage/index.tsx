@@ -9,33 +9,9 @@ import Account from 'app/components/Account'
 import BasePage from 'app/pages/BasePage'
 import TwitCreate from 'app/components/TwitCreate'
 import Recommendations from 'app/pages/FeedPage/components/Recommendations'
-import { Twit } from 'types/Twit'
 
 export function FeedPage() {
   const { t } = useTranslation('feed')
-
-  // TODO fix scroll
-  // const [scroll, setScroll] = useState(true)
-  // window.addEventListener('scroll', e => {
-  //   // setScroll(scroll + e.deltaY)
-  //   if ((e as any).deltaY >= 0) {
-  //     // Scrolling Down with mouse
-  //     setScroll(true)
-  //   } else {
-  //     // Scrolling Up with mouse
-  //     setScroll(false)
-  //   }
-  // })
-  // window.scroll(e => {
-  //   var $el = $('.fixedElement')
-  //   var isPositionFixed = $el.css('position') == 'fixed'
-  //   if ($(this).scrollTop() > 200 && !isPositionFixed) {
-  //     $el.css({ position: 'fixed', top: '0px' })
-  //   }
-  //   if ($(this).scrollTop() < 200 && isPositionFixed) {
-  //     $el.css({ position: 'static', top: '0px' })
-  //   }
-  // })
 
   return (
     <BasePage
@@ -60,14 +36,7 @@ export function FeedPage() {
               <div className={styles.sidebar__search}>
                 <Search />
               </div>
-              <div
-                // className={`flex flex-col`}
-                // // className={`flex flex-col m-[${scroll}px]`}
-                // style={{ top: scroll }}
-                // ${ scroll ? '' : 'top-0' }
-                // className={styles.sidebar__box + `${scroll ? 'top-0' : 'top-0'}`}
-                className={styles.sidebar__box}
-              >
+              <div className={styles.sidebar__box}>
                 <div className={styles.box__trends}>
                   <Trends />
                 </div>
@@ -149,6 +118,7 @@ const styles = {
   top-0 
   py-4 
   pl-4 
+  z-10
   backdrop-blur-md 
   bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 
   text-black dark:text-white 
@@ -164,7 +134,7 @@ const styles = {
   flex 
   flex-col 
 
-  min-[0px]:max-[1000px]:hidden
+  max-[1000px]:hidden
   min-[1000px]:block
   min-[1000px]:max-[1025px]:w-[290px]
   min-[1025px]:max-[1075px]:w-[320px]

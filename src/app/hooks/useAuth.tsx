@@ -30,12 +30,6 @@ export const useRegistration = () => {
     try {
       const response = await registerRequest(formData)
       setUser(response)
-      // if (response) {
-      //   setError(null)
-      // } else {
-      //   const data = await response.json()
-      //   setError(data.message || 'Registration failed')
-      // }
     } catch (error) {
       setError((error as any).message)
     }
@@ -46,7 +40,6 @@ export const useRegistration = () => {
   return { register, user, loading, error }
 }
 
-// Login hook
 export const useAuth = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -56,7 +49,11 @@ export const useAuth = () => {
     setLoading(true)
 
     try {
-      await loginRequest(formData)
+      const tokens = await loginRequest(formData)
+      //REFACTOR think if it's appropriate place to use localStorage
+      localStorage.setItem('jwtAccessToken', tokens.jwtAccessToken)
+      localStorage.setItem('jwtRefreshToken', tokens.jwtRefreshToken)
+
       const user = await getMeRequest()
       setUser(user)
     } catch (error) {
@@ -74,6 +71,7 @@ export const useAuth = () => {
       return user
     } catch (error) {
       setError((error as any).message)
+
       return null
     }
   }
