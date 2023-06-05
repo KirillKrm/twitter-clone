@@ -2,11 +2,11 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import 'index.css'
 
-import RecommendationsUnit, {
-  RecommendationUnitProps,
-} from 'app/pages/FeedPage/components/RecommendationsUnit'
+import Recommendation, {
+  RecommendationProps,
+} from 'app/pages/FeedPage/components/Recommendation'
 
-const recommendationlist: RecommendationUnitProps[] = [
+const recommendationlist: RecommendationProps[] = [
   {
     name: 'Kyrylo Karmazin',
     nickname: '@KirillKr231',
@@ -45,14 +45,12 @@ export default function Recommendations() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Recommendations')}</span>
-      {recommendationlist.map(recommendationUnitProps => {
-        return (
-          <RecommendationsUnit
-            {...recommendationUnitProps}
-            key={recommendationUnitProps.nickname}
-          />
-        )
-      })}
+      {recommendationlist.map(recommendationProps => (
+        <Recommendation
+          {...recommendationProps}
+          key={recommendationProps.nickname}
+        />
+      ))}
     </div>
   )
 }

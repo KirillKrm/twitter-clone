@@ -6,7 +6,7 @@ import 'index.css'
 
 import { useAuth } from 'app/hooks/useAuth'
 import { postTwit } from 'app/api/twits'
-import Image from 'app/components/Avatar'
+import Avatar from 'app/components/Avatar'
 
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
@@ -53,7 +53,7 @@ export default function TwitCreate() {
 
   return (
     <div className={styles.container}>
-      <Image />
+      <Avatar />
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}

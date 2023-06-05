@@ -1,7 +1,7 @@
 import * as React from 'react'
 import 'index.css'
 
-import TwitsUnit from 'app/pages/FeedPage/components/TwitsUnit'
+import Twit from 'app/pages/FeedPage/components/Twit'
 import { getTwits } from 'app/api/twits'
 
 type twit = {
@@ -62,7 +62,7 @@ export default function Twits() {
   return (
     <div>
       {twits.map(twit => {
-        return <TwitsUnit key={twit.id} data={twit} />
+        return <Twit key={twit.id} data={twit} />
       })}
       {/* {wasLastList ? <Loader /> : null} */}
     </div>

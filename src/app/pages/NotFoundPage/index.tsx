@@ -49,15 +49,13 @@ export function NotFoundPage() {
             />
             <div className={styles.content__footer}>
               <ul className={styles.footer__ul}>
-                {buttons.map(name => {
-                  return (
-                    <li className={styles.ul__li}>
-                      <a href="/#" className={styles.li__a}>
-                        {t(name)}
-                      </a>
-                    </li>
-                  )
-                })}
+                {buttons.map(name => (
+                  <li className={styles.ul__li}>
+                    <a href="/#" className={styles.li__a}>
+                      {t(name)}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

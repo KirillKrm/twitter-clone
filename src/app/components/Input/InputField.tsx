@@ -87,11 +87,11 @@ export default function InputField({
         />
         <label className={labelStyle}>{placeholder}</label>
         <label className={styles.container__counter}>{counter}</label>
-        {isConfirmed ? (
+        {isConfirmed && (
           <div className={styles.container__svg}>
             <SvgConfirmed />
           </div>
-        ) : null}
+        )}
       </div>
     </>
   )

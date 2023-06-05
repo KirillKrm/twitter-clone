@@ -3,14 +3,14 @@ import 'index.css'
 import SvgLike from 'app/components/SVG/SvgLike'
 import SvgComment from 'app/components/SVG/SvgComment'
 import SvgRetwit from 'app/components/SVG/SvgRetwit'
-import { Twit } from 'types/Twit'
-import Image from 'app/components/Avatar'
+import { Twit as TwitTypes } from 'types/Twit'
+import Avatar from 'app/components/Avatar'
 
-export type TwitUnitProps = {
-  data: Twit
+export type TwitProps = {
+  data: TwitTypes
 }
 
-export default function TwitsUnit({
+export default function Twit({
   data: {
     id,
     author,
@@ -21,7 +21,7 @@ export default function TwitsUnit({
     createdAt,
     updatedAt,
   },
-}: TwitUnitProps) {
+}: TwitProps) {
   const elapsedDate = (time: any) => {
     const date = new Date((time || '').replace(/-/g, '/').replace(/[TZ]/g, ' '))
     const secDiff = (new Date().getTime() - date.getTime()) / 1000
@@ -56,7 +56,7 @@ export default function TwitsUnit({
 
   return (
     <div key={id} className={styles.container}>
-      <Image />
+      <Avatar />
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>
           <a href="/#">
