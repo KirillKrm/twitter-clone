@@ -34,12 +34,7 @@ export default function SelectField({
 
   const handleOnFocus = () => setEverFocusedInput(true)
 
-  const handleOnChange = (e: {
-    target: {
-      selectedIndex: number
-      value: React.SetStateAction<string | undefined>
-    }
-  }) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.selectedIndex !== -1) setІsChoosen(true)
     if (setValue) setValue(e.target.value)
   }
@@ -52,7 +47,6 @@ export default function SelectField({
         name="text"
         value={value}
         autoComplete="off"
-        title=""
         required={everFocusedInput}
         onFocus={handleOnFocus}
         onChange={handleOnChange}

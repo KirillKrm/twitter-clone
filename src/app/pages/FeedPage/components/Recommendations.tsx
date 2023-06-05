@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import 'index.css'
 
 import RecommendationsUnit, {
-  RecommendationProps,
+  RecommendationUnitProps,
 } from 'app/pages/FeedPage/components/RecommendationsUnit'
 
-const recommendationlist: RecommendationProps[] = [
+const recommendationlist: RecommendationUnitProps[] = [
   {
     name: 'Kyrylo Karmazin',
     nickname: '@KirillKr231',
@@ -45,13 +45,11 @@ export default function Recommendations() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Recommendations')}</span>
-      {recommendationlist.map(({ name, nickname, avatar }) => {
+      {recommendationlist.map(recommendationUnitProps => {
         return (
           <RecommendationsUnit
-            key={nickname}
-            name={name}
-            nickname={nickname}
-            avatar={avatar}
+            {...recommendationUnitProps}
+            key={recommendationUnitProps.nickname}
           />
         )
       })}

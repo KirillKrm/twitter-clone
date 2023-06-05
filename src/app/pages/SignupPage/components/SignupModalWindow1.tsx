@@ -17,7 +17,7 @@ export default function SignupModalWindow1({
 }: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
-  const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') goToNextStep()
     e.preventDefault()
   }

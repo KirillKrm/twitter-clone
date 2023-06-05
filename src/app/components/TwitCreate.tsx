@@ -6,7 +6,7 @@ import 'index.css'
 
 import { useAuth } from 'app/hooks/useAuth'
 import { postTwit } from 'app/api/twits'
-import Image from 'app/components/Image'
+import Image from 'app/components/Avatar'
 
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
@@ -47,16 +47,13 @@ export default function TwitCreate() {
     }
   }
 
-  const avatar =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png'
-
   if (!user) {
     return <></>
   }
 
   return (
     <div className={styles.container}>
-      <Image img={avatar} />
+      <Image />
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}

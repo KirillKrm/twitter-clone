@@ -6,13 +6,11 @@ export type TrendProps = {
   twitsAmount: number
 }
 
-export default function Trend(props: TrendProps) {
+export default function Trend({ name, twitsAmount }: TrendProps) {
   return (
-    <div key={props.name} className={styles.container}>
-      <div className={styles.container__name}>{props.name}</div>
-      <span className={styles.container__twits}>
-        Twits: {props.twitsAmount}
-      </span>
+    <div key={name} className={styles.container}>
+      <div className={styles.container__name}>{name}</div>
+      <span className={styles.container__twits}>Twits: {twitsAmount}</span>
     </div>
   )
 }

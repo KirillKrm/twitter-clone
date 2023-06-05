@@ -1,7 +1,7 @@
 import 'index.css'
-import Image from 'app/components/Image'
+import Image from 'app/components/Avatar'
 
-export type RecommendationProps = {
+export type RecommendationUnitProps = {
   name: string
   nickname: string
   avatar: string
@@ -11,10 +11,10 @@ export default function RecommendationsUnit({
   name,
   nickname,
   avatar,
-}: RecommendationProps) {
+}: RecommendationUnitProps) {
   return (
     <div key={nickname} className={styles.container}>
-      <Image img={avatar} />
+      <Image avatar={avatar} />
       <div className={styles.container__text}>
         <span className={styles.text__name}>{name}</span>
         <span className={styles.text__nickname}>{nickname}</span>

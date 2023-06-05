@@ -101,14 +101,12 @@ export default function Menu() {
           <SvgLogo />
         </a>
       ) : null}
-      {menu.map(({ name, image, link }) => {
+      {menu.map(menuUnitProps => {
         return (
           <MenuUnit
-            key={name}
-            name={name}
-            image={image}
-            link={link}
-            isActive={activeButton === name}
+            {...menuUnitProps}
+            key={menuUnitProps.name}
+            isActive={activeButton === menuUnitProps.name}
             setActive={setActiveButton}
           />
         )

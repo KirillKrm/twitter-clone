@@ -50,7 +50,7 @@ export const useAuth = () => {
 
     try {
       const tokens = await loginRequest(formData)
-      //REFACTOR think if it's appropriate place to use localStorage
+
       localStorage.setItem('jwtAccessToken', tokens.jwtAccessToken)
       localStorage.setItem('jwtRefreshToken', tokens.jwtRefreshToken)
 

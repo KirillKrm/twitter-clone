@@ -14,7 +14,7 @@ type InputFieldProps = {
   isConfirmed?: boolean
   isError?: boolean
   onClick?: any
-  isDisabled?: boolean
+  disabled?: boolean
   isPassword?: boolean
 }
 
@@ -28,7 +28,7 @@ export default function InputField({
   isConfirmed,
   isError,
   onClick,
-  isDisabled,
+  disabled,
   isPassword,
 }: InputFieldProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -37,12 +37,12 @@ export default function InputField({
 
   const isInputEmpty = value.length === 0
   const inputStyle = classnames(styles.container__input, {
-    [styles.container__input_disabled]: isDisabled,
+    [styles.container__input_disabled]: disabled,
     'border-1 dark:valid:border-rose-500': isError,
   })
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
-    [styles.container__label_disabled]: isDisabled,
+    [styles.container__label_disabled]: disabled,
   })
 
   React.useEffect(() => {
@@ -60,11 +60,8 @@ export default function InputField({
   const handleOnFocus = () => setEverFocusedInput(true)
 
   const handleOnInput = (e: any) =>
-    maxLength
-      ? setCounter(
-          (e.target as HTMLInputElement).value.length + '/' + maxLength,
-        )
-      : undefined
+    maxLength &&
+    setCounter((e.target as HTMLInputElement).value.length + '/' + maxLength)
 
   return (
     <>
@@ -86,7 +83,7 @@ export default function InputField({
           onInput={handleOnInput}
           pattern={everFocusedInput ? pattern : undefined}
           required={!!pattern && everFocusedInput}
-          disabled={isDisabled}
+          disabled={disabled}
         />
         <label className={labelStyle}>{placeholder}</label>
         <label className={styles.container__counter}>{counter}</label>

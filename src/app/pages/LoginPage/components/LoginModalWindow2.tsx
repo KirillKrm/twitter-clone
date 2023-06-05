@@ -73,7 +73,7 @@ export default function SignupBaseModal({
             <h1 className={styles.title__h1}>{t('loginTitle2')}</h1>
           </div>
           <InputField
-            isDisabled={true}
+            disabled={true}
             value={loginString}
             setValue={setLoginString}
             setValid={setLoginValid}
