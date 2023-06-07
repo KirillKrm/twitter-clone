@@ -6,14 +6,9 @@ import SvgRetwit from 'app/components/SVG/SvgRetwit'
 import { Twit as TwitTypes } from 'types/Twit'
 import Avatar from 'app/components/Avatar'
 
-const elapsedDate = (time: Date) => {
-  const date = new Date(
-    (time || '')
-      .toLocaleString('en-GB')
-      .replace(/-/g, '/')
-      .replace(/[TZ]/g, ' '),
-  )
-  const secDiff = (new Date().getTime() - date.getTime()) / 1000
+// TODO Consider about converting date values that fetched from API to Date.
+const elapsedDate = (date: Date) => {
+  const secDiff = (new Date().getTime() - new Date(date).getTime()) / 1000
   const dayDiff = Math.floor(secDiff / 86400)
 
   if (isNaN(dayDiff) || dayDiff < 0) return

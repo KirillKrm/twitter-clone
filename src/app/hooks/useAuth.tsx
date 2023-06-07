@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { SignUpPayload } from 'app/pages/SignupPage/types'
 
@@ -12,6 +11,7 @@ import { getMe as getMeRequest } from 'app/api/me'
 // TODO add more types to all returning functions/objects
 type User = {
   id: number
+  avatar: string
   username: string
   nickname: string
   email: string
@@ -39,13 +39,6 @@ export const useRegistration = () => {
   }
 
   return { register, user, loading, error }
-}
-
-export const useLogout = () => {
-  const navigate = useNavigate()
-  localStorage.removeItem('jwtAccessToken')
-  localStorage.removeItem('jwtRefreshToken')
-  navigate('/login')
 }
 
 export const useAuth = () => {
@@ -88,5 +81,11 @@ export const useAuth = () => {
     getMe()
   }, [])
 
-  return { user, login, getMe, loading, error }
+  const logout = (navigate: any) => {
+    localStorage.removeItem('jwtAccessToken')
+    localStorage.removeItem('jwtRefreshToken')
+    navigate('/login')
+  }
+
+  return { user, login, logout, getMe, loading, error }
 }

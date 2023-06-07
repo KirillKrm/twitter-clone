@@ -62,9 +62,9 @@ export default function Twits() {
 
   return (
     <div>
-      {twits.map(twit => {
-        return <Twit key={twit.id} data={twit} />
-      })}
+      {twits.map(twit => (
+        <Twit key={twit.id} data={twit} />
+      ))}
       {wasLastList && (
         <div className={styles.loading}>
           <Loading />

@@ -83,8 +83,11 @@ export default function Menu() {
   const [activeButton, setActiveButton] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
   const menu =
-    (width > 500 && ((user && menuListDesktop) || menuListNotAuthorized)) ||
-    menuListMobile
+    width > 500
+      ? user
+        ? menuListDesktop
+        : menuListNotAuthorized
+      : menuListMobile
 
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth)

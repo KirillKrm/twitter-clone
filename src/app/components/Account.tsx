@@ -1,18 +1,18 @@
 import 'index.css'
 import * as React from 'react'
 import classnames from 'classnames'
+import { useNavigate } from 'react-router-dom'
 
-import { useAuth, useLogout } from 'app/hooks/useAuth'
+import { useAuth } from 'app/hooks/useAuth'
 import SvgAccount from './SVG/SvgAccount'
 import SvgPopupTriangle from './SVG/SvgPopupTriangle'
+import Avatar from 'app/components/Avatar'
 
 export default function Account() {
-  const { user } = useAuth()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
   const [popup, setPopup] = React.useState(false)
   const popupStyle = classnames(styles.popup, { hidden: !popup })
-
-  const avatar =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png'
 
   const handleOnCLickAccount = () => {
     setPopup(!popup)
@@ -25,13 +25,13 @@ export default function Account() {
   return (
     <>
       <div className={popupStyle}>
-        <div className={styles.popup__logout} onClick={useLogout}>
+        <div className={styles.popup__logout} onClick={() => logout(navigate)}>
           Log out @{user.nickname}
         </div>
         <SvgPopupTriangle />
       </div>
       <div className={styles.container} onClick={handleOnCLickAccount}>
-        <img className={styles.container__image} alt="avatar" src={avatar} />
+        <Avatar src={user.avatar} />
         <div className={styles.container__rightblock}>
           <div className={styles.rightblock__text}>
             <span className={styles.text__name}>{user.username}</span>
