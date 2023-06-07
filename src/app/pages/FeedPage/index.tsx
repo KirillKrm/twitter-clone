@@ -93,7 +93,7 @@ const styles = {
   max-[500px]:flex-row
   max-[500px]:w-full
   max-[500px]:border-t
-  max-[500px]:border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+  max-[500px]:border-[#EFF3F4] dark:border-[#2F3336]
 `,
   main__columns: `
   flex 
@@ -107,7 +107,7 @@ const styles = {
   flex-col 
   min-[500px]:border-r 
   min-[500px]:border-l 
-  min-[500px]:border-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+  min-[500px]:border-[#EFF3F4] dark:border-[#2F3336]
 
   min-[500px]:max-[680px]:w-full
   min-[680px]:w-[600px]
@@ -125,7 +125,7 @@ const styles = {
   text-[20px] 
   font-bold 
   border-b 
-  bodred-[rgb(239,243,244)] dark:border-[rgb(47,51,54)]
+  bodred-[#EFF3F4] dark:border-[#2F3336]
 
   min-[500px]:max-[680px]:w-full
   min-[680px]:w-[598px]

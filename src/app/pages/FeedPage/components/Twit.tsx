@@ -55,7 +55,7 @@ export default function Twit({
   }
 
   return (
-    <div key={id} className={styles.container}>
+    <div className={styles.container}>
       <Avatar />
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>

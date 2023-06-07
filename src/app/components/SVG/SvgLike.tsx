@@ -17,7 +17,7 @@ const styles = {
     h-9 
     p-2 
     rounded-full 
-    hover:fill-[rgb(249,24,128)] 
-    hover:bg-[rgb(249,24,128,0.1)]
+    hover:fill-[#F91880] 
+    hover:bg-[rgba(249,24,128,0.1)]
   `,
 }

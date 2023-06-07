@@ -17,6 +17,6 @@ const styles = {
     h-5
   `,
   button__g: `
-    text-[rgb(15,20,25)] dark:text-white
+    text-[#0F1419] dark:text-white
   `,
 }
