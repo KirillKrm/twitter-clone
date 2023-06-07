@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpPayload } from 'app/pages/SignupPage/types'
 
@@ -38,6 +39,13 @@ export const useRegistration = () => {
   }
 
   return { register, user, loading, error }
+}
+
+export const useLogout = () => {
+  const navigate = useNavigate()
+  localStorage.removeItem('jwtAccessToken')
+  localStorage.removeItem('jwtRefreshToken')
+  navigate('/login')
 }
 
 export const useAuth = () => {

@@ -6,6 +6,43 @@ import SvgRetwit from 'app/components/SVG/SvgRetwit'
 import { Twit as TwitTypes } from 'types/Twit'
 import Avatar from 'app/components/Avatar'
 
+const elapsedDate = (time: Date) => {
+  const date = new Date(
+    (time || '')
+      .toLocaleString('en-GB')
+      .replace(/-/g, '/')
+      .replace(/[TZ]/g, ' '),
+  )
+  const secDiff = (new Date().getTime() - date.getTime()) / 1000
+  const dayDiff = Math.floor(secDiff / 86400)
+
+  if (isNaN(dayDiff) || dayDiff < 0) return
+
+  if (dayDiff === 0) {
+    if (secDiff < 60) return 'just now'
+    if (secDiff < 120) return '1 minute ago'
+    if (secDiff < 3600) return Math.floor(secDiff / 60) + ' minutes ago'
+    if (secDiff < 7200) return '1 hour ago'
+    if (secDiff < 86400) return Math.floor(secDiff / 3600) + ' hours ago'
+  } else if (dayDiff === 1) {
+    return 'Yesterday'
+  } else if (dayDiff < 7) {
+    return dayDiff + ' days ago'
+  } else if (dayDiff === 7) {
+    return 'week ago'
+  } else if (dayDiff < 31) {
+    return Math.ceil(dayDiff / 7) + ' weeks ago'
+  } else if (dayDiff === 31) {
+    return 'mounth ago'
+  } else if (dayDiff < 365) {
+    return Math.ceil(dayDiff / 31) + ' months ago'
+  } else if (dayDiff === 365) {
+    return 'year ago'
+  } else if (dayDiff < 730) {
+    return Math.ceil(dayDiff / 365) + ' years ago'
+  }
+}
+
 export type TwitProps = {
   data: TwitTypes
 }
@@ -22,41 +59,9 @@ export default function Twit({
     updatedAt,
   },
 }: TwitProps) {
-  const elapsedDate = (time: any) => {
-    const date = new Date((time || '').replace(/-/g, '/').replace(/[TZ]/g, ' '))
-    const secDiff = (new Date().getTime() - date.getTime()) / 1000
-    const dayDiff = Math.floor(secDiff / 86400)
-
-    if (isNaN(dayDiff) || dayDiff < 0) return
-
-    if (dayDiff === 0) {
-      if (secDiff < 60) return 'just now'
-      if (secDiff < 120) return '1 minute ago'
-      if (secDiff < 3600) return Math.floor(secDiff / 60) + ' minutes ago'
-      if (secDiff < 7200) return '1 hour ago'
-      if (secDiff < 86400) return Math.floor(secDiff / 3600) + ' hours ago'
-    } else if (dayDiff === 1) {
-      return 'Yesterday'
-    } else if (dayDiff < 7) {
-      return dayDiff + ' days ago'
-    } else if (dayDiff === 7) {
-      return 'week ago'
-    } else if (dayDiff < 31) {
-      return Math.ceil(dayDiff / 7) + ' weeks ago'
-    } else if (dayDiff === 31) {
-      return 'mounth ago'
-    } else if (dayDiff < 365) {
-      return Math.ceil(dayDiff / 31) + ' months ago'
-    } else if (dayDiff === 365) {
-      return 'year ago'
-    } else if (dayDiff < 730) {
-      return Math.ceil(dayDiff / 365) + ' years ago'
-    }
-  }
-
   return (
     <div className={styles.container}>
-      <Avatar />
+      <Avatar src={author.avatar} />
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>
           <a href="/#">

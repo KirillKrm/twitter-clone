@@ -1,14 +1,13 @@
 import 'index.css'
 import * as React from 'react'
 import classnames from 'classnames'
-import { useNavigate } from 'react-router-dom'
 
-import { useAuth } from 'app/hooks/useAuth'
+import { useAuth, useLogout } from 'app/hooks/useAuth'
 import SvgAccount from './SVG/SvgAccount'
+import SvgPopupTriangle from './SVG/SvgPopupTriangle'
 
 export default function Account() {
   const { user } = useAuth()
-  const navigate = useNavigate()
   const [popup, setPopup] = React.useState(false)
   const popupStyle = classnames(styles.popup, { hidden: !popup })
 
@@ -18,11 +17,6 @@ export default function Account() {
   const handleOnCLickAccount = () => {
     setPopup(!popup)
   }
-  const handleOnCLickLogout = () => {
-    localStorage.removeItem('jwtAccessToken')
-    localStorage.removeItem('jwtRefreshToken')
-    navigate('/login')
-  }
 
   if (!user) {
     return <></>
@@ -31,14 +25,10 @@ export default function Account() {
   return (
     <>
       <div className={popupStyle}>
-        <div className={styles.popup__logout} onClick={handleOnCLickLogout}>
+        <div className={styles.popup__logout} onClick={useLogout}>
           Log out @{user.nickname}
         </div>
-        <svg className={styles.popup__triangle} viewBox="0 0 24 24">
-          <g>
-            <path d="M22 17H2L12 6l10 11z" />
-          </g>
-        </svg>
+        <SvgPopupTriangle />
       </div>
       <div className={styles.container} onClick={handleOnCLickAccount}>
         <img className={styles.container__image} alt="avatar" src={avatar} />
@@ -119,14 +109,5 @@ const styles = {
     items-center
     text-white
     hover:bg-[#16181C]
-  `,
-  popup__triangle: `
-    flex
-    absolute
-    left-20
-    bottom-[-15px]
-    w-6
-    drop-shadow-[1px_-1px_1px_#333639]
-    rotate-180
   `,
 }
