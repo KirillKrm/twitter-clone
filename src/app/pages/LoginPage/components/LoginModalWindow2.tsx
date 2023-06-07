@@ -38,13 +38,10 @@ export default function SignupBaseModal({
       username: loginString,
       password,
     })
-  }
-
-  React.useEffect(() => {
     if (user) {
       navigate('/home')
     }
-  }, [navigate, user])
+  }
 
   return (
     <BaseModal>
