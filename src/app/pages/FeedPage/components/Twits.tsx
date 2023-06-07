@@ -3,6 +3,7 @@ import 'index.css'
 
 import Twit from 'app/pages/FeedPage/components/Twit'
 import { getTwits } from 'app/api/twits'
+import Loading from 'app/components/Loading'
 
 type twit = {
   id: number
@@ -64,7 +65,19 @@ export default function Twits() {
       {twits.map(twit => {
         return <Twit key={twit.id} data={twit} />
       })}
-      {/* {wasLastList ? <Loader /> : null} */}
+      {wasLastList ? (
+        <div className={styles.loading}>
+          <Loading />
+        </div>
+      ) : null}
     </div>
   )
+}
+
+const styles = {
+  loading: `
+    flex
+    w-full
+    justify-center
+  `,
 }
