@@ -58,16 +58,11 @@ const styles = {
   justify-center
   h-fit
   w-full
-  bg-white dark:bg-black
-
-  min-[680px]:justify-center
 `,
   container__main: `
   flex
   flex-row
   justify-center
-
-  min-[680px]:w-9/12
 `,
   main__header: `
   flex
@@ -75,41 +70,40 @@ const styles = {
   sticky
   h-screen
 
-  min-[500px]:top-0
-  min-[500px]:justify-end
+  xs:top-0
+  xs:justify-end
 
-  max-[500px]:fixed
-  max-[500px]:bottom-0
-  max-[500px]:w-full
-  max-[500px]:h-[56px]
-  max-[500px]:justify-center
-  max-[500px]:bg-primaryBg-light max-[500px]:dark:bg-primaryBg-dark
+  max-xs:fixed
+  max-xs:bottom-0
+  max-xs:w-full
+  max-xs:h-[56px]
+  max-xs:justify-center
+  max-xs:bg-primary
 `,
   header__menu: `
   flex 
   flex-col 
   justify-between
 
-  max-[500px]:flex-row
-  max-[500px]:w-full
-  max-[500px]:border-t
-  max-[500px]:border-tertiaryBg-light max-[500px]:dark:border-tertiaryBg-dark
+  max-xs:flex-row
+  max-xs:w-full
+  max-xs:border-t
+  max-xs:border-tertiaryBg-light max-xs:dark:border-tertiaryBg-dark
 `,
   main__columns: `
   flex 
   flex-grow
   gap-6
 
-  min-[500px]:max-[680px]:w-full
+  xs:max-sm:w-full
 `,
   columns__middleColumn: `
   flex 
   flex-col 
-  min-[500px]:border-r 
-  min-[500px]:border-l 
-  min-[500px]:border-tertiaryBg-light dark:border-tertiaryBg-dark
-
-  min-[500px]:max-[680px]:w-full
+  xs:border-r 
+  xs:border-l 
+  xs:border-tertiaryBg-light dark:border-tertiaryBg-dark
+  xs:max-[680px]:w-full
   min-[680px]:w-[600px]
 `,
   middleColumn__title: `
@@ -126,7 +120,7 @@ const styles = {
   border-b 
   border-tertiaryBg-light dark:border-tertiaryBg-dark
 
-  min-[500px]:max-[680px]:w-full
+  xs:max-[680px]:w-full
   min-[680px]:w-[598px]
 `,
   columns__sidebar: `

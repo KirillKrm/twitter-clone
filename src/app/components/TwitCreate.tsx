@@ -78,7 +78,7 @@ const styles = {
     flex 
     w-full 
     p-3 
-    shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#2f3336]
+    shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#202327]
   `,
   container__inputBox: `
     flex 
@@ -89,7 +89,7 @@ const styles = {
   inputBox__textArea: `
     flex 
     py-2 
-    bg-primaryBg-light dark:bg-primaryBg-dark
+    bg-primary
     outline-none 
     text-lg 
     placeholder-secondaryText-light dark:placeholder-secondaryText-dark
@@ -101,7 +101,7 @@ const styles = {
     self-end
     select-none
     h-[36px] 
-    bg-logo-light
+    bg-blue
     hover:bg-[#1a8cd8] 
     rounded-full 
     transition-colors 

@@ -46,9 +46,6 @@ const styles = {
     flex
     h-full
     w-full
-
-    bg-primaryBg-light dark:bg-primaryBg-dark
-    text-primaryText-light dark:text-primaryText-dark
   `,
   container__language: `
     flex 

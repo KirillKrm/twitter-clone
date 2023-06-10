@@ -184,7 +184,7 @@ const styles = {
     leading-[20px]
   `,
   hint__left: `
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
   `,
   hint__right: `
     text-logo-light

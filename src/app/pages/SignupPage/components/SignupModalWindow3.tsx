@@ -177,7 +177,7 @@ const styles = {
   `,
   main__registrationhint: `
     mt-[16px]
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
     text-[14px]
     leading-[16px]
   `,
@@ -189,7 +189,7 @@ const styles = {
     w-[440px]
     h-[52px]
     my-[24px]
-    bg-logo-light dark:bg-logo-light
+    bg-blue dark:bg-blue
     rounded-full
   `,
   next__text: `

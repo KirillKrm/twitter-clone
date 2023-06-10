@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
+        blue: '#1d9bf0',
+        pink: '#f91880',
+        green: '#00ba7c',
+        red: '#f4212e',
         primaryText: {
           light: '#0f1419',
           dark: '#e7e9ea',
@@ -32,12 +38,12 @@ module.exports = {
           light: '#1d9bf0',
           dark: '#ffffff',
         },
-        pink: '#f91880',
-        green: '#00ba7c',
-        red: '#f4212e',
       },
     },
-
+    screens: {
+      xs: '500px',
+      ...defaultTheme.screens,
+    },
     fontFamily: {
       sans: ['"Roboto"'],
     },

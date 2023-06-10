@@ -22,6 +22,6 @@ const styles = {
     rotate-180
   `,
   triangle__g: `
-    text-primaryBg-light dark:text-primaryBg-dark
+    fill-primaryBg-light dark:fill-primaryBg-dark
   `,
 }

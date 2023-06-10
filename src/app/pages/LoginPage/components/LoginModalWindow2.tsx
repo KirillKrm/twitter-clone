@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { RootState } from 'types'
 import { useNavigate } from 'react-router-dom'
+import classnames from 'classnames'
 
 import BaseModal from 'app/components/BaseModal'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
@@ -42,6 +43,10 @@ export default function SignupBaseModal({
       navigate('/home')
     }
   }
+
+  const buttonStyle = classnames(styles.main__next, {
+    'opacity-50': loading,
+  })
 
   return (
     <BaseModal>
@@ -90,7 +95,7 @@ export default function SignupBaseModal({
         </div>
         <div className={styles.main__bottom}>
           <button
-            className={styles.main__next + (loading ? 'opacity-50' : '')}
+            className={buttonStyle}
             disabled={!formValid}
             onClick={e => (!loading ? loginHandler() : e.preventDefault())}
           >
@@ -175,10 +180,10 @@ const styles = {
     mb-6
   `,
   hint__left: `
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
   `,
   hint__right: `
-    text-logo-light
+    text-blue
     hover:underline
   `,
   hint__password: `
@@ -186,7 +191,7 @@ const styles = {
     ml-2
     leading-[16px]
     text-[13px]
-    text-logo-light
+    text-blue
     hover:underline
   `,
   main__top: `

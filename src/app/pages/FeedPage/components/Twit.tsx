@@ -74,7 +74,7 @@ export default function Twit({
             <SvgLike />
             <span className={styles.box__text}>{likes}</span>
           </div>
-          <div className={styles.buttons__box + 'hover:text-logo-light'}>
+          <div className={styles.buttons__box + 'hover:text-blue'}>
             <SvgComment />
             <span className={styles.box__text}>{comments}</span>
           </div>
@@ -107,11 +107,11 @@ const styles = {
   twitBox__title: `
     flex 
     flex-row 
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
   `,
   title__name: `
     font-bold 
-    text-primaryText-light dark:text-primaryText-dark
+    text-primary
   `,
   title__nickname: `
     ml-1 
@@ -128,7 +128,7 @@ const styles = {
     justify-between
     select-none
 
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
   `,
   buttons__box: `
     flex 

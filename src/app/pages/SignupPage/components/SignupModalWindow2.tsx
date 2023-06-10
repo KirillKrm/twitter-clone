@@ -239,7 +239,7 @@ const styles = {
   `,
   main__birthdayhint: `
     mb-[4px]
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
     text-[14px]
     leading-[16px]
   `,

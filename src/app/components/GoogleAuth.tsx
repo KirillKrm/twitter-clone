@@ -27,7 +27,7 @@ const styles = {
     bg-white
     rounded-full
     border
-    border-primaryBorder-light dark:border-primaryBorder-dark
+    border-primary
 
     pointer-events-none
   `,

@@ -118,11 +118,11 @@ const styles = {
     flex 
     flex-col
 
-    min-[500px]:max-xl:items-center
+    xs:max-xl:items-center
 
-    max-[500px]:flex-row
-    max-[500px]:w-full
-    max-[500px]:justify-around
+    max-xs:flex-row
+    max-xs:w-full
+    max-xs:justify-around
   `,
   container__logo: `
     flex 
@@ -140,6 +140,6 @@ const styles = {
     h-8
   `,
   svg__g: `
-    text-logo-light dark:text-logo-dark
+    fill-logo-light dark:fill-logo-dark
   `,
 }

@@ -55,7 +55,7 @@ const styles = {
     duration-200
     select-none
     cursor-pointer
-    max-[500px]:hidden
+    max-xs:hidden
   `,
   container__image: `
     flex 
@@ -85,7 +85,7 @@ const styles = {
     font-bold
   `,
   text__nickname: `
-    text-secondaryText-light dark:text-secondaryText-dark 
+    text-secondary
     text-[15px]
   `,
   popup: `
@@ -95,7 +95,7 @@ const styles = {
     w-[300px]
     h-[68px]
     items-center
-    bg-primaryBg-light dark:bg-primaryBg-dark
+    bg-primary
     rounded-[16px]
     shadow-[0px_0px_15px_rgba(101,119,134,0.2),0px_0px_3px_1px_rgba(101,119,134,0.15)]
     dark:shadow-[0px_0px_15px_rgba(255,255,255,0.2),0px_0px_3px_1px_rgba(255,255,255,0.15)]
@@ -106,6 +106,6 @@ const styles = {
     py-3
     px-4
     items-center
-    hover:bg-secondaryBg-light dark:hover:bg-secondaryBg-dark
+    hover:bg-secondaryBg-light hover:dark:bg-secondaryBg-dark
   `,
 }

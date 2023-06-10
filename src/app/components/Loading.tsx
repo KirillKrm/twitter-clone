@@ -37,6 +37,6 @@ const styles = {
     h-16
     justify-center
     items-center
-    text-logo-light
+    text-blue
   `,
 }

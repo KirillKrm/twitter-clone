@@ -59,7 +59,7 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-secondaryBg-light dark:bg-secondaryBg-dark
+    bg-secondary
     w-full 
     rounded-[15px]
   `,

@@ -148,7 +148,7 @@ const styles = {
   `,
   main__registrationHint1: `
     w-[300px]
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
     leading-[16px]
     text-[13px]
   `,
@@ -159,10 +159,10 @@ const styles = {
     leading-[20px]
   `,
   hint__left: `
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
   `,
   hint__right: `
-    text-logo-light
+    text-blue
     hover:underline
   `,
 }

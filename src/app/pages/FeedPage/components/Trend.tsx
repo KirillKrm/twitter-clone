@@ -32,7 +32,7 @@ const styles = {
   `,
   container__twits: `
     flex 
-    text-secondaryText-light dark:text-secondaryText-dark 
+    text-secondary
     text-base
   `,
 }

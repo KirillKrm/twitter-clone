@@ -17,7 +17,7 @@ const styles = {
     justify-self-center
     w-[600px]
     h-[650px]
-    bg-primaryBg-light dark:bg-primaryBg-dark
+    bg-primary
     rounded-2xl
   `,
 }

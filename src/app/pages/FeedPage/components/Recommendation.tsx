@@ -54,7 +54,7 @@ const styles = {
   `,
   text__nickname: `
     flex 
-    text-secondaryText-light dark:text-secondaryText-dark
+    text-secondary
     text-base
   `,
 }

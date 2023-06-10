@@ -39,3 +39,27 @@
   background-position-y: 50%;
   background-size: 22px;
 }
+
+.text-primary {
+  @apply text-primaryText-light dark:text-primaryText-dark;
+}
+
+.text-secondary {
+  @apply text-secondaryText-light dark:text-secondaryText-dark;
+}
+
+.bg-primary {
+  @apply bg-primaryBg-light dark:bg-primaryBg-dark;
+}
+
+.bg-secondary {
+  @apply bg-secondaryBg-light dark:bg-secondaryBg-dark;
+}
+
+.bg-tertiary {
+  @apply bg-tertiaryBg-light dark:bg-tertiaryBg-dark;
+}
+
+.border-primary {
+  @apply border-primaryBorder-light dark:border-primaryBorder-dark;
+}
