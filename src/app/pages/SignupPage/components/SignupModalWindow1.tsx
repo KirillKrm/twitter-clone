@@ -115,7 +115,6 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__separator: `
     flex
@@ -125,12 +124,11 @@ const styles = {
     w-full
     h-[1px]
     mx-[4px]
-    bg-[rgba(15,20,25,0.1)] dark:bg-[#333639]
+    bg-primaryBorder-light dark:bg-primaryBorder-dark
   `,
   separator__text: `
     mx-[4px]
     text-[17px]
-    text-[#0f1419] dark:text-[#e7e9ea]
     leading-[20px]
   `,
   main__next: `
@@ -150,7 +148,7 @@ const styles = {
   `,
   main__registrationHint1: `
     w-[300px]
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     leading-[16px]
     text-[13px]
   `,
@@ -161,10 +159,10 @@ const styles = {
     leading-[20px]
   `,
   hint__left: `
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
   `,
   hint__right: `
-    text-[#1d9bf0]
+    text-logo-light
     hover:underline
   `,
 }

@@ -1,7 +1,6 @@
 import 'index.css'
 import * as React from 'react'
 import classnames from 'classnames'
-import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from 'app/hooks/useAuth'
 import SvgAccount from './SVG/SvgAccount'
@@ -9,7 +8,6 @@ import SvgPopupTriangle from './SVG/SvgPopupTriangle'
 import Avatar from 'app/components/Avatar'
 
 export default function Account() {
-  const navigate = useNavigate()
   const { user, logout } = useAuth()
   const [popup, setPopup] = React.useState(false)
   const popupStyle = classnames(styles.popup, { hidden: !popup })
@@ -25,7 +23,7 @@ export default function Account() {
   return (
     <>
       <div className={popupStyle}>
-        <div className={styles.popup__logout} onClick={() => logout(navigate)}>
+        <div className={styles.popup__logout} onClick={logout}>
           Log out @{user.nickname}
         </div>
         <SvgPopupTriangle />
@@ -70,6 +68,7 @@ const styles = {
   container__rightblock: `
     flex
     flex-row
+    ml-3
     items-center
     max-xl:hidden
   `,
@@ -77,7 +76,6 @@ const styles = {
     flex 
     flex-col 
     mr-3 
-    text-black dark:text-white
   `,
   text__name: `
     whitespace-nowrap 
@@ -87,7 +85,7 @@ const styles = {
     font-bold
   `,
   text__nickname: `
-    text-[#536471] dark:text-[#71767b] 
+    text-secondaryText-light dark:text-secondaryText-dark 
     text-[15px]
   `,
   popup: `
@@ -97,9 +95,10 @@ const styles = {
     w-[300px]
     h-[68px]
     items-center
-    bg-black
+    bg-primaryBg-light dark:bg-primaryBg-dark
     rounded-[16px]
-    shadow-[0px_0px_15px_rgba(255,255,255,0.2),0px_0px_3px_1px_rgba(255,255,255,0.15)]
+    shadow-[0px_0px_15px_rgba(101,119,134,0.2),0px_0px_3px_1px_rgba(101,119,134,0.15)]
+    dark:shadow-[0px_0px_15px_rgba(255,255,255,0.2),0px_0px_3px_1px_rgba(255,255,255,0.15)]
   `,
   popup__logout: `
     flex
@@ -107,7 +106,6 @@ const styles = {
     py-3
     px-4
     items-center
-    text-white
-    hover:bg-[#16181C]
+    hover:bg-secondaryBg-light dark:hover:bg-secondaryBg-dark
   `,
 }

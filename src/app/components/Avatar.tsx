@@ -17,7 +17,6 @@ const styles = {
     w-11 
     h-11 
     rounded-full
-    mr-3
     select-none
   `,
 }

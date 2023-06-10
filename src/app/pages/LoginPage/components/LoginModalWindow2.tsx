@@ -90,7 +90,7 @@ export default function SignupBaseModal({
         </div>
         <div className={styles.main__bottom}>
           <button
-            className={styles.main__next + (loading ? 'dark:bg-[#8a8a8a]' : '')}
+            className={styles.main__next + (loading ? 'opacity-50' : '')}
             disabled={!formValid}
             onClick={e => (!loading ? loginHandler() : e.preventDefault())}
           >
@@ -152,7 +152,6 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__next: `
     flex
@@ -161,13 +160,13 @@ const styles = {
     justify-center
     w-full
     h-[52px]
-    bg-black dark:bg-white
+    bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
     mb-6
     disabled:opacity-50
   `,
   next__text: `
-    text-white dark:text-black
+    text-primaryText-dark dark:text-primaryText-light
     font-bold
   `,
   main__hint: `
@@ -176,10 +175,10 @@ const styles = {
     mb-6
   `,
   hint__left: `
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
   `,
   hint__right: `
-    text-[#1d9bf0]
+    text-logo-light
     hover:underline
   `,
   hint__password: `
@@ -187,7 +186,7 @@ const styles = {
     ml-2
     leading-[16px]
     text-[13px]
-    text-[#1d9bf0]
+    text-logo-light
     hover:underline
   `,
   main__top: `

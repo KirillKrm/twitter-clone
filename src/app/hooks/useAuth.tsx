@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpPayload } from 'app/pages/SignupPage/types'
 
@@ -45,6 +46,7 @@ export const useAuth = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<User>()
+  const navigate = useNavigate()
 
   const login = async (formData: { username: string; password: string }) => {
     setLoading(true)
@@ -81,7 +83,7 @@ export const useAuth = () => {
     getMe()
   }, [])
 
-  const logout = (navigate: any) => {
+  const logout = () => {
     localStorage.removeItem('jwtAccessToken')
     localStorage.removeItem('jwtRefreshToken')
     navigate('/login')

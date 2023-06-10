@@ -107,9 +107,6 @@ const styles = {
     w-5 
     h-5
   `,
-  button__g: `
-    text-[#0f1419] dark:text-white
-  `,
   top__logo: `
     flex
     items-center
@@ -133,7 +130,6 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__separator: `
     flex
@@ -143,12 +139,11 @@ const styles = {
     w-full
     h-[1px]
     mx-[4px]
-    bg-[rgba(15,20,25,0.1)] dark:bg-[#333639]
+    bg-primaryBorder-light dark:bg-primaryBorder-dark
   `,
   separator__text: `
     mx-[4px]
     text-[17px]
-    text-[#0f1419] dark:text-[#e7e9ea]
     leading-[20px]
   `,
   main__next: `
@@ -159,11 +154,11 @@ const styles = {
     w-[300px]
     h-[40px]
     my-[12px]
-    bg-black dark:bg-white
+    bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
   `,
   next__text: `
-    text-white dark:text-black
+    text-primaryText-dark dark:text-primaryText-light
     font-bold
   `,
   main__forgot: `
@@ -177,11 +172,10 @@ const styles = {
     bg-white dark:bg-black
     rounded-full
     border
-    border-[#536471]
+    border-secondaryText-light dark:border-secondaryText-dark
     dark:hover:bg-[rgba(239,243,244,0.1)]
   `,
   forgot__text: `
-    text-dark dark:text-white
     font-bold
   `,
   main__hint: `
@@ -190,10 +184,10 @@ const styles = {
     leading-[20px]
   `,
   hint__left: `
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
   `,
   hint__right: `
-    text-[#1d9bf0]
+    text-logo-light
     hover:underline
   `,
 }

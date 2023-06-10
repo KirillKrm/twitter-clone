@@ -46,6 +46,9 @@ const styles = {
     flex
     h-full
     w-full
+
+    bg-primaryBg-light dark:bg-primaryBg-dark
+    text-primaryText-light dark:text-primaryText-dark
   `,
   container__language: `
     flex 
@@ -55,13 +58,13 @@ const styles = {
     mt-1 
     ml-1 
     gap-1
-    z-10
+    z-50
   `,
   container__themes: `
     fixed
     right-0
     mt-1 
     mr-1 
-    z-10
+    z-50
   `,
 }

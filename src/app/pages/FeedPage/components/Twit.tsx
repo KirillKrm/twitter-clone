@@ -70,15 +70,15 @@ export default function Twit({
         </div>
         <div className={styles.twitBox__article}>{content}</div>
         <div className={styles.twitBox__buttons}>
-          <div className={styles.buttons__box + 'hover:text-[#f91880]'}>
+          <div className={styles.buttons__box + 'hover:text-pink'}>
             <SvgLike />
             <span className={styles.box__text}>{likes}</span>
           </div>
-          <div className={styles.buttons__box + 'hover:text-[#1d9bf0]'}>
+          <div className={styles.buttons__box + 'hover:text-logo-light'}>
             <SvgComment />
             <span className={styles.box__text}>{comments}</span>
           </div>
-          <div className={styles.buttons__box + 'hover:text-[#00ba7c]'}>
+          <div className={styles.buttons__box + 'hover:text-green'}>
             <SvgRetwit />
             <span className={styles.box__text}>{retwits}</span>
           </div>
@@ -96,21 +96,22 @@ const styles = {
     hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
     duration-200
     border-b 
-    border-[#eff3f4] dark:border-[#2f3336]
+    border-tertiaryBg-light dark:border-tertiaryBg-dark
   `,
   container__twitBox: `
     flex 
     flex-col
     w-full
+    ml-3
   `,
   twitBox__title: `
     flex 
-    flex-row
-    text-[#536471] dark:text-[#71767b] 
+    flex-row 
+    text-secondaryText-light dark:text-secondaryText-dark
   `,
   title__name: `
     font-bold 
-    text-black dark:text-white
+    text-primaryText-light dark:text-primaryText-dark
   `,
   title__nickname: `
     ml-1 
@@ -119,7 +120,6 @@ const styles = {
     px-1
   `,
   twitBox__article: `
-    text-black dark:text-white
   `,
   twitBox__buttons: `
     flex 
@@ -127,13 +127,13 @@ const styles = {
     max-w-[425px]
     justify-between
     select-none
+
+    text-secondaryText-light dark:text-secondaryText-dark
   `,
   buttons__box: `
     flex 
     flex-row 
-    items-center 
-    text-[#536471] dark:text-[#71767b]
-    hover:text-[#f91880]
+    items-center
   `,
   box__text: `
     pl-1 

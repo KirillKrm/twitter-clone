@@ -85,7 +85,7 @@ const styles = {
     p-0
     bg-transparent
     overflow-hidden
-    text-[#000] dark:text-[#fff]
+    text-black dark:text-white
     max-h-[100vh]
   `,
   body__top: `

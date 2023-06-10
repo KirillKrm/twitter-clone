@@ -85,13 +85,12 @@ const styles = {
     bg-white dark:bg-black
     rounded-[4px]
     border
-    border-[rgba(15,20,25,0.1)] dark:border-[#333639]
     outline-none
     cursor-pointer
 
-    focus:border-[#1d9bf0] dark:focus:border-[#1d9bf0]
-    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[#ff3639]
-    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[#333639]
+    focus:border-logo-light dark:focus:border-logo-light
+    invalid:border-red dark:invalid:border-red
+    valid:border-primaryBorder-light dark:valid:border-primaryBorder-dark
   
     peer
 
@@ -101,7 +100,7 @@ const styles = {
     absolute
     w-[284px]
     text-[17px]
-    text-[#536471] dark:text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     top-[16px]
     left-[8px]
     pointer-events-none
@@ -115,7 +114,7 @@ const styles = {
   
     peer-focus-within:top-[5px]
     peer-focus-within:text-[12px]
-    peer-focus-within:text-[#1d9bf0]
+    peer-focus-within:text-logo-light
   `,
   container__label_shrinked: `
     text-[12px]
@@ -123,6 +122,7 @@ const styles = {
 
     peer-valid:top-[5px]
     peer-valid:text-[12px]
-    peer-valid:text-[#71767b]
+    peer-valid:text-secondaryText-light
+    peer-valid:dark:text-secondaryText-dark
   `,
 }

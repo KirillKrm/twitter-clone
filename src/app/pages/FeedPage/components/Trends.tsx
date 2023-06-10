@@ -29,13 +29,12 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[#f7f9f9] dark:bg-[#16181c] 
+    bg-secondaryBg-light dark:bg-secondaryBg-dark
     w-full 
     rounded-[15px]
   `,
   container__title: `
     flex 
-    text-black dark:text-white 
     px-4 
     py-3 
     items-center

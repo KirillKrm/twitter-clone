@@ -21,6 +21,6 @@ const styles = {
     h-8
   `,
   svg__g: `
-    text-[#1d9bf0] dark:text-white
+    text-logo-light dark:text-logo-dark
   `,
 }

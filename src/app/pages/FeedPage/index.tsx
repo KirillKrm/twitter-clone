@@ -83,7 +83,7 @@ const styles = {
   max-[500px]:w-full
   max-[500px]:h-[56px]
   max-[500px]:justify-center
-  max-[500px]:bg-black
+  max-[500px]:bg-primaryBg-light max-[500px]:dark:bg-primaryBg-dark
 `,
   header__menu: `
   flex 
@@ -93,7 +93,7 @@ const styles = {
   max-[500px]:flex-row
   max-[500px]:w-full
   max-[500px]:border-t
-  max-[500px]:border-[#EFF3F4] dark:border-[#2F3336]
+  max-[500px]:border-tertiaryBg-light max-[500px]:dark:border-tertiaryBg-dark
 `,
   main__columns: `
   flex 
@@ -107,7 +107,7 @@ const styles = {
   flex-col 
   min-[500px]:border-r 
   min-[500px]:border-l 
-  min-[500px]:border-[#EFF3F4] dark:border-[#2F3336]
+  min-[500px]:border-tertiaryBg-light dark:border-tertiaryBg-dark
 
   min-[500px]:max-[680px]:w-full
   min-[680px]:w-[600px]
@@ -121,11 +121,10 @@ const styles = {
   z-10
   backdrop-blur-md 
   bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 
-  text-black dark:text-white 
   text-[20px] 
   font-bold 
   border-b 
-  bodred-[#EFF3F4] dark:border-[#2F3336]
+  border-tertiaryBg-light dark:border-tertiaryBg-dark
 
   min-[500px]:max-[680px]:w-full
   min-[680px]:w-[598px]

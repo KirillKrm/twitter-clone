@@ -26,14 +26,13 @@ const styles = {
     transition-colors duration-200
   `,
   container__name: `
-    flex 
-    text-black dark:text-white 
+    flex  
     font-bold 
     text-lg
   `,
   container__twits: `
     flex 
-    text-[#536471] dark:text-[#71767b] 
+    text-secondaryText-light dark:text-secondaryText-dark 
     text-base
   `,
 }

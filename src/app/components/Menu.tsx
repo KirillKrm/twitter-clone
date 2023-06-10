@@ -131,7 +131,7 @@ const styles = {
     p-3 
     my-1 
     rounded-full 
-    hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(29,155,240,0.1)] 
+    hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(231,233,234,0.1)] 
     transition-colors 
     duration-200
   `,
@@ -140,6 +140,6 @@ const styles = {
     h-8
   `,
   svg__g: `
-    text-[#1D9BF0] dark:text-white
+    text-logo-light dark:text-logo-dark
   `,
 }

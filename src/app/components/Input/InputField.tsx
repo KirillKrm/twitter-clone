@@ -38,7 +38,7 @@ export default function InputField({
   const isInputEmpty = value.length === 0
   const inputStyle = classnames(styles.container__input, {
     [styles.container__input_disabled]: disabled,
-    'border-1 dark:valid:border-rose-500': isError,
+    'border-1 valid:border-red dark:valid:border-red': isError,
   })
   const labelStyle = classnames(styles.container__label, {
     [styles.container__label_shrinked]: pattern && !isInputEmpty,
@@ -113,17 +113,15 @@ const styles = {
     px-2
     pt-5
     text-[17px]
-    text-black dark:text-white
     leading-[24px]
-    bg-white dark:bg-black
+    bg-primaryBg-light dark:bg-primaryBg-dark
     rounded-[4px]
     border
-    border-[rgba(15,20,25,0.1)] dark:border-[#333639]
     outline-none
 
-    focus:border-[#1d9bf0] dark:focus:border-[#1d9bf0]
-    invalid:border-[rgba(255,20,25,0.1)] dark:invalid:border-[#ff3639]
-    valid:border-[rgba(15,20,25,0.1)] dark:valid:border-[#333639]
+    focus:border-logo-light dark:focus:border-logo-light
+    invalid:border-red dark:invalid:border-red
+    valid:border-primaryBorder-light dark:valid:border-primaryBorder-dark
 
     peer
   `,
@@ -137,7 +135,7 @@ const styles = {
     absolute
     w-[284px]
     text-[17px]
-    text-[#536471] dark:text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     top-[16px]
     left-[8px]
     pointer-events-none
@@ -151,7 +149,7 @@ const styles = {
 
     peer-focus-within:top-[5px]
     peer-focus-within:text-[12px]
-    peer-focus-within:text-[#1d9bf0]
+    peer-focus-within:text-logo-light
   `,
   container__label_disabled: `
     text-[rgba(83,100,113,0.5)] dark:text-[rgba(113,118,123,0.5)]
@@ -162,7 +160,8 @@ const styles = {
 
     peer-valid:top-[5px]
     peer-valid:text-[12px]
-    peer-valid:text-[#71767b]
+    peer-valid:text-secondaryText-light
+    peer-valid:text-secondaryText-dark
   `,
   container__counter: `
     hidden
@@ -171,7 +170,7 @@ const styles = {
     top-[8px]
     leading-[16px]
     text-[14px]
-    text-[#536471] dark:text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     pointer-events-none
 
     peer-focus-within:block

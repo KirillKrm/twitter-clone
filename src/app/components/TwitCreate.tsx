@@ -84,15 +84,15 @@ const styles = {
     flex 
     flex-col 
     w-full
+    ml-3
   `,
   inputBox__textArea: `
     flex 
     py-2 
-    bg-white dark:bg-black 
-    text-black dark:text-white 
+    bg-primaryBg-light dark:bg-primaryBg-dark
     outline-none 
     text-lg 
-    placeholder-[#536471] dark:placeholder-[#71767b]
+    placeholder-secondaryText-light dark:placeholder-secondaryText-dark
     resize-none
     select-none
   `,
@@ -101,7 +101,7 @@ const styles = {
     self-end
     select-none
     h-[36px] 
-    bg-[#1d9bf0] 
+    bg-logo-light
     hover:bg-[#1a8cd8] 
     rounded-full 
     transition-colors 

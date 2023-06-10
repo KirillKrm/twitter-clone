@@ -45,16 +45,16 @@ const styles = {
   container__text: `
     flex 
     flex-col
+    ml-3
   `,
   text__name: `
     flex 
-    text-black dark:text-white 
     font-bold 
     text-base
   `,
   text__nickname: `
     flex 
-    text-[#536471] dark:text-[#71767b] 
+    text-secondaryText-light dark:text-secondaryText-dark
     text-base
   `,
 }

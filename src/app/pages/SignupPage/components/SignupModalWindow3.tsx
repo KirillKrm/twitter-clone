@@ -35,7 +35,7 @@ export default function SignupModalWindow3({
   const [birthday, setBirthday] = React.useState(bithdayString || '')
 
   const nextButton = classnames(styles.main__next, {
-    'bg-[#8a8a8a]': loading,
+    'opacity-50': loading,
   })
 
   const handleOnClick = (e: { preventDefault: () => any }) => {
@@ -156,7 +156,6 @@ const styles = {
     flex
     items-center
     text-[20px]
-    text-[#0f1419] dark:text-[#e7e9ea]
     font-bold
     leading-[24px]
   `,
@@ -175,11 +174,10 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__registrationhint: `
     mt-[16px]
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     text-[14px]
     leading-[16px]
   `,
@@ -191,7 +189,7 @@ const styles = {
     w-[440px]
     h-[52px]
     my-[24px]
-    bg-[#1D9BF0] dark:bg-[#1D9BF0]
+    bg-logo-light dark:bg-logo-light
     rounded-full
   `,
   next__text: `

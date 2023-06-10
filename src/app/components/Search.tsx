@@ -21,7 +21,7 @@ export default function Search() {
 const styles = {
   container: `
     flex
-    bg-[#eff3f4] dark:bg-[#202327]
+    bg-tertiaryBg-light dark:bg-tertiaryBg-dark
     w-full
     px-4
     py-2
@@ -31,12 +31,10 @@ const styles = {
   `,
   input: `
     self-center
-    bg-[#eff3f4] dark:bg-[#202327]
-    text-[#536471] dark:text-[#71767b]
-    rounded-none
+    bg-tertiaryBg-light dark:bg-tertiaryBg-dark
     outline-none
     w-[420px]
     text-lg
-    placeholder-[#71767b]
+    placeholder-secondaryText-light dark:placeholder-secondaryText-dark
   `,
 }

@@ -211,7 +211,6 @@ const styles = {
     flex
     items-center
     text-[20px]
-    text-[#0f1419] dark:text-[#e7e9ea]
     font-bold
     leading-[24px]
   `,
@@ -230,19 +229,17 @@ const styles = {
     leading-[36px]
     text-[31px]
     font-bold
-    text-[#0f1419] dark:text-[#e7e9ea]
   `,
   main__birthday: `
     mt-[20px]
     mb-[8px]
-    text-[#0f1419] dark:text-[#e7e9ea]
     text-[15px]
     font-bold
     leading-[20px]
   `,
   main__birthdayhint: `
     mb-[4px]
-    text-[#71767b]
+    text-secondaryText-light dark:text-secondaryText-dark
     text-[14px]
     leading-[16px]
   `,
