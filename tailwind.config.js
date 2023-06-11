@@ -1,12 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+const lightBlue = '#1d9bf0'
+
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        blue: '#1d9bf0',
+        blue: lightBlue,
         pink: '#f91880',
         green: '#00ba7c',
         red: '#f4212e',
@@ -31,7 +33,7 @@ module.exports = {
           dark: '#202327',
         },
         primaryBorder: {
-          light: '#cfd9de',
+          light: lightBlue,
           dark: '#333639',
         },
         logo: {

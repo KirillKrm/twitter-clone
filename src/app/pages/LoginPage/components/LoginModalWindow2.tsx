@@ -97,7 +97,7 @@ export default function SignupBaseModal({
           <button
             className={buttonStyle}
             disabled={!formValid}
-            onClick={e => (!loading ? loginHandler() : e.preventDefault())}
+            onClick={e => (loading ? e.preventDefault() : loginHandler())}
           >
             <span className={styles.next__text}>{t('login')}</span>
           </button>
