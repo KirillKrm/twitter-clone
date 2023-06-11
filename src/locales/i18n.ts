@@ -6,16 +6,24 @@ import feedTranslationEN from './en/feed.json'
 import feedTranslationUA from './ua/feed.json'
 import notfoundTranslationEN from './en/notfound.json'
 import notfoundTranslationUA from './ua/notfound.json'
+import loginTranslationEN from './en/login.json'
+import loginTranslationUA from './ua/login.json'
+import signupTranslationEN from './en/signup.json'
+import signupTranslationUA from './ua/signup.json'
 import { convertLanguageJsonToObject } from './translations'
 
 export const translationsJson = {
   en: {
     feed: feedTranslationEN,
     notfound: notfoundTranslationEN,
+    login: loginTranslationEN,
+    signup: signupTranslationEN,
   },
   ua: {
     feed: feedTranslationUA,
     notfound: notfoundTranslationUA,
+    login: loginTranslationUA,
+    signup: signupTranslationUA,
   },
 }
 

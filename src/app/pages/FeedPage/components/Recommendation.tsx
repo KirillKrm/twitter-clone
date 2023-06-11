@@ -1,23 +1,23 @@
-import * as React from 'react'
 import 'index.css'
+import Avatar from 'app/components/Avatar'
 
-type RecommendationProps = {
+export type RecommendationProps = {
   name: string
   nickname: string
   avatar: string
 }
 
-export default function RecommendationsUnit(props: RecommendationProps) {
+export default function Recommendation({
+  name,
+  nickname,
+  avatar,
+}: RecommendationProps) {
   return (
-    <div key={props.nickname} className={styles.container}>
-      <img
-        className={styles.container__image}
-        alt="avatar"
-        src={props.avatar}
-      />
+    <div key={nickname} className={styles.container}>
+      <Avatar src={avatar} />
       <div className={styles.container__text}>
-        <span className={styles.text__name}>{props.name}</span>
-        <span className={styles.text__nickname}>{props.nickname}</span>
+        <span className={styles.text__name}>{name}</span>
+        <span className={styles.text__nickname}>{nickname}</span>
       </div>
     </div>
   )
@@ -40,20 +40,21 @@ const styles = {
     h-12 
     rounded-full 
     mr-3
+    select-none
   `,
   container__text: `
     flex 
     flex-col
+    ml-3
   `,
   text__name: `
     flex 
-    text-black dark:text-white 
     font-bold 
     text-base
   `,
   text__nickname: `
     flex 
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
+    text-secondary
     text-base
   `,
 }

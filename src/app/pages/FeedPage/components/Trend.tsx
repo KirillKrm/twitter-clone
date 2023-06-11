@@ -1,18 +1,16 @@
 import * as React from 'react'
 import 'index.css'
 
-type TrendProps = {
+export type TrendProps = {
   name: string
   twitsAmount: number
 }
 
-export default function TrendsUnit(props: TrendProps) {
+export default function Trend({ name, twitsAmount }: TrendProps) {
   return (
-    <div key={props.name} className={styles.container}>
-      <div className={styles.container__name}>{props.name}</div>
-      <span className={styles.container__twits}>
-        Twits: {props.twitsAmount}
-      </span>
+    <div key={name} className={styles.container}>
+      <div className={styles.container__name}>{name}</div>
+      <span className={styles.container__twits}>Twits: {twitsAmount}</span>
     </div>
   )
 }
@@ -28,14 +26,13 @@ const styles = {
     transition-colors duration-200
   `,
   container__name: `
-    flex 
-    text-black dark:text-white 
+    flex  
     font-bold 
     text-lg
   `,
   container__twits: `
     flex 
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
+    text-secondary
     text-base
   `,
 }

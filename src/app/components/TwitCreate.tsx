@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import classnames from 'classnames'
 import 'index.css'
+
+import { useAuth } from 'app/hooks/useAuth'
+import { postTwit } from 'app/api/twits'
+import Avatar from 'app/components/Avatar'
 
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
@@ -18,11 +23,16 @@ const useAutosizeTextArea = (
 
 export default function TwitCreate() {
   const { t } = useTranslation()
-
+  const { user } = useAuth()
   const [value, setValue] = useState('')
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   useAutosizeTextArea(textAreaRef.current, value)
+
+  const isInputEmpty = value.length === 0
+  const buttonStyle = classnames(styles.inputBox__button, {
+    'pointer-events-none opacity-50': isInputEmpty,
+  })
 
   const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = evt.target?.value
@@ -30,18 +40,20 @@ export default function TwitCreate() {
     setValue(val)
   }
 
-  const mockData = {
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+  const handleOnClick = async () => {
+    const res = await postTwit({ content: value })
+    if (res) {
+      if (textAreaRef.current) textAreaRef.current.value = ''
+    }
+  }
+
+  if (!user) {
+    return <></>
   }
 
   return (
     <div className={styles.container}>
-      <img
-        className={styles.container__image}
-        alt="avatar"
-        src={mockData.avatar}
-      />
+      <Avatar />
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}
@@ -53,7 +65,7 @@ export default function TwitCreate() {
           ref={textAreaRef}
           value={value}
         ></textarea>
-        <div className={styles.inputBox__button}>
+        <div className={buttonStyle} onClick={handleOnClick}>
           <span className={styles.button__text}>{t('Tweet')}</span>
         </div>
       </div>
@@ -66,44 +78,40 @@ const styles = {
     flex 
     w-full 
     p-3 
-    shadow-[0px_0px_0px_1px_#2f3336]
-  `,
-  container__image: `
-    flex 
-    w-10 
-    h-10 
-    rounded-full mr-3
+    shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#202327]
   `,
   container__inputBox: `
     flex 
     flex-col 
     w-full
+    ml-3
   `,
   inputBox__textArea: `
     flex 
     py-2 
-    bg-white dark:bg-black 
-    text-black dark:text-white 
+    bg-primary
     outline-none 
     text-lg 
-    placeholder-[rgb(83,100,113)] dark:placeholder-[#71767b]
+    placeholder-secondaryText-light dark:placeholder-secondaryText-dark
     resize-none
+    select-none
   `,
   inputBox__button: `
     flex 
     self-end
+    select-none
+    h-[36px] 
+    bg-blue
+    hover:bg-[#1a8cd8] 
+    rounded-full 
+    transition-colors 
+    duration-200
   `,
   button__text: `
     flex 
     items-center 
     px-4 
     text-base 
-    min-h-[36px] 
     text-white 
-    rounded-full 
-    bg-[#1d9bf0] 
-    hover:bg-[rgb(26,140,216)] 
-    transition-colors 
-    duration-200
   `,
 }

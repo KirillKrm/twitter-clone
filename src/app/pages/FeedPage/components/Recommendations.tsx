@@ -1,15 +1,12 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import RecommendationsUnit from 'app/components/RecommendationsUnit'
 import 'index.css'
 
-export type Recommendation = {
-  name: string
-  nickname: string
-  avatar: string
-}
+import Recommendation, {
+  RecommendationProps,
+} from 'app/pages/FeedPage/components/Recommendation'
 
-const recommendationlist: Recommendation[] = [
+const recommendationlist: RecommendationProps[] = [
   {
     name: 'Kyrylo Karmazin',
     nickname: '@KirillKr231',
@@ -48,33 +45,13 @@ export default function Recommendations() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Recommendations')}</span>
-      <RecommendationsList recommendations={recommendationlist} />
+      {recommendationlist.map(recommendationProps => (
+        <Recommendation
+          {...recommendationProps}
+          key={recommendationProps.nickname}
+        />
+      ))}
     </div>
-  )
-}
-
-export type RecommendationsListProps = {
-  recommendations: Recommendation[]
-}
-
-export const RecommendationsList = ({
-  recommendations,
-}: RecommendationsListProps) => {
-  return (
-    <>
-      {recommendationlist.map(recommendation => {
-        const { name, nickname, avatar } = recommendation
-
-        return (
-          <RecommendationsUnit
-            key={nickname}
-            name={name}
-            nickname={nickname}
-            avatar={avatar}
-          />
-        )
-      })}
-    </>
   )
 }
 
@@ -82,13 +59,12 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
+    bg-secondary
     w-full 
     rounded-[15px]
   `,
   container__title: `
-    flex 
-    text-black dark:text-white 
+    flex  
     px-4 
     py-3 
     items-center

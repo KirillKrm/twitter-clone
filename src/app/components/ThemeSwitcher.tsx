@@ -3,33 +3,39 @@ import 'index.css'
 
 export default function ThemeSwitcher() {
   const handleClickLight = () => {
+    const setThemeLight = () => {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('color-theme', 'light')
+    }
+
     // if set via local storage previously
     if (localStorage.getItem('color-theme')) {
       if (localStorage.getItem('color-theme') === 'dark') {
-        document.documentElement.classList.remove('dark')
-        localStorage.setItem('color-theme', 'light')
+        setThemeLight()
       }
       // if NOT set via local storage previously
     } else {
       if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark')
-        localStorage.setItem('color-theme', 'light')
+        setThemeLight()
       }
     }
   }
 
   const handleClickDark = () => {
+    const setThemeDark = () => {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('color-theme', 'dark')
+    }
+
     // if set via local storage previously
     if (localStorage.getItem('color-theme')) {
       if (localStorage.getItem('color-theme') === 'light') {
-        document.documentElement.classList.add('dark')
-        localStorage.setItem('color-theme', 'dark')
+        setThemeDark()
       }
       // if NOT set via local storage previously
     } else {
       if (!document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.add('dark')
-        localStorage.setItem('color-theme', 'dark')
+        setThemeDark()
       }
     }
   }
@@ -55,8 +61,9 @@ export default function ThemeSwitcher() {
 const styles = {
   container: `
     flex
-    flex-row
+    flex-col
     gap-1
+    select-none
   `,
   container__light: `
     py-1

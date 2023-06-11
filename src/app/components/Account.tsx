@@ -1,35 +1,44 @@
-import * as React from 'react'
 import 'index.css'
+import * as React from 'react'
+import classnames from 'classnames'
+
+import { useAuth } from 'app/hooks/useAuth'
+import SvgAccount from './SVG/SvgAccount'
+import SvgPopupTriangle from './SVG/SvgPopupTriangle'
+import Avatar from 'app/components/Avatar'
 
 export default function Account() {
-  const mockData = {
-    name: 'Kyrylo Karmazin',
-    username: 'KirillKr231',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/375px-Flag_of_Ukraine.svg.png',
+  const { user, logout } = useAuth()
+  const [popup, setPopup] = React.useState(false)
+  const popupStyle = classnames(styles.popup, { hidden: !popup })
+
+  const handleOnCLickAccount = () => {
+    setPopup(!popup)
+  }
+
+  if (!user) {
+    return <></>
   }
 
   return (
-    <div className={styles.container}>
-      <img
-        className={styles.container__image}
-        alt="avatar"
-        src={mockData.avatar}
-      />
-      <div className={styles.container__text}>
-        <span className={styles.text__name}>{mockData.name}</span>
-        <span className={styles.text__nickname}>{'@' + mockData.username}</span>
+    <>
+      <div className={popupStyle}>
+        <div className={styles.popup__logout} onClick={logout}>
+          Log out @{user.nickname}
+        </div>
+        <SvgPopupTriangle />
       </div>
-      <svg
-        viewBox="0 0 24 24"
-        className={styles.container__svg}
-        aria-hidden="true"
-      >
-        <g className={styles.svg__g}>
-          <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
-        </g>
-      </svg>
-    </div>
+      <div className={styles.container} onClick={handleOnCLickAccount}>
+        <Avatar src={user.avatar} />
+        <div className={styles.container__rightblock}>
+          <div className={styles.rightblock__text}>
+            <span className={styles.text__name}>{user.username}</span>
+            <span className={styles.text__nickname}>{'@' + user.nickname}</span>
+          </div>
+          <SvgAccount />
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -41,9 +50,12 @@ const styles = {
     p-3 
     mb-3
     rounded-full 
-    hover:bg-[rgb(15,20,25,0.1)] dark:hover:bg-[rgb(231,233,234,0.1)] 
+    hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(231,233,234,0.1)] 
     transition-colors 
     duration-200
+    select-none
+    cursor-pointer
+    max-xs:hidden
   `,
   container__image: `
     flex 
@@ -51,12 +63,19 @@ const styles = {
     h-10 
     rounded-full 
     mr-3
+    max-xl:mr-0
   `,
-  container__text: `
+  container__rightblock: `
+    flex
+    flex-row
+    ml-3
+    items-center
+    max-xl:hidden
+  `,
+  rightblock__text: `
     flex 
     flex-col 
     mr-3 
-    text-black dark:text-white
   `,
   text__name: `
     whitespace-nowrap 
@@ -66,14 +85,27 @@ const styles = {
     font-bold
   `,
   text__nickname: `
-    text-[rgb(83,100,113)] dark:text-[#71767b] 
+    text-secondary
     text-[15px]
   `,
-  container__svg: `
-    w-6 
-    h-6
+  popup: `
+    flex
+    fixed
+    bottom-24
+    w-[300px]
+    h-[68px]
+    items-center
+    bg-primary
+    rounded-[16px]
+    shadow-[0px_0px_15px_rgba(101,119,134,0.2),0px_0px_3px_1px_rgba(101,119,134,0.15)]
+    dark:shadow-[0px_0px_15px_rgba(255,255,255,0.2),0px_0px_3px_1px_rgba(255,255,255,0.15)]
   `,
-  svg__g: `
-    text-black dark:text-white
+  popup__logout: `
+    flex
+    w-full
+    py-3
+    px-4
+    items-center
+    hover:bg-secondaryBg-light hover:dark:bg-secondaryBg-dark
   `,
 }

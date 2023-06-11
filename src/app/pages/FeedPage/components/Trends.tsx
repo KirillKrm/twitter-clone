@@ -1,14 +1,9 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import TrendsUnit from 'app/components/TrendsUnit'
+import Trend, { TrendProps } from 'app/pages/FeedPage/components/Trend'
 import 'index.css'
 
-export type Trend = {
-  name: string
-  twitsAmount: number
-}
-
-const trendlist: Trend[] = [
+const trendlist: TrendProps[] = [
   { name: 'Kyiv', twitsAmount: 5000 },
   { name: 'Odesa', twitsAmount: 4000 },
   { name: 'Lviv', twitsAmount: 3000 },
@@ -23,11 +18,9 @@ export default function Trends() {
   return (
     <div className={styles.container}>
       <span className={styles.container__title}>{t('Trends')}</span>
-      {trendlist.map(trend => {
-        const { name, twitsAmount } = trend
-
-        return <TrendsUnit key={name} name={name} twitsAmount={twitsAmount} />
-      })}
+      {trendlist.map(trend => (
+        <Trend key={trend.name} {...trend} />
+      ))}
     </div>
   )
 }
@@ -36,13 +29,12 @@ const styles = {
   container: `
     flex 
     flex-col 
-    bg-[rgb(247,249,249)] dark:bg-[#16181c] 
+    bg-secondary
     w-full 
     rounded-[15px]
   `,
   container__title: `
     flex 
-    text-black dark:text-white 
     px-4 
     py-3 
     items-center

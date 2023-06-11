@@ -3,6 +3,9 @@ import { createInjectorsEnhancer } from 'redux-injectors'
 import createSagaMiddleware from 'redux-saga'
 
 import { createReducer } from './reducers'
+import { signUpPageReducer } from 'app/pages/SignupPage/slice'
+import { loginPageReducer } from 'app/pages/LoginPage/slice'
+import { feedPageReducer } from 'app/pages/FeedPage/slice'
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {}
@@ -20,7 +23,11 @@ export function configureAppStore() {
   ] as StoreEnhancer[]
 
   const store = configureStore({
-    reducer: createReducer(),
+    reducer: createReducer({
+      signuppage: signUpPageReducer,
+      loginpage: loginPageReducer,
+      feedpage: feedPageReducer,
+    }),
     middleware: defaultMiddleware => [...defaultMiddleware(), ...middlewares],
     devTools:
       /* istanbul ignore next line */

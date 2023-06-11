@@ -1,0 +1,23 @@
+{
+  "join": "Join Twitter now!",
+  "signup": "Sign up",
+  "hint": "Already have an account? ",
+  "signin": "Sign in",
+  "step1": "Step 1 of 2",
+  "step2": "Step 2 of 2",
+  "create": "Create account",
+  "name": "Name",
+  "email": "Email address",
+  "usePhone": "Use phone number",
+  "useEmail": "Use email address",
+  "birthday": "Date of Birth",
+  "birthdayHint": "This information will not be publicly available. Verify your age, even if this account is for a company, pet, etc.",
+  "month": "Month",
+  "day": "Day",
+  "year": "Year",
+  "next": "Next",
+  "registrationHint1": "By registering, you agree to the Terms of Service and Privacy Policy, as well as the Cookies Policy.",
+  "registrationHint2": "By registering, you accept the Terms of Service, Privacy Policy and Cookie Policy. Twitter may use your contact information, including your email address and phone number, for the purposes described in our Privacy Policy, such as maintaining account security and personalizing services, including advertising. More. Other users will be able to find you using the email address or phone number you provide, unless you specify otherwise here.",
+  "separator": "or",
+  "google": "Continue with Google"
+}

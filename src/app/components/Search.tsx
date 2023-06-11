@@ -13,7 +13,7 @@ export default function Search() {
         name="search"
         placeholder={t('Search')}
         autoComplete="off"
-      ></input>
+      />
     </div>
   )
 }
@@ -21,21 +21,20 @@ export default function Search() {
 const styles = {
   container: `
     flex
-    bg-[rgb(239,243,244)] dark:bg-[#202327]
+    bg-tertiary
     w-full
     px-4
     py-2
     rounded-full
+    select-none
     focus-within:shadow-[0px_0px_0px_1px_deepskyblue_inset]
   `,
   input: `
     self-center
-    bg-[rgb(239,243,244)] dark:bg-[#202327]
-    text-[rgb(83,100,113)] dark:text-[#71767b]
-    rounded-none
+    bg-tertiary
     outline-none
     w-[420px]
     text-lg
-    placeholder-[#71767b]
+    placeholder-secondaryText-light dark:placeholder-secondaryText-dark
   `,
 }

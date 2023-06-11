@@ -13,8 +13,11 @@ import 'index.css'
 import 'locales/i18n.ts'
 
 import { useTranslation } from 'react-i18next'
-import { HomePage } from './pages/HomePage/index'
+import { FeedPage } from './pages/FeedPage/index'
+import { LoginPage } from './pages/LoginPage/index'
+import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
+import ErrorBoundary from './components/ErrorBoundary'
 
 export function App() {
   const { i18n } = useTranslation()
@@ -30,12 +33,16 @@ export function App() {
           <meta name="description" content="Twitter Clone" />
         </Helmet>
 
-        <Routes>
-          {['/', '/home'].map((path, index) => (
-            <Route path={path} element={<HomePage />} key={index} />
-          ))}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <ErrorBoundary>
+          <Routes>
+            {['/', '/home'].map((path, index) => (
+              <Route path={path} element={<FeedPage />} key={index} />
+            ))}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </ErrorBoundary>
       </BrowserRouter>
     </>
   )
