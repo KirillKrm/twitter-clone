@@ -2,24 +2,15 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { SignUpPayload } from 'app/pages/SignupPage/types'
+import { User } from '../../types/User'
 
 import {
   register as registerRequest,
   login as loginRequest,
-} from 'app/api/services'
+} from 'app/api/auth'
 import { getMe as getMeRequest } from 'app/api/me'
 
 // TODO add more types to all returning functions/objects
-type User = {
-  id: number
-  avatar: string
-  username: string
-  nickname: string
-  email: string
-  password: string
-  createAt: Date
-  updatedAt: Date
-}
 
 export const useRegistration = () => {
   const [error, setError] = useState<string>()

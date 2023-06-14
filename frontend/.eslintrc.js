@@ -1,9 +1,4 @@
-const fs = require('fs')
-const path = require('path')
-
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-)
+const prettierOptions = require('../.prettierrc.js')
 
 module.exports = {
   extends: ['react-app', 'prettier'],
@@ -13,8 +8,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.ts?(x)'],
-      rules: { 'prettier/prettier': ['warn', prettierOptions] },
+      files: ['**/*.ts?(x)', '**/*.js?(x)'],
+      rules: {
+        'prettier/prettier': ['warn', prettierOptions],
+      },
     },
   ],
 }

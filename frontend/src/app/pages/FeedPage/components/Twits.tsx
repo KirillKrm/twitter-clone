@@ -4,25 +4,11 @@ import 'index.css'
 import Twit from 'app/pages/FeedPage/components/Twit'
 import { getTwits } from 'app/api/twits'
 import Loading from 'app/components/Loading'
-
-type twit = {
-  id: number
-  author: {
-    id: number
-    username: string
-    nickname: string
-    email: string
-    createdAt: Date
-    updatedAt: Date
-  }
-  content: string
-  createdAt: Date
-  updatedAt: Date
-}
+import { Twit as TwitType } from '../../../../types/Twit'
 
 export default function Twits() {
   const [token, setToken] = React.useState<number>()
-  const [twits, setTwits] = React.useState<twit[]>([])
+  const [twits, setTwits] = React.useState<TwitType[]>([])
   const [isFetchMore, setIsFetchMore] = React.useState(true)
   const [wasLastList, setWasLastList] = React.useState(false)
 

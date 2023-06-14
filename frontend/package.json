@@ -3,11 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD:package.json
-    "postinstall": "if [ $FRONTEND_ENV ]; then yarn postinstall-client; elif [ $BACKEND_ENV ]; then yarn postinstall-backend; else echo no environment detected, please set FRONTEND_ENV or BACKEND_ENV; fi",
-    "postinstall-client": "echo TODO move frontend to monorepo; fi",
-    "postinstall-backend": "cd backend && yarn && yarn build"
-=======
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -146,6 +141,5 @@
         "statements": 90
       }
     }
->>>>>>> master:frontend/package.json
   }
 }

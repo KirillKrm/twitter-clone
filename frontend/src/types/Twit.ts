@@ -2,9 +2,12 @@ export type Twit = {
   id: number
   author: {
     id: number
+    avatar?: string
     username: string
     nickname: string
-    avatar?: string
+    email: string
+    createdAt: Date
+    updatedAt: Date
   }
   content: string
   likes?: number //TODO not optional, wait for backend implementation
