@@ -7,6 +7,7 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  Query,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -19,7 +20,9 @@ import { ExceptionResponseDto } from '../common/dto'
 import { AuthGuard } from '../auth/auth.guard'
 
 import { UsersService } from './users.service'
-import { User } from './entities/user.entity'
+import { User } from './user.entity'
+import { GetUsersQuery } from './dto/get-users-query.dto'
+import { PaginatedUsers } from './dto/paginated-users.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
 @ApiTags('users')
@@ -33,21 +36,21 @@ export class UsersController {
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: 'Get all users',
-    description: 'Retrieve a list of all users.',
+    summary: 'Get all users with offset pagination',
+    description: 'Retrieve a list of all users with offset pagination',
   })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Successfully retrieved all users.',
-    type: [User],
+    type: PaginatedUsers,
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Users not found.',
     type: ExceptionResponseDto,
   })
-  async findAll(): Promise<User[]> {
-    return this.usersService.findAll()
+  async findAll(@Query() queries: GetUsersQuery): Promise<PaginatedUsers> {
+    return this.usersService.findAll(queries)
   }
 
   @Get(':id')

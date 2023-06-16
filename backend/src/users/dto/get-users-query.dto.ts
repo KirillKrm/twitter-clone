@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import { IsInt, IsOptional, Max } from 'class-validator'
 
-export class GetTwitsQuery {
+export class GetUsersQuery {
   @IsInt()
   @Max(40)
   @Type(() => Number)
@@ -14,11 +14,5 @@ export class GetTwitsQuery {
   @Type(() => Number)
   @IsOptional()
   @ApiPropertyOptional()
-  token?: number
-
-  @IsInt()
-  @Type(() => Number)
-  @IsOptional()
-  @ApiPropertyOptional()
-  userId?: number
+  page?: number
 }

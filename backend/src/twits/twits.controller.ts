@@ -14,7 +14,6 @@ import {
 import {
   ApiBearerAuth,
   ApiOperation,
-  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
@@ -24,10 +23,10 @@ import { AuthGuard } from '../auth/auth.guard'
 import { CurrentUser } from '../common/decorators'
 import { ExceptionResponseDto } from '../common/dto'
 
-import { PaginatedGetAll } from './dto/paginated-get-all.dto'
 import { TwitsService } from './twits.service'
 import { CreateTwitDto } from './dto/create-twit.dto'
 import { UpdateTwitDto } from './dto/update-twit.dto'
+import { PaginatedTwits } from './dto/paginated-twits.dto'
 import { GetTwitsQuery } from './dto/get-twits-query.dto'
 import { Twit } from './twit.entity'
 
@@ -62,23 +61,20 @@ export class TwitsController {
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: 'Get all twits',
-    description: 'Retrieves all the existing twits',
+    summary: 'Get all twits with cursor pagination',
+    description: 'Retrieves all the existing twits with cursor pagination',
   })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Successfully retrieved all twits',
-    type: [Twit],
+    type: PaginatedTwits,
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Twits not found.',
     type: ExceptionResponseDto,
   })
-  @ApiQuery({ type: GetTwitsQuery })
-  async findAll(
-    @Query() queries: GetTwitsQuery,
-  ): Promise<PaginatedGetAll<Twit>> {
+  async findAll(@Query() queries: GetTwitsQuery): Promise<PaginatedTwits> {
     return this.twitsService.findAll(queries)
   }
 

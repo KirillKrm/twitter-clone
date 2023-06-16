@@ -9,9 +9,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { PasswordTransformer } from '../../common/transformers/password.transformer'
+import { PasswordTransformer } from '../common/transformers/password.transformer'
 
-import { UserI } from '../../../../shared/interfaces'
+import { UserI } from '../interfaces'
 
 @Entity()
 export class User extends BaseEntity implements UserI {

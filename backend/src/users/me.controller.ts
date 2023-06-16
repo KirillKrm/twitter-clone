@@ -19,7 +19,7 @@ import { CurrentUser } from '../common/decorators'
 import { JwtPayload } from '../auth/types'
 
 import { UsersService } from './users.service'
-import { User } from './entities/user.entity'
+import { User } from './user.entity'
 import { UpdateUserDto } from './dto/update-user.dto'
 
 @ApiTags('me')

@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Hash } from '../common/lib/hash'
 import { CreateUserDto } from '../users/dto/create-user.dto'
 import { UsersService } from '../users/users.service'
-import { User } from '../users/entities/user.entity'
+import { User } from '../users/user.entity'
 
 import { RegisterDto, JwtRefreshDto, JwtTokensDto } from './dto'
 import { JwtPayload } from './types'

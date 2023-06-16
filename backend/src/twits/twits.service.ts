@@ -12,7 +12,7 @@ import { UsersService } from '../users/users.service'
 import { CreateTwitDto } from './dto/create-twit.dto'
 import { UpdateTwitDto } from './dto/update-twit.dto'
 import { GetTwitsQuery } from './dto/get-twits-query.dto'
-import { PaginatedGetAll } from './dto/paginated-get-all.dto'
+import { PaginatedTwits } from './dto/paginated-twits.dto'
 import { Twit } from './twit.entity'
 
 @Injectable()
@@ -39,9 +39,11 @@ export class TwitsService {
     return res
   }
 
-  async findAll({ limit = 20, token, userId }: GetTwitsQuery = {}): Promise<
-    PaginatedGetAll<Twit>
-  > {
+  async findAll({
+    limit = 20,
+    token,
+    userId,
+  }: GetTwitsQuery = {}): Promise<PaginatedTwits> {
     const query = this.twitRepository
       .createQueryBuilder('twit')
       .leftJoinAndSelect('twit.author', 'user')
@@ -62,7 +64,7 @@ export class TwitsService {
     }
     this.logger.log(`${twits.length} twits fetched successfully`)
 
-    const res: PaginatedGetAll<Twit> = {
+    const res: PaginatedTwits = {
       data: twits,
       nextToken: twits.at(-1).createdAt.getTime(),
     }

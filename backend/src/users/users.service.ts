@@ -7,9 +7,11 @@ import {
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { User } from './entities/user.entity'
+import { User } from './user.entity'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { GetUsersQuery } from './dto/get-users-query.dto'
+import { PaginatedUsers } from './dto/paginated-users.dto'
 
 @Injectable()
 export class UsersService {
@@ -48,15 +50,29 @@ export class UsersService {
     return res
   }
 
-  // TODO filter + pagination
-  async findAll(): Promise<User[]> {
-    const users = await this.userRepository.find()
+  async findAll({
+    limit = 20,
+    page = 0,
+  }: GetUsersQuery = {}): Promise<PaginatedUsers> {
+    const query = this.userRepository
+      .createQueryBuilder('user')
+      .orderBy('user.createdAt')
+      .offset(limit * page)
+      .limit(limit)
+
+    const users = await query.getMany()
     if (!users || !users.length) {
       throw new NotFoundException('Users not found')
     }
     this.logger.log(`${users.length} users fetched successfully`)
 
-    return users
+    const res: PaginatedUsers = {
+      data: users,
+      limit,
+      page,
+    }
+
+    return res
   }
 
   async findOne(id: number): Promise<User> {
