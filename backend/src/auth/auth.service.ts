@@ -2,13 +2,13 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 
-import { Hash } from '../common/lib/hash'
-import { CreateUserDto } from '../users/dto/create-user.dto'
-import { UsersService } from '../users/users.service'
-import { User } from '../users/user.entity'
+import { Hash } from '@backend/common/lib/hash'
+import { CreateUserDto } from '@backend/users/dto/create-user.dto'
+import { UsersService } from '@backend/users/users.service'
+import { User } from '@backend/users/user.entity'
+import { JwtPayload } from '@shared/auth/types'
 
 import { RegisterDto, JwtRefreshDto, JwtTokensDto } from './dto'
-import { JwtPayload } from './types'
 
 @Injectable()
 export class AuthService {

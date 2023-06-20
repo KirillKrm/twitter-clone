@@ -1,10 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 
-import { PaginatedTokenStrategyI } from '../../../../shared/interfaces'
+import { PaginatedTwitsI } from '@shared/twit/dtos'
 
 import { Twit } from '../twit.entity'
 
-export class PaginatedTwits implements PaginatedTokenStrategyI<Twit> {
+export class PaginatedTwits implements PaginatedTwitsI {
   @ApiProperty({ type: [Twit] })
   data: Twit[]
 

@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-import { User } from '../users/user.entity'
-import { TwitI } from '../../../shared/interfaces'
+import { User } from '@backend/users/user.entity'
+import { TwitI } from '@shared/twit/types'
 
 @Entity()
 export class Twit extends BaseEntity implements TwitI {

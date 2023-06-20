@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsJWT } from 'class-validator'
 
-export class JwtTokensDto {
+import { JwtTokensDtoI } from '@shared/auth/dtos'
+
+export class JwtTokensDto implements JwtTokensDtoI {
   @IsJWT()
   @ApiProperty()
   jwtAccessToken: string

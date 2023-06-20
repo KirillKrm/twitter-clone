@@ -63,16 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
     new winston.transports.Console({
       level: 'error',
       handleExceptions: true,
-      format: winston.format.printf(info => {
-        const { level, message, timestamp, stack } = info
-
-        if (info instanceof Error) {
-          const formattedStack = stack || inspect(info, { depth: null })
-          return `${timestamp} ${level}: ${formattedStack}`
-        }
-
-        return `${timestamp} ${level}: ${message}`
-      }),
+      format: winston.format.printf(info => info.message),
     }),
   )
 }

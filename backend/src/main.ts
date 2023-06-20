@@ -6,8 +6,8 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import csurf from 'tiny-csrf'
 
-import { logger } from './logger'
 import { AppModule } from './app.module'
+import { logger } from './logger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

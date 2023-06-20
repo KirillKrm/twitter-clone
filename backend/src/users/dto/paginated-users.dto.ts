@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { PaginatedOffsetStrategyI } from '../../../../shared/interfaces'
+
+import { PaginatedUsersI } from '@shared/user/dtos'
 
 import { User } from '../user.entity'
 
-export class PaginatedUsers implements PaginatedOffsetStrategyI<User> {
+export class PaginatedUsers implements PaginatedUsersI {
   @ApiProperty({ type: [User] })
   data: User[]
 

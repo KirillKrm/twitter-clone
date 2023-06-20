@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["./shared/*"],
+      "@backend/*": ["./backend/src/*"],
+      "@frontend/*": ["./frontend/src/*"],
+      "@frontend/components/*": ["./frontend/src/app/components/*"],
+      "@frontend/hooks/*": ["./frontend/src/app/components/*"],
+    }
+  },
+  "references": [{
+      "path": "./backend"
+    },
+    {
+      "path": "./frontend"
+    },
+    {
+      "path": "./shared"
+    }
+  ],
+  "include": ["./shared/**/*", "./backend/**/*", "./frontend/**/*"]
+}

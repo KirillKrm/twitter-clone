@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-import { ExceptionResponseI } from '../../../../shared/interfaces'
+import { ExceptionResponseI } from '@shared/common/backend/dtos'
 
 // No need to use class-validator cus it's not used anywhere
 // except documentation

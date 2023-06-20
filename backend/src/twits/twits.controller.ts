@@ -18,10 +18,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger'
 
-import { JwtPayload } from '../auth/types'
-import { AuthGuard } from '../auth/auth.guard'
-import { CurrentUser } from '../common/decorators'
-import { ExceptionResponseDto } from '../common/dto'
+import { AuthGuard } from '@backend/auth/auth.guard'
+import { CurrentUser } from '@backend/common/decorators'
+import { ExceptionResponseDto } from '@backend/common/dto'
+import { JwtPayload } from '@shared/auth/types'
 
 import { TwitsService } from './twits.service'
 import { CreateTwitDto } from './dto/create-twit.dto'

@@ -14,9 +14,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger'
 
-import { AuthGuard } from '../auth/auth.guard'
-import { CurrentUser } from '../common/decorators'
-import { JwtPayload } from '../auth/types'
+import { AuthGuard } from '@backend/auth/auth.guard'
+import { CurrentUser } from '@backend/common/decorators'
+import { JwtPayload } from '@shared/auth/types'
 
 import { UsersService } from './users.service'
 import { User } from './user.entity'

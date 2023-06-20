@@ -1,7 +1,7 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
     "declaration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
@@ -13,7 +13,6 @@
     "noImplicitAny": false,
     "outDir": "./dist",
     "removeComments": true,
-    "rootDirs": ["./src", "../shared"],
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": false,
@@ -23,9 +22,5 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ],
-  "include": [
-    "src/**/*",
-    "../shared/*"
   ]
 }

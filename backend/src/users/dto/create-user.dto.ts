@@ -1,11 +1,9 @@
 import { IsEmail, IsString, Length, MaxLength } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-import { UserI } from '../../../../shared/interfaces'
+import { CreateUserDtoI } from '@shared/user/dtos'
 
-export class CreateUserDto
-  implements Omit<UserI, 'id' | 'createdAt' | 'updatedAt'>
-{
+export class CreateUserDto implements CreateUserDtoI {
   @IsString()
   @MaxLength(20) //TODO check frontend form
   @ApiProperty()

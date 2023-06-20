@@ -1,7 +1,9 @@
 import { IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-export class LoginDto {
+import { LoginDtoI } from '@shared/auth/dtos'
+
+export class LoginDto implements LoginDtoI {
   @IsString()
   @ApiProperty()
   // TODO check size restrictions
