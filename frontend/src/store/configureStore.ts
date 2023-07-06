@@ -1,11 +1,28 @@
 import { configureStore, StoreEnhancer } from '@reduxjs/toolkit'
 import { createInjectorsEnhancer } from 'redux-injectors'
 import createSagaMiddleware from 'redux-saga'
+import storage from 'redux-persist/lib/storage'
+import { persistReducer } from 'redux-persist'
+import thunk from 'redux-thunk'
 
 import { createReducer } from './reducers'
 import { signUpPageReducer } from 'app/pages/SignupPage/slice'
 import { loginPageReducer } from 'app/pages/LoginPage/slice'
 import { userReducer } from 'app/pages/FeedPage/slice'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  createReducer({
+    signuppage: signUpPageReducer,
+    loginpage: loginPageReducer,
+    user: userReducer,
+  }),
+)
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {}
@@ -13,7 +30,7 @@ export function configureAppStore() {
   const { run: runSaga } = sagaMiddleware
 
   // Create the store with saga middleware
-  const middlewares = [sagaMiddleware]
+  const middlewares = [sagaMiddleware, thunk]
 
   const enhancers = [
     createInjectorsEnhancer({
@@ -23,12 +40,8 @@ export function configureAppStore() {
   ] as StoreEnhancer[]
 
   const store = configureStore({
-    reducer: createReducer({
-      signuppage: signUpPageReducer,
-      loginpage: loginPageReducer,
-      user: userReducer,
-    }),
-    middleware: defaultMiddleware => [...defaultMiddleware(), ...middlewares],
+    reducer: persistedReducer,
+    middleware: middlewares,
     devTools:
       /* istanbul ignore next line */
       process.env.NODE_ENV !== 'production' ||

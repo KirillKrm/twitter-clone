@@ -9,19 +9,19 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Routes, Route } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { RootState } from 'types'
 import 'index.css'
 import 'locales/i18n'
 
-import { useTranslation } from 'react-i18next'
 import { FeedPage } from './pages/FeedPage/index'
 import { LoginPage } from './pages/LoginPage/index'
 import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
 import ErrorBoundary from './components/ErrorBoundary'
 import { UserContext } from './contexts/UserContext'
-import { useAuth } from './hooks/useAuth'
-import { useSelector } from 'react-redux'
-import { RootState } from 'types'
+// import { useAuth } from './hooks/useAuth'
 
 export function App() {
   const { i18n } = useTranslation()

@@ -28,7 +28,11 @@ import reportWebVitals from 'reportWebVitals'
 
 // Initialize languages
 import './locales/i18n'
+
 import { BrowserRouter } from 'react-router-dom'
+
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
@@ -39,20 +43,27 @@ import { BrowserRouter } from 'react-router-dom'
 //   document.body.classList.add('fontLoaded')
 // })
 
+// Redux stor
 const store = configureAppStore()
+
+// Redux persist store
+const persistor = persistStore(store)
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <Provider store={store}>
     {/* <ThemeProvider> */}
-    <HelmetProvider>
-      <React.StrictMode>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </React.StrictMode>
-    </HelmetProvider>
-    {/* </ThemeProvider> */}
+    <PersistGate loading={null} persistor={persistor}>
+      <HelmetProvider>
+        <React.StrictMode>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </React.StrictMode>
+      </HelmetProvider>
+      {/* </ThemeProvider> */}
+    </PersistGate>
   </Provider>,
 )
 
