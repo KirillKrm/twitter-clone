@@ -34,10 +34,9 @@ const yearList: Year[] = Array.from({ length: currentYear - 1899 }, (_, i) => ({
   name: currentYear - i,
 }))
 
-// REFACTOR types
 export type SignupModalWindow2Props = {
-  goToNextStep: any
-  goToPrevStep: any
+  goToNextStep: () => void
+  goToPrevStep: () => void
 }
 
 export default function SignupModalWindow2({

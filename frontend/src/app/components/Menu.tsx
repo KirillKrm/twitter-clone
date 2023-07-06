@@ -22,47 +22,47 @@ export type MenuButton = Omit<MenuUnitProps, 'isActive' | 'setActive'>
 const menuList: MenuButton[] = [
   {
     name: 'Home',
-    image: HomeIcon,
+    svgPath: HomeIcon,
     link: '/home',
   },
   {
     name: 'Search',
-    image: SearchIcon,
+    svgPath: SearchIcon,
     link: '/#',
   },
   {
     name: 'Explore',
-    image: ExploreIcon,
+    svgPath: ExploreIcon,
     link: '/#',
   },
   {
     name: 'Notifications',
-    image: NotificationsIcon,
+    svgPath: NotificationsIcon,
     link: '/#',
   },
   {
     name: 'Messages',
-    image: MessagesIcon,
+    svgPath: MessagesIcon,
     link: '/#',
   },
   {
     name: 'Bookmarks',
-    image: BookmarksIcon,
+    svgPath: BookmarksIcon,
     link: '/#',
   },
   {
     name: 'Lists',
-    image: ListsIcon,
+    svgPath: ListsIcon,
     link: '/#',
   },
   {
     name: 'Profile',
-    image: ProfileIcon,
+    svgPath: ProfileIcon,
     link: '/#',
   },
   {
     name: 'More',
-    image: MoreIcon,
+    svgPath: MoreIcon,
     link: '/#',
   },
 ]

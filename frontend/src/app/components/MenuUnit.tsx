@@ -3,7 +3,7 @@ import 'index.css'
 
 export type MenuUnitProps = {
   name: string
-  image: string
+  svgPath: string
   link: string
   isActive: boolean
   setActive: Function
@@ -12,7 +12,7 @@ export type MenuUnitProps = {
 export default function MenuUnit({
   link,
   isActive,
-  image,
+  svgPath: image,
   name,
 }: MenuUnitProps) {
   const { t } = useTranslation()

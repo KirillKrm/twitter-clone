@@ -7,9 +7,8 @@ import GoogleAuth from 'app/components/GoogleAuth'
 import SvgLogo from 'app/components/SVG/SvgLogo'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
-// REFACTOR types
 export type SignupModalWindow1Props = {
-  goToNextStep: any
+  goToNextStep: () => void
 }
 
 export default function SignupModalWindow1({

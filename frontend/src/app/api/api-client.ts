@@ -1,12 +1,16 @@
 import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 import { JwtTokens } from 'types/JwtTokens'
+import { ExceptionResponseI } from '../../../../shared/interfaces'
 
-type HandleResponse<T = unknown> = (res: Response, body: T) => Promise<void>
+type HandleResponse<T = unknown> = (
+  res: Response,
+  body: T | ExceptionResponseI,
+) => Promise<void>
 
-type ApiRequestOptions<T = unknown> = {
-  body?: T
-  handleResponse?: HandleResponse<T> //TODO
+type ApiRequestOptions<T = unknown, Payload = any> = {
+  body?: Payload
+  handleResponse?: HandleResponse<T>
 }
 
 export class ApiClient {
@@ -28,7 +32,7 @@ export class ApiClient {
 
   private async handleResponse<T>(
     response: Response,
-    handleResponse?: HandleResponse<T>, //TODO here types in template
+    handleResponse?: HandleResponse<T>,
   ): Promise<T> {
     const body = await response.json()
 
@@ -97,7 +101,7 @@ export class ApiClient {
     return headers
   }
 
-  private async request<T = unknown>(
+  private async request<T>(
     method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
     path: string,
     options: ApiRequestOptions<T>,
@@ -129,9 +133,9 @@ export class ApiClient {
     })
   }
 
-  async post<T = unknown>(
+  async post<T = unknown, Payload = any>(
     path: string,
-    body: any,
+    body: Payload,
     handleResponse?: HandleResponse<T>,
   ): Promise<T> {
     return this.request('POST', path, {

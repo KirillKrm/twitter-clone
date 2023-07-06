@@ -11,7 +11,7 @@ import SvgLogo from 'app/components/SVG/SvgLogo'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 export type LoginModalWindow1Props = {
-  goToNextStep: any
+  goToNextStep: () => void
 }
 
 export default function LoginModalWindow1({

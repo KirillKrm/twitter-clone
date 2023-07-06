@@ -1,4 +1,3 @@
-export interface FeedPageState {
-  username: string
-  nickname: string
-}
+import { User } from 'types/User'
+
+export type UserState = User | null

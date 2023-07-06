@@ -10,11 +10,9 @@ import BaseModal from 'app/components/BaseModal'
 import InputField from 'app/components/Input/InputField'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import { useRegistration } from 'app/hooks/useAuth'
-import { feedPageActions } from 'app/pages/FeedPage/slice/index'
 
-// REFACTOR types
 export type SignupModalWindow3Props = {
-  goToPrevStep: any
+  goToPrevStep: () => void
 }
 
 export default function SignupModalWindow3({
@@ -56,8 +54,6 @@ export default function SignupModalWindow3({
   React.useEffect(() => {
     if (user) {
       localStorage.setItem('current_user_username', user.username)
-      dispatch(feedPageActions.changeUsername(user.username))
-      dispatch(feedPageActions.changeNickname(user.nickname))
       navigate('/login')
     }
   }, [dispatch, navigate, user])

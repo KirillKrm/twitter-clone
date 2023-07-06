@@ -13,14 +13,15 @@ import InputField from 'app/components/Input/InputField'
 import { useAuth } from 'app/hooks/useAuth'
 
 export type LoginModalWindow2Props = {
-  goToPrevStep: any
+  goToPrevStep: () => void
 }
 
-export default function SignupBaseModal({
+export default function LoginModalWindow2({
   goToPrevStep,
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const navigate = useNavigate()
+  const { login, user, loading, error } = useAuth()
 
   const loginPage = useSelector((state: RootState) => state.loginpage)
   const [loginString, setLoginString] = React.useState(
@@ -31,18 +32,20 @@ export default function SignupBaseModal({
   const [passwordValid, setPasswordValid] = React.useState(false)
   const formValid = loginValid && passwordValid
 
-  const { login, user, loading, error } = useAuth()
-
   const loginHandler = () => {
     console.log('Try to login')
     login({
       username: loginString,
       password,
     })
+  }
+
+  React.useEffect(() => {
     if (user) {
+      console.log(user)
       navigate('/home')
     }
-  }
+  }, [navigate, user])
 
   const buttonStyle = classnames(styles.main__next, {
     'opacity-50': loading,

@@ -11,12 +11,14 @@ export function randLocation(): number {
 }
 
 export async function register(registerData: SignUpPayload): Promise<User> {
-  const res = await apiClient.post<User & ExceptionResponseI>(
+  const res = await apiClient.post<User>(
     'v1/auth/register',
     registerData,
     async (res, body) => {
       if (res.status !== 201) {
-        throw new Error(`${res.status}: ${body.message}`)
+        throw new Error(
+          `${res.status}: ${(body as ExceptionResponseI).message}`,
+        )
       }
     },
   )
@@ -30,12 +32,14 @@ export async function login(loginData: {
   username: string
   password: string
 }): Promise<JwtTokens> {
-  const res = await apiClient.post<JwtTokens & ExceptionResponseI>(
+  const res = await apiClient.post<JwtTokens>(
     'v1/auth/login',
     loginData,
     async (res, body) => {
       if (res.status !== 200) {
-        throw new Error(`${res.status}: ${body.message}`)
+        throw new Error(
+          `${res.status}: ${(body as ExceptionResponseI).message}`,
+        )
       }
     },
   )
