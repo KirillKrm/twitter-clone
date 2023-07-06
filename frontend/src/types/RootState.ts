@@ -2,7 +2,7 @@
 import { ThemeState } from 'styles/theme/slice/types'
 import { SignupPageState } from 'app/pages/SignupPage/slice/types'
 import { LoginPageState } from 'app/pages/LoginPage/slice/types'
-import { FeedPageState } from 'app/pages/FeedPage/slice/types'
+import { UserState } from 'app/pages/FeedPage/slice/types'
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -15,6 +15,6 @@ export interface RootState {
   theme?: ThemeState
   signuppage?: SignupPageState
   loginpage?: LoginPageState
-  feedpage?: FeedPageState
+  user?: UserState
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

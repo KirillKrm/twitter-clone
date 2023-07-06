@@ -6,9 +6,11 @@ import { useAuth } from 'app/hooks/useAuth'
 import SvgAccount from './SVG/SvgAccount'
 import SvgPopupTriangle from './SVG/SvgPopupTriangle'
 import Avatar from 'app/components/Avatar'
+import { UserContext } from '../contexts/UserContext'
 
 export default function Account() {
-  const { user, logout } = useAuth()
+  const { logout } = useAuth()
+  const user = React.useContext(UserContext)
   const [popup, setPopup] = React.useState(false)
   const popupStyle = classnames(styles.popup, { hidden: !popup })
 

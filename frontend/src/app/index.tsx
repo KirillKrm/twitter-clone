@@ -8,9 +8,9 @@
 
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import 'index.css'
-import 'locales/i18n.ts'
+import 'locales/i18n'
 
 import { useTranslation } from 'react-i18next'
 import { FeedPage } from './pages/FeedPage/index'
@@ -18,32 +18,36 @@ import { LoginPage } from './pages/LoginPage/index'
 import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
 import ErrorBoundary from './components/ErrorBoundary'
+import { UserContext } from './contexts/UserContext'
+import { useAuth } from './hooks/useAuth'
+import { useSelector } from 'react-redux'
+import { RootState } from 'types'
 
 export function App() {
   const { i18n } = useTranslation()
+  // const { user } = useAuth()
+  const user = useSelector((state: RootState) => state.user)
+  console.log('App user state', user)
 
   return (
-    <>
-      <BrowserRouter>
-        <Helmet
-          titleTemplate="Twitter Clone"
-          defaultTitle="Twitter Clone"
-          htmlAttributes={{ lang: i18n.language }}
-        >
-          <meta name="description" content="Twitter Clone" />
-        </Helmet>
-
-        <ErrorBoundary>
-          <Routes>
-            {['/', '/home'].map((path, index) => (
-              <Route path={path} element={<FeedPage />} key={index} />
-            ))}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </ErrorBoundary>
-      </BrowserRouter>
-    </>
+    <UserContext.Provider value={user}>
+      <Helmet
+        titleTemplate="Twitter Clone"
+        defaultTitle="Twitter Clone"
+        htmlAttributes={{ lang: i18n.language }}
+      >
+        <meta name="description" content="Twitter Clone" />
+      </Helmet>
+      <ErrorBoundary>
+        <Routes>
+          {['/', '/home'].map((path, index) => (
+            <Route path={path} element={<FeedPage />} key={index} />
+          ))}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </ErrorBoundary>
+    </UserContext.Provider>
   )
 }

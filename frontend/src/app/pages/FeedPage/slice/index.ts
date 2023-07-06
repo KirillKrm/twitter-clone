@@ -1,23 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from 'utils/@reduxjs/toolkit'
-import { FeedPageState } from './types'
+import { UserState } from './types'
 
-export const initialState: FeedPageState = {
-  username: '',
-  nickname: '',
-}
+export const initialState = null as UserState
 
 const slice = createSlice({
-  name: 'feedpage',
+  name: 'user',
   initialState,
   reducers: {
-    changeUsername(state, action: PayloadAction<string>) {
-      state.username = action.payload
-    },
-    changeNickname(state, action: PayloadAction<string>) {
-      state.nickname = action.payload
+    changeUser(state, action: PayloadAction<UserState>) {
+      return (state = action.payload)
     },
   },
 })
 
-export const { actions: feedPageActions, reducer: feedPageReducer } = slice
+export const { actions: userActions, reducer: userReducer } = slice
