@@ -32,10 +32,13 @@ export default function Twits() {
   React.useEffect(() => {
     const fetchData = async () => {
       const response = await getTwits({ limit: 10, token })
+
       if (response.data.length < 10) {
         setWasLastList(true)
+        setTwits(twits.concat(response.data))
         return
       }
+
       setTwits(twits.concat(response.data))
       setToken(response.nextToken)
       setIsFetchMore(false)
@@ -51,7 +54,7 @@ export default function Twits() {
       {twits.map(twit => (
         <Twit key={twit.id} data={twit} />
       ))}
-      {wasLastList && (
+      {!wasLastList && (
         <div className={styles.loading}>
           <Loading />
         </div>
