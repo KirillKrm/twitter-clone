@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import 'index.css'
+import classnames from 'classnames'
 
 export type MenuUnitProps = {
   name: string
@@ -12,19 +13,25 @@ export type MenuUnitProps = {
 export default function MenuUnit({
   link,
   isActive,
+  setActive,
   svgPath: image,
   name,
 }: MenuUnitProps) {
   const { t } = useTranslation()
 
+  const buttonStyle = classnames(styles.container__button, {
+    'font-bold': isActive,
+    'hover:blur-[2px] dark:hover:blur-[2px] cursor-not-allowed':
+      name !== 'Home',
+  })
+
+  const handleOnClick = () => {
+    setActive(name)
+    localStorage.setItem('active_menu_btn', name)
+  }
+
   return (
-    <a
-      href={link}
-      className={
-        styles.container__button +
-        `${isActive ? 'font-bold' : 'cursor-default'}`
-      }
-    >
+    <a href={link} className={buttonStyle} onClick={handleOnClick}>
       <svg viewBox="0 0 24 24" className={styles.button__svg}>
         <g className={styles.svg__g}>
           <path d={image}></path>

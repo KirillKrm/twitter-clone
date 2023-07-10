@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from 'types'
 
 import { userActions } from 'app/pages/FeedPage/slice/index'
 import { SignUpPayload } from 'app/pages/SignupPage/types'
@@ -81,7 +80,6 @@ export const useAuth = () => {
   // ownLocalStorage.currentUser.get()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector((state: RootState) => state.user)
   const setUser = (payload: UserState) => {
     dispatch(userActions.changeUser(payload))
   }
@@ -135,5 +133,5 @@ export const useAuth = () => {
     navigate('/login')
   }
 
-  return { login, logout, getMe, user, loading, error }
+  return { login, logout, getMe, loading, error }
 }

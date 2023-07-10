@@ -28,8 +28,10 @@ const styles = {
     rounded-full
     border
     border-primary
+    select-none
 
-    pointer-events-none
+    hover:blur-[2px] dark:hover:blur-[2px]
+    cursor-not-allowed
   `,
   google__text: `
     text-black

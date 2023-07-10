@@ -21,11 +21,9 @@ import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
 import ErrorBoundary from './components/ErrorBoundary'
 import { UserContext } from './contexts/UserContext'
-// import { useAuth } from './hooks/useAuth'
 
 export function App() {
   const { i18n } = useTranslation()
-  // const { user } = useAuth()
   const user = useSelector((state: RootState) => state.user)
   console.log('App user state', user)
 

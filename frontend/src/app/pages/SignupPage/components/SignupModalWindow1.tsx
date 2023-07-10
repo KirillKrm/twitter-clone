@@ -140,6 +140,7 @@ const styles = {
     my-[12px]
     bg-black dark:bg-white
     rounded-full
+    select-none
   `,
   next__text: `
     text-white dark:text-black

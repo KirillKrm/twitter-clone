@@ -11,6 +11,7 @@ import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import SvgLogo from 'app/components/SVG/SvgLogo'
 import InputField from 'app/components/Input/InputField'
 import { useAuth } from 'app/hooks/useAuth'
+import { UserContext } from 'app/contexts/UserContext'
 
 export type LoginModalWindow2Props = {
   goToPrevStep: () => void
@@ -21,7 +22,8 @@ export default function LoginModalWindow2({
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const navigate = useNavigate()
-  const { login, user, loading, error } = useAuth()
+  const { login, loading, error } = useAuth()
+  const user = React.useContext(UserContext)
 
   const loginPage = useSelector((state: RootState) => state.loginpage)
   const [loginString, setLoginString] = React.useState(
@@ -92,8 +94,8 @@ export default function LoginModalWindow2({
             placeholder={t('password')}
             isError={!!error}
           />
-          <a href="/signup" className={styles.hint__password}>
-            <span role="button">{t('forgot')}</span>
+          <a href="#/" className={styles.hint__password}>
+            <span>{t('forgot')}</span>
           </a>
         </div>
         <div className={styles.main__bottom}>
@@ -107,9 +109,7 @@ export default function LoginModalWindow2({
           <div className={styles.main__hint}>
             <span className={styles.hint__left}>{t('hint')}</span>
             <a href="/signup">
-              <span className={styles.hint__right} role="button">
-                {t('signup')}
-              </span>
+              <span className={styles.hint__right}>{t('signup')}</span>
             </a>
           </div>
         </div>
@@ -172,6 +172,7 @@ const styles = {
     rounded-full
     mb-6
     disabled:opacity-50
+    select-none
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light
@@ -196,6 +197,9 @@ const styles = {
     text-[13px]
     text-blue
     hover:underline
+
+    hover:blur-[1px] dark:hover:blur-[1px]
+    cursor-not-allowed
   `,
   main__top: `
     flex

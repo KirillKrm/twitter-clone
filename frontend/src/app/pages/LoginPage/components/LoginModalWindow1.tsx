@@ -156,6 +156,7 @@ const styles = {
     my-[12px]
     bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
+    select-none
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light
@@ -174,6 +175,10 @@ const styles = {
     border
     border-secondaryText-light dark:border-secondaryText-dark
     dark:hover:bg-[rgba(239,243,244,0.1)]
+    select-none
+    
+    hover:blur-[2px] dark:hover:blur-[2px]
+    cursor-not-allowed
   `,
   forgot__text: `
     font-bold

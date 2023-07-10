@@ -3,7 +3,6 @@ import 'index.css'
 import { useState, useEffect } from 'react'
 
 import MenuUnit, { MenuUnitProps } from './MenuUnit'
-import { useAuth } from 'app/hooks/useAuth'
 import SvgLogo from './SVG/SvgLogo'
 import {
   HomeIcon,
@@ -16,6 +15,7 @@ import {
   MoreIcon,
   SearchIcon,
 } from 'app/components/SVG/SvgIcons'
+import { UserContext } from 'app/contexts/UserContext'
 
 export type MenuButton = Omit<MenuUnitProps, 'isActive' | 'setActive'>
 
@@ -28,42 +28,42 @@ const menuList: MenuButton[] = [
   {
     name: 'Search',
     svgPath: SearchIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Explore',
     svgPath: ExploreIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Notifications',
     svgPath: NotificationsIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Messages',
     svgPath: MessagesIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Bookmarks',
     svgPath: BookmarksIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Lists',
     svgPath: ListsIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'Profile',
     svgPath: ProfileIcon,
-    link: '/#',
+    link: '#/',
   },
   {
     name: 'More',
     svgPath: MoreIcon,
-    link: '/#',
+    link: '#/',
   },
 ]
 
@@ -79,8 +79,10 @@ const menuListNotAuthorized: MenuButton[] = menuList.filter(menuBtn =>
 )
 
 export default function Menu() {
-  const { user } = useAuth()
-  const [activeButton, setActiveButton] = useState('')
+  const user = React.useContext(UserContext)
+  const [activeButton, setActiveButton] = useState(
+    localStorage.getItem('active_menu_btn') || 'Home',
+  )
   const [width, setWidth] = useState(window.innerWidth)
   const menu =
     width > 500
@@ -123,6 +125,8 @@ const styles = {
     max-xs:flex-row
     max-xs:w-full
     max-xs:justify-around
+    max-xs:bg-white
+    max-xs:dark:bg-black
   `,
   container__logo: `
     flex 
