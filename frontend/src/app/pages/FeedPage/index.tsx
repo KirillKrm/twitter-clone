@@ -1,98 +1,50 @@
 import 'index.css'
 import { useTranslation } from 'react-i18next'
 
-import Menu from 'app/components/Menu'
 import Twits from 'app/pages/FeedPage/components/Twits'
 import Search from 'app/components/Search'
 import Trends from 'app/pages/FeedPage/components/Trends'
-import Account from 'app/components/Account'
 import BasePage from 'app/pages/BasePage'
+import BaseMainPage from '../BaseMainPage'
 import TwitCreate from 'app/components/TwitCreate'
 import Recommendations from 'app/pages/FeedPage/components/Recommendations'
 
 export function FeedPage() {
   const { t } = useTranslation('feed')
-
   return (
     <BasePage
       helmet={{ title: 'Feed page', description: 'Twitter Clone Feed Page' }}
       langSwitch={{ page: 'feed' }}
     >
-      <div className={styles.container}>
-        <main className={styles.container__main}>
-          <header className={styles.main__header}>
-            <div className={styles.header__menu}>
-              <Menu />
-              <Account />
+      <BaseMainPage>
+        <div className={styles.main__columns}>
+          <div className={styles.columns__middleColumn}>
+            <h2 className={styles.middleColumn__title}>{t('Home')}</h2>
+            <TwitCreate />
+            <Twits />
+          </div>
+          <div className={styles.columns__sidebar}>
+            <div className={styles.sidebar__search}>
+              <Search />
             </div>
-          </header>
-          <div className={styles.main__columns}>
-            <div className={styles.columns__middleColumn}>
-              <h2 className={styles.middleColumn__title}>{t('Home')}</h2>
-              <TwitCreate />
-              <Twits />
-            </div>
-            <div className={styles.columns__sidebar}>
-              <div className={styles.sidebar__search}>
-                <Search />
+            <div className={styles.sidebar__box}>
+              <div className={styles.box__trends}>
+                <Trends />
               </div>
-              <div className={styles.sidebar__box}>
-                <div className={styles.box__trends}>
-                  <Trends />
-                </div>
-                <div className={styles.box__recommendations}>
-                  <Recommendations />
-                </div>
+              <div className={styles.box__recommendations}>
+                <Recommendations />
               </div>
             </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </BaseMainPage>
     </BasePage>
   )
 }
 
 const styles = {
-  container: `
-  flex
-  justify-center
-  h-fit
-  w-full
-`,
-  container__main: `
-  flex
-  flex-row
-  justify-center
-`,
-  main__header: `
-  flex
-  flex-grow 
-  sticky
-  h-screen
-
-  xs:top-0
-  xs:justify-end
-
-  max-xs:fixed
-  max-xs:bottom-0
-  max-xs:w-full
-  max-xs:h-[56px]
-  max-xs:justify-center
-  max-xs:bg-primary
-`,
-  header__menu: `
-  flex 
-  flex-col 
-  justify-between
-
-  max-xs:flex-row
-  max-xs:w-full
-  max-xs:border-t
-  max-xs:border-tertiaryBg-light max-xs:dark:border-tertiaryBg-dark
-`,
   main__columns: `
   flex 
-  flex-grow
   gap-6
 
   xs:max-sm:w-full

@@ -17,9 +17,7 @@ import {
 } from 'app/components/SVG/SvgIcons'
 import { UserContext } from 'app/contexts/UserContext'
 
-export type MenuButton = Omit<MenuUnitProps, 'isActive' | 'setActive'>
-
-const menuList: MenuButton[] = [
+const menuList: MenuUnitProps[] = [
   {
     name: 'Home',
     svgPath: HomeIcon,
@@ -28,61 +26,65 @@ const menuList: MenuButton[] = [
   {
     name: 'Search',
     svgPath: SearchIcon,
-    link: '#/',
+    link: '/search',
+    notAvailable: true,
   },
   {
     name: 'Explore',
     svgPath: ExploreIcon,
-    link: '#/',
+    link: '/explore',
+    notAvailable: true,
   },
   {
     name: 'Notifications',
     svgPath: NotificationsIcon,
-    link: '#/',
+    link: '/notifications',
+    notAvailable: true,
   },
   {
     name: 'Messages',
     svgPath: MessagesIcon,
-    link: '#/',
+    link: '/messages',
+    notAvailable: true,
   },
   {
     name: 'Bookmarks',
     svgPath: BookmarksIcon,
-    link: '#/',
+    link: '/bookmarks',
+    notAvailable: true,
   },
   {
     name: 'Lists',
     svgPath: ListsIcon,
-    link: '#/',
+    link: '/lists',
+    notAvailable: true,
   },
   {
     name: 'Profile',
     svgPath: ProfileIcon,
-    link: '#/',
+    link: '/profile',
+    notAvailable: true,
   },
   {
     name: 'More',
     svgPath: MoreIcon,
-    link: '#/',
+    link: '/settings',
   },
 ]
 
-const menuListDesktop: MenuButton[] = menuList.filter(
+const menuListDesktop: MenuUnitProps[] = menuList.filter(
   menuBtn => menuBtn.name !== 'Search',
 )
 
-const menuListMobile: MenuButton[] = menuList.filter(menuBtn =>
+const menuListMobile: MenuUnitProps[] = menuList.filter(menuBtn =>
   ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
 )
-const menuListNotAuthorized: MenuButton[] = menuList.filter(menuBtn =>
+const menuListNotAuthorized: MenuUnitProps[] = menuList.filter(menuBtn =>
   ['Explore', 'More'].includes(menuBtn.name),
 )
 
 export default function Menu() {
   const user = React.useContext(UserContext)
-  const [activeButton, setActiveButton] = useState(
-    localStorage.getItem('active_menu_btn') || 'Home',
-  )
   const [width, setWidth] = useState(window.innerWidth)
   const menu =
     width > 500
@@ -98,18 +100,13 @@ export default function Menu() {
 
   return (
     <nav className={styles.container}>
-      {width > 500 ? (
+      {width > 500 && (
         <a href="/#" className={styles.container__logo}>
           <SvgLogo />
         </a>
-      ) : null}
+      )}
       {menu.map(menuUnitProps => (
-        <MenuUnit
-          {...menuUnitProps}
-          key={menuUnitProps.name}
-          isActive={activeButton === menuUnitProps.name}
-          setActive={setActiveButton}
-        />
+        <MenuUnit {...menuUnitProps} key={menuUnitProps.name} />
       ))}
     </nav>
   )

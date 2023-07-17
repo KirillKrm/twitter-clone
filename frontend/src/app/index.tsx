@@ -7,42 +7,39 @@
  */
 
 import * as React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Routes, Route } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'types'
 import 'index.css'
 import 'locales/i18n'
 
+import { Settings } from './pages/Settings'
 import { FeedPage } from './pages/FeedPage/index'
 import { LoginPage } from './pages/LoginPage/index'
 import { SignupPage } from './pages/SignupPage/index'
 import { NotFoundPage } from './pages/NotFoundPage/index'
+import { ThemesLanguages } from './pages/Settings/components/ThemesLanguages'
 import ErrorBoundary from './components/ErrorBoundary'
 import { UserContext } from './contexts/UserContext'
 
 export function App() {
-  const { i18n } = useTranslation()
   const user = useSelector((state: RootState) => state.user)
-  console.log('App user state', user)
 
   return (
     <UserContext.Provider value={user}>
-      <Helmet
-        titleTemplate="Twitter Clone"
-        defaultTitle="Twitter Clone"
-        htmlAttributes={{ lang: i18n.language }}
-      >
-        <meta name="description" content="Twitter Clone" />
-      </Helmet>
       <ErrorBoundary>
         <Routes>
-          {['/', '/home'].map((path, index) => (
-            <Route path={path} element={<FeedPage />} key={index} />
-          ))}
+          <Route
+            path="/"
+            element={user ? <Navigate to="/home" /> : <Navigate to="/login" />}
+          />
+          <Route path="/home" element={<FeedPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/settings" element={<Settings />}>
+            <Route path="themes-and-languages" element={<ThemesLanguages />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ErrorBoundary>

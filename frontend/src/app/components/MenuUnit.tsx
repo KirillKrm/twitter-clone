@@ -1,4 +1,6 @@
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 import 'index.css'
 import classnames from 'classnames'
 
@@ -6,40 +8,47 @@ export type MenuUnitProps = {
   name: string
   svgPath: string
   link: string
-  isActive: boolean
-  setActive: Function
+  notAvailable?: boolean
 }
 
 export default function MenuUnit({
-  link,
-  isActive,
-  setActive,
-  svgPath: image,
   name,
+  svgPath: image,
+  link,
+  notAvailable,
 }: MenuUnitProps) {
   const { t } = useTranslation()
 
   const buttonStyle = classnames(styles.container__button, {
-    'font-bold': isActive,
-    'hover:blur-[2px] dark:hover:blur-[2px] cursor-not-allowed':
-      name !== 'Home',
+    [styles.button__not_available]: notAvailable,
   })
 
-  const handleOnClick = () => {
-    setActive(name)
-    localStorage.setItem('active_menu_btn', name)
-  }
-
-  return (
-    <a href={link} className={buttonStyle} onClick={handleOnClick}>
+  const button = (
+    <>
       <svg viewBox="0 0 24 24" className={styles.button__svg}>
         <g className={styles.svg__g}>
           <path d={image}></path>
         </g>
       </svg>
       <span className={styles.button__name}>{t(name)}</span>
-    </a>
+    </>
   )
+
+  // TODO try to rewrite clearly
+  if (notAvailable) {
+    return <div className={buttonStyle}>{button}</div>
+  } else {
+    return (
+      <NavLink
+        to={link}
+        className={({ isActive }) =>
+          classnames(buttonStyle, { 'font-bold': isActive })
+        }
+      >
+        {button}
+      </NavLink>
+    )
+  }
 }
 
 const styles = {
@@ -54,6 +63,10 @@ const styles = {
     transition-colors 
     duration-200
     select-none
+  `,
+  button__not_available: `
+    hover:blur-[2px] dark:hover:blur-[2px]
+    cursor-not-allowed
   `,
   button__svg: `
     w-6 
