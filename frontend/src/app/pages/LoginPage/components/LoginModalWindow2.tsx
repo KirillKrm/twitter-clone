@@ -173,6 +173,9 @@ const styles = {
     mb-6
     disabled:opacity-50
     select-none
+    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light

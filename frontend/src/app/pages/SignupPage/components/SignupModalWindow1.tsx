@@ -141,6 +141,9 @@ const styles = {
     bg-black dark:bg-white
     rounded-full
     select-none
+    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-white dark:text-black

@@ -1,59 +1,48 @@
 import * as React from 'react'
 import 'index.css'
+import { motion } from 'framer-motion'
+import classnames from 'classnames'
+
+import SvgMoon from './SVG/SvgMoon'
+import SvgSun from './SVG/SvgSun'
+import { useTheme } from '../hooks/useTheme'
 
 export default function ThemeSwitcher() {
-  const handleClickLight = () => {
-    const setThemeLight = () => {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('color-theme', 'light')
-    }
+  const { setLightTheme, setkDarkTheme } = useTheme()
+  const [isOn, setIsOn] = React.useState(
+    localStorage.getItem('color-theme') === 'dark' ||
+      document.documentElement.classList.contains('dark'),
+  )
 
-    // if set via local storage previously
-    if (localStorage.getItem('color-theme')) {
-      if (localStorage.getItem('color-theme') === 'dark') {
-        setThemeLight()
-      }
-      // if NOT set via local storage previously
-    } else {
-      if (document.documentElement.classList.contains('dark')) {
-        setThemeLight()
-      }
-    }
+  const switcherStyle = classnames(styles.container, { 'justify-end': isOn })
+
+  const handleOnClickLight = () => {
+    setIsOn(false)
+    setLightTheme()
   }
 
-  const handleClickDark = () => {
-    const setThemeDark = () => {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('color-theme', 'dark')
-    }
-
-    // if set via local storage previously
-    if (localStorage.getItem('color-theme')) {
-      if (localStorage.getItem('color-theme') === 'light') {
-        setThemeDark()
-      }
-      // if NOT set via local storage previously
-    } else {
-      if (!document.documentElement.classList.contains('dark')) {
-        setThemeDark()
-      }
-    }
+  const handleOnClickDark = () => {
+    setIsOn(true)
+    setkDarkTheme()
   }
 
   return (
-    <div className={styles.container}>
-      <button
-        className={styles.container__light}
-        onClick={() => handleClickLight()}
+    <div
+      className={switcherStyle}
+      onClick={isOn ? handleOnClickLight : handleOnClickDark}
+    >
+      <motion.div
+        layout
+        transition={{ type: 'spring', stiffness: 800, damping: 60 }}
+        className={styles.container__handle}
       >
-        light
-      </button>
-      <button
-        className={styles.container__dark}
-        onClick={() => handleClickDark()}
-      >
-        dark
-      </button>
+        <motion.div className={styles.handle__svg + 'hidden dark:block'}>
+          <SvgMoon />
+        </motion.div>
+        <motion.div className={styles.handle__svg + 'block dark:hidden'}>
+          <SvgSun />
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
@@ -61,26 +50,29 @@ export default function ThemeSwitcher() {
 const styles = {
   container: `
     flex
-    flex-col
-    gap-1
-    select-none
+    w-[80px]
+    h-[40px]
+    p-1
+    justify-start
+    bg-tertiary
+    rounded-full
+    cursor-pointer
   `,
-  container__light: `
-    py-1
-    px-2
-    bg-white
-    text-black
-    rounded-lg
-    border-2
-    border-black
+  container__handle: `
+    flex
+    w-[32px]
+    h-[32px]
+    bg-[#000] dark:bg-[#fff]
+    rounded-full
+    justify-center
+    items-center
+    transition-colors
+    duration-[400ms]
   `,
-  container__dark: `
-    py-1
-    px-2
-    bg-black
-    text-white
-    rounded-lg
-    border-2
-    border-white
+  handle__svg: `
+    justify-center
+    items-center
+    w-4/5
+    h-4/5
   `,
 }

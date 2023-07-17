@@ -154,9 +154,12 @@ const styles = {
     w-[300px]
     h-[40px]
     my-[12px]
-    bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
     select-none
+    bg-primaryBg-dark dark:bg-primaryBg-light
+    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light

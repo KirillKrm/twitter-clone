@@ -187,6 +187,10 @@ const styles = {
     my-[24px]
     bg-blue dark:bg-blue
     rounded-full
+    select-none
+    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-white dark:text-white
