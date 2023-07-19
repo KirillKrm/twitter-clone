@@ -34,28 +34,25 @@ export default function MenuUnit({
     </>
   )
 
-  // TODO try to rewrite clearly
-  if (notAvailable) {
-    return <div className={buttonStyle}>{button}</div>
-  } else {
-    return (
-      <NavLink
-        to={link}
-        className={({ isActive }) =>
-          classnames(buttonStyle, { 'font-bold': isActive })
-        }
-      >
-        {button}
-      </NavLink>
-    )
-  }
+  return notAvailable ? (
+    <div className={buttonStyle}>{button}</div>
+  ) : (
+    <NavLink
+      to={link}
+      className={({ isActive }) =>
+        classnames(buttonStyle, { 'font-bold': isActive })
+      }
+    >
+      {button}
+    </NavLink>
+  )
 }
 
 const styles = {
   container__button: `
     flex 
     items-center 
-    min-[1280px]:min-w-[200px]
+    min-[1280px]:min-w-[222px]
     p-3 
     my-1 
     rounded-full 

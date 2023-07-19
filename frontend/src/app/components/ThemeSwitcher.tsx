@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'index.css'
-import { motion } from 'framer-motion'
+import { cubicBezier, motion } from 'framer-motion'
 import classnames from 'classnames'
 
 import SvgMoon from './SVG/SvgMoon'
@@ -33,7 +33,10 @@ export default function ThemeSwitcher() {
     >
       <motion.div
         layout
-        transition={{ type: 'spring', stiffness: 800, damping: 60 }}
+        transition={{
+          ease: cubicBezier(0.33, 1, 0.68, 1),
+          duration: 0.5,
+        }}
         className={styles.container__handle}
       >
         <motion.div className={styles.handle__svg + 'hidden dark:block'}>
@@ -52,22 +55,23 @@ const styles = {
     flex
     w-[80px]
     h-[40px]
-    p-1
+    p-1.5
     justify-start
+    items-center
     bg-tertiary
     rounded-full
     cursor-pointer
   `,
   container__handle: `
     flex
-    w-[32px]
-    h-[32px]
+    w-[30px]
+    h-[30px]
     bg-[#000] dark:bg-[#fff]
     rounded-full
     justify-center
     items-center
     transition-colors
-    duration-[400ms]
+    duration-[500ms]
   `,
   handle__svg: `
     justify-center

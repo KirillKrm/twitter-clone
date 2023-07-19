@@ -11,13 +11,18 @@ const itemVariants: Variants = {
   open: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 24 },
+    transition: {
+      type: 'spring',
+      duration: 0.2,
+      stiffness: 1200,
+      damping: 100,
+    },
   },
   closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 }
 
 export default function LanguageSwitcher(props: LanguageSwitcherProps) {
-  const { i18n } = useTranslation(props.page)
+  const { t, i18n } = useTranslation(props.page)
   const [isOpen, setIsOpen] = React.useState(false)
 
   const handleOnClick = language => {
@@ -36,7 +41,7 @@ export default function LanguageSwitcher(props: LanguageSwitcherProps) {
         onClick={() => setIsOpen(!isOpen)}
         className={styles.container__title}
       >
-        Language
+        <>{t(i18n.language)}</>
         <motion.div
           variants={{
             open: { rotate: 180 },
@@ -57,9 +62,8 @@ export default function LanguageSwitcher(props: LanguageSwitcherProps) {
             transition: {
               type: 'spring',
               bounce: 0,
-              duration: 0.7,
-              delayChildren: 0.3,
-              staggerChildren: 0.05,
+              duration: 0.2,
+              staggerChildren: 0.025,
             },
           },
           closed: {
@@ -67,25 +71,35 @@ export default function LanguageSwitcher(props: LanguageSwitcherProps) {
             transition: {
               type: 'spring',
               bounce: 0,
-              duration: 0.3,
+              duration: 0.2,
             },
           },
         }}
         className={styles.container__list}
       >
+        {/* {i18n.languages.map(language => (
+          <motion.li
+            key={language}
+            variants={itemVariants}
+            className={styles.list__item}
+            onClick={() => handleOnClick(language)}
+          >
+            {language}
+          </motion.li>
+        ))} */}
         <motion.li
           variants={itemVariants}
           className={styles.list__item}
           onClick={() => handleOnClick('en')}
         >
-          English
+          {t('en')}
         </motion.li>
         <motion.li
           variants={itemVariants}
           className={styles.list__item}
           onClick={() => handleOnClick('ua')}
         >
-          Ukrainian
+          {t('ua')}
         </motion.li>
       </motion.ul>
     </motion.div>
@@ -96,7 +110,8 @@ const styles = {
   container: `
     flex
     flex-col
-    w-full
+    min-w-[160px]
+    select-none
   `,
   container__title: `
     flex
@@ -104,18 +119,18 @@ const styles = {
     mb-2
     justify-between
     items-center
+    gap-4
     rounded
     bg-tertiary
   `,
   container__list: `
     flex
     flex-col
-    py-2
-    gap-1
     bg-tertiary
   `,
   list__item: `
     px-2
+    py-1
     cursor-pointer
     hover:bg-[rgba(15,20,25,0.1)] dark:hover:bg-[rgba(231,233,234,0.1)]
   `,

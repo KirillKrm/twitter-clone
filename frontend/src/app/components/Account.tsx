@@ -26,7 +26,7 @@ export default function Account() {
     <>
       <div className={popupStyle}>
         <div className={styles.popup__logout} onClick={logout}>
-          Log out @{user.nickname}
+          <span className={'text-primary'}>Log out @{user.nickname}</span>
         </div>
         <SvgPopupTriangle />
       </div>
@@ -82,6 +82,7 @@ const styles = {
   text__name: `
     whitespace-nowrap 
     overflow-hidden 
+    text-primary
     text-ellipsis 
     text-[15px] 
     font-bold

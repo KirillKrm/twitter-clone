@@ -38,7 +38,6 @@ export function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/settings" element={<Settings />}>
             <Route path="themes-and-languages" element={<ThemesLanguages />} />
-            <Route path="*" element={<NotFoundPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
