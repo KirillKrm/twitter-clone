@@ -1,18 +1,23 @@
 import * as React from 'react'
 import 'index.css'
+import { useTranslation } from 'react-i18next'
 
 import ThemeSwitcher from '../../../components/ThemeSwitcher'
 import LanguageSwitcher from '../../../components/LanguageSwitcher'
 
 export function ThemesLanguages() {
+  const { t } = useTranslation('settings')
+
   return (
     <div className={styles.container}>
-      <div className={styles.theme}>
-        <h3 className={styles.title}>Theme</h3>
+      <div className={styles.container__theme}>
+        <h3 className={styles.theme__title}>{t('theme')}</h3>
         <ThemeSwitcher />
       </div>
-      <h3 className={styles.title}>Display language</h3>
-      <LanguageSwitcher page={'feed'} />
+      <div className={styles.container__language}>
+        <h3 className={styles.language__title}>{t('language')}</h3>
+        <LanguageSwitcher page={'settings'} />
+      </div>
     </div>
   )
 }
@@ -25,13 +30,24 @@ const styles = {
     py-3
     gap-3
   `,
-  theme: `
+  container__theme: `
     flex
     justify-between
     items-center
   `,
-  title: `
+  container__language: `
     flex
+    justify-between
+  `,
+  theme__title: `
+    flex
+    font-bold
+    text-xl
+    text-primary
+  `,
+  language__title: `
+    flex
+    min-w-fit
     font-bold
     text-xl
     text-primary

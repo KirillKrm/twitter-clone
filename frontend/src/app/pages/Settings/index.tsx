@@ -1,50 +1,76 @@
 import * as React from 'react'
 import 'index.css'
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
+import classnames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 import BasePage from 'app/pages/BasePage'
 import BaseMainPage from '../BaseMainPage'
 import SvgRightArrow from '../../components/SVG/SvgRightArrow'
 
 const settingsList = [
-  { name: 'Your account', link: '' },
-  { name: 'Security', link: '' },
-  { name: 'Privacy', link: '' },
-  { name: 'Themes and languages', link: 'themes-and-languages' },
-  { name: 'Additional resources', link: '' },
+  { name: 'account', link: 'account', notAvailable: true },
+  { name: 'security', link: 'security', notAvailable: true },
+  { name: 'privacy', link: 'privacy', notAvailable: true },
+  { name: 'themesLanguages', link: 'themes-and-languages' },
+  {
+    name: 'additionalResources',
+    link: 'additional-resources',
+    notAvailable: true,
+  },
 ]
 
 export function Settings() {
+  const { t } = useTranslation('settings')
+
   return (
     <BasePage
       helmet={{
         title: 'Settings',
         description: 'Twitter Clone Settings',
       }}
-      langSwitch={{ page: 'feed' }}
+      langSwitch={{ page: 'settings' }}
     >
       <BaseMainPage>
         <div className={styles.main__columns}>
           <section className={styles.columns__navigation}>
             <div className={styles.navigation__title}>
-              <h2 className={styles.title__text}>Settings</h2>
+              <h2 className={styles.title__text}>{t('settings')}</h2>
             </div>
             <nav className={styles.navigation__items}>
-              {settingsList.map(settingsListProps => (
-                <Link
-                  key={settingsListProps.name}
-                  to={settingsListProps.link}
-                  className={styles.navigation__item}
-                >
-                  {settingsListProps.name}
-                  <SvgRightArrow />
-                </Link>
-              ))}
+              {settingsList.map(settingsListProps => {
+                const navItemStyle = classnames(styles.navigation__item, {
+                  [styles.item__not_available]: settingsListProps.notAvailable,
+                })
+
+                return settingsListProps.notAvailable ? (
+                  <div key={settingsListProps.name} className={navItemStyle}>
+                    <h3 className="text-primary">
+                      {t(settingsListProps.name)}
+                    </h3>
+                  </div>
+                ) : (
+                  <NavLink
+                    key={settingsListProps.name}
+                    to={settingsListProps.link}
+                    className={({ isActive }) =>
+                      classnames(navItemStyle, {
+                        [styles.item__active]: isActive,
+                      })
+                    }
+                  >
+                    <h3 className="text-primary">
+                      {t(settingsListProps.name)}
+                    </h3>
+                    <SvgRightArrow />
+                  </NavLink>
+                )
+              })}
             </nav>
           </section>
           <section className={styles.columns__details}>
             <div className={styles.navigation__title}>
-              <h2 className={styles.title__text}>Details</h2>
+              <h2 className={styles.title__text}>{t('details')}</h2>
             </div>
             <Outlet />
           </section>
@@ -103,5 +129,13 @@ const styles = {
     transition-colors 
     duration-200
     select-none
+  `,
+  item__not_available: `
+    hover:blur-[2px] dark:hover:blur-[2px]
+    cursor-not-allowed
+  `,
+  item__active: `
+    bg-[rgba(15,20,25,0.1)] dark:bg-[rgba(231,233,234,0.1)]
+    shadow-[-2px_0px_0px_0px_deepskyblue_inset]
   `,
 }
