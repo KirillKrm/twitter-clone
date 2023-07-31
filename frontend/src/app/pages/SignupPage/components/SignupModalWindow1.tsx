@@ -9,10 +9,12 @@ import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 export type SignupModalWindow1Props = {
   goToNextStep: () => void
+  handleClose?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function SignupModalWindow1({
   goToNextStep,
+  handleClose,
 }: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
@@ -29,6 +31,7 @@ export default function SignupModalWindow1({
             className={styles.close__button}
             aria-label="Close"
             role="button"
+            onClick={handleClose && (() => handleClose(false))}
           >
             <SvgButtonClose />
           </div>
@@ -141,7 +144,7 @@ const styles = {
     bg-black dark:bg-white
     rounded-full
     select-none
-    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
     transition-colors 
     duration-200
   `,

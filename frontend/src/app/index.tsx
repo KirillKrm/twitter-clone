@@ -29,10 +29,7 @@ export function App() {
     <UserContext.Provider value={user}>
       <ErrorBoundary>
         <Routes>
-          <Route
-            path="/"
-            element={user ? <Navigate to="/home" /> : <Navigate to="/login" />}
-          />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<FeedPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

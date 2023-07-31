@@ -47,7 +47,7 @@ export default function SignupModalWindow2({
   const signUpPage = useSelector((state: RootState) => state.signuppage)
   const [name, setName] = React.useState(signUpPage?.username || 'Uber')
   const [nickname, setNickname] = React.useState(
-    signUpPage?.nickname || 'Uber228',
+    signUpPage?.nickname || 'Uber123',
   )
   const [password, setPassword] = React.useState(
     signUpPage?.password || '123456789',
@@ -266,9 +266,9 @@ const styles = {
     my-[12px]
     bg-black dark:bg-white
     rounded-full
-    disabled:opacity-50
+    disabled:bg-[#353535] disabled:dark:bg-[#cacaca]
     select-none
-    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
     transition-colors 
     duration-200
   `,

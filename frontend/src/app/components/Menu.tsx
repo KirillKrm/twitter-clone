@@ -101,7 +101,7 @@ export default function Menu() {
   return (
     <nav className={styles.container}>
       {width > 500 && (
-        <a href="/#" className={styles.container__logo}>
+        <a href="/home" className={styles.container__logo}>
           <SvgLogo />
         </a>
       )}

@@ -15,10 +15,12 @@ import { UserContext } from 'app/contexts/UserContext'
 
 export type LoginModalWindow2Props = {
   goToPrevStep: () => void
+  handleClose?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function LoginModalWindow2({
   goToPrevStep,
+  handleClose,
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const navigate = useNavigate()
@@ -40,6 +42,7 @@ export default function LoginModalWindow2({
       username: loginString,
       password,
     })
+    handleClose && handleClose(false)
   }
 
   React.useEffect(() => {
@@ -171,9 +174,9 @@ const styles = {
     bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
     mb-6
-    disabled:opacity-50
+    disabled:bg-[#353535] disabled:dark:bg-[#cacaca]
     select-none
-    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
     transition-colors 
     duration-200
   `,

@@ -13,10 +13,12 @@ import { useRegistration } from 'app/hooks/useAuth'
 
 export type SignupModalWindow3Props = {
   goToPrevStep: () => void
+  handleClose?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function SignupModalWindow3({
   goToPrevStep,
+  handleClose,
 }: SignupModalWindow3Props) {
   const { t } = useTranslation('signup')
   const { register, user, loading, error } = useRegistration()
@@ -49,6 +51,7 @@ export default function SignupModalWindow3({
       password,
       birthday: birthdayList,
     })
+    handleClose && handleClose(false)
   }
 
   React.useEffect(() => {
@@ -188,7 +191,7 @@ const styles = {
     bg-blue dark:bg-blue
     rounded-full
     select-none
-    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
     transition-colors 
     duration-200
   `,

@@ -24,7 +24,6 @@ const itemVariants: Variants = {
 export default function LanguageSwitcher(props: LanguageSwitcherProps) {
   const { t, i18n } = useTranslation(props.page)
   const [isOpen, setIsOpen] = React.useState(false)
-  const languages = i18n.languages
 
   const handleOnClick = (language: string) => {
     i18n.changeLanguage(language)
@@ -78,7 +77,7 @@ export default function LanguageSwitcher(props: LanguageSwitcherProps) {
         }}
         className={styles.container__list}
       >
-        {[...languages].sort().map(language => (
+        {[...i18n.languages].sort().map(language => (
           <motion.li
             key={language}
             variants={itemVariants}

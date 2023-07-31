@@ -12,15 +12,18 @@ import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 export type LoginModalWindow1Props = {
   goToNextStep: () => void
+  onClose?: () => void
 }
 
 export default function LoginModalWindow1({
   goToNextStep,
+  onClose,
 }: LoginModalWindow1Props) {
   const { t } = useTranslation('login')
   const [login, setLogin] = React.useState(
     localStorage.getItem('current_user_username') || '',
   )
+  const [loginValid, setLoginValid] = React.useState(false)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -38,6 +41,7 @@ export default function LoginModalWindow1({
             className={styles.close__button}
             aria-label="Close"
             role="button"
+            onClick={onClose && (() => onClose())}
           >
             <SvgButtonClose />
           </div>
@@ -60,15 +64,16 @@ export default function LoginModalWindow1({
         <InputField
           value={login}
           setValue={setLogin}
+          setValid={setLoginValid}
           placeholder={t('input')}
         />
-        <div
+        <button
           className={styles.main__next}
-          role="button"
           onClick={() => goToNextStep()}
+          disabled={!loginValid}
         >
           <span className={styles.next__text}>{t('next')}</span>
-        </div>
+        </button>
         <div className={styles.main__forgot} role="button">
           <span className={styles.forgot__text}>{t('forgot')}</span>
         </div>
@@ -155,9 +160,10 @@ const styles = {
     h-[40px]
     my-[12px]
     rounded-full
+    disabled:bg-[#353535] disabled:dark:bg-[#cacaca]
     select-none
     bg-primaryBg-dark dark:bg-primaryBg-light
-    hover:bg-[#151515] dark:hover:bg-[#eaeaea]
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
     transition-colors 
     duration-200
   `,
