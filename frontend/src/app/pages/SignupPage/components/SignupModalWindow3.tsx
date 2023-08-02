@@ -13,12 +13,12 @@ import { useRegistration } from 'app/hooks/useAuth'
 
 export type SignupModalWindow3Props = {
   goToPrevStep: () => void
-  handleClose?: React.Dispatch<React.SetStateAction<boolean>>
+  onClose?: () => void
 }
 
 export default function SignupModalWindow3({
   goToPrevStep,
-  handleClose,
+  onClose,
 }: SignupModalWindow3Props) {
   const { t } = useTranslation('signup')
   const { register, user, loading, error } = useRegistration()
@@ -51,7 +51,7 @@ export default function SignupModalWindow3({
       password,
       birthday: birthdayList,
     })
-    handleClose && handleClose(false)
+    onClose && onClose()
   }
 
   React.useEffect(() => {

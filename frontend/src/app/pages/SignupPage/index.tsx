@@ -13,11 +13,7 @@ export function SignupPage() {
       }}
       langSwitch={{ page: 'signup' }}
     >
-      <SignupModal
-        onClose={() => {
-          window.history.back()
-        }}
-      />
+      <SignupModal isModal={false} />
     </BasePage>
   )
 }

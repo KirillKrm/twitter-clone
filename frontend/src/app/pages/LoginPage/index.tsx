@@ -12,11 +12,7 @@ export function LoginPage() {
       }}
       langSwitch={{ page: 'login' }}
     >
-      <LoginModal
-        onClose={() => {
-          window.history.back()
-        }}
-      />
+      <LoginModal isModal={false} />
     </BasePage>
   )
 }

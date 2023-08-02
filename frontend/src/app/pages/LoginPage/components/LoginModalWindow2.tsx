@@ -15,12 +15,12 @@ import { UserContext } from 'app/contexts/UserContext'
 
 export type LoginModalWindow2Props = {
   goToPrevStep: () => void
-  handleClose?: React.Dispatch<React.SetStateAction<boolean>>
+  onClose?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function LoginModalWindow2({
   goToPrevStep,
-  handleClose,
+  onClose,
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ export default function LoginModalWindow2({
       username: loginString,
       password,
     })
-    handleClose && handleClose(false)
+    onClose && onClose(false)
   }
 
   React.useEffect(() => {

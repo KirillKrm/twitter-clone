@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ReactI18NextChild } from 'react-i18next'
 import { motion } from 'framer-motion'
+import classnames from 'classnames'
 
 import Menu from 'app/components/Menu'
 import Account from 'app/components/Account'
@@ -11,6 +12,19 @@ import { SignupModal } from './SignupPage/components/SignupModal'
 export type BaseMainPageProps = {
   children: ReactI18NextChild | Iterable<ReactI18NextChild>
 }
+
+const MenuEntranceButton = ({
+  classNameButton,
+  classNameText,
+  onClick,
+  buttonText,
+}) => (
+  <div className={styles.menu__entrance}>
+    <button className={classNameButton} onClick={onClick}>
+      <span className={classNameText}>{buttonText}</span>
+    </button>
+  </div>
+)
 
 const ModalWrapper = ({ isOpen, children }) => {
   return (
@@ -33,6 +47,36 @@ export default function BaseMainPage({ children }: BaseMainPageProps) {
   const [isSignupOpen, setIsSignupOpen] = React.useState(false)
   const [currentHref] = React.useState(window.location.href)
 
+  const handleLoginButtonClick = () => {
+    setIsLoginOpen(true)
+    window.history.replaceState(null, '', '/login')
+  }
+
+  const handleSignupButtonClick = () => {
+    setIsSignupOpen(true)
+    window.history.replaceState(null, '', '/signup')
+  }
+
+  const loginStyle = classnames(
+    styles.entrance__button,
+    'bg-primaryBg-dark dark:bg-primaryBg-light hover:bg-[#d7dbdc] hover:dark:bg-[#d7dbdc]',
+  )
+
+  const signupStyle = classnames(
+    styles.entrance__button,
+    'bg-blue hover:bg-[#1a8cd8]',
+  )
+
+  const loginTextStyle = classnames(
+    styles.button__text,
+    'text-primaryText-dark dark:text-primaryText-light',
+  )
+
+  const signupTextStyle = classnames(
+    styles.button__text,
+    'text-primaryText-dark',
+  )
+
   return (
     <>
       <div className={styles.container}>
@@ -43,33 +87,18 @@ export default function BaseMainPage({ children }: BaseMainPageProps) {
                 <Menu />
                 {!user && (
                   <div>
-                    <div className={styles.menu__entrance}>
-                      <button
-                        className={
-                          styles.entrance__button +
-                          'bg-primaryBg-dark dark:bg-primaryBg-light hover:bg-[#d7dbdc] hover:dark:bg-[#d7dbdc] text-primaryText-dark dark:text-primaryText-light'
-                        }
-                        onClick={() => {
-                          setIsLoginOpen(true)
-                          window.history.replaceState(null, '', '/login')
-                        }}
-                      >
-                        <span className={styles.button__text}>Log in</span>
-                      </button>
-                    </div>
-                    <div className={styles.menu__entrance}>
-                      <button
-                        className={
-                          styles.entrance__button + 'bg-blue hover:bg-[#1a8cd8]'
-                        }
-                        onClick={() => {
-                          setIsSignupOpen(true)
-                          window.history.replaceState(null, '', '/signup')
-                        }}
-                      >
-                        <span className={styles.button__text}>Sign up</span>
-                      </button>
-                    </div>
+                    <MenuEntranceButton
+                      classNameButton={loginStyle}
+                      classNameText={loginTextStyle}
+                      onClick={handleLoginButtonClick}
+                      buttonText="Log in"
+                    />
+                    <MenuEntranceButton
+                      classNameButton={signupStyle}
+                      classNameText={signupTextStyle}
+                      onClick={handleSignupButtonClick}
+                      buttonText="Sign up"
+                    />
                   </div>
                 )}
               </div>
@@ -81,6 +110,7 @@ export default function BaseMainPage({ children }: BaseMainPageProps) {
       </div>
       <ModalWrapper isOpen={isLoginOpen}>
         <LoginModal
+          isModal
           onClose={() => {
             setIsLoginOpen(false)
             window.history.replaceState(null, '', currentHref)
@@ -89,6 +119,7 @@ export default function BaseMainPage({ children }: BaseMainPageProps) {
       </ModalWrapper>
       <ModalWrapper isOpen={isSignupOpen}>
         <SignupModal
+          isModal
           onClose={() => {
             setIsSignupOpen(false)
             window.history.replaceState(null, '', currentHref)
@@ -165,5 +196,6 @@ const styles = {
     w-full
     h-full
     z-10
+    overflow-x-hidden
   `,
 }

@@ -13,11 +13,13 @@ import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 export type LoginModalWindow1Props = {
   goToNextStep: () => void
   onClose?: () => void
+  isModal?: boolean
 }
 
 export default function LoginModalWindow1({
   goToNextStep,
   onClose,
+  isModal,
 }: LoginModalWindow1Props) {
   const { t } = useTranslation('login')
   const [login, setLogin] = React.useState(
@@ -37,14 +39,16 @@ export default function LoginModalWindow1({
     <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__close}>
-          <div
-            className={styles.close__button}
-            aria-label="Close"
-            role="button"
-            onClick={onClose && (() => onClose())}
-          >
-            <SvgButtonClose />
-          </div>
+          {isModal && (
+            <div
+              className={styles.close__button}
+              aria-label="Close"
+              role="button"
+              onClick={onClose && (() => onClose())}
+            >
+              <SvgButtonClose />
+            </div>
+          )}
         </div>
         <div className={styles.top__logo}>
           <SvgLogo />

@@ -6,9 +6,16 @@ import SignupModalWindow1 from 'app/pages/SignupPage/components/SignupModalWindo
 import SignupModalWindow2 from 'app/pages/SignupPage/components/SignupModalWindow2'
 import SignupModalWindow3 from 'app/pages/SignupPage/components/SignupModalWindow3'
 
-export type SignupModalProps = {
-  onClose?: () => void
+type SignupIsModalProps = {
+  isModal: true
+  onClose: () => void
 }
+
+type SignupIsPageProps = {
+  isModal?: false
+}
+
+type SignupModalProps = SignupIsModalProps | SignupIsPageProps
 
 const variants = {
   enter: (direction: number) => {
@@ -31,7 +38,8 @@ const variants = {
   },
 }
 
-export function SignupModal({ onClose }: SignupModalProps) {
+export function SignupModal(props: SignupModalProps) {
+  const onClose: () => void = props.isModal ? props.onClose : () => {}
   const [step, setStep] = React.useState('first')
   const [direction, setDirection] = React.useState(0)
 
@@ -40,8 +48,16 @@ export function SignupModal({ onClose }: SignupModalProps) {
     setDirection(direction)
   }
 
+  const handleClick = (event: any) => {
+    event.preventDefault()
+
+    if (event.target === event.currentTarget) {
+      onClose()
+    }
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={step}
@@ -60,7 +76,8 @@ export function SignupModal({ onClose }: SignupModalProps) {
           {step === 'first' ? (
             <SignupModalWindow1
               goToNextStep={() => paginate('second', 1)}
-              handleClose={onClose}
+              onClose={onClose}
+              isModal={props.isModal}
             />
           ) : step === 'second' ? (
             <SignupModalWindow2
@@ -70,7 +87,7 @@ export function SignupModal({ onClose }: SignupModalProps) {
           ) : step === 'third' ? (
             <SignupModalWindow3
               goToPrevStep={() => paginate('second', -1)}
-              handleClose={onClose}
+              onClose={onClose}
             />
           ) : null}
         </motion.div>

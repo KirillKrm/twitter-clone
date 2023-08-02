@@ -4,9 +4,16 @@ import { AnimatePresence, motion } from 'framer-motion'
 import LoginModalWindow1 from './LoginModalWindow1'
 import LoginModalWindow2 from './LoginModalWindow2'
 
-export type LoginModalProps = {
-  onClose?: () => void
+type LoginIsModalProps = {
+  isModal: true
+  onClose: () => void
 }
+
+type LoginIsPageProps = {
+  isModal?: false
+}
+
+type LoginModalProps = LoginIsModalProps | LoginIsPageProps
 
 const variants = {
   enter: (direction: number) => {
@@ -29,7 +36,9 @@ const variants = {
   },
 }
 
-export function LoginModal({ onClose }: LoginModalProps) {
+export function LoginModal(props: LoginModalProps) {
+  const onClose: () => void = props.isModal ? props.onClose : () => {}
+
   const [step, setStep] = React.useState('first')
   const [direction, setDirection] = React.useState(0)
 
@@ -38,8 +47,16 @@ export function LoginModal({ onClose }: LoginModalProps) {
     setDirection(direction)
   }
 
+  const handleClick = (event: any) => {
+    event.preventDefault()
+
+    if (event.target === event.currentTarget) {
+      onClose()
+    }
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={step}
@@ -59,11 +76,12 @@ export function LoginModal({ onClose }: LoginModalProps) {
             <LoginModalWindow1
               goToNextStep={() => paginate('second', 1)}
               onClose={onClose}
+              isModal={props.isModal}
             />
           ) : step === 'second' ? (
             <LoginModalWindow2
               goToPrevStep={() => paginate('first', -1)}
-              handleClose={onClose}
+              onClose={onClose}
             />
           ) : null}
         </motion.div>
