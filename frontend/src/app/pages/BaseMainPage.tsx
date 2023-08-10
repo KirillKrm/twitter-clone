@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ReactI18NextChild } from 'react-i18next'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import classnames from 'classnames'
 
 import Menu from 'app/components/Menu'
@@ -28,16 +28,19 @@ const MenuEntranceButton = ({
 
 const ModalWrapper = ({ isOpen, children }) => {
   return (
-    isOpen && (
-      <motion.div
-        className={styles.modal}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.2 }}
-      >
-        {children}
-      </motion.div>
-    )
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className={styles.modal}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
