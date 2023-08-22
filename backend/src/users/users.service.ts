@@ -10,6 +10,7 @@ import { Repository } from 'typeorm'
 import { User } from './entities/user.entity'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { GetUsersQuery } from './dto/get-users-query.dto'
 
 @Injectable()
 export class UsersService {
@@ -49,11 +50,28 @@ export class UsersService {
   }
 
   // TODO filter + pagination
-  async findAll(): Promise<User[]> {
-    const users = await this.userRepository.find()
-    if (!users || !users.length) {
-      throw new NotFoundException('Users not found')
+  async findAll({ nickname }: GetUsersQuery = {}): Promise<User[]> {
+    let users: User[]
+
+    if (nickname) {
+      try {
+        const user = await this.findOneByNickname(nickname)
+
+        users = [user]
+      } catch (e) {
+        if (e instanceof NotFoundException) {
+          throw new NotFoundException('Users not found')
+        } else {
+          throw e
+        }
+      }
+    } else {
+      users = await this.userRepository.find()
+      if (!users || !users.length) {
+        throw new NotFoundException('Users not found')
+      }
     }
+
     this.logger.log(`${users.length} users fetched successfully`)
 
     return users
@@ -61,6 +79,16 @@ export class UsersService {
 
   async findOne(id: number): Promise<User> {
     const user = await this.userRepository.findOneBy({ id })
+    if (!user) {
+      throw new NotFoundException('User not found')
+    }
+    this.logger.log(`User ${user.id} fetched successfully`)
+
+    return user
+  }
+
+  async findOneByNickname(nickname: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ nickname })
     if (!user) {
       throw new NotFoundException('User not found')
     }
