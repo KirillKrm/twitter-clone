@@ -6,7 +6,12 @@ import { getTwits } from 'app/api/twits'
 import Loading from 'app/components/Loading'
 import { Twit as TwitType } from '../../../../types/Twit'
 
-export default function Twits() {
+export type TwitsProps = {
+  limit?: number
+  userId?: number
+}
+
+export default function Twits({ limit = 10, userId }: TwitsProps) {
   const [token, setToken] = React.useState<number>()
   const [twits, setTwits] = React.useState<TwitType[]>([])
   const [isFetchMore, setIsFetchMore] = React.useState(true)
@@ -31,23 +36,27 @@ export default function Twits() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await getTwits({ limit: 10, token })
+      const { data: nextTwits, nextToken } = await getTwits({
+        userId,
+        limit,
+        token,
+      })
 
-      if (response.data.length < 10) {
+      if (nextTwits.length < 10) {
         setWasLastList(true)
-        setTwits(twits.concat(response.data))
+        setTwits(twits.concat(nextTwits))
         return
       }
 
-      setTwits(twits.concat(response.data))
-      setToken(response.nextToken)
+      setTwits(twits.concat(nextTwits))
+      setToken(nextToken)
       setIsFetchMore(false)
     }
 
     if (!wasLastList && isFetchMore) {
       fetchData()
     }
-  }, [token, wasLastList, twits, isFetchMore])
+  }, [token, wasLastList, twits, isFetchMore, userId, limit])
 
   return (
     <div>
