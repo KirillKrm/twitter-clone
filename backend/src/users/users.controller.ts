@@ -7,10 +7,12 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  Query,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
@@ -21,6 +23,7 @@ import { AuthGuard } from '../auth/auth.guard'
 import { UsersService } from './users.service'
 import { User } from './entities/user.entity'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { GetUsersQuery } from './dto/get-users-query.dto'
 
 @ApiTags('users')
 @Controller({
@@ -46,8 +49,9 @@ export class UsersController {
     description: 'Users not found.',
     type: ExceptionResponseDto,
   })
-  async findAll(): Promise<User[]> {
-    return this.usersService.findAll()
+  @ApiQuery({ type: GetUsersQuery })
+  async findAll(@Query() queries: GetUsersQuery): Promise<User[]> {
+    return this.usersService.findAll(queries)
   }
 
   @Get(':id')
