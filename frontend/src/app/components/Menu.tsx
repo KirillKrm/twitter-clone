@@ -17,75 +17,73 @@ import {
 } from 'app/components/SVG/SvgIcons'
 import { UserContext } from 'app/contexts/UserContext'
 
-const menuList: MenuUnitProps[] = [
-  {
-    name: 'Home',
-    svgPath: HomeIcon,
-    link: '/home',
-  },
-  {
-    name: 'Search',
-    svgPath: SearchIcon,
-    link: '/search',
-    notAvailable: true,
-  },
-  {
-    name: 'Explore',
-    svgPath: ExploreIcon,
-    link: '/explore',
-    notAvailable: true,
-  },
-  {
-    name: 'Notifications',
-    svgPath: NotificationsIcon,
-    link: '/notifications',
-    notAvailable: true,
-  },
-  {
-    name: 'Messages',
-    svgPath: MessagesIcon,
-    link: '/messages',
-    notAvailable: true,
-  },
-  {
-    name: 'Bookmarks',
-    svgPath: BookmarksIcon,
-    link: '/bookmarks',
-    notAvailable: true,
-  },
-  {
-    name: 'Lists',
-    svgPath: ListsIcon,
-    link: '/lists',
-    notAvailable: true,
-  },
-  {
-    name: 'Profile',
-    svgPath: ProfileIcon,
-    link: '/profile',
-    notAvailable: true,
-  },
-  {
-    name: 'More',
-    svgPath: MoreIcon,
-    link: '/settings',
-  },
-]
-
-const menuListDesktop: MenuUnitProps[] = menuList.filter(
-  menuBtn => menuBtn.name !== 'Search',
-)
-
-const menuListMobile: MenuUnitProps[] = menuList.filter(menuBtn =>
-  ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
-)
-const menuListNotAuthorized: MenuUnitProps[] = menuList.filter(menuBtn =>
-  ['Explore', 'More'].includes(menuBtn.name),
-)
-
 export default function Menu() {
   const user = React.useContext(UserContext)
   const [width, setWidth] = useState(window.innerWidth)
+
+  const menuList: MenuUnitProps[] = [
+    {
+      name: 'Home',
+      svgPath: HomeIcon,
+      link: '/home',
+    },
+    {
+      name: 'Search',
+      svgPath: SearchIcon,
+      link: '/search',
+      notAvailable: true,
+    },
+    {
+      name: 'Explore',
+      svgPath: ExploreIcon,
+      link: '/explore',
+      notAvailable: true,
+    },
+    {
+      name: 'Notifications',
+      svgPath: NotificationsIcon,
+      link: '/notifications',
+      notAvailable: true,
+    },
+    {
+      name: 'Messages',
+      svgPath: MessagesIcon,
+      link: '/messages',
+      notAvailable: true,
+    },
+    {
+      name: 'Bookmarks',
+      svgPath: BookmarksIcon,
+      link: '/bookmarks',
+      notAvailable: true,
+    },
+    {
+      name: 'Lists',
+      svgPath: ListsIcon,
+      link: '/lists',
+      notAvailable: true,
+    },
+    {
+      name: 'Profile',
+      svgPath: ProfileIcon,
+      link: `/${user?.nickname}`,
+    },
+    {
+      name: 'More',
+      svgPath: MoreIcon,
+      link: '/settings',
+    },
+  ]
+  const menuListDesktop: MenuUnitProps[] = menuList.filter(
+    menuBtn => menuBtn.name !== 'Search',
+  )
+  const menuListMobile: MenuUnitProps[] = menuList.filter(menuBtn =>
+    ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
+  )
+  const menuListNotAuthorized: MenuUnitProps[] = menuList.filter(menuBtn =>
+    ['Explore', 'More'].includes(menuBtn.name),
+  )
+
   const menu =
     width > 500
       ? user
@@ -106,7 +104,11 @@ export default function Menu() {
         </a>
       )}
       {menu.map(menuUnitProps => (
-        <MenuUnit {...menuUnitProps} key={menuUnitProps.name} />
+        <MenuUnit
+          {...menuUnitProps}
+          key={menuUnitProps.name}
+          // isAvailable={currentPath === menuUnitProps.link}
+        />
       ))}
     </nav>
   )

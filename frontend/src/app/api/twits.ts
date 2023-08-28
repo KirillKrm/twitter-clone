@@ -24,15 +24,25 @@ export async function getTwits(query?: GetTwitsQuery): Promise<Twits> {
     searchParams = new URLSearchParams(buildURLSearchParams(query)).toString()
   }
 
+  let notFound = false
   const res = await apiClient.get<Twits>(
     'v1/twits?' + searchParams,
     async res => {
       if (res.status === 404) {
+        notFound = true
       } else if (res.status !== 200) {
         throw new Error(`Can't get twits. Response status: ${res.status}`)
       }
     },
   )
+
+  // TODO maybe rewrite
+  if (notFound) {
+    return {
+      data: [],
+      nextToken: Number.MAX_SAFE_INTEGER,
+    }
+  }
 
   return res
 }

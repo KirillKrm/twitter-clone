@@ -176,6 +176,8 @@ const styles = {
     flex
     w-11/12
     my-4
+
+    max-xl:hidden
   `,
   entrance__button: `
     flex

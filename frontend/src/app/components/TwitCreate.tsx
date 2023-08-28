@@ -53,7 +53,9 @@ export default function TwitCreate() {
 
   return (
     <div className={styles.container}>
-      <Avatar />
+      <div className={styles.container__avatar}>
+        <Avatar />
+      </div>
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}
@@ -79,6 +81,12 @@ const styles = {
     w-full 
     p-3 
     shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#202327]
+  `,
+  container__avatar: `
+    flex
+    shrink-0
+    w-11
+    h-11
   `,
   container__inputBox: `
     flex 

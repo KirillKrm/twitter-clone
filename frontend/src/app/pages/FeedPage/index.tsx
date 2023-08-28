@@ -62,8 +62,9 @@ const styles = {
   flex 
   sticky 
   top-0 
-  py-4 
+  h-16
   pl-4 
+  items-center
   z-10
   backdrop-blur-md 
   bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(0,0,0,0.65)] 

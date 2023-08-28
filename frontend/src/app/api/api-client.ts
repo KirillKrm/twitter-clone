@@ -119,7 +119,7 @@ export class ApiClient {
 
       return this.handleResponse<T>(response, options.handleResponse)
     } catch (error) {
-      console.error(error)
+      console.warn('error:', error)
       throw error
     }
   }

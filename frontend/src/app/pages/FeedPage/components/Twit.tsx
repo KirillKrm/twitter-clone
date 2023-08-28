@@ -54,12 +54,16 @@ export default function Twit({
     updatedAt,
   },
 }: TwitProps) {
+  const urlToProfile = `/${author.nickname}/posts`
+
   return (
     <div className={styles.container}>
-      <Avatar src={author.avatar} />
+      <div className={styles.container__avatar}>
+        <Avatar src={author.avatar} />
+      </div>
       <div className={styles.container__twitBox}>
         <div className={styles.twitBox__title}>
-          <a href="/#">
+          <a href={urlToProfile}>
             <span className={styles.title__name}>{author.username}</span>
           </a>
           <div className={styles.title__nickname + 'ml-1'}>
@@ -93,10 +97,17 @@ const styles = {
     flex 
     w-full 
     p-3 
+    pb-1
     hover:bg-[rgba(0,0,0,0.03)] dark:hover:bg-[rgba(255,255,255,0.03)] 
     duration-200
     border-b 
     border-tertiaryBg-light dark:border-tertiaryBg-dark
+  `,
+  container__avatar: `
+    flex
+    shrink-0
+    w-11
+    h-11
   `,
   container__twitBox: `
     flex 

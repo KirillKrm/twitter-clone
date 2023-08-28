@@ -39,6 +39,7 @@ export default function MenuUnit({
   ) : (
     <NavLink
       to={link}
+      reloadDocument
       className={({ isActive }) =>
         classnames(buttonStyle, { 'font-bold': isActive })
       }

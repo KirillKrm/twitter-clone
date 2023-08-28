@@ -31,7 +31,9 @@ export default function Account() {
         <SvgPopupTriangle />
       </div>
       <div className={styles.container} onClick={handleOnCLickAccount}>
-        <Avatar src={user.avatar} />
+        <div className={styles.container__avatar}>
+          <Avatar src={user.avatar} />
+        </div>
         <div className={styles.container__rightblock}>
           <div className={styles.rightblock__text}>
             <span className={styles.text__name}>{user.username}</span>
@@ -59,12 +61,11 @@ const styles = {
     cursor-pointer
     max-xs:hidden
   `,
-  container__image: `
+  container__avatar: `
     flex 
-    w-10 
-    h-10 
-    rounded-full 
-    mr-3
+    shrink-0
+    w-11
+    h-11 
     max-xl:mr-0
   `,
   container__rightblock: `

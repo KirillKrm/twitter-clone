@@ -37,9 +37,9 @@ export default function Twits({ limit = 10, userId }: TwitsProps) {
   React.useEffect(() => {
     const fetchData = async () => {
       const { data: nextTwits, nextToken } = await getTwits({
-        userId,
         limit,
         token,
+        userId,
       })
 
       if (nextTwits.length < 10) {
