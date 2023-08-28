@@ -142,6 +142,7 @@ const styles = {
     whitespace-nowrap
     text-ellipsis
     overflow-hidden
+    select-none
 
     transition-all
     ease-in-out

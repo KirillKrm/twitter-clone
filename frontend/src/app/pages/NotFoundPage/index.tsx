@@ -51,7 +51,7 @@ export function NotFoundPage() {
               <ul className={styles.footer__ul}>
                 {buttons.map(name => (
                   <li className={styles.ul__li}>
-                    <a href="/#" className={styles.li__a}>
+                    <a href="#/" className={styles.li__a}>
                       {t(name)}
                     </a>
                   </li>
@@ -143,7 +143,6 @@ const styles = {
     mb-[5px]
     p-[0]
     m-[0]
-    list-none
   `,
   ul__li: `
     inline
@@ -154,7 +153,6 @@ const styles = {
     text-[#657786]
     p-[0]
     m-[0]
-    list-none
   `,
   li__a: `
     text-[#657786]
@@ -162,6 +160,9 @@ const styles = {
     no-underline
     hover:underline
     focus:underline
+
+    hover:blur-[1px] dark:hover:blur-[1px]
+    cursor-not-allowed
   `,
   article__link: `
     block

@@ -1,10 +1,16 @@
-import jwt_decode from 'jwt-decode'
+import jwt_decode, { JwtPayload } from 'jwt-decode'
 
-type HandleResponse<T = any> = (res: Response, body: T) => Promise<void>
+import { JwtTokens } from 'types/JwtTokens'
+import { ExceptionResponseI } from '../../../../shared/interfaces'
 
-type ApiRequestOptions<T = any> = {
-  body?: T
-  handleResponse?: HandleResponse //TODO
+type HandleResponse<T = unknown> = (
+  res: Response,
+  body: T | ExceptionResponseI,
+) => Promise<void>
+
+type ApiRequestOptions<T = unknown, Payload = any> = {
+  body?: Payload
+  handleResponse?: HandleResponse<T>
 }
 
 export class ApiClient {
@@ -18,31 +24,35 @@ export class ApiClient {
     return `${this.backendUrl}/${path}`
   }
 
-  // TODO types
-  private async defaultHandleResponse(response, body): Promise<void> {
+  private async defaultHandleResponse(response: Response): Promise<void> {
     if (!response.ok) {
       throw new Error('Default response handler caught not 200 status')
     }
   }
 
-  // TODO types
-  private async handleResponse(response, handleResponse?: HandleResponse) {
+  private async handleResponse<T>(
+    response: Response,
+    handleResponse?: HandleResponse<T>,
+  ): Promise<T> {
     const body = await response.json()
 
     if (handleResponse) {
       await handleResponse(response, body)
     } else {
-      await this.defaultHandleResponse(response, body)
+      await this.defaultHandleResponse(response)
     }
 
     return body
   }
 
-  // TODO types
   private isJwtExpired(jwt: string): boolean {
-    const { exp } = jwt_decode<any>(jwt)
+    const { exp } = jwt_decode<JwtPayload>(jwt)
 
-    return exp * 1000 < Date.now()
+    if (!exp) {
+      throw new Error('The token has invalid expire time')
+    }
+
+    return (exp as number) * 1000 < Date.now()
   }
 
   private redirectToLogin() {
@@ -69,7 +79,7 @@ export class ApiClient {
       return
     }
 
-    const tokens = await this.post(
+    const tokens = await this.post<JwtTokens>(
       'v1/auth/refresh',
       { refreshToken },
       async res => {
@@ -91,12 +101,11 @@ export class ApiClient {
     return headers
   }
 
-  // TODO types
-  private async request(
+  private async request<T>(
     method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
     path: string,
-    options: ApiRequestOptions = {},
-  ): Promise<any> {
+    options: ApiRequestOptions<T>,
+  ): Promise<T> {
     if ((method === 'GET' || method === 'DELETE') && !!options.body) {
       throw new Error('GET and DELETE api requests do not have body')
     }
@@ -108,38 +117,44 @@ export class ApiClient {
         body: options.body ? JSON.stringify(options.body) : undefined,
       })
 
-      return this.handleResponse(response, options.handleResponse)
+      return this.handleResponse<T>(response, options.handleResponse)
     } catch (error) {
-      console.error(error)
+      console.warn('error:', error)
+      throw error
     }
   }
 
-  // TODO types
-  async get(path: string, handleResponse?: HandleResponse): Promise<any> {
+  async get<T = unknown>(
+    path: string,
+    handleResponse?: HandleResponse<T>,
+  ): Promise<T> {
     return this.request('GET', path, {
       handleResponse,
     })
   }
 
-  // TODO types
-  async post(
+  async post<T = unknown, Payload = any>(
     path: string,
-    body: { [key: string]: any },
-    handleResponse?: HandleResponse,
-  ): Promise<any> {
+    body: Payload,
+    handleResponse?: HandleResponse<T>,
+  ): Promise<T> {
     return this.request('POST', path, {
       body,
       handleResponse,
     })
   }
 
-  // TODO types
-  async patch(path: string, handleResponse?: HandleResponse): Promise<any> {
+  async patch<T = unknown>(
+    path: string,
+    handleResponse?: HandleResponse<T>,
+  ): Promise<T> {
     return this.request('PATCH', path, { handleResponse })
   }
 
-  // TODO types
-  async delete(path: string, handleResponse?: HandleResponse): Promise<any> {
+  async delete<T = unknown>(
+    path: string,
+    handleResponse?: HandleResponse<T>,
+  ): Promise<T> {
     return this.request('DELETE', path, { handleResponse })
   }
 }

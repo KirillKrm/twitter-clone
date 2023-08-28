@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { ReactI18NextChild } from 'react-i18next'
 
-const ErrorBoundary = ({ children }) => {
+type ErrorBoundaryProps = {
+  children: ReactI18NextChild
+}
+
+// TODO Rewrite
+const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
   const [hasError, setHasError] = useState(false)
   const [error, setError] = useState<string | null>(null)
 

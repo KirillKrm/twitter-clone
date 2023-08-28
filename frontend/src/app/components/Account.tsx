@@ -6,9 +6,11 @@ import { useAuth } from 'app/hooks/useAuth'
 import SvgAccount from './SVG/SvgAccount'
 import SvgPopupTriangle from './SVG/SvgPopupTriangle'
 import Avatar from 'app/components/Avatar'
+import { UserContext } from '../contexts/UserContext'
 
 export default function Account() {
-  const { user, logout } = useAuth()
+  const { logout } = useAuth()
+  const user = React.useContext(UserContext)
   const [popup, setPopup] = React.useState(false)
   const popupStyle = classnames(styles.popup, { hidden: !popup })
 
@@ -24,12 +26,14 @@ export default function Account() {
     <>
       <div className={popupStyle}>
         <div className={styles.popup__logout} onClick={logout}>
-          Log out @{user.nickname}
+          <span className={'text-primary'}>Log out @{user.nickname}</span>
         </div>
         <SvgPopupTriangle />
       </div>
       <div className={styles.container} onClick={handleOnCLickAccount}>
-        <Avatar src={user.avatar} />
+        <div className={styles.container__avatar}>
+          <Avatar src={user.avatar} />
+        </div>
         <div className={styles.container__rightblock}>
           <div className={styles.rightblock__text}>
             <span className={styles.text__name}>{user.username}</span>
@@ -57,12 +61,11 @@ const styles = {
     cursor-pointer
     max-xs:hidden
   `,
-  container__image: `
+  container__avatar: `
     flex 
-    w-10 
-    h-10 
-    rounded-full 
-    mr-3
+    shrink-0
+    w-11
+    h-11 
     max-xl:mr-0
   `,
   container__rightblock: `
@@ -80,6 +83,7 @@ const styles = {
   text__name: `
     whitespace-nowrap 
     overflow-hidden 
+    text-primary
     text-ellipsis 
     text-[15px] 
     font-bold

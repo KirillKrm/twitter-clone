@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import 'index.css'
 
-import { useAuth } from 'app/hooks/useAuth'
 import { postTwit } from 'app/api/twits'
 import Avatar from 'app/components/Avatar'
+import { UserContext } from 'app/contexts/UserContext'
 
 const useAutosizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
@@ -23,7 +23,7 @@ const useAutosizeTextArea = (
 
 export default function TwitCreate() {
   const { t } = useTranslation()
-  const { user } = useAuth()
+  const user = React.useContext(UserContext)
   const [value, setValue] = useState('')
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -53,7 +53,9 @@ export default function TwitCreate() {
 
   return (
     <div className={styles.container}>
-      <Avatar />
+      <div className={styles.container__avatar}>
+        <Avatar />
+      </div>
       <div className={styles.container__inputBox}>
         <textarea
           className={styles.inputBox__textArea}
@@ -79,6 +81,12 @@ const styles = {
     w-full 
     p-3 
     shadow-[0px_0px_0px_1px_#eff3f4] dark:shadow-[0px_0px_0px_1px_#202327]
+  `,
+  container__avatar: `
+    flex
+    shrink-0
+    w-11
+    h-11
   `,
   container__inputBox: `
     flex 

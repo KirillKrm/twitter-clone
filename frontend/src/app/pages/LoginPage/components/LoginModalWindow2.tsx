@@ -11,16 +11,21 @@ import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import SvgLogo from 'app/components/SVG/SvgLogo'
 import InputField from 'app/components/Input/InputField'
 import { useAuth } from 'app/hooks/useAuth'
+import { UserContext } from 'app/contexts/UserContext'
 
 export type LoginModalWindow2Props = {
-  goToPrevStep: any
+  goToPrevStep: () => void
+  onClose?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function SignupBaseModal({
+export default function LoginModalWindow2({
   goToPrevStep,
+  onClose,
 }: LoginModalWindow2Props) {
   const { t } = useTranslation('login')
   const navigate = useNavigate()
+  const { login, loading, error } = useAuth()
+  const user = React.useContext(UserContext)
 
   const loginPage = useSelector((state: RootState) => state.loginpage)
   const [loginString, setLoginString] = React.useState(
@@ -31,18 +36,21 @@ export default function SignupBaseModal({
   const [passwordValid, setPasswordValid] = React.useState(false)
   const formValid = loginValid && passwordValid
 
-  const { login, user, loading, error } = useAuth()
-
   const loginHandler = () => {
     console.log('Try to login')
     login({
       username: loginString,
       password,
     })
+    onClose && onClose(false)
+  }
+
+  React.useEffect(() => {
     if (user) {
+      console.log(user)
       navigate('/home')
     }
-  }
+  }, [navigate, user])
 
   const buttonStyle = classnames(styles.main__next, {
     'opacity-50': loading,
@@ -89,8 +97,8 @@ export default function SignupBaseModal({
             placeholder={t('password')}
             isError={!!error}
           />
-          <a href="/signup" className={styles.hint__password}>
-            <span role="button">{t('forgot')}</span>
+          <a href="#/" className={styles.hint__password}>
+            <span>{t('forgot')}</span>
           </a>
         </div>
         <div className={styles.main__bottom}>
@@ -104,9 +112,7 @@ export default function SignupBaseModal({
           <div className={styles.main__hint}>
             <span className={styles.hint__left}>{t('hint')}</span>
             <a href="/signup">
-              <span className={styles.hint__right} role="button">
-                {t('signup')}
-              </span>
+              <span className={styles.hint__right}>{t('signup')}</span>
             </a>
           </div>
         </div>
@@ -168,7 +174,11 @@ const styles = {
     bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
     mb-6
-    disabled:opacity-50
+    disabled:bg-[#353535] disabled:dark:bg-[#cacaca]
+    select-none
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light
@@ -193,6 +203,9 @@ const styles = {
     text-[13px]
     text-blue
     hover:underline
+
+    hover:blur-[1px] dark:hover:blur-[1px]
+    cursor-not-allowed
   `,
   main__top: `
     flex

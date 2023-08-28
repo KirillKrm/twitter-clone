@@ -10,15 +10,15 @@ import BaseModal from 'app/components/BaseModal'
 import InputField from 'app/components/Input/InputField'
 import SvgButtonBack from 'app/components/SVG/SvgButtonBack'
 import { useRegistration } from 'app/hooks/useAuth'
-import { feedPageActions } from 'app/pages/FeedPage/slice/index'
 
-// REFACTOR types
 export type SignupModalWindow3Props = {
-  goToPrevStep: any
+  goToPrevStep: () => void
+  onClose?: () => void
 }
 
 export default function SignupModalWindow3({
   goToPrevStep,
+  onClose,
 }: SignupModalWindow3Props) {
   const { t } = useTranslation('signup')
   const { register, user, loading, error } = useRegistration()
@@ -51,13 +51,12 @@ export default function SignupModalWindow3({
       password,
       birthday: birthdayList,
     })
+    onClose && onClose()
   }
 
   React.useEffect(() => {
     if (user) {
       localStorage.setItem('current_user_username', user.username)
-      dispatch(feedPageActions.changeUsername(user.username))
-      dispatch(feedPageActions.changeNickname(user.nickname))
       navigate('/login')
     }
   }, [dispatch, navigate, user])
@@ -191,6 +190,10 @@ const styles = {
     my-[24px]
     bg-blue dark:bg-blue
     rounded-full
+    select-none
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-white dark:text-white

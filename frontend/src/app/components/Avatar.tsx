@@ -14,8 +14,8 @@ export default function Avatar({ src = defaultAvatarSrc }: AvatarProps) {
 const styles = {
   container: `
     flex 
-    w-11 
-    h-11 
+    w-full
+    h-full
     rounded-full
     select-none
   `,

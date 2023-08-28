@@ -3,7 +3,6 @@ import 'index.css'
 import { useState, useEffect } from 'react'
 
 import MenuUnit, { MenuUnitProps } from './MenuUnit'
-import { useAuth } from 'app/hooks/useAuth'
 import SvgLogo from './SVG/SvgLogo'
 import {
   HomeIcon,
@@ -16,72 +15,75 @@ import {
   MoreIcon,
   SearchIcon,
 } from 'app/components/SVG/SvgIcons'
-
-export type MenuButton = Omit<MenuUnitProps, 'isActive' | 'setActive'>
-
-const menuList: MenuButton[] = [
-  {
-    name: 'Home',
-    image: HomeIcon,
-    link: '/home',
-  },
-  {
-    name: 'Search',
-    image: SearchIcon,
-    link: '/#',
-  },
-  {
-    name: 'Explore',
-    image: ExploreIcon,
-    link: '/#',
-  },
-  {
-    name: 'Notifications',
-    image: NotificationsIcon,
-    link: '/#',
-  },
-  {
-    name: 'Messages',
-    image: MessagesIcon,
-    link: '/#',
-  },
-  {
-    name: 'Bookmarks',
-    image: BookmarksIcon,
-    link: '/#',
-  },
-  {
-    name: 'Lists',
-    image: ListsIcon,
-    link: '/#',
-  },
-  {
-    name: 'Profile',
-    image: ProfileIcon,
-    link: '/#',
-  },
-  {
-    name: 'More',
-    image: MoreIcon,
-    link: '/#',
-  },
-]
-
-const menuListDesktop: MenuButton[] = menuList.filter(
-  menuBtn => menuBtn.name !== 'Search',
-)
-
-const menuListMobile: MenuButton[] = menuList.filter(menuBtn =>
-  ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
-)
-const menuListNotAuthorized: MenuButton[] = menuList.filter(menuBtn =>
-  ['Explore', 'More'].includes(menuBtn.name),
-)
+import { UserContext } from 'app/contexts/UserContext'
 
 export default function Menu() {
-  const { user } = useAuth()
-  const [activeButton, setActiveButton] = useState('')
+  const user = React.useContext(UserContext)
   const [width, setWidth] = useState(window.innerWidth)
+
+  const menuList: MenuUnitProps[] = [
+    {
+      name: 'Home',
+      svgPath: HomeIcon,
+      link: '/home',
+    },
+    {
+      name: 'Search',
+      svgPath: SearchIcon,
+      link: '/search',
+      notAvailable: true,
+    },
+    {
+      name: 'Explore',
+      svgPath: ExploreIcon,
+      link: '/explore',
+      notAvailable: true,
+    },
+    {
+      name: 'Notifications',
+      svgPath: NotificationsIcon,
+      link: '/notifications',
+      notAvailable: true,
+    },
+    {
+      name: 'Messages',
+      svgPath: MessagesIcon,
+      link: '/messages',
+      notAvailable: true,
+    },
+    {
+      name: 'Bookmarks',
+      svgPath: BookmarksIcon,
+      link: '/bookmarks',
+      notAvailable: true,
+    },
+    {
+      name: 'Lists',
+      svgPath: ListsIcon,
+      link: '/lists',
+      notAvailable: true,
+    },
+    {
+      name: 'Profile',
+      svgPath: ProfileIcon,
+      link: `/${user?.nickname}`,
+    },
+    {
+      name: 'More',
+      svgPath: MoreIcon,
+      link: '/settings',
+    },
+  ]
+  const menuListDesktop: MenuUnitProps[] = menuList.filter(
+    menuBtn => menuBtn.name !== 'Search',
+  )
+  const menuListMobile: MenuUnitProps[] = menuList.filter(menuBtn =>
+    ['Home', 'Search', 'Notifications', 'Messages'].includes(menuBtn.name),
+  )
+  const menuListNotAuthorized: MenuUnitProps[] = menuList.filter(menuBtn =>
+    ['Explore', 'More'].includes(menuBtn.name),
+  )
+
   const menu =
     width > 500
       ? user
@@ -96,17 +98,16 @@ export default function Menu() {
 
   return (
     <nav className={styles.container}>
-      {width > 500 ? (
-        <a href="/#" className={styles.container__logo}>
+      {width > 500 && (
+        <a href="/home" className={styles.container__logo}>
           <SvgLogo />
         </a>
-      ) : null}
+      )}
       {menu.map(menuUnitProps => (
         <MenuUnit
           {...menuUnitProps}
           key={menuUnitProps.name}
-          isActive={activeButton === menuUnitProps.name}
-          setActive={setActiveButton}
+          // isAvailable={currentPath === menuUnitProps.link}
         />
       ))}
     </nav>
@@ -123,6 +124,8 @@ const styles = {
     max-xs:flex-row
     max-xs:w-full
     max-xs:justify-around
+    max-xs:bg-white
+    max-xs:dark:bg-black
   `,
   container__logo: `
     flex 

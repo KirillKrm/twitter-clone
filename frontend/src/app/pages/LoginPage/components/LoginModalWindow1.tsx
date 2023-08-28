@@ -11,16 +11,21 @@ import SvgLogo from 'app/components/SVG/SvgLogo'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
 export type LoginModalWindow1Props = {
-  goToNextStep: any
+  goToNextStep: () => void
+  onClose?: () => void
+  isModal?: boolean
 }
 
 export default function LoginModalWindow1({
   goToNextStep,
+  onClose,
+  isModal,
 }: LoginModalWindow1Props) {
   const { t } = useTranslation('login')
   const [login, setLogin] = React.useState(
     localStorage.getItem('current_user_username') || '',
   )
+  const [loginValid, setLoginValid] = React.useState(false)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -34,13 +39,16 @@ export default function LoginModalWindow1({
     <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__close}>
-          <div
-            className={styles.close__button}
-            aria-label="Close"
-            role="button"
-          >
-            <SvgButtonClose />
-          </div>
+          {isModal && (
+            <div
+              className={styles.close__button}
+              aria-label="Close"
+              role="button"
+              onClick={onClose && (() => onClose())}
+            >
+              <SvgButtonClose />
+            </div>
+          )}
         </div>
         <div className={styles.top__logo}>
           <SvgLogo />
@@ -60,15 +68,16 @@ export default function LoginModalWindow1({
         <InputField
           value={login}
           setValue={setLogin}
+          setValid={setLoginValid}
           placeholder={t('input')}
         />
-        <div
+        <button
           className={styles.main__next}
-          role="button"
           onClick={() => goToNextStep()}
+          disabled={!loginValid}
         >
           <span className={styles.next__text}>{t('next')}</span>
-        </div>
+        </button>
         <div className={styles.main__forgot} role="button">
           <span className={styles.forgot__text}>{t('forgot')}</span>
         </div>
@@ -154,8 +163,13 @@ const styles = {
     w-[300px]
     h-[40px]
     my-[12px]
-    bg-primaryBg-dark dark:bg-primaryBg-light
     rounded-full
+    disabled:bg-[#353535] disabled:dark:bg-[#cacaca]
+    select-none
+    bg-primaryBg-dark dark:bg-primaryBg-light
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-primaryText-dark dark:text-primaryText-light
@@ -174,6 +188,10 @@ const styles = {
     border
     border-secondaryText-light dark:border-secondaryText-dark
     dark:hover:bg-[rgba(239,243,244,0.1)]
+    select-none
+    
+    hover:blur-[2px] dark:hover:blur-[2px]
+    cursor-not-allowed
   `,
   forgot__text: `
     font-bold

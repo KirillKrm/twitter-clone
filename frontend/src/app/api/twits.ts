@@ -1,4 +1,6 @@
 import { apiClient } from './api-client'
+import { Twit } from '../../types/Twit'
+import { Twits } from '../../types/Twits'
 
 type GetTwitsQuery = {
   limit?: number
@@ -16,26 +18,37 @@ const buildURLSearchParams = (obj: {
   )
 }
 
-// TODO types
-export async function getTwits(query?: GetTwitsQuery) {
+export async function getTwits(query?: GetTwitsQuery): Promise<Twits> {
   let searchParams: string = ''
   if (query) {
     searchParams = new URLSearchParams(buildURLSearchParams(query)).toString()
   }
 
-  const res = await apiClient.get('v1/twits?' + searchParams, async res => {
-    if (res.status === 404) {
-    } else if (res.status !== 200) {
-      throw new Error(`Can't get twts. Response status: ${res.status}`)
+  let notFound = false
+  const res = await apiClient.get<Twits>(
+    'v1/twits?' + searchParams,
+    async res => {
+      if (res.status === 404) {
+        notFound = true
+      } else if (res.status !== 200) {
+        throw new Error(`Can't get twits. Response status: ${res.status}`)
+      }
+    },
+  )
+
+  // TODO maybe rewrite
+  if (notFound) {
+    return {
+      data: [],
+      nextToken: Number.MAX_SAFE_INTEGER,
     }
-  })
+  }
 
   return res
 }
 
-// TODO types
-export async function postTwit(body: { [key: string]: string }) {
-  const res = await apiClient.post('v1/twits', body, async res => {
+export async function postTwit(body: { [key: string]: string }): Promise<Twit> {
+  const res = await apiClient.post<Twit>('v1/twits', body, async res => {
     if (res.status !== 201) {
       throw new Error(`Can't create tweet. Response status: ${res.status}`)
     }

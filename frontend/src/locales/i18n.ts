@@ -10,6 +10,8 @@ import loginTranslationEN from './en/login.json'
 import loginTranslationUA from './ua/login.json'
 import signupTranslationEN from './en/signup.json'
 import signupTranslationUA from './ua/signup.json'
+import settingsTranslationEN from './en/settings.json'
+import settingsTranslationUA from './ua/settings.json'
 import { convertLanguageJsonToObject } from './translations'
 
 export const translationsJson = {
@@ -18,12 +20,14 @@ export const translationsJson = {
     notfound: notfoundTranslationEN,
     login: loginTranslationEN,
     signup: signupTranslationEN,
+    settings: settingsTranslationEN,
   },
   ua: {
     feed: feedTranslationUA,
     notfound: notfoundTranslationUA,
     login: loginTranslationUA,
     signup: signupTranslationUA,
+    settings: settingsTranslationUA,
   },
 }
 
@@ -38,8 +42,8 @@ export const i18n = i18next
   // init i18next
   .init({
     resources: translationsJson,
-    fallbackLng: 'en',
-    ns: ['feed'],
+    fallbackLng: ['en', 'ua'],
+    ns: ['feed', 'login', 'signup', 'settings', 'notfound'],
     debug:
       process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test',
 

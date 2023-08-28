@@ -7,13 +7,16 @@ import GoogleAuth from 'app/components/GoogleAuth'
 import SvgLogo from 'app/components/SVG/SvgLogo'
 import SvgButtonClose from 'app/components/SVG/SvgButtonClose'
 
-// REFACTOR types
 export type SignupModalWindow1Props = {
-  goToNextStep: any
+  goToNextStep: () => void
+  onClose?: () => void
+  isModal?: boolean
 }
 
 export default function SignupModalWindow1({
   goToNextStep,
+  onClose,
+  isModal,
 }: SignupModalWindow1Props) {
   const { t } = useTranslation('signup')
 
@@ -26,13 +29,16 @@ export default function SignupModalWindow1({
     <BaseModal>
       <div className={styles.module__top}>
         <div className={styles.top__close}>
-          <div
-            className={styles.close__button}
-            aria-label="Close"
-            role="button"
-          >
-            <SvgButtonClose />
-          </div>
+          {isModal && (
+            <div
+              className={styles.close__button}
+              aria-label="Close"
+              role="button"
+              onClick={onClose && (() => onClose())}
+            >
+              <SvgButtonClose />
+            </div>
+          )}
         </div>
         <div className={styles.top__logo}>
           <SvgLogo />
@@ -141,6 +147,10 @@ const styles = {
     my-[12px]
     bg-black dark:bg-white
     rounded-full
+    select-none
+    hover:bg-[#353535] dark:hover:bg-[#cacaca]
+    transition-colors 
+    duration-200
   `,
   next__text: `
     text-white dark:text-black
